@@ -5,7 +5,7 @@
   <array>
     <dict>
       <key>ProductID</key>
-      <string>com.comcast.XRE2</string>
+      <string>com.comcast.Pxscene</string>
       <key>Predicate</key>
       <string>Ticket.version != '2.0'</string>
       <key>Codebase</key>
