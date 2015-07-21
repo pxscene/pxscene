@@ -19,8 +19,8 @@ hline=14
 hrep="      <string>$hash<\/string>"
 echo "$hrep"
 sed -i "" -e "${hline}s:.*:${hrep}:" $updatefile
-cp $1 pxscene/dist/osx/Pxscene/Pxscene.dmg
-cd pxscene
-git commit -a
-git push
-cd ..
+cp $1 osx/Pxscene/Pxscene.dmg
+git status
+#git commit -a
+#git push
+#cd ..
