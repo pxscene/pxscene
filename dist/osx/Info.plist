@@ -7,7 +7,7 @@
       <key>ProductID</key>
       <string>com.comcast.Pxscene</string>
       <key>Predicate</key>
-      <string>Ticket.version != '3.0'</string>
+      <string>Ticket.version != '4.0'</string>
       <key>Codebase</key>
       <string>http://www.pxscene.org/dist/osx/Pxscene/Pxscene.dmg</string>
       <key>Hash</key>
@@ -15,7 +15,7 @@
       <key>Size</key>
       <string>43880193</string>
       <key>Version</key>
-      <string>3.0</string>
+      <string>4.0</string>
     </dict>
   </array>
 </dict>
