@@ -9,7 +9,21 @@
       <key>Predicate</key>
       <string>Ticket.version != '4.0'</string>
       <key>Codebase</key>
-      <string>http://www.pxscene.org/dist/osx/Pxscene/Pxscene.dmg</string>
+      <string>http://www.pxscene.org/dist/osx/pxscene/pxscene.dmg</string>
+      <key>Hash</key>
+      <string>mjlMEuqQSlZamriPp2Lkpk5G48A=</string>
+      <key>Size</key>
+      <string>43880193</string>
+      <key>Version</key>
+      <string>4.0</string>
+    </dict>
+    <dict>
+      <key>ProductID</key>
+      <string>com.comcast.pxsceneedge</string>
+      <key>Predicate</key>
+      <string>Ticket.version != '4.0'</string>
+      <key>Codebase</key>
+      <string>http://www.pxscene.org/dist/osx/pxsceneedge/pxsceneedge.dmg</string>
       <key>Hash</key>
       <string>mjlMEuqQSlZamriPp2Lkpk5G48A=</string>
       <key>Size</key>
