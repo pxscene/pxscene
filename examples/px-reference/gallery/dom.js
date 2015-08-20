@@ -1,6 +1,6 @@
 //"use strict";
 var root = scene.root;
-
+var basePackageUri = app.getPackageBaseFilePath();
 
 var o = scene.create({t:"rect",fillColor:0xffffffff,w:300,h:300,parent:root,cx:150,cy:150,c:[
   {t:"rect",fillColor:0xff0000ff,w:100,h:100},
