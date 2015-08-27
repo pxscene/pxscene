@@ -7,7 +7,7 @@ fi
 #name="${1%.*}"
 #echo "$name"
 updatefile=osx/Info.plist
-dmg=osx/Pxscene/Pxscene.dmg
+dmg=osx/pxscene/pxscene.dmg
 size=`ls -l "$1" | cut -d" " -f7`
 sline=16
 srep="      <string>$size<\/string>"
@@ -19,7 +19,7 @@ hline=14
 hrep="      <string>$hash<\/string>"
 echo "$hrep"
 sed -i "" -e "${hline}s:.*:${hrep}:" $updatefile
-cp $1 osx/Pxscene/Pxscene.dmg
+cp $1 osx/pxscene/pxscene.dmg
 git status
 #git commit -a
 #git push
