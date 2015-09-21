@@ -5,9 +5,7 @@ var basePackageUri = px.getPackageBaseFilePath();
 //var bg = scene.createImage();
 //var bgShade = scene.createImage();
 
-console.log("CreateText");
 var txt1 = scene.createText();
-console.log("after createText");
 
 /*
 bg.url = process.cwd() + "/../../images/skulls.png";
