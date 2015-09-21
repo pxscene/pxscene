@@ -8,7 +8,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
   scene.create({
     id:"description",         // example id for styling match
     t: "text",                // Element type will be text
-    parent: scene.root,     // Parent element
+    parent: scene.root,      // Parent element
     class:"News",             // example class for styling match
     text: "Hello, World!",    // the text
     x: 100, y: 100,           // position
@@ -19,7 +19,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
   scene.create({
     t: "text",                // Element type will be text
     class:"News",             // example class for styling match
-    parent: scene.root,     // Parent element
+    parent: scene.root,       // Parent element
     text: "Hello, World!",    // the text
     x: 100, y: 200            // position
   });
