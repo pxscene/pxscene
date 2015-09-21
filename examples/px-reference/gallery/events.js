@@ -1,6 +1,7 @@
 "use strict";
+px.import("px:scene.1.js").then( function ready(scene) {
 var root = scene.root;
-var basePackageUri = app.getPackageBaseFilePath();
+var basePackageUri = px.getPackageBaseFilePath();
 
 function randomInt(from, to) {
 	var range = to-from;
@@ -17,13 +18,13 @@ function updateSize(w, h) {
 }
 
 scene.on("onResize", function(e) {updateSize(e.w, e.h);});
-updateSize(scene.w, scene.h);
+updateSize(scene.getWidth(), scene.getHeight());
 
 scene.root.on("onKeyDown", function(e) {
   var keycode = e.keyCode; var flags = e.flags;
   var keytext = ""+Math.floor(keycode);
-  var textbg = scene.createImage({a:0, x:randomInt(50,scene.w-150), 
-                                  y:scene.h+50, 
+  var textbg = scene.createImage({a:0, x:randomInt(50,scene.getWidth()-150),
+                                  y:scene.getHeight()+50,
                                   url:basePackageUri+"/images/keybubble.png",
                                   parent:back,sx:0.75, sy:0.75});
   textbg.cx = textbg.w/2;
@@ -86,8 +87,8 @@ function blah(eventname) {
   return function(x, y) {
     var text = scene.createText({r:randomInt(-10,10),
                                  text:eventname, parent:root});
-    text.x = scene.w-text.w/2;
-    text.y = scene.h-text.h/2;
+    text.x = scene.getWidth()-text.w/2;
+    text.y = scene.getHeight()-text.h/2;
     text.cx = text.w/2;
     text.cy = text.h/2;
     text.animateTo({y: text.y-10}, 0.3, 0, 0)
@@ -102,3 +103,8 @@ function blah(eventname) {
 
 scene.on("mouseenter", blah("mouseenter"));
 scene.on("mouseleave", blah("mouseleave"));
+
+}).catch( function importFailed(err){
+  console.error("Import failed for events.js: " + err)
+});
+

@@ -1,4 +1,6 @@
+px.import("px:scene.1.js").then( function ready(scene) {
 var root = scene.root;
+var basePackageUri = px.getPackageBaseFilePath();
 
 var url;
 /*
@@ -11,7 +13,7 @@ var bgShade = scene.createImage({url:url,xStretch:1,yStretch:1,parent:root});
 
 var txt1 = scene.createText({x:10,text:"",parent:root,pixelSize:64});
 
-url = process.cwd() + "/../../images/ball.png"
+url = basePackageUri + "/images/ball.png"
 var ball = scene.createImage({url:url,parent:root,clip:true});
 ball.cx = ball.w/2;
 ball.cy = ball.h/2;
@@ -79,4 +81,9 @@ function updateSize(w, h) {
 }
 
 scene.on("onResize", function(e){updateSize(e.w,e.h);});
-updateSize(scene.w, scene.h);
+updateSize(scene.getWidth(), scene.getHeight());
+
+}).catch( function importFailed(err){
+  console.error("Import failed for cliptest.js: " + err)
+});
+

@@ -1,3 +1,4 @@
+px.import("px:scene.1.js").then( function ready(scene) {
 var root = scene.root;
 
 
@@ -8,31 +9,22 @@ function updateSize(w, h) {
 }
 
 scene.on("onResize", function(e){updateSize(e.w,e.h);});
-updateSize(scene.w, scene.h);
+updateSize(scene.getWidth(), scene.h);
 
 
 // null or "" is the default face FreeSans.ttf
 var faces = ["",
-             "FontdinerSwanky.ttf",
-             "IndieFlower.ttf",
-             "PoiretOne-Regular.ttf",
-             "DancingScript-Bold.ttf",
-             "Pacifico.ttf",
-             "FontdinerSwanky.ttf",
-             "IndieFlower.ttf",
-             "PoiretOne-Regular.ttf",
-             "DancingScript-Bold.ttf",
-             "Pacifico.ttf",
-             "FontdinerSwanky.ttf",
-             "IndieFlower.ttf",
-             "PoiretOne-Regular.ttf",
-             "DancingScript-Bold.ttf",
-             "Pacifico.ttf",
-             "FontdinerSwanky.ttf",
-             "IndieFlower.ttf",
-             "PoiretOne-Regular.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Regular.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Bold.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSans.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/FontdinerSwanky.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/FreeSans.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/IndieFlower.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/Pacifico.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/PoiretOne-Regular.ttf",
             ];
-
+console.log("Faces: " + faces);
 console.log("faces: ", faces.length);
 
 var scroll = scene.createImage({parent:root});
@@ -52,7 +44,7 @@ for (var i=0; i < faces.length; i++)
                               faceURL:faces[i]});
     var t2 = scene.createText({text:faceName, 
                                parent:row,x:20,y:t.h,
-                               textColor:0x000000ff, pixelSize:14,a:0.6});
+                               textColor:0xeeeeeeff, pixelSize:14,a:0.6});
     
     row.h = t.h+t2.h;
     row.w = 800;
@@ -61,7 +53,7 @@ for (var i=0; i < faces.length; i++)
 }
 var select = scene.createRectangle({parent:scrollContent, fillColor:0x000000, 
                                     lineColor:0xffff00ff,
-                                    lineWidth:4,w:scene.w,h:100});
+                                    lineWidth:4,w:scene.getWidth(),h:100});
 
 
 function clamp(v, min, max) {
@@ -80,8 +72,8 @@ function selectRow(i) {
         console.log("one");
         scrollContent.animateTo({y:t},0.3, 0, 0);
     }
-    else if (row.y+row.h-scene.h > t) {
-        t = -(row.y+row.h-scene.h);
+    else if (row.y+row.h-scene.getHeight() > t) {
+        t = -(row.y+row.h-scene.getHeight());
         console.log("two");
         scrollContent.animateTo({y:t},0.3, 0, 0);
     }
@@ -128,4 +120,11 @@ scene.root.on("onChar", function(e) {
     updateText(str);
   }
 });
+
+
+}).catch( function importFailed(err){
+  console.error("Import failed for fonts.js: " + err)
+});
+
+
 

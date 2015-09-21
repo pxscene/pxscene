@@ -1,4 +1,5 @@
-var basePackageUri = app.getPackageBaseFilePath();
+px.import("px:scene.1.js").then( function ready(scene) {
+var basePackageUri = px.getPackageBaseFilePath();
 
 scene.on('resize', function(width, height) {
   console.log('resize:' + width + ' height:' + height);
@@ -84,4 +85,9 @@ scene.on("keydown", function(code, flags) {
 });
 
 testScene();
+
+}).catch( function importFailed(err){
+  console.error("Import failed for hello.js: " + err)
+});
+
 

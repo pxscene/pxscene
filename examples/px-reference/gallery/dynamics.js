@@ -1,13 +1,13 @@
-// TODO add support for relative urls
+px.import("px:scene.1.js").then( function ready(scene) {
 //var baseURL = "http://johnrobinsn.github.io/pxScene2d/";
 //var baseURL = "http://localhost/~johnrobinson/johnrobinsn.github.io/pxScene2d/";
-var baseURL = process.cwd()+"/../../";
+var baseURL = px.getPackageBaseFilePath()  + "/";
 
 var root = scene.root;
 
 var interpolators = scene.allInterpolators;
 
-var bg = scene.createRectangle({fillColor:0xffffffff,w:scene.w,h:scene.h,parent:root});
+var bg = scene.createRectangle({fillColor:0xffffffff,w:scene.getWidth(),h:scene.getHeight(),parent:root});
 
 var tweeners = [{n:"linear",v:0}, {n:"easeOutElastic",v:1}, {n:"easeOutBounce",v:2}, 
 		{n:"exp", v:3}, {n:"stop", v:4}];
@@ -35,7 +35,12 @@ function updateSize(w, h) {
 }
 
 scene.on("onResize", function(e) { updateSize(e.w,e.h); });
-updateSize(scene.w, scene.h);
+updateSize(scene.getWidth(), scene.getHeight());
+
+}).catch( function importFailed(err){
+  console.error("Import failed for dynamics.js: " + err)
+});
+
 
 
 
