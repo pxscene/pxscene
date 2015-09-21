@@ -1,10 +1,13 @@
+px.import("px:scene.1.js").then( function ready(scene) {
 var root = scene.root;
-var basePackageUri = app.getPackageBaseFilePath();
+var basePackageUri = px.getPackageBaseFilePath();
 
 //var bg = scene.createImage();
 //var bgShade = scene.createImage();
 
+console.log("CreateText");
 var txt1 = scene.createText();
+console.log("after createText");
 
 /*
 bg.url = process.cwd() + "/../../images/skulls.png";
@@ -66,7 +69,7 @@ var numPictures = 0;
 function doIt() {
   
   // create an object to group some other objects
-	var pictures = scene.createImage();;
+	var pictures = scene.createImage();
   pictures.parent = root;
   
 	var urlIndex = 0;
@@ -75,14 +78,14 @@ function doIt() {
     
     var url = getImageURL();
     var picture;
-    picture = scene.createImage({parent: pictures, x:(randomInt(0,1)==0)?-1000:scene.w+2000, 
+    picture = scene.createImage({parent: pictures, x:(randomInt(0,1)==0)?-1000:scene.getWidth()+2000,
                                  y:randomInt(-200, 800), cx: 200, 
                                  cy:200, sx: 2, sy: 2, 
                                  r: randomInt(-45,45), url:url});
     
     picture.ready.then(function(){
-      picture.animateTo({x:randomInt(50,scene.w-picture.w-50),
-                          y:randomInt(50,scene.h-picture.h-50),
+      picture.animateTo({x:randomInt(50,scene.getWidth()-picture.w-50),
+                          y:randomInt(50,scene.getHeight()-picture.h-50),
                           r:randomInt(-15,15),sx:0.75,sy:0.75},1,pxStop,0)
         .then(function() {
           if (pictures.numChildren > 10) {
@@ -122,9 +125,14 @@ function updateSize(w, h) {
 }
 
 scene.on("onResize", function(e){updateSize(e.w,e.h);});
-updateSize(scene.w, scene.h);
+updateSize(scene.getWidth(), scene.getHeight());
 
 doIt();
+
+}).catch( function importFailed(err){
+  console.error("Import failed for picturepile.js: " + err)
+});
+
 
 
 
