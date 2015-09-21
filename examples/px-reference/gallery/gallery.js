@@ -32,7 +32,6 @@ px.import("px:scene.1.js").then( function ready(scene) {
       url: appUrl, parent:apps,
       w: childAppWidth, h: childAppHeight, clip: true
     });
-    console.log("TJC: c=" + c);
 
     c.on("onMouseDown", function (e) {
       var c = e.target;
@@ -51,7 +50,6 @@ px.import("px:scene.1.js").then( function ready(scene) {
       scene.setFocus(c);
 
   }
-console.log("Out of the for loop");
 
   var url = basePackageUri + "/images/select.png";
   select = scene.createImage9({
@@ -71,7 +69,6 @@ console.log("Out of the for loop");
 
 
   function positionApps() {
-    console.log("position apps");
     for (var i = 0; i < apps.children.length; i++) {
       var c = apps.children[i];
       c.animateTo({
@@ -93,7 +90,6 @@ console.log("Out of the for loop");
     if (childAcross < 1)
       childAcross = 1;
     positionApps();
-    console.log("GALLERY.js: filePath= " + scene.filePath);
 
   }
 

@@ -1,5 +1,4 @@
 //"use strict";
-console.log("\nDOM.js");
 px.import("px:scene.1.js").then( function ready(scene) {
   var root = scene.root;
   var basePackageUri = px.getPackageBaseFilePath();
@@ -10,18 +9,12 @@ px.import("px:scene.1.js").then( function ready(scene) {
     {t:"rect",fillColor:0x0000ffff,w:100,h:100,x:200,y:200}
   ]});
 
-  console.log("o= " + o);
-
    scene.setFocus(o);
    scene.setFocus(o.children[0]);
-
-  console.log("scene.PX_SEESAW= " + scene.PX_SEESAW);
 
    o.animateTo({r:360},2,scene.PX_LINEAR,scene.PX_LOOP);
    o.animateTo({sx:0.5,sy:0.5,a:0},2,scene.PX_LINEAR,scene.PX_SEESAW);
    o.children[1].animateTo({r:-360},1,scene.PX_LINEAR,scene.PX_LOOP);
-
-  console.log("after animates");
 
   /**
    *
@@ -46,13 +39,9 @@ px.import("px:scene.1.js").then( function ready(scene) {
    }, 5000);
    */
 
-  console.log("after animates5");
-  console.log("DOM.js: filePath= " + scene.filePath);
-
   o.on('onKeyDown', function (e) {
     px.log.message(2, "dom.js - 2 keydown:" + e.keyCode);
   });
-  console.log("after animates10");
 
 }).catch( function importFailed(err){
   console.error("Import failed for dom.js: " + err)
