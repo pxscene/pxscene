@@ -31,7 +31,7 @@ px.import("px:scene.1.js").then(function(scene) {
   //testLoadArchive("gallery.zip","hello.js");
 
   // remote urls
-  testLoadArchive(baseUrl+"fail","");
+  //testLoadArchive(baseUrl+"fail","");
   testLoadArchive(baseUrl+"fonts.js","");
   testLoadArchive(baseUrl+"gallery.zip","hello.js");
 
