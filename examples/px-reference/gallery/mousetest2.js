@@ -14,14 +14,14 @@ var txt1 = scene.createText({x:10,text:"",parent:root,pixelSize:64});
 
 //var childText;
 url = basePackageUri + "/images/ball.png"
-scene.createImage({id:"ball",url:url,x:450,y:150,parent:root,onReady:function(e){
-    b = e.target;
-    b.cx = b.w/2;
-    b.cy = b.h/2;
-    childText = scene.createText({id:"text",text:"CLICK ME!!!",parent:b,textColor:0xff0000ff, 
+var ballImg = scene.createImage({id:"ball",url:url,x:450,y:150,parent:root});
+ballImg.ready.then(function(e){
+       e.cx = e.w/2;
+    e.cy = e.h/2;
+    childText = scene.createText({id:"text",text:"CLICK ME!!!",parent:e,textColor:0xff0000ff, 
 				  r:30, pixelSize:64});
-    childText.y = b.h/2-childText.h/2;
-    childText.x = b.w/2-childText.w/2;
+    childText.y = e.h/2-childText.h/2;
+    childText.x = e.w/2-childText.w/2;
     childText.cx = childText.w/2;
     childText.cy = childText.h/2;
     childText.on("onMouseDown", function(e) {
@@ -30,8 +30,7 @@ scene.createImage({id:"ball",url:url,x:450,y:150,parent:root,onReady:function(e)
 	childText.animateTo({r:rTarget}, 1.0, 4, 0); 
 	//    childText.animateTo({r:360}, 5.0, 4, 0, function(o) { o.r = 0; }); 
     });
-}});
-
+});
 var rTarget = 0;
 
 
