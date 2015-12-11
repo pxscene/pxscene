@@ -9,10 +9,10 @@ px.import("px:scene.1.js").then( function ready(scene) {
   var basePackageUri = px.getPackageBaseFilePath();
 
   url = basePackageUri + "/images/skulls.png";
-  var bg = scene.createRectangle({parent:root, url: url, xStretch: 2, yStretch: 2, fillColor: 0xe0e0e0ff});
+  var bg = scene.create({t:"rect", parent:root, url: url, stretchX: 2, stretchY: 2, fillColor: 0xe0e0e0ff});
 
   url = basePackageUri + "/images/status_bg.png";
-  var bgShade = scene.createImage({parent:root, url: url, xStretch: 1, yStretch: 1});
+  var bgShade = scene.create({t:"image", parent:root, url: url, stretchX: 1, stretchY: 1});
 
   var childPad = 48;
   var childAppWidth = 1280;
@@ -23,7 +23,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
   var select;
 
-  var apps = scene.createImage({parent:root, sx: 0.25, sy: 0.25, w: 1280, h: 720});
+  var apps = scene.create({t:"image", parent:root, sx: 0.25, sy: 0.25, w: 1280, h: 720});
   //var apps = scene.createRectangle({sx: 0.25, sy: 0.25, w: 1280, h: 720});
 
   for (var i = 0; i < appURLs.length; i++) {
@@ -52,8 +52,8 @@ px.import("px:scene.1.js").then( function ready(scene) {
   }
 
   var url = basePackageUri + "/images/select.png";
-  select = scene.createImage9({
-    parent: root, url: url, lInset: 16, tInset: 16, rInset: 16, bInset: 16,
+  select = scene.create({t:"image9",
+    parent: root, url: url, insetLeft: 16, insetTop: 16, insetRight: 16, insetBottom: 16,
     w: selectWidth * 0.25, h: selectHeight * 0.25, x: 0, y: 0, interactive: false
   });
   select.ready.then(function () {

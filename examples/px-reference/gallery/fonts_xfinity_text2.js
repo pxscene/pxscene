@@ -1,21 +1,22 @@
 px.import("px:scene.1.js").then( function ready(scene) {
-var root = scene.root;
 
+var root = scene.root;
 
 
 var width = 800;
 //var bg = scene.createRectangle({fillColor:0xccccccff, parent:root});
 function updateSize(w, h) {
-
+//    bg.w = w;
+//    bg.h = h;
 }
 
 scene.on("onResize", function(e){updateSize(e.w,e.h);});
-updateSize(scene.getWidth(), scene.h);
+updateSize(scene.w, scene.h);
 
 
-// null or "" is the default face FreeSans.ttf
+// null or "" is the default font FreeSans.ttf
 
-var faces = ["",
+var fonts = ["",
              "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf",
              "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-BoldCond.ttf",
              "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-ExLgt.ttf",
@@ -26,36 +27,35 @@ var faces = ["",
              "http://54.146.54.142/tom/xre2/apps/receiver/fonts/DejaVuSerif.ttf",
             ];
 
-console.log("faces: "+faces.length);
-//scene.w = width;
-//console.log("scene.w="+scene.w);
+console.log("fonts: "+fonts.length);
+scene.w = width;
+console.log("scene.w="+scene.w);
 
 var scroll = scene.createImage({parent:root});
 var scrollContent = scene.createImage({parent:scroll,w:width});
 
 var rowcontainer = scene.createImage({parent:scrollContent});
 
-pleaseWait = scene.create({t:"text2",text:"Please wait while fonts load...", 
+pleaseWait = scene.create({t:"textBox",text:"Please wait while fonts load...", 
                               parent:root,x:10,y:0,
                               textColor:0xfaebd7ff, pixelSize:24,
-                              faceURL:faces[i], clip:true, w:width,h:100});
+                              fontUrl:fonts[i], clip:true, w:width,h:100});
 var elems = [];
 var promises = [];
 var p = 0; 
-for (var i=0; i < faces.length; i++)
+for (var i=0; i < fonts.length; i++)
 {
     var row = scene.createImage({parent:rowcontainer,y:0, clip:false});
-    var faceName = faces[i]?faces[i]:"FreeSans.ttf";
+    var faceName = fonts[i]?fonts[i]:"FreeSans.ttf";
     console.log("fontFace: "+faceName);
-    var t = scene.create({t:"text2",text:"Enter in some text...", 
+    var t = scene.create({t:"textBox",text:"Enter in some text...", 
                               parent:row,x:10,y:0,
                               textColor:0xfaebd7ff, pixelSize:24,
-                              faceURL:faces[i], clip:true,w:width,h:100, draw:false});
+                              fontUrl:fonts[i], clip:true,w:width,h:100, draw:false});
     elems[i] = t;                           
     promises[i] = t.ready;
 
 }
-
 Promise.all(promises).then(function(success, failure) {
 
   pleaseWait.remove();
@@ -77,7 +77,7 @@ Promise.all(promises).then(function(success, failure) {
                 if( n != 0) {
                     var prevParent = elems[n-1].parent;          
 
-                          console.log("PrevParent elem is "+elems[n-1].faceURL);
+                          console.log("PrevParent elem is "+elems[n-1].fontUrl);
 
                           t.parent.y = prevParent.h+prevParent.y; 
                           console.log("Prevparent y is "+prevParent.y);
@@ -95,7 +95,7 @@ Promise.all(promises).then(function(success, failure) {
 
 var select = scene.createRectangle({parent:scrollContent, fillColor:0x000000, 
                                     lineColor:0xffff00ff,
-                                    lineWidth:4,w:scene.getWidth(),h:100});
+                                    lineWidth:4,w:scene.w,h:100});
 
 
 function clamp(v, min, max) {
@@ -117,8 +117,8 @@ function selectRow(i) {
         console.log("one");
         scrollContent.animateTo({y:t},0.3, 0, 0);
     }
-    else if (row.y+row.h-scene.getHeight() > t) {
-        t = -(row.y+row.h-scene.getHeight());
+    else if (row.y+row.h-scene.h > t) {
+        t = -(row.y+row.h-scene.h);
         console.log("two");
         scrollContent.animateTo({y:t},0.3, 0, 0);
     }
@@ -167,6 +167,7 @@ scene.root.on("onChar", function(e) {
     updateText(str);
   }
 });
+
 
 }).catch( function importFailed(err){
   console.error("Import failed for fonts_xfinity_text2.js: " + err)

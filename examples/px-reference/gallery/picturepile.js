@@ -9,13 +9,13 @@ var txt1 = scene.createText();
 
 /*
 bg.url = process.cwd() + "/../../images/skulls.png";
-bg.xStretch = 2;
-bg.yStretch = 2;
+bg.stretchX = 2;
+bg.stretchY = 2;
 bg.parent = root;
 
 bgShade.url = process.cwd() + "/../../images/radial_gradient.png";
-bgShade.xStretch = 1;
-bgShade.yStretch = 1;
+bgShade.stretchX = 1;
+bgShade.stretchY = 1;
 bgShade.parent = root;
 */
 
@@ -39,10 +39,10 @@ function randomInt(from, to) {
 function getImageURL() {
   if (true) {
     var urls = [
-	    "http://farm4.static.flickr.com/3307/5767175230_b5d2bf2312_z.jpg",
-	    "http://farm6.static.flickr.com/5263/5793867021_3e1d5d3aae_z.jpg",
-	    "http://farm3.static.flickr.com/2454/3594278573_500f415e39_z.jpg",
-	    "http://farm3.static.flickr.com/2415/2087329111_dd29709847.jpg",
+	  "http://farm4.static.flickr.com/3307/5767175230_b5d2bf2312_z.jpg",
+	  "http://farm6.static.flickr.com/5263/5793867021_3e1d5d3aae_z.jpg",
+	  "http://farm3.static.flickr.com/2454/3594278573_500f415e39_z.jpg",
+	  "http://farm3.static.flickr.com/2415/2087329111_dd29709847.jpg",
       "http://c2.staticflickr.com/4/3707/9393275293_a108ed698a_b.jpg",
       "http://c2.staticflickr.com/8/7524/15571693270_9c5b3555b6_c.jpg",
       "http://c1.staticflickr.com/3/2925/13963178756_980d79b8a6_z.jpg",
