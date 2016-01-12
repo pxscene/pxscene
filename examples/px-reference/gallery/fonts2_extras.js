@@ -1,27 +1,23 @@
+/**  This test will position each row as each single font becomes available */
+
 px.import("px:scene.1.js").then( function ready(scene) {
   
 var root = scene.root;
 
 
 // null or "" is the default font FreeSans.ttf
-var fonts = ["http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf",
+// Using "" in fonts array tests that local font files can be loaded, too
+var fonts = [ "",
+              "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf",
              "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-MedCond.ttf",
-             "PoiretOne-Regular.ttf",
-             "DancingScript-Bold.ttf",
-             "Pacifico.ttf",
-             "FontdinerSwanky.ttf",
-             "IndieFlower.ttf",
-             "PoiretOne-Regular.ttf",
-             "DancingScript-Bold.ttf",
-             "Pacifico.ttf",
-             "FontdinerSwanky.ttf",
-             "IndieFlower.ttf",
-             "PoiretOne-Regular.ttf",
-             "DancingScript-Bold.ttf",
-             "Pacifico.ttf",
-             "FontdinerSwanky.ttf",
-             "IndieFlower.ttf",
-             "PoiretOne-Regular.ttf",
+             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf",
+             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-BoldCond.ttf",
+             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-ExLgt.ttf",
+             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Lgt.ttf",
+             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Med.ttf",
+             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-MedCond.ttf",
+             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/DejaVuSans.ttf",
+             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/DejaVuSerif.ttf",
             ];
 
 // Example for using getFont for font metrics

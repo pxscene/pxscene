@@ -15,7 +15,7 @@ updateSize(scene.w, scene.h);
 
 
 // null or "" is the default font FreeSans.ttf
-
+// Using "" in fonts array tests that local font files can be loaded, too
 var fonts = ["",
              "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf",
              "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-BoldCond.ttf",
@@ -74,6 +74,7 @@ Promise.all(promises).then(function(success, failure) {
                 t.h = fontMetrics.height;
                 t.parent.h = t.h+(fontMetrics.naturalLeading);
                 t.parent.w = width;
+                console.log("set t.parent.h to "+t.parent.h);
                 if( n != 0) {
                     var prevParent = elems[n-1].parent;          
 
@@ -93,6 +94,8 @@ Promise.all(promises).then(function(success, failure) {
               });
 //}
 
+//var measure = elems[0].font.measureText(elems[0].pixelSize,"/");
+//console.log("MeasureText result for slash is "+measure.w);
 var select = scene.createRectangle({parent:scrollContent, fillColor:0x000000, 
                                     lineColor:0xffff00ff,
                                     lineWidth:4,w:scene.w,h:100});
