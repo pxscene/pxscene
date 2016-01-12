@@ -7,7 +7,7 @@ var url;
 var txt1 = scene.createText({x:10,text:"",parent:root,pixelSize:64});
 
 url = basePackageUri + "/images/ball.png";
-var ball = scene.createImage({url:url,parent:root,clip:true,mask:url});
+var ball = scene.createImage({url:url,parent:root,clip:true,drawAsMask:true});
   ball.ready.then(function() {
     ball.cx = ball.w/2;
     ball.cy = ball.h/2;
