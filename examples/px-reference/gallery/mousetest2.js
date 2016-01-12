@@ -14,23 +14,28 @@ var txt1 = scene.createText({x:10,text:"",parent:root,pixelSize:64});
 
 //var childText;
 url = basePackageUri + "/images/ball.png"
-var ballImg = scene.createImage({id:"ball",url:url,x:450,y:150,parent:root});
+var ballImg = scene.create({t:"image",id:"ball",url:url,x:450,y:150,parent:root});
 ballImg.ready.then(function(e){
-       e.cx = e.w/2;
-    e.cy = e.h/2;
-    childText = scene.createText({id:"text",text:"CLICK ME!!!",parent:e,textColor:0xff0000ff, 
+       e.cx = e.resource.w/2;
+    e.cy = e.resource.h/2;
+    childText = scene.create({t:"text",id:"text",text:"CLICK ME!!!",parent:e,textColor:0xff0000ff, 
 				  r:30, pixelSize:64});
-    childText.y = e.h/2-childText.h/2;
-    childText.x = e.w/2-childText.w/2;
+    childText.y = e.resource.h/2-childText.h/2;
+    childText.x = e.resource.w/2-childText.w/2;
     childText.cx = childText.w/2;
     childText.cy = childText.h/2;
     childText.on("onMouseDown", function(e) {
+    console.log("onMouseDown for text object");
 	// TODO is there a better way to do this??
 	rTarget += 360;
 	childText.animateTo({r:rTarget}, 1.0, 4, 0); 
 	//    childText.animateTo({r:360}, 5.0, 4, 0, function(o) { o.r = 0; }); 
     });
+
 });
+    ballImg.on("onMouseDown", function(o) {
+    console.log("onMouseDown for image object");
+    });
 var rTarget = 0;
 
 

@@ -82,8 +82,8 @@ function doIt() {
                                  r: randomInt(-45,45), url:url});
     
     picture.ready.then(function(){
-      picture.animateTo({x:randomInt(50,scene.getWidth()-picture.w-50),
-                          y:randomInt(50,scene.getHeight()-picture.h-50),
+      picture.animateTo({x:randomInt(50,scene.getWidth()-picture.resource.w-50),
+                          y:randomInt(50,scene.getHeight()-picture.resource.h-50),
                           r:randomInt(-15,15),sx:0.75,sy:0.75},1,pxStop,0)
         .then(function() {
           if (pictures.numChildren > 10) {
