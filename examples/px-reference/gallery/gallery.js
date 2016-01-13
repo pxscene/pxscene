@@ -24,12 +24,12 @@ px.import("px:scene.1.js").then( function ready(scene) {
   var select;
 
   var apps = scene.create({t:"image", parent:root, sx: 0.25, sy: 0.25, w: 1280, h: 720});
-  //var apps = scene.createRectangle({sx: 0.25, sy: 0.25, w: 1280, h: 720});
+  //var apps = scene.create({t:"rect",sx: 0.25, sy: 0.25, w: 1280, h: 720});
 
   for (var i = 0; i < appURLs.length; i++) {
     var appUrl = basePackageUri + "/" + appURLs[i];
-    var c = scene.createScene({
-      url: appUrl, parent:apps,
+    var c = scene.create({
+      t:"scene", url: appUrl, parent:apps,
       w: childAppWidth, h: childAppHeight, clip: true
     });
 

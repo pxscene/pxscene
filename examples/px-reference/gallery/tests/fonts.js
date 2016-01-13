@@ -2,7 +2,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
 var root = scene.root;
 
 
-//var bg = scene.createRectangle({fillColor:0xccccccff, parent:root});
+//var bg = scene.create({t:"rect",fillColor:0xccccccff, parent:root});
 function updateSize(w, h) {
 //    bg.w = w;
 //    bg.h = h;
@@ -27,22 +27,22 @@ var faces = ["",
 console.log("Faces: " + faces);
 console.log("faces: ", faces.length);
 
-var scroll = scene.createImage({parent:root});
-var scrollContent = scene.createImage({parent:scroll});
+var scroll = scene.create({t:"image",parent:root});
+var scrollContent = scene.create({t:"image",parent:scroll});
 
-var rowcontainer = scene.createImage({parent:scrollContent});
+var rowcontainer = scene.create({t:"image",parent:scrollContent});
 
 var p = 0; 
 for (var i=0; i < faces.length; i++)
 {
-    var row = scene.createImage({parent:rowcontainer,y:p});
+    var row = scene.create({t:"image",parent:rowcontainer,y:p});
     var faceName = faces[i]?faces[i]:"FreeSans.ttf";
     console.log(faceName);
-    var t = scene.createText({text:"Enter in some text...", 
+    var t = scene.create({t:"text",text:"Enter in some text...", 
                               parent:row,x:10,
                               textColor:0xfaebd7ff, pixelSize:36,
                               faceURL:faces[i]});
-    var t2 = scene.createText({text:faceName, 
+    var t2 = scene.create({t:"text",text:faceName, 
                                parent:row,x:20,y:t.h,
                                textColor:0xeeeeeeff, pixelSize:14,a:0.6});
     
@@ -51,7 +51,7 @@ for (var i=0; i < faces.length; i++)
   //row.painting = false;
     p += row.h;
 }
-var select = scene.createRectangle({parent:scrollContent, fillColor:0x000000, 
+var select = scene.create({t:"rect",parent:scrollContent, fillColor:0x000000, 
                                     lineColor:0xffff00ff,
                                     lineWidth:4,w:scene.getWidth(),h:100});
 

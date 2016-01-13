@@ -2,7 +2,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
 var root = scene.root;
 
 
-//var bg = scene.createRectangle({fillColor:0xccccccff, parent:root});
+//var bg = scene.create({t:"rect",fillColor:0xccccccff, parent:root});
 function updateSize(w, h) {
 //    bg.w = w;
 //    bg.h = h;

@@ -2,10 +2,10 @@ px.import("px:scene.1.js").then( function ready(scene) {
 var root = scene.root;
 var basePackageUri = px.getPackageBaseFilePath();
 
-//var bg = scene.createImage();
-//var bgShade = scene.createImage();
+//var bg = scene.create({t:"image"});
+//var bgShade = scene.create({t:"image"});
 
-var txt1 = scene.createText();
+var txt1 = scene.create({t:"text"});
 
 /*
 bg.url = process.cwd() + "/../../images/skulls.png";
@@ -67,7 +67,7 @@ var numPictures = 0;
 function doIt() {
   
   // create an object to group some other objects
-	var pictures = scene.createImage();
+	var pictures = scene.create({t:"image"});
   pictures.parent = root;
   
 	var urlIndex = 0;
@@ -76,7 +76,7 @@ function doIt() {
     
     var url = getImageURL();
     var picture;
-    picture = scene.createImage({parent: pictures, x:(randomInt(0,1)==0)?-1000:scene.getWidth()+2000,
+    picture = scene.create({t:"image",parent: pictures, x:(randomInt(0,1)==0)?-1000:scene.getWidth()+2000,
                                  y:randomInt(-200, 800), cx: 200, 
                                  cy:200, sx: 2, sy: 2, 
                                  r: randomInt(-45,45), url:url});
@@ -102,7 +102,7 @@ function doIt() {
     },function(){
       console.log("pic load failed: statusCode="+picture.resource.loadStatus.statusCode+" and httpStatusCode="+picture.resource.loadStatus.httpStatusCode);
       var res =picture.resource;
-      res.ready.then(function(){ console.log("resource is ready - success");}, function(){console.log("resource is ready - failure");});
+      res.ready.then(function(){ console.log("resource is ready - success - within image promise failure");}, function(){console.log("resource is ready - failure - within image promise failure");});
       
       picture.remove();
       newPicture();

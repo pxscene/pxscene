@@ -8,9 +8,9 @@ function randomInt(from, to) {
 	return Math.round(Math.random()*range + from);
 }
 
-var bg = scene.createRectangle({fillColor:0xcccccc00, parent:root});
-var back = scene.createImage({parent:bg});
-var front = scene.createImage({parent:bg});
+var bg = scene.create({t:"rect",fillColor:0xcccccc00, parent:root});
+var back = scene.create({t:"image",parent:bg});
+var front = scene.create({t:"image",parent:bg});
 
 function updateSize(w, h) {
   bg.w = w;
@@ -23,13 +23,13 @@ updateSize(scene.getWidth(), scene.getHeight());
 scene.root.on("onKeyDown", function(e) {
   var keycode = e.keyCode; var flags = e.flags;
   var keytext = ""+Math.floor(keycode);
-  var textbg = scene.createImage({a:0, x:randomInt(50,scene.getWidth()-150),
+  var textbg = scene.create({t:"image",a:0, x:randomInt(50,scene.getWidth()-150),
                                   y:scene.getHeight()+50,
                                   url:basePackageUri+"/images/keybubble.png",
                                   parent:back,sx:0.75, sy:0.75});
   textbg.cx = textbg.w/2;
   textbg.cy = textbg.h/2;
-  var text = scene.createText({text:keytext,parent:textbg,pixelSize:48});
+  var text = scene.create({t:"text",text:keytext,parent:textbg,pixelSize:48});
   text.x = (textbg.w-text.w)/2;
   text.y = (textbg.h-text.h)/2;
   text.cx = text.w/2;
@@ -54,12 +54,12 @@ function balloon(eventName, imageURL, textColor, offset, parent) {
   return function(e) {
       var x = e.x; var y = e.y;
 
-    var textbg = scene.createImage9({url:imageURL,parent:parent,r:randomInt(-10,10)});
+    var textbg = scene.create({t:"image9",url:imageURL,parent:parent,r:randomInt(-10,10)});
     textbg.x = x-textbg.w/2;
     textbg.y = y-textbg.h
     textbg.cx = textbg.w/2;
     textbg.cy = textbg.h/2;
-    var text = scene.createText({text:eventName, parent:textbg, 
+    var text = scene.create({t:"text",text:eventName, parent:textbg, 
                                  textColor:textColor});
     text.x = (textbg.w-text.w)/2;
     text.y = (textbg.h-text.h-10)/2;
@@ -85,7 +85,7 @@ scene.on("onMouseUp",   balloon("mouseup",   basePackageUri+"/images/textballoon
 function blah(eventname) {
   
   return function(x, y) {
-    var text = scene.createText({r:randomInt(-10,10),
+    var text = scene.create({t:"text",r:randomInt(-10,10),
                                  text:eventname, parent:root});
     text.x = scene.getWidth()-text.w/2;
     text.y = scene.getHeight()-text.h/2;

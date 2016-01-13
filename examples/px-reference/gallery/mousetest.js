@@ -1,7 +1,7 @@
 px.import("px:scene.1.js").then( function ready(scene) {
 //scene.showOutlines = true;
 
-var text = scene.createText({text:"CLICK ME!!",parent:scene.root,pixelSize:64});
+var text = scene.create({t:"text",text:"CLICK ME!!",parent:scene.root,pixelSize:64});
 text.x = (scene.getWidth()-text.w)/2;
 text.y = (scene.getHeight()-text.h)/2;
 text.cx = text.w/2;

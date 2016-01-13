@@ -19,12 +19,12 @@ function testScene()
 
   for (i = 0; i < n; ++i) {
     if (i < 1) {
-        p = scene.createRectangle({w:300,h:30,fillColor:0x00ff00ff,lineColor:0xffffff80,lineWidth:10});
+        p = scene.create({t:"rect",w:300,h:30,fillColor:0x00ff00ff,lineColor:0xffffff80,lineWidth:10});
         p.animateTo({h:600}, 0.5, 0, 1);
     }
     else if (i < 2) {
       var url = basePackageUri+"/images/curve_rectangle.png";
-      p = scene.createImage9({url:url,lInset:100,tInset:100,rInset:100,bInset:100});
+      p = scene.create({t:"image9",url:url,lInset:100,tInset:100,rInset:100,bInset:100});
       p.cx = p.w/2;
       p.cy = p.h/2;
       ny = 100;
@@ -33,13 +33,13 @@ function testScene()
     }
     else if (i < n-3) {
         var url = basePackageUri+"/images/banana.png";
-        p = scene.createImage({url:url});
+        p = scene.create({t:"image",url:url});
         p.cx = p.w/2;
         p.cy = p.h/2;
         ny = 100;
     }
     else {
-        p = scene.createText({pixelSize:64});
+        p = scene.create({t:"text",pixelSize:64});
         p.animateTo({sx:2,sy:2}, 1.0, 0, 0);
         nx = 200;
         if (i == n-3) {

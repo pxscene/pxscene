@@ -38,25 +38,26 @@ myFont.ready.then(function(font) {
   console.log("measure h="+measure.h);
   });
 
-var scroll = scene.createImage({parent:root});
-var scrollContent = scene.createImage({parent:scroll});
+var scroll = scene.create({t:"image",parent:root});
+var scrollContent = scene.create({t:"image",parent:scroll});
 
-var rowcontainer = scene.createImage({parent:scrollContent});
+var rowcontainer = scene.create({t:"image",parent:scrollContent});
 
 var prevRow;
 
 var p = 0; 
 for (var i=0; i < fonts.length; i++)
 {
-  var row = scene.createImage({parent:rowcontainer,a:0});
+  var row = scene.create({t:"image",parent:rowcontainer,a:0});
   
   var faceName = fonts[i]?fonts[i]:"FreeSans.ttf";
-  var t = scene.createText({
+  var t = scene.create({ 
+    t:"text",
     parent:row,x:10,
     textColor:0xfaebd7ff, pixelSize:36,
     fontUrl:fonts[i],
     text: "Please type some text..."});
-  var t2 = scene.createText({text:"" + (i+1) + ". " + faceName, 
+  var t2 = scene.create({t:"text",text:"" + (i+1) + ". " + faceName, 
                              parent:row,x:20,
                              textColor:0xfaebd7ff, pixelSize:14,a:0.6,
                              fontUrl:"FreeSans.ttf"});
@@ -100,7 +101,7 @@ for (var i=0; i < fonts.length; i++)
   prevRow = row;
 }
 
-var select = scene.createRectangle({parent:scrollContent, fillColor:0x000000, 
+var select = scene.create({t:"rect",parent:scrollContent, fillColor:0x000000, 
                                     lineColor:0xffff00ff,
                                     lineWidth:4,w:scene.w,h:100});
 
