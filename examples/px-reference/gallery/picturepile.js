@@ -81,7 +81,11 @@ function doIt() {
                                  cy:200, sx: 2, sy: 2, 
                                  r: randomInt(-45,45), url:url});
     
-    picture.ready.then(function(){
+    picture.ready.then(function(pic){
+      
+      var res = pic.resource;
+      res.ready.then(function(){ console.log("resource is ready - success");}, function(){console.log("resource is ready - failure");});
+          
       picture.animateTo({x:randomInt(50,scene.getWidth()-picture.resource.w-50),
                           y:randomInt(50,scene.getHeight()-picture.resource.h-50),
                           r:randomInt(-15,15),sx:0.75,sy:0.75},1,pxStop,0)
@@ -96,6 +100,10 @@ function doIt() {
           newPicture();
         });    
     },function(){
+      console.log("pic load failed: statusCode="+picture.resource.loadStatus.statusCode+" and httpStatusCode="+picture.resource.loadStatus.httpStatusCode);
+      var res =picture.resource;
+      res.ready.then(function(){ console.log("resource is ready - success");}, function(){console.log("resource is ready - failure");});
+      
       picture.remove();
       newPicture();
     });

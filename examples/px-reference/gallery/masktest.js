@@ -14,7 +14,7 @@ var bgShade = scene.createImage({url:url,xStretch:1,yStretch:1,parent:root});
 var txt1 = scene.createText({x:10,text:"",parent:root,pixelSize:64});
 
 url = basePackageUri + "/images/ball.png";
-var ball = scene.createImage({url:url,parent:root,clip:true,drawAsMask:true});
+var ball = scene.createImage({url:url,parent:root,clip:true,mask:true});
   ball.ready.then(function() {
     ball.cx = ball.resource.w/2;
     ball.cy = ball.resource.h/2;
