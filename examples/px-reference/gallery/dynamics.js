@@ -23,7 +23,7 @@ for (var i = 0; i < interpolators.length; i++) {
     scene.create({t:"text",text:interpolatorName,textColor:0x707070ff,pixelSize:14,x:x+5,y:y+18,
                       parent:container});
     scene.create({t:"image",url:baseURL+"images/ball2.png",a:0.5,y:-40,parent:line})
-	  .animateTo({x:550},1,scene[interpolatorName],scene.PX_SEESAW);
+	  .animateTo({x:550},1,scene[interpolatorName],scene.PX_OSCILLATE);
 }
 container.h = interpolators.length*64;
 
