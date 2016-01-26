@@ -140,7 +140,7 @@ function textready(text) {
 	console.log("inside text2.ready");
   console.log("text2.h="+text2.h+" and text2.w="+text2.w);
 
-	metrics = text2.getFontMetrics();
+	metrics = text2.font.getFontMetrics(text2.pixelSize);
 	console.log("metrics h="+metrics.height);
 	console.log("metrics a="+metrics.ascent);
 	console.log("metrics d="+metrics.descent);
