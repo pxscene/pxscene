@@ -19,7 +19,7 @@ var fonts = ["",
             ];
 
 // Example for using getFont for font metrics
-var myFont = scene.getFont( "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf");
+var myFont = scene.create({t:"fontResource",url:"http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf"});
 
 myFont.ready.then(function(font) {
   console.log("!CLF: First Promise received");

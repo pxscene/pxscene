@@ -25,7 +25,7 @@ var myFonts = [];//scene.getFont( "http://54.146.54.142/tom/xre2/apps/receiver/f
 var myFontPromises = [];
 for (var i=0; i < fonts.length; i++)
 {
-  myFonts[i] = scene.getFont(fonts[i]?fonts[i]:"FreeSans.ttf");
+  myFonts[i] = scene.create({t:"fontResource",url:fonts[i]?fonts[i]:"FreeSans.ttf"});
   myFontPromises[i] = myFonts[i].ready;
   
 

@@ -22,11 +22,11 @@ root.w=800;
 
 // Use the font vars below to preload fonts so that they stay loaded. 
 
-var fontXfinityMed = scene.getFont(fontUrlStart+XFinityMed);
-var fontDejaVu = scene.getFont(fontUrlStart+DejaVu);
-var fontDejaVuSerif = scene.getFont(fontUrlStart+DejaVuSerif);
-var fontXFinity = scene.getFont(fontUrlStart+XFinity);
-var fontXFinityBold = scene.getFont(fontUrlStart+XFinityBold);
+var fontXfinityMed = scene.create({t:"fontResource",url:fontUrlStart+XFinityMed});
+var fontDejaVu = scene.create({t:"fontResource",url:fontUrlStart+DejaVu});
+var fontDejaVuSerif = scene.create({t:"fontResource",url:fontUrlStart+DejaVuSerif});
+var fontXFinity = scene.create({t:"fontResource",url:fontUrlStart+XFinity});
+var fontXFinityBold = scene.create({t:"fontResource",url:fontUrlStart+XFinityBold});
 
 fontXfinityMed.ready.then(function(f) {
   console.log("Ready for fontXfinityMed font!");
