@@ -25,10 +25,10 @@ txt1.parent = root;
 
 
 // clean up these names and expose as properties off of some object
-var pxInterpLinear = 0;
-var easeOutElastic = 1;
-var easeOutBounce  = 2;
-var exp2 = 3;
+//var pxInterpLinear = 0;
+//var easeOutElastic = 1;
+//var easeOutBounce  = 2;
+//var exp2 = 3;
 var pxStop = 4;
 
 function randomInt(from, to) {
@@ -88,11 +88,11 @@ function doIt() {
           
       picture.animateTo({x:randomInt(50,scene.getWidth()-picture.resource.w-50),
                           y:randomInt(50,scene.getHeight()-picture.resource.h-50),
-                          r:randomInt(-15,15),sx:0.75,sy:0.75},1,pxStop,0)
+                          r:randomInt(-15,15),sx:0.75,sy:0.75},1,scene.animation.TWEEN_STOP,scene.animation.OPTION_END)
         .then(function() {
           if (pictures.numChildren > 10) {
             var f = pictures.getChild(0);
-            f.animateTo({a: 0}, 0.75, 0, 0)
+            f.animateTo({a: 0}, 0.75, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
               .then(function(f){
                 f.remove();
               });

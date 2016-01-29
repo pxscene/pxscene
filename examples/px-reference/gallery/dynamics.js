@@ -5,7 +5,7 @@ var baseURL = px.getPackageBaseFilePath()  + "/";
 
 var root = scene.root;
 
-var interpolators = scene.allInterpolators;
+var interpolators = scene.animation.interpolators;
 
 var bg = scene.create({t:"rect",fillColor:0xffffffff,w:scene.getWidth(),h:scene.getHeight(),parent:root});
 
@@ -16,6 +16,7 @@ var container = scene.create({t:"image",parent:root,w:600});
 
 for (var i = 0; i < interpolators.length; i++) {
     var interpolatorName = interpolators[i];
+    console.log("interpolatorName is "+interpolatorName);
     var x = 0;
     var y = i*64;
     var line = scene.create({t:"image",url:baseURL+"images/blurredline.png",x:x,y:y+50,
@@ -23,7 +24,7 @@ for (var i = 0; i < interpolators.length; i++) {
     scene.create({t:"text",text:interpolatorName,textColor:0x707070ff,pixelSize:14,x:x+5,y:y+18,
                       parent:container});
     scene.create({t:"image",url:baseURL+"images/ball2.png",a:0.5,y:-40,parent:line})
-	  .animateTo({x:550},1,scene[interpolatorName],scene.PX_OSCILLATE);
+	  .animateTo({x:550},1,scene.animation[interpolatorName],scene.animation.OPTION_OSCILLATE);
 }
 container.h = interpolators.length*64;
 

@@ -25,9 +25,9 @@ function fancy(o) {
 
   // animate x and restart the overall animation at end
   o.x = startX;
-  o.animateTo({x:50}, 1.0, scene.PX_LINEAR, scene.PX_END)
+  o.animateTo({x:50}, 1.0, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
     .then(function(o){
-      o.animateTo({x:startX}, 3.0, scene.PX_EASEOUTELASTIC, scene.PX_END)
+      o.animateTo({x:startX}, 3.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END)
         .then(function(o){
           fancy(o);
       })
@@ -35,21 +35,21 @@ function fancy(o) {
 
   // animate y
   o.y = startY;
-  o.animateTo({y:350}, 1.0, scene.PX_EASEOUTBOUNCE, scene.PX_END)
+  o.animateTo({y:350}, 1.0, scene.animation.EASE_OUT_BOUNCE, scene.animation.OPTION_END)
     .then(function(o) {
-      o.animateTo({y:startY}, 1.0, scene.PX_EASEOUTELASTIC, scene.PX_END);
+      o.animateTo({y:startY}, 1.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END);
   });
 
   // animate r
   o.r = 0;
-  o.animateTo({r:-360}, 2.5, scene.PX_EASEOUTELASTIC, scene.PX_END);
+  o.animateTo({r:-360}, 2.5, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END);
 
   // animate sx, sy
-  o.animateTo({sx:0.2,sy:0.2}, 1, scene.PX_LINEAR, scene.PX_END)
+  o.animateTo({sx:0.2,sy:0.2}, 1, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
     .then(function(o){
-      o.animateTo({sx:2.0,sy:2.0}, 1.0, scene.PX_EXP1, scene.PX_END)
+      o.animateTo({sx:2.0,sy:2.0}, 1.0, scene.animation.TWEEN_EXP1, scene.animation.OPTION_END)
         .then(function(o) {
-          o.animateTo({sx:1.0,sy:1.0}, 1.0, scene.PX_EASEOUTELASTIC, scene.PX_END);
+          o.animateTo({sx:1.0,sy:1.0}, 1.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END);
       })
   });
 }

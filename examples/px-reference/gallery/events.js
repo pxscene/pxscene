@@ -34,7 +34,7 @@ scene.root.on("onKeyDown", function(e) {
   text.y = (textbg.h-text.h)/2;
   text.cx = text.w/2;
   text.cy = text.h/2;
-  textbg.animateTo({a:1,y:randomInt(20,200),r:randomInt(-30,30)},0.2,scene.PX_STOP,0)
+  textbg.animateTo({a:1,y:randomInt(20,200),r:randomInt(-30,30)},0.2,scene.animation.TWEEN_STOP,0)
     .then(function(t) { 
       t.animateTo({r:randomInt(-15,15), y: t.y+50}, 0.6, 0, 0)
         .then(function(t) {

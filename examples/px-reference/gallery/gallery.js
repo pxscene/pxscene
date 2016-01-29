@@ -9,10 +9,10 @@ px.import("px:scene.1.js").then( function ready(scene) {
   var basePackageUri = px.getPackageBaseFilePath();
 
   url = basePackageUri + "/images/skulls.png";
-  var bg = scene.create({t:"rect", parent:root, url: url, stretchX: 2, stretchY: 2, fillColor: 0xe0e0e0ff});
+  var bg = scene.create({t:"rect", parent:root, url: url, stretchX:scene.stretch.REPEAT, stretchY:scene.stretch.REPEAT, fillColor: 0xe0e0e0ff});
 
   url = basePackageUri + "/images/status_bg.png";
-  var bgShade = scene.create({t:"image", parent:root, url: url, stretchX: 1, stretchY: 1});
+  var bgShade = scene.create({t:"image", parent:root, url: url, stretchX: scene.stretch.STRETCH, stretchY: scene.stretch.STRETCH});
 
   var childPad = 48;
   var childAppWidth = 1280;
@@ -39,11 +39,11 @@ px.import("px:scene.1.js").then( function ready(scene) {
       if (e.flags == 4) {  // ctrl-mousedown
         c.cx = c.w / 2;
         c.cy = c.h / 2;
-        c.animateTo({r: c.r + 360}, 3, scene.PX_STOP, scene.PX_END);
+        c.animateTo({r: c.r + 360}, 3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
       }
       scene.setFocus(c);
       select.animateTo({x: (c.x - childPad) * 0.25, y: (c.y - childPad) * 0.25},
-        0.3, scene.PX_STOP, scene.PX_END);
+        0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
     });
 
     if (i == 0)
@@ -75,7 +75,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
           x: ((i % childAcross) * (childAppWidth + childPad)) + childPad,
           y: (Math.floor(i / childAcross) * (childAppHeight + childPad)) + childPad
         },
-        0.3, scene.PX_STOP, scene.PX_END);
+        0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
     }
   }
 
