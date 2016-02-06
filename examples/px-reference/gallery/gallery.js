@@ -41,13 +41,17 @@ px.import("px:scene.1.js").then( function ready(scene) {
         c.cy = c.h / 2;
         c.animateTo({r: c.r + 360}, 3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
       }
-      scene.setFocus(c);
+      //scene.setFocus(c);
+      c.focus = true;
       select.animateTo({x: (c.x - childPad) * 0.25, y: (c.y - childPad) * 0.25},
         0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
     });
 
-    if (i == 0)
-      scene.setFocus(c);
+    if (i == 0) {
+      //scene.setFocus(c);
+      c.focus = true;
+      
+    }
 
   }
 

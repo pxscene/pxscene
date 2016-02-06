@@ -176,8 +176,8 @@ px.import("px:scene.1.js").then( function ready(scene) {
       console.log("container got onFocus");
       //upperLine.draw = true;
       //lowerLine.draw = true;  
-      scene.setFocus(tiles[focusIndex]);
-      
+      //scene.setFocus(tiles[focusIndex]);
+      tiles[focusIndex].focus = true;
     });
     container.on('onBlur', function(e) 
     {
@@ -200,12 +200,9 @@ px.import("px:scene.1.js").then( function ready(scene) {
         // receiving these keys!
         e.stopPropagation(true);// = true;
         focusIndex++;
-        //if( focusIndex >= numTiles)
-        //{
-          //focusIndex = 0;
-        //}
         navDirection=1;
-        scene.setFocus(tiles[focusIndex]);
+        //scene.setFocus(tiles[focusIndex]);
+        tiles[focusIndex].focus = true;
       }
       else if(e.keyCode == 37) // left arrow 
       {
@@ -214,12 +211,9 @@ px.import("px:scene.1.js").then( function ready(scene) {
           return;
         e.stopPropagation(true);// = true;
         focusIndex--;
-        //if( focusIndex < 0)
-        //{
-          //focusIndex = numTiles-1;
-        //}
         navDirection=2;
-        scene.setFocus(tiles[focusIndex]);      
+        //scene.setFocus(tiles[focusIndex]);  
+        tiles[focusIndex].focus = true;    
       }
       else if(e.keyCode == 40) // down arrow
       { 
@@ -235,16 +229,10 @@ px.import("px:scene.1.js").then( function ready(scene) {
     this.setFocus = function() 
     { 
       console.log("ImageRow setFocus");
-      //if( index < 0)
-        //index = focusIndex;
-      //else if( index >= numTiles)
-        //index = numTiles-1;
-      //  focusIndex = index;
       upperLine.draw = true;
       lowerLine.draw = true;  
-      scene.setFocus(container);
-      //scene.setFocus(tiles[focusIndex]);
-        
+      //scene.setFocus(container);
+      container.focus=true;
     }
     /** Return the index of the focused image */
     this.getFocusedIndex = function()
