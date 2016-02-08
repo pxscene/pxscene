@@ -3,27 +3,25 @@ var root = scene.root;
 var basePackageUri = px.getPackageBaseFilePath();
 
 var url;
-/*
-url = process.cwd() + "/../../images/skulls.png";
-var bg = scene.create({t:"image",url:url,xStretch:2,yStretch:2,parent:root});
-
-url = process.cwd() + "/../../images/radial_gradient.png";
-var bgShade = scene.create({t:"image",url:url,xStretch:1,yStretch:1,parent:root});
-*/
 
 var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
 
 url = basePackageUri + "/images/ball.png"
-var ball = scene.create({t:"image",url:url,parent:root,clip:true});
-ball.cx = ball.resource.w/2;
-ball.cy = ball.resource.h/2;
 
-var childText = scene.create({t:"text",text:"Hello There!!!",parent:ball,textColor:0xff0000ff,pixelSize:64});
-childText.y = ball.resource.h/2-childText.h/2;
-childText.x = ball.resource.w/2-childText.w/2;
-childText.cx = childText.w/2;
-childText.cy = childText.h/2;
-childText.animateTo({"r":360}, 1, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP);
+var ball = scene.create({t:"image",url:url,parent:root,clip:true});
+  ball.ready.then(function() {
+    ball.cx = ball.resource.w/2;
+    ball.cy = ball.resource.h/2;
+
+    var childText = scene.create({t:"text",text:"Hello There!!!",parent:ball,textColor:0xff0000ff,pixelSize:64});
+      childText.ready.then(function() {
+        childText.y = ball.resource.h/2-childText.h/2;
+        childText.x = ball.resource.w/2-childText.w/2;
+        childText.cx = childText.w/2;
+        childText.cy = childText.h/2;
+        childText.animateTo({"r":360}, 1, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP);
+      });
+  });
 
 function fancy(o) {
   var startX = 450;

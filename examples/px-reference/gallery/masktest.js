@@ -3,13 +3,6 @@ var root = scene.root;
 var basePackageUri = px.getPackageBaseFilePath();
 
 var url;
-/*
-url = process.cwd() + "/../../images/skulls.png";
-var bg = scene.create({t:"image",url:url,xStretch:2,yStretch:2,parent:root});
-
-url = process.cwd() + "/../../images/radial_gradient.png";
-var bgShade = scene.create({t:"image",url:url,xStretch:1,yStretch:1,parent:root});
-*/
 
 var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
 

@@ -27,51 +27,60 @@ scene.root.on("onKeyDown", function(e) {
                                   y:scene.getHeight()+50,
                                   url:basePackageUri+"/images/keybubble.png",
                                   parent:back,sx:0.75, sy:0.75});
-  textbg.cx = textbg.w/2;
-  textbg.cy = textbg.h/2;
-  var text = scene.create({t:"text",text:keytext,parent:textbg,pixelSize:48});
-  text.x = (textbg.w-text.w)/2;
-  text.y = (textbg.h-text.h)/2;
-  text.cx = text.w/2;
-  text.cy = text.h/2;
-  textbg.animateTo({a:1,y:randomInt(20,200),r:randomInt(-30,30)},0.2,scene.animation.TWEEN_STOP,0)
-    .then(function(t) { 
-      t.animateTo({r:randomInt(-15,15), y: t.y+50}, 0.6, 0, 0)
-        .then(function(t) {
-          t.animateTo({sx:1, sy: 1}, 0.01, 0, 0)
+  textbg.ready.then(function() {
+    textbg.cx = textbg.w/2;
+    textbg.cy = textbg.h/2;
+    var text = scene.create({t:"text",text:keytext,parent:textbg,pixelSize:48});
+    text.ready.then(function() {
+      text.x = (textbg.w-text.w)/2;
+      text.y = (textbg.h-text.h)/2;
+      text.cx = text.w/2;
+      text.cy = text.h/2;
+      textbg.animateTo({a:1,y:randomInt(20,200),r:randomInt(-30,30)},0.2,scene.animation.TWEEN_STOP,0)
+        .then(function(t) { 
+          t.animateTo({r:randomInt(-15,15), y: t.y+50}, 0.6, 0, 0)
             .then(function(t) {
-              t.animateTo({a:0,sx:0.25,sy:0.25}, 0.2, 0, 0)
+              t.animateTo({sx:1, sy: 1}, 0.01, 0, 0)
                 .then(function(t) {
-                  t.remove();
+                  t.animateTo({a:0,sx:0.25,sy:0.25}, 0.2, 0, 0)
+                    .then(function(t) {
+                      t.remove();
+                    })
                 })
             })
-        })
+        });
     });
+  });
 });
 
 
 function balloon(eventName, imageURL, textColor, offset, parent) {
   return function(e) {
-      var x = e.x; var y = e.y;
+    var x = e.x; var y = e.y;
 
-    var textbg = scene.create({t:"image9",url:imageURL,parent:parent,r:randomInt(-10,10)});
-    textbg.x = x-textbg.w/2;
-    textbg.y = y-textbg.h
-    textbg.cx = textbg.w/2;
-    textbg.cy = textbg.h/2;
-    var text = scene.create({t:"text",text:eventName, parent:textbg, 
-                                 textColor:textColor});
-    text.x = (textbg.w-text.w)/2;
-    text.y = (textbg.h-text.h-10)/2;
-    text.cx = text.w/2;
-    text.cy = text.h/2;
-    textbg.animateTo({y: textbg.y-10-offset}, 0.3, 0, 0)
-      .then(function(t) {
-        t.animateTo({a:0}, 0.3, 4, 0)
+    var textbg = scene.create({t:"image9",url:imageURL,parent:parent,r:randomInt(-10,10),a:0});
+    textbg.ready.then(function() {
+      textbg.x = x-textbg.w/2;
+      textbg.y = y-textbg.h
+      textbg.cx = textbg.w/2;
+      textbg.cy = textbg.h/2;
+      textbg.a = 1;
+      var text = scene.create({t:"text",text:eventName, parent:textbg, 
+                                   textColor:textColor});
+      text.ready.then(function() {
+        text.x = (textbg.w-text.w)/2;
+        text.y = (textbg.h-text.h-10)/2;
+        text.cx = text.w/2;
+        text.cy = text.h/2;
+        textbg.animateTo({y: textbg.y-10-offset}, 0.3, 0, 0)
           .then(function(t) {
-            t.remove();
-          })
+            t.animateTo({a:0}, 0.3, 4, 0)
+              .then(function(t) {
+                t.remove();
+              })
+          });
       });
+    });
   }
 }
 
@@ -87,17 +96,19 @@ function blah(eventname) {
   return function(x, y) {
     var text = scene.create({t:"text",r:randomInt(-10,10),
                                  text:eventname, parent:root});
-    text.x = scene.getWidth()-text.w/2;
-    text.y = scene.getHeight()-text.h/2;
-    text.cx = text.w/2;
-    text.cy = text.h/2;
-    text.animateTo({y: text.y-10}, 0.3, 0, 0)
+    text.ready.then(function() {
+      text.x = scene.getWidth()-text.w/2;
+      text.y = scene.getHeight()-text.h/2;
+      text.cx = text.w/2;
+      text.cy = text.h/2;
+      text.animateTo({y: text.y-10}, 0.3, 0, 0)
         .then(function(t) {
           t.animateTo({a:0}, 0.3, 4, 0)
             .then(function(t) {
               t.remove();
             })
         });
+    });
   }
 }
 
