@@ -9,12 +9,14 @@ px.import("px:scene.1.js").then( function ready(scene) {
     {t:"rect",fillColor:0x0000ffff,w:100,h:100,x:200,y:200}
   ]});
 
-   scene.setFocus(o);
-   scene.setFocus(o.children[0]);
+   //scene.setFocus(o);
+   o.focus = true;
+   //scene.setFocus(o.children[0]);
+   o.children[0].focus = true;
 
-   o.animateTo({r:360},2,scene.PX_LINEAR,scene.PX_LOOP);
-   o.animateTo({sx:0.5,sy:0.5,a:0},2,scene.PX_LINEAR,scene.PX_SEESAW);
-   o.children[1].animateTo({r:-360},1,scene.PX_LINEAR,scene.PX_LOOP);
+   o.animateTo({r:360},2,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP);
+   o.animateTo({sx:0.5,sy:0.5,a:0},2,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_OSCILLATE);
+   o.children[1].animateTo({r:-360},1,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP);
 
   /**
    *

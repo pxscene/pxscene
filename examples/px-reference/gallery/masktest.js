@@ -4,19 +4,19 @@ var basePackageUri = px.getPackageBaseFilePath();
 
 var url;
 
-var txt1 = scene.createText({x:10,text:"",parent:root,pixelSize:64});
+var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
 
 url = basePackageUri + "/images/ball.png";
-var ball = scene.createImage({url:url,parent:root,clip:true,drawAsMask:true});
+var ball = scene.create({t:"image",url:url,parent:root,clip:true,mask:true});
   ball.ready.then(function() {
-    ball.cx = ball.w/2;
-    ball.cy = ball.h/2;
+    ball.cx = ball.resource.w/2;
+    ball.cy = ball.resource.h/2;
     fancy(ball);
 
-    var childText = scene.createText({text:"Hello There!!!",parent:ball,textColor:0xff0000ff,pixelSize:64});
+    var childText = scene.create({t:"text",text:"Hello There!!!",parent:ball,textColor:0xff0000ff,pixelSize:64});
     childText.ready.then(function() {
-      childText.y = ball.h/2-childText.h/2;
-      childText.x = ball.w/2-childText.w/2;
+      childText.y = ball.resource.h/2-childText.h/2;
+      childText.x = ball.resource.w/2-childText.w/2;
       childText.cx = childText.w/2;
       childText.cy = childText.h/2;
       childText.animateTo({"r":360}, 1, 0, 2);
@@ -29,9 +29,9 @@ function fancy(o) {
 
   // animate x and restart the overall animation at end
   o.x = startX;
-  o.animateTo({x:50}, 1.0, scene.PX_LINEAR, scene.PX_END)
+  o.animateTo({x:50}, 1.0, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
     .then(function(o){
-      o.animateTo({x:startX}, 3.0, scene.PX_EASEOUTELASTIC, scene.PX_END)
+      o.animateTo({x:startX}, 3.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END)
         .then(function(o){
           fancy(o);
         })
@@ -39,21 +39,21 @@ function fancy(o) {
 
   // animate y
   o.y = startY;
-  o.animateTo({y:350}, 1.0, scene.PX_EASEOUTBOUNCE, scene.PX_END)
+  o.animateTo({y:350}, 1.0, scene.animation.EASE_OUT_BOUNCE, scene.animation.OPTION_END)
     .then(function(o) {
-      o.animateTo({y:startY}, 1.0, scene.PX_EASEOUTELASTIC, scene.PX_END);
+      o.animateTo({y:startY}, 1.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END);
   });
 
   // animate r
   o.r = 0;
-  o.animateTo({r:-360}, 2.5, scene.PX_EASEOUTELASTIC, scene.PX_END);
+  o.animateTo({r:-360}, 2.5, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END);
 
   // animate sx, sy
-  o.animateTo({sx:0.2,sy:0.2}, 1, scene.PX_LINEAR, scene.PX_END)
+  o.animateTo({sx:0.2,sy:0.2}, 1, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
     .then(function(o){
-      o.animateTo({sx:2.0,sy:2.0}, 1.0, scene.PX_EXP1, scene.PX_END)
+      o.animateTo({sx:2.0,sy:2.0}, 1.0, scene.animation.TWEEN_EXP1, scene.animation.OPTION_END)
         .then(function(o) {
-          o.animateTo({sx:1.0,sy:1.0}, 1.0, scene.PX_EASEOUTELASTIC, scene.PX_END);
+          o.animateTo({sx:1.0,sy:1.0}, 1.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END);
         })
     });
 }

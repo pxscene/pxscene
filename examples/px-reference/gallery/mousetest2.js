@@ -5,32 +5,37 @@ var basePackageUri = px.getPackageBaseFilePath();
 var url;
 /*
 url = process.cwd() + "/../../images/skulls.png";
-var bg = scene.createImage({id:"bg2",url:url,xStretch:2,yStretch:2,parent:root});
+var bg = scene.create({t:"image",id:"bg2",url:url,stretchX:2,stretchY:2,parent:root});
 
 url = process.cwd() + "/../../images/radial_gradient.png";
-var bgShade = scene.createImage({id:"bg", url:url,xStretch:1,yStretch:1,parent:root});
+var bgShade = scene.create({t:"image",id:"bg", url:url,stretchX:1,stretchY:1,parent:root});
 */
-var txt1 = scene.createText({x:10,text:"",parent:root,pixelSize:64});
+var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
 
 //var childText;
 url = basePackageUri + "/images/ball.png"
-var ballImg = scene.createImage({id:"ball",url:url,x:450,y:150,parent:root});
+var ballImg = scene.create({t:"image",id:"ball",url:url,x:450,y:150,parent:root});
 ballImg.ready.then(function(e){
-       e.cx = e.w/2;
-    e.cy = e.h/2;
-    childText = scene.createText({id:"text",text:"CLICK ME!!!",parent:e,textColor:0xff0000ff, 
+       e.cx = e.resource.w/2;
+    e.cy = e.resource.h/2;
+    childText = scene.create({t:"text",id:"text",text:"CLICK ME!!!",parent:e,textColor:0xff0000ff, 
 				  r:30, pixelSize:64});
-    childText.y = e.h/2-childText.h/2;
-    childText.x = e.w/2-childText.w/2;
+    childText.y = e.resource.h/2-childText.h/2;
+    childText.x = e.resource.w/2-childText.w/2;
     childText.cx = childText.w/2;
     childText.cy = childText.h/2;
     childText.on("onMouseDown", function(e) {
+    console.log("onMouseDown for text object");
 	// TODO is there a better way to do this??
 	rTarget += 360;
 	childText.animateTo({r:rTarget}, 1.0, 4, 0); 
 	//    childText.animateTo({r:360}, 5.0, 4, 0, function(o) { o.r = 0; }); 
     });
+
 });
+    ballImg.on("onMouseDown", function(o) {
+    console.log("onMouseDown for image object");
+    });
 var rTarget = 0;
 
 

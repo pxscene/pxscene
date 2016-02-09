@@ -9,10 +9,10 @@ px.import("px:scene.1.js").then( function ready(scene) {
   var basePackageUri = px.getPackageBaseFilePath();
 
   url = basePackageUri + "/images/skulls.png";
-  var bg = scene.createRectangle({parent:root, url: url, xStretch: 2, yStretch: 2, fillColor: 0xe0e0e0ff});
+  var bg = scene.create({t:"rect", parent:root, url: url, stretchX:scene.stretch.REPEAT, stretchY:scene.stretch.REPEAT, fillColor: 0xe0e0e0ff});
 
   url = basePackageUri + "/images/status_bg.png";
-  var bgShade = scene.createImage({parent:root, url: url, xStretch: 1, yStretch: 1});
+  var bgShade = scene.create({t:"image", parent:root, url: url, stretchX: scene.stretch.STRETCH, stretchY: scene.stretch.STRETCH});
 
   var childPad = 48;
   var childAppWidth = 1280;
@@ -23,13 +23,13 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
   var select;
 
-  var apps = scene.createImage({parent:root, sx: 0.25, sy: 0.25, w: 1280, h: 720});
-  //var apps = scene.createRectangle({sx: 0.25, sy: 0.25, w: 1280, h: 720});
+  var apps = scene.create({t:"image", parent:root, sx: 0.25, sy: 0.25, w: 1280, h: 720});
+  //var apps = scene.create({t:"rect",sx: 0.25, sy: 0.25, w: 1280, h: 720});
 
   for (var i = 0; i < appURLs.length; i++) {
     var appUrl = basePackageUri + "/" + appURLs[i];
-    var c = scene.createScene({
-      url: appUrl, parent:apps,
+    var c = scene.create({
+      t:"scene", url: appUrl, parent:apps,
       w: childAppWidth, h: childAppHeight, clip: true
     });
 
@@ -39,21 +39,21 @@ px.import("px:scene.1.js").then( function ready(scene) {
       if (e.flags == 4) {  // ctrl-mousedown
         c.cx = c.w / 2;
         c.cy = c.h / 2;
-        c.animateTo({r: c.r + 360}, 3, scene.PX_STOP, scene.PX_END);
+        c.animateTo({r: c.r + 360}, 3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
       }
-      scene.setFocus(c);
+      c.focus = true;
       select.animateTo({x: (c.x - childPad) * 0.25, y: (c.y - childPad) * 0.25},
-        0.3, scene.PX_STOP, scene.PX_END);
+        0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
     });
 
-    if (i == 0)
-      scene.setFocus(c);
+    if (i == 0) 
+      c.focus = true;
 
   }
 
   var url = basePackageUri + "/images/select.png";
-  select = scene.createImage9({
-    parent: root, url: url, lInset: 16, tInset: 16, rInset: 16, bInset: 16,
+  select = scene.create({t:"image9",
+    parent: root, url: url, insetLeft: 16, insetTop: 16, insetRight: 16, insetBottom: 16,
     w: selectWidth * 0.25, h: selectHeight * 0.25, x: 0, y: 0, interactive: false
   });
   select.ready.then(function () {
@@ -75,7 +75,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
           x: ((i % childAcross) * (childAppWidth + childPad)) + childPad,
           y: (Math.floor(i / childAcross) * (childAppHeight + childPad)) + childPad
         },
-        0.3, scene.PX_STOP, scene.PX_END);
+        0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
     }
   }
 

@@ -1,10 +1,10 @@
 px.import("px:scene.1.js").then( function ready(scene) {
-
+  
 var root = scene.root;
 
 
 var width = 800;
-//var bg = scene.create({t:"rect",fillColor:0xccccccff, parent:root});
+//var bg = scene.create({t:"rect", fillColor:0xccccccff, parent:root});
 function updateSize(w, h) {
 //    bg.w = w;
 //    bg.h = h;
@@ -15,26 +15,26 @@ updateSize(scene.w, scene.h);
 
 
 // null or "" is the default font FreeSans.ttf
-// Using "" in fonts array tests that local font files can be loaded, too
+
 var fonts = ["",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-BoldCond.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-ExLgt.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Lgt.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Med.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-MedCond.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/DejaVuSans.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/DejaVuSerif.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/XFINITYSansTT-New-Bold.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/XFINITYSansTT-New-BoldCond.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/XFINITYSansTT-New-ExLgt.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/XFINITYSansTT-New-Lgt.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/XFINITYSansTT-New-Med.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/XFINITYSansTT-New-MedCond.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSans.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf",
             ];
 
 console.log("fonts: "+fonts.length);
 scene.w = width;
 console.log("scene.w="+scene.w);
 
-var scroll = scene.create({t:"image",parent:root});
-var scrollContent = scene.create({t:"image",parent:scroll,w:width});
+var scroll = scene.create({t:"image", parent:root});
+var scrollContent = scene.create({t:"image", parent:scroll,w:width});
 
-var rowcontainer = scene.create({t:"image",parent:scrollContent});
+var rowcontainer = scene.create({t:"image", parent:scrollContent});
 
 pleaseWait = scene.create({t:"textBox",text:"Please wait while fonts load...", 
                               parent:root,x:10,y:0,
@@ -45,7 +45,7 @@ var promises = [];
 var p = 0; 
 for (var i=0; i < fonts.length; i++)
 {
-    var row = scene.create({t:"image",parent:rowcontainer,y:0, clip:false});
+    var row = scene.create({t:"image", parent:rowcontainer,y:0, clip:false});
     var faceName = fonts[i]?fonts[i]:"FreeSans.ttf";
     console.log("fontFace: "+faceName);
     var t = scene.create({t:"textBox",text:"Enter in some text...", 
@@ -74,7 +74,6 @@ Promise.all(promises).then(function(success, failure) {
                 t.h = fontMetrics.height;
                 t.parent.h = t.h+(fontMetrics.naturalLeading);
                 t.parent.w = width;
-                console.log("set t.parent.h to "+t.parent.h);
                 if( n != 0) {
                     var prevParent = elems[n-1].parent;          
 
@@ -94,9 +93,7 @@ Promise.all(promises).then(function(success, failure) {
               });
 //}
 
-//var measure = elems[0].font.measureText(elems[0].pixelSize,"/");
-//console.log("MeasureText result for slash is "+measure.w);
-var select = scene.create({t:"rect",parent:scrollContent, fillColor:0x000000, 
+var select = scene.create({t:"rect", parent:scrollContent, fillColor:0x000000, 
                                     lineColor:0xffff00ff,
                                     lineWidth:4,w:scene.w,h:100});
 
@@ -171,7 +168,7 @@ scene.root.on("onChar", function(e) {
   }
 });
 
-
 }).catch( function importFailed(err){
   console.error("Import failed for fonts_xfinity_text2.js: " + err)
 });
+

@@ -2,20 +2,20 @@ px.import("px:scene.1.js").then( function ready(scene) {
 var root = scene.root;
 var basePackageUri = px.getPackageBaseFilePath();
 
-//var bg = scene.createImage();
-//var bgShade = scene.createImage();
+//var bg = scene.create({t:"image"});
+//var bgShade = scene.create({t:"image"});
 
-var txt1 = scene.createText();
+var txt1 = scene.create({t:"text"});
 
 /*
 bg.url = process.cwd() + "/../../images/skulls.png";
-bg.xStretch = 2;
-bg.yStretch = 2;
+bg.stretchX = 2;
+bg.stretchY = 2;
 bg.parent = root;
 
 bgShade.url = process.cwd() + "/../../images/radial_gradient.png";
-bgShade.xStretch = 1;
-bgShade.yStretch = 1;
+bgShade.stretchX = 1;
+bgShade.stretchY = 1;
 bgShade.parent = root;
 */
 
@@ -25,10 +25,10 @@ txt1.parent = root;
 
 
 // clean up these names and expose as properties off of some object
-var pxInterpLinear = 0;
-var easeOutElastic = 1;
-var easeOutBounce  = 2;
-var exp2 = 3;
+//var pxInterpLinear = 0;
+//var easeOutElastic = 1;
+//var easeOutBounce  = 2;
+//var exp2 = 3;
 var pxStop = 4;
 
 function randomInt(from, to) {
@@ -39,10 +39,10 @@ function randomInt(from, to) {
 function getImageURL() {
   if (true) {
     var urls = [
-	    "http://farm4.static.flickr.com/3307/5767175230_b5d2bf2312_z.jpg",
-	    "http://farm6.static.flickr.com/5263/5793867021_3e1d5d3aae_z.jpg",
-	    "http://farm3.static.flickr.com/2454/3594278573_500f415e39_z.jpg",
-	    "http://farm3.static.flickr.com/2415/2087329111_dd29709847.jpg",
+	  "http://farm4.static.flickr.com/3307/5767175230_b5d2bf2312_z.jpg",
+	  "http://farm6.static.flickr.com/5263/5793867021_3e1d5d3aae_z.jpg",
+	  "http://farm3.static.flickr.com/2454/3594278573_500f415e39_z.jpg",
+	  "http://farm3.static.flickr.com/2415/2087329111_dd29709847.jpg",
       "http://c2.staticflickr.com/4/3707/9393275293_a108ed698a_b.jpg",
       "http://c2.staticflickr.com/8/7524/15571693270_9c5b3555b6_c.jpg",
       "http://c1.staticflickr.com/3/2925/13963178756_980d79b8a6_z.jpg",
@@ -67,7 +67,7 @@ var numPictures = 0;
 function doIt() {
   
   // create an object to group some other objects
-	var pictures = scene.createImage();
+	var pictures = scene.create({t:"image"});
   pictures.parent = root;
   
 	var urlIndex = 0;
@@ -76,19 +76,23 @@ function doIt() {
     
     var url = getImageURL();
     var picture;
-    picture = scene.createImage({parent: pictures, x:(randomInt(0,1)==0)?-1000:scene.getWidth()+2000,
+    picture = scene.create({t:"image",parent: pictures, x:(randomInt(0,1)==0)?-1000:scene.getWidth()+2000,
                                  y:randomInt(-200, 800), cx: 200, 
                                  cy:200, sx: 2, sy: 2, 
                                  r: randomInt(-45,45), url:url});
     
-    picture.ready.then(function(){
-      picture.animateTo({x:randomInt(50,scene.getWidth()-picture.w-50),
-                          y:randomInt(50,scene.getHeight()-picture.h-50),
-                          r:randomInt(-15,15),sx:0.75,sy:0.75},1,pxStop,0)
+    picture.ready.then(function(pic){
+      
+      var res = pic.resource;
+      res.ready.then(function(){ console.log("resource is ready - success");}, function(){console.log("resource is ready - failure");});
+          
+      picture.animateTo({x:randomInt(50,scene.getWidth()-picture.resource.w-50),
+                          y:randomInt(50,scene.getHeight()-picture.resource.h-50),
+                          r:randomInt(-15,15),sx:0.75,sy:0.75},1,scene.animation.TWEEN_STOP,scene.animation.OPTION_END)
         .then(function() {
           if (pictures.numChildren > 10) {
             var f = pictures.getChild(0);
-            f.animateTo({a: 0}, 0.75, 0, 0)
+            f.animateTo({a: 0}, 0.75, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
               .then(function(f){
                 f.remove();
               });
@@ -96,6 +100,10 @@ function doIt() {
           newPicture();
         });    
     },function(){
+      console.log("pic load failed: statusCode="+picture.resource.loadStatus.statusCode+" and httpStatusCode="+picture.resource.loadStatus.httpStatusCode);
+      var res =picture.resource;
+      res.ready.then(function(){ console.log("resource is ready - success - within image promise failure");}, function(){console.log("resource is ready - failure - within image promise failure");});
+      
       picture.remove();
       newPicture();
     });

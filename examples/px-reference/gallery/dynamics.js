@@ -5,25 +5,26 @@ var baseURL = px.getPackageBaseFilePath()  + "/";
 
 var root = scene.root;
 
-var interpolators = scene.allInterpolators;
+var interpolators = scene.animation.interpolators;
 
-var bg = scene.createRectangle({fillColor:0xffffffff,w:scene.getWidth(),h:scene.getHeight(),parent:root});
+var bg = scene.create({t:"rect",fillColor:0xffffffff,w:scene.getWidth(),h:scene.getHeight(),parent:root});
 
 var tweeners = [{n:"linear",v:0}, {n:"easeOutElastic",v:1}, {n:"easeOutBounce",v:2}, 
 		{n:"exp", v:3}, {n:"stop", v:4}];
 
-var container = scene.createImage({parent:root,w:600});
+var container = scene.create({t:"image",parent:root,w:600});
 
 for (var i = 0; i < interpolators.length; i++) {
     var interpolatorName = interpolators[i];
+    console.log("interpolatorName is "+interpolatorName);
     var x = 0;
     var y = i*64;
-    var line = scene.createImage({url:baseURL+"images/blurredline.png",x:x,y:y+50,
+    var line = scene.create({t:"image",url:baseURL+"images/blurredline.png",x:x,y:y+50,
                                   parent:container});
-    scene.createText({text:interpolatorName,textColor:0x707070ff,pixelSize:14,x:x+5,y:y+18,
+    scene.create({t:"text",text:interpolatorName,textColor:0x707070ff,pixelSize:14,x:x+5,y:y+18,
                       parent:container});
-    scene.createImage({url:baseURL+"images/ball2.png",a:0.5,y:-40,parent:line})
-	  .animateTo({x:550},1,scene[interpolatorName],scene.PX_SEESAW);
+    scene.create({t:"image",url:baseURL+"images/ball2.png",a:0.5,y:-40,parent:line})
+	  .animateTo({x:550},1,scene.animation[interpolatorName],scene.animation.OPTION_OSCILLATE);
 }
 container.h = interpolators.length*64;
 
