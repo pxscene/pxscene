@@ -51,7 +51,7 @@ function createText(x, y, props) {
 
 createText(0, 0, {fontUrl:"FreeSans.ttf", text:(textA + "\n" + textA + "\n" + textA), wordWrap:false, clip:false});
 createText(0, 200, {fontUrl:"http://www.w3schools.com/cssref/sansation_light.woff", text:(textB + " " + textB + " " + textB), wordWrap:true, clip:false});
-createText(0, 400, {fontUrl:"http://54.146.54.142/tom/xre2/apps/receiver/fonts/DejaVuSerif.ttf", text:(textB + "\n" + textB + "\n" + textB), wordWrap:true, clip:false, pixelSize:35, leading:20});
+createText(0, 400, {fontUrl:"http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf", text:(textB + "\n" + textB + "\n" + textB), wordWrap:true, clip:false, pixelSize:35, leading:20});
 
 
 }).catch( function importFailed(err){

@@ -5,7 +5,7 @@ var root = scene.root;
 //var longText = textA + "\n" + textA + "\n" + textA;
 // "Hello!  How are you?";//
 // Use fontUrl to load from web
-var fontUrlStart = "http://54.146.54.142/tom/receiverdotjs/fonts/";
+var fontUrlStart = "http://www.pxscene.org/examples/px-reference/fonts/";
 var XFinityMed = "XFINITYSansTT-New-Med.ttf";
 var DejaVu = "DejaVuSans.ttf";
 var DejaVuSerif = "DejaVuSerif.ttf";
