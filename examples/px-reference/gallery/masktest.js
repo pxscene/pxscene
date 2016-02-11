@@ -7,13 +7,14 @@ var url;
 var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
 
 url = basePackageUri + "/images/ball.png";
-var ball = scene.create({t:"image",url:url,parent:root,clip:true,mask:true});
+// ball will draw since draw:true, but will also be used as mask for childText
+var ball = scene.create({t:"image",url:url,parent:root,clip:true,mask:true,draw:true});
   ball.ready.then(function() {
     ball.cx = ball.resource.w/2;
     ball.cy = ball.resource.h/2;
-    fancy(ball);
+    fancy(root);
 
-    var childText = scene.create({t:"text",text:"Hello There!!!",parent:ball,textColor:0xff0000ff,pixelSize:64});
+    var childText = scene.create({t:"text",text:"Hello There!!!",parent:root,textColor:0xff0000ff,pixelSize:64});
     childText.ready.then(function() {
       childText.y = ball.resource.h/2-childText.h/2;
       childText.x = ball.resource.w/2-childText.w/2;
