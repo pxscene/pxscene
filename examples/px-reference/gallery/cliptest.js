@@ -12,6 +12,7 @@ var ball = scene.create({t:"image",url:url,parent:root,clip:true});
   ball.ready.then(function() {
     ball.cx = ball.resource.w/2;
     ball.cy = ball.resource.h/2;
+	fancy(ball);
 
     var childText = scene.create({t:"text",text:"Hello There!!!",parent:ball,textColor:0xff0000ff,pixelSize:64});
       childText.ready.then(function() {
@@ -58,7 +59,6 @@ function fancy(o) {
    });
 }
 
-fancy(ball);
 
 scene.on('onKeyDown', function(e) {
   console.log("onKeyDown:" + e.keyCode);

@@ -31,7 +31,7 @@ var childText = scene.create({t:"text",text:"Hello There!!!",parent:logo,textCol
 childText.y = 0;
 childText.x = 0;
 logo.x = (ball.resource.w-logo.resource.w)/2;
-logo.y = (ball.resource.h-logo.resource.h)/2
+logo.y = (ball.resource.h-logo.resource.h)/2;
 logo.cx = logo.resource.w/2;
 logo.cy = logo.resource.h/2;
 logo.animateTo({r:360}, 10, 0, 2);

@@ -30,7 +30,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
     var appUrl = basePackageUri + "/" + appURLs[i];
     var c = scene.create({
       t:"scene", url: appUrl, parent:apps,
-      w: childAppWidth, h: childAppHeight, clip: true
+      w: childAppWidth, h: childAppHeight, clip: true,a:1
     });
 
     c.on("onMouseDown", function (e) {
@@ -76,6 +76,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
           y: (Math.floor(i / childAcross) * (childAppHeight + childPad)) + childPad
         },
         0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+      c.a=0;
     }
   }
 
