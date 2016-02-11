@@ -16,9 +16,12 @@ var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
 
 url = basePackageUri + "/images/ball.png"
 var ball = scene.create({t:"image",url:url,parent:root});
-ball.cx = ball.w/2;
-ball.cy = ball.h/2;
+ball.ready.then(function() {
+  ball.cx = ball.resource.w/2;
+  ball.cy = ball.resource.h/2;
 
+  fancy(ball);
+});
 function fancy(o) {
   var startX = 450;
   var startY = 100;
@@ -54,7 +57,7 @@ function fancy(o) {
   });
 }
 
-fancy(ball);
+
 
 scene.on("onMouseMove", function(e) {
     txt1.text = "" + e.x + ", " + e.y;
