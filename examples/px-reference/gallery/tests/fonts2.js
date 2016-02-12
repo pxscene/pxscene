@@ -1,23 +1,46 @@
 px.import("px:scene.1.js").then( function ready(scene) {
-
 var root = scene.root;
 
-
-
 // null or "" is the default face FreeSans.ttf
-var fonts = ["",
-             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Regular.ttf",
+var faces = ["http://www.pxscene.org/examples/px-reference/fonts/XFINITYSansTT-New-Bold.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/XFINITYSansTT-New-MedCond.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/PoiretOne-Regular.ttf",
              "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Bold.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSans.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/FontdinerSwanky.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/FreeSans.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/IndieFlower.ttf",
              "http://www.pxscene.org/examples/px-reference/fonts/Pacifico.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/FontdinerSwanky.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/IndieFlower.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/PoiretOne-Regular.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Bold.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/Pacifico.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/FontdinerSwanky.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/IndieFlower.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/PoiretOne-Regular.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Bold.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/Pacifico.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/FontdinerSwanky.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/IndieFlower.ttf",
              "http://www.pxscene.org/examples/px-reference/fonts/PoiretOne-Regular.ttf",
             ];
-console.log("fonts: " + fonts);
-console.log("fonts: ", fonts.length);
+
+// Example for using getFont for font metrics
+var myFont = scene.create( {t:"fontResource",url:"http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf"});
+
+myFont.ready.then(function(font) {
+  console.log("!CLF: First Promise received");
+
+	console.log("inside font.ready");
+
+	metrics = font.getFontMetrics(35);
+	console.log("metrics h="+metrics.height);
+	console.log("metrics a="+metrics.ascent);
+	console.log("metrics d="+metrics.descent);
+  console.log("metrics naturalLeading="+metrics.naturalLeading);
+  console.log("metrics baseline="+metrics.baseline);
+  
+  var measure = font.measureText( 35, "Please type some text...");
+  console.log("measure w="+measure.w);
+  console.log("measure h="+measure.h);
+  });
 
 var scroll = scene.create({t:"image",parent:root});
 var scrollContent = scene.create({t:"image",parent:scroll});
@@ -27,20 +50,22 @@ var rowcontainer = scene.create({t:"image",parent:scrollContent});
 var prevRow;
 
 var p = 0; 
-for (var i=0; i < fonts.length; i++)
+for (var i=0; i < faces.length; i++)
 {
-    var row = scene.create({t:"image",parent:rowcontainer,a:0});
+  var row = scene.create({t:"image",parent:rowcontainer,a:0});
+  
+  var faceName = faces[i]?faces[i]:"FreeSans.ttf";
+  var t = scene.create({t:"text",
+    parent:row,x:10,
+    textColor:0xfaebd7ff, pixelSize:36,
+    fontUrl:faces[i],
+    text: "Please type some text..."});
+  var t2 = scene.create({t:"text",text:"" + (i+1) + ". " + faceName, 
+                             parent:row,x:20,
+                             textColor:0xfaebd7ff, pixelSize:14,a:0.6,
+                             fontUrl:"FreeSans.ttf"});
+  
 
-    var faceName = fonts[i]?fonts[i]:"FreeSans.ttf";
-    console.log(faceName);
-    var t = scene.create({t:"text",text:"Enter in some text...", 
-                              parent:row,x:10,
-                              textColor:0xfaebd7ff, pixelSize:36,
-                              fontUrl:fonts[i]});
-    var t2 = scene.create({t:"text",text:faceName, 
-                               parent:row,x:20,
-                               textColor:0xeeeeeeff, pixelSize:14,a:0.6});
-    
   // Use promises to layout the rows as the text becomes ready
   var rowReady = new Promise(
     
@@ -53,7 +78,7 @@ for (var i=0; i < fonts.length; i++)
 
       // Please note that rowReady at this point is the rowReady for the previous row
       Promise.all([t.ready,t2.ready,rowReady]).then(function() {
-        console.log("IN PROMISE ALL!");
+        
         t2Copy.y = tCopy.h;
         rowCopy.h = tCopy.h+t2Copy.h;
 
@@ -77,8 +102,8 @@ for (var i=0; i < fonts.length; i++)
   
   row.w = 800;
   prevRow = row;
-
 }
+
 var select = scene.create({t:"rect",parent:scrollContent, fillColor:0x000000, 
                                     lineColor:0xffff00ff,
                                     lineWidth:4,w:scene.w,h:100});
@@ -97,12 +122,10 @@ function selectRow(i) {
     var t = -scrollContent.y;
     if (row.y < t) {
         t = -row.y
-        console.log("one");
         scrollContent.animateTo({y:t},0.3, 0, 0);
     }
     else if (row.y+row.h-scene.h > t) {
         t = -(row.y+row.h-scene.h);
-        console.log("two");
         scrollContent.animateTo({y:t},0.3, 0, 0);
     }
 }
@@ -111,15 +134,11 @@ selectRow(currentRow);
 
 function scrollUp() {
     var numRows = rowcontainer.children.length;
-//    selectRow(currentRow>0?currentRow-1:0);
     selectRow(clamp(currentRow-1, 0, numRows-1));
 }
 
 function scrollDn() {
     var numRows = rowcontainer.children.length;
-    console.log("numRows", numRows);
-    console.log(currentRow);
-//    selectRow((currentRow<(numRows-1))?currentRow+1:numRows-1);
     selectRow(clamp(currentRow+1, 0, numRows-1));
 }
 
@@ -135,8 +154,6 @@ scene.root.on("onKeyDown", function (e) {
     if (keycode == 38) scrollUp();
     else if (keycode == 40) scrollDn();
     else if (keycode == 8) {
-//        str = str.substr(0,str.length-1);
-//        str = str.slice(0,str.length-2);
       str = str.slice(0,-1);
       updateText(str);
     }
@@ -155,10 +172,6 @@ function updateSize(w, h) {
 
 scene.on("onResize", function(e){updateSize(e.w,e.h);});
 updateSize(scene.w, scene.h);
-
 }).catch( function importFailed(err){
   console.error("Import failed for fonts.js: " + err)
 });
-
-
-
