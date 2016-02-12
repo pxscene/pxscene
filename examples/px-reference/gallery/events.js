@@ -36,7 +36,7 @@ scene.root.on("onKeyDown", function(e) {
       text.y = (textbg.h-text.h)/2;
       text.cx = text.w/2;
       text.cy = text.h/2;
-      textbg.animateTo({a:1,y:randomInt(20,200),r:randomInt(-30,30)},0.2,scene.animation.TWEEN_STOP,0)
+      textbg.animateTo({a:1,y:randomInt(20,200),r:randomInt(-30,30)},0.2,scene.animation.TWEEN_STOP,scene.animation.OPTION_END)
         .then(function(t) { 
           t.animateTo({r:randomInt(-15,15), y: t.y+50}, 0.6, 0, 0)
             .then(function(t) {
@@ -54,17 +54,17 @@ scene.root.on("onKeyDown", function(e) {
 });
 
 
-function balloon(eventName, imageURL, textColor, offset, parent) {
+function balloon(eventName, image, textColor, offset, parent) {
   return function(e) {
     var x = e.x; var y = e.y;
 
-    var textbg = scene.create({t:"image9",url:imageURL,parent:parent,r:randomInt(-10,10),a:0});
+    var textbg = scene.create({t:"image9",resource:image,parent:parent,r:randomInt(-10,10),a:0});
     textbg.ready.then(function() {
       textbg.x = x-textbg.w/2;
-      textbg.y = y-textbg.h
+      textbg.y = y-textbg.h;
       textbg.cx = textbg.w/2;
       textbg.cy = textbg.h/2;
-      textbg.a = 1;
+
       var text = scene.create({t:"text",text:eventName, parent:textbg, 
                                    textColor:textColor});
       text.ready.then(function() {
@@ -72,6 +72,7 @@ function balloon(eventName, imageURL, textColor, offset, parent) {
         text.y = (textbg.h-text.h-10)/2;
         text.cx = text.w/2;
         text.cy = text.h/2;
+        textbg.a = 1;
         textbg.animateTo({y: textbg.y-10-offset}, 0.3, 0, 0)
           .then(function(t) {
             t.animateTo({a:0}, 0.3, 4, 0)
@@ -84,12 +85,13 @@ function balloon(eventName, imageURL, textColor, offset, parent) {
   }
 }
 
-scene.on("onMouseMove", balloon("mousemove", basePackageUri+"/images/textballoon_white.png", 0x000000ff,0,
-                              back));
-scene.on("onMouseDown", balloon("mousedown", basePackageUri+"/images/textballoon_blue.png", 0xffffffff,0,
-                              front));
-scene.on("onMouseUp",   balloon("mouseup",   basePackageUri+"/images/textballoon_red.png", 0xffffffff,25,
-                              front));
+var whiteBalloon = scene.create({t:"imageResource", url:basePackageUri+"/images/textballoon_white.png"});
+var blueBalloon = scene.create({t:"imageResource", url:basePackageUri+"/images/textballoon_blue.png"});
+var redBalloon = scene.create({t:"imageResource", url:basePackageUri+"/images/textballoon_red.png"});
+
+scene.on("onMouseMove", balloon("mousemove", whiteBalloon, 0x000000ff,0, back));
+scene.on("onMouseDown", balloon("mousedown", blueBalloon, 0xffffffff,0, front));
+scene.on("onMouseUp",   balloon("mouseup", redBalloon, 0xffffffff,25, front));
 
 function blah(eventname) {
   
