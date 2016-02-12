@@ -28,21 +28,21 @@ scene.root.on("onKeyDown", function(e) {
                                   url:basePackageUri+"/images/keybubble.png",
                                   parent:back,sx:0.75, sy:0.75});
   textbg.ready.then(function() {
-    textbg.cx = textbg.w/2;
-    textbg.cy = textbg.h/2;
+    textbg.cx = textbg.resource.w/2;
+    textbg.cy = textbg.resource.h/2;
     var text = scene.create({t:"text",text:keytext,parent:textbg,pixelSize:48});
     text.ready.then(function() {
-      text.x = (textbg.w-text.w)/2;
-      text.y = (textbg.h-text.h)/2;
+      text.x = (textbg.resource.w-text.w)/2;
+      text.y = (textbg.resource.h-text.h)/2;
       text.cx = text.w/2;
       text.cy = text.h/2;
       textbg.animateTo({a:1,y:randomInt(20,200),r:randomInt(-30,30)},0.2,scene.animation.TWEEN_STOP,scene.animation.OPTION_END)
         .then(function(t) { 
-          t.animateTo({r:randomInt(-15,15), y: t.y+50}, 0.6, 0, 0)
+          t.animateTo({r:randomInt(-15,15), y: t.y+50}, 0.6, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
             .then(function(t) {
-              t.animateTo({sx:1, sy: 1}, 0.01, 0, 0)
+              t.animateTo({sx:1, sy: 1}, 0.01, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
                 .then(function(t) {
-                  t.animateTo({a:0,sx:0.25,sy:0.25}, 0.2, 0, 0)
+                  t.animateTo({a:0,sx:0.25,sy:0.25}, 0.2, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
                     .then(function(t) {
                       t.remove();
                     })
