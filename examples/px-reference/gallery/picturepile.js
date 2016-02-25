@@ -88,11 +88,11 @@ function doIt() {
           
       picture.animateTo({x:randomInt(50,scene.getWidth()-picture.resource.w-50),
                           y:randomInt(50,scene.getHeight()-picture.resource.h-50),
-                          r:randomInt(-15,15),sx:0.75,sy:0.75},1,scene.animation.TWEEN_STOP,scene.animation.OPTION_END)
+                          r:randomInt(-15,15),sx:0.75,sy:0.75},1,scene.animation.TWEEN_STOP,scene.animation.OPTION_LOOP, 1)
         .then(function() {
           if (pictures.numChildren > 10) {
             var f = pictures.getChild(0);
-            f.animateTo({a: 0}, 0.75, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
+            f.animateTo({a: 0}, 0.75, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, 1)
               .then(function(f){
                 f.remove();
               });

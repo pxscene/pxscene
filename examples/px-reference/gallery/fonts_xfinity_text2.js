@@ -87,7 +87,7 @@ Promise.all(promises).then(function(success, failure) {
                   } 
                   else  {
                       var row = rowcontainer.children[n];
-                      select.animateTo({x:row.x,y:row.y,h:row.h,w:row.w},0.3,0,0);                   
+                      select.animateTo({x:row.x,y:row.y,h:row.h,w:row.w},0.3,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, 1);                   
                   }
                 }
 
@@ -112,18 +112,18 @@ function selectRow(i) {
     var row = rowcontainer.children[i];
     measurements = row.children[0].measureText();
     //width = measurements.bounds.x2 + row.children[0].x;
-    select.animateTo({x:row.x,y:row.y,h:row.h, w:width},0.3,0,0);
+    select.animateTo({x:row.x,y:row.y,h:row.h, w:width},0.3,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, 1);
     // animate to bring selection into view
     var t = -scrollContent.y;
     if (row.y < t) {
         t = -row.y
         console.log("one");
-        scrollContent.animateTo({y:t},0.3, 0, 0);
+        scrollContent.animateTo({y:t},0.3, scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, 1);
     }
     else if (row.y+row.h-scene.h > t) {
         t = -(row.y+row.h-scene.h);
         console.log("two");
-        scrollContent.animateTo({y:t},0.3, 0, 0);
+        scrollContent.animateTo({y:t},0.3, scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, 1);
     }
 }
 

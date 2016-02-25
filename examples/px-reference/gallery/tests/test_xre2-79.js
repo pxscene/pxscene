@@ -30,7 +30,7 @@ var json = {
 text.ready.then(function(textObj) {
     view.w = json.w;
     view.h = json.h;
-    textObj.animateTo(json, 12, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END);
+    textObj.animateTo(json, 12, scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, 1);
 });
 
 }).catch( function importFailed(err){

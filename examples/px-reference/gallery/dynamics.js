@@ -9,9 +9,6 @@ var interpolators = scene.animation.interpolators;
 
 var bg = scene.create({t:"rect",fillColor:0xffffffff,w:scene.getWidth(),h:scene.getHeight(),parent:root});
 
-var tweeners = [{n:"linear",v:0}, {n:"easeOutElastic",v:1}, {n:"easeOutBounce",v:2}, 
-		{n:"exp", v:3}, {n:"stop", v:4}];
-
 var container = scene.create({t:"image",parent:root,w:600});
 
 for (var i = 0; i < interpolators.length; i++) {
@@ -24,7 +21,7 @@ for (var i = 0; i < interpolators.length; i++) {
     scene.create({t:"text",text:interpolatorName,textColor:0x707070ff,pixelSize:14,x:x+5,y:y+18,
                       parent:container});
     scene.create({t:"image",url:baseURL+"images/ball2.png",a:0.5,y:-40,parent:line})
-	  .animateTo({x:550},1,scene.animation[interpolatorName],scene.animation.OPTION_OSCILLATE);
+	  .animateTo({x:550},1,scene.animation[interpolatorName],scene.animation.OPTION_OSCILLATE,scene.animation.COUNT_FOREVER);
 }
 container.h = interpolators.length*64;
 

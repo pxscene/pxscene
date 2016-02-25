@@ -50,7 +50,7 @@ var m42 = -41;
 var fancy = function(){
   setTimeout(function(){
   console.log("Going to animate.......");
-    view4070.animateTo({"m41":0,"m42":m42}, 100, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END).then(function() {
+    view4070.animateTo({"m41":0,"m42":m42}, 100, scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, 1).then(function() {
         console.log("animation done " + "m41 " + view4070.m41 + " m42 " + view4070.m42);
         text4067.x = view4070.m41;
         text4067.y = view4070.m42;

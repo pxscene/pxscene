@@ -36,13 +36,13 @@ scene.root.on("onKeyDown", function(e) {
       text.y = (textbg.resource.h-text.h)/2;
       text.cx = text.w/2;
       text.cy = text.h/2;
-      textbg.animateTo({a:1,y:randomInt(20,200),r:randomInt(-30,30)},0.2,scene.animation.TWEEN_STOP,scene.animation.OPTION_END)
+      textbg.animateTo({a:1,y:randomInt(20,200),r:randomInt(-30,30)},0.2,scene.animation.TWEEN_STOP,scene.animation.OPTION_LOOP, 1)
         .then(function(t) { 
-          t.animateTo({r:randomInt(-15,15), y: t.y+50}, 0.6, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
+          t.animateTo({r:randomInt(-15,15), y: t.y+50}, 0.6, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, 1)
             .then(function(t) {
-              t.animateTo({sx:1, sy: 1}, 0.01, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
+              t.animateTo({sx:1, sy: 1}, 0.01, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, 1)
                 .then(function(t) {
-                  t.animateTo({a:0,sx:0.25,sy:0.25}, 0.2, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
+                  t.animateTo({a:0,sx:0.25,sy:0.25}, 0.2, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, 1)
                     .then(function(t) {
                       t.remove();
                     })
@@ -73,9 +73,9 @@ function balloon(eventName, image, textColor, offset, parent) {
         text.cx = text.w/2;
         text.cy = text.h/2;
         textbg.a = 1;
-        textbg.animateTo({y: textbg.y-10-offset}, 0.3, 0, 0)
+        textbg.animateTo({y: textbg.y-10-offset}, 0.3, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, 1)
           .then(function(t) {
-            t.animateTo({a:0}, 0.3, 4, 0)
+            t.animateTo({a:0}, 0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1)
               .then(function(t) {
                 t.remove();
               })
@@ -103,9 +103,9 @@ function blah(eventname) {
       text.y = scene.getHeight()-text.h/2;
       text.cx = text.w/2;
       text.cy = text.h/2;
-      text.animateTo({y: text.y-10}, 0.3, 0, 0)
+      text.animateTo({y: text.y-10}, 0.3, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, 1)
         .then(function(t) {
-          t.animateTo({a:0}, 0.3, 4, 0)
+          t.animateTo({a:0}, 0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1)
             .then(function(t) {
               t.remove();
             })

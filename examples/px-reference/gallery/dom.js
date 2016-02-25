@@ -14,9 +14,9 @@ px.import("px:scene.1.js").then( function ready(scene) {
    //scene.setFocus(o.children[0]);
    o.children[0].focus = true;
 
-   o.animateTo({r:360},2,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP);
-   o.animateTo({sx:0.5,sy:0.5,a:0},2,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_OSCILLATE);
-   o.children[1].animateTo({r:-360},1,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP);
+   o.animateTo({r:360},2,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, scene.animation.COUNT_FOREVER);
+   o.animateTo({sx:0.5,sy:0.5,a:0},2,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_OSCILLATE,scene.animation.COUNT_FOREVER);
+   o.children[1].animateTo({r:-360},1,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP,scene.animation.COUNT_FOREVER);
 
   /**
    *

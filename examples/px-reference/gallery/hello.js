@@ -20,7 +20,7 @@ function testScene()
   for (i = 0; i < n; ++i) {
     if (i < 1) {
         p = scene.create({t:"rect",w:300,h:30,fillColor:0x00ff00ff,lineColor:0xffffff80,lineWidth:10});
-        p.animateTo({h:600}, 0.5, 0, 1);
+        p.animateTo({h:600}, 0.5, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_OSCILLATE,scene.animation.COUNT_FOREVER);
     }
     else if (i < 2) {
       var url = basePackageUri+"/images/curve_rectangle.png";
@@ -28,8 +28,8 @@ function testScene()
       p.cx = p.w/2;
       p.cy = p.h/2;
       ny = 100;
-      p.animateTo({h:600}, 0.5, 0, 0);
-      p.animateTo({w:600}, 0.5, 0, 1);
+      p.animateTo({h:600}, 0.5, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP,1);
+      p.animateTo({w:600}, 0.5, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_OSCILLATE,scene.animation.COUNT_FOREVER);
     }
     else if (i < n-3) {
         var url = basePackageUri+"/images/banana.png";
@@ -40,7 +40,7 @@ function testScene()
     }
     else {
         p = scene.create({t:"text",pixelSize:64});
-        p.animateTo({sx:2,sy:2}, 1.0, 0, 0);
+        p.animateTo({sx:2,sy:2}, 1.0, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP,1);
         nx = 200;
         if (i == n-3) {
             p.text = "Iñtërnâtiônàližætiøn";
@@ -74,8 +74,8 @@ function testScene()
     p.ry = 1.0;
     p.rz = 0.0;
 
-    p.animateTo({r:360}, 1.0+(i*0.3), 0, 2);
-    p.animateTo({x:600}, 1.0+(i*0.3), 0, 1);
+    p.animateTo({r:360}, 1.0+(i*0.3), scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, scene.animation.COUNT_FOREVER);
+    p.animateTo({x:600}, 1.0+(i*0.3), scene.animation.TWEEN_LINEAR, scene.animation.OPTION_OSCILLATE,scene.animation.COUNT_FOREVER);
     
   }
 }

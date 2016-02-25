@@ -39,11 +39,11 @@ px.import("px:scene.1.js").then( function ready(scene) {
       if (e.flags == 4) {  // ctrl-mousedown
         c.cx = c.w / 2;
         c.cy = c.h / 2;
-        c.animateTo({r: c.r + 360}, 3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+        c.animateTo({r: c.r + 360}, 3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP,1);
       }
       c.focus = true;
       select.animateTo({x: (c.x - childPad) * 0.25, y: (c.y - childPad) * 0.25},
-        0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+        0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
     });
 
     if (i == 0) 
@@ -75,7 +75,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
           x: ((i % childAcross) * (childAppWidth + childPad)) + childPad,
           y: (Math.floor(i / childAcross) * (childAppHeight + childPad)) + childPad
         },
-        0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+        0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
 
     }
   }

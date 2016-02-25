@@ -28,7 +28,7 @@ ballImg.ready.then(function(e){
     console.log("onMouseDown for text object");
 	// TODO is there a better way to do this??
 	rTarget += 360;
-	childText.animateTo({r:rTarget}, 1.0, 4, 0); 
+	childText.animateTo({r:rTarget}, 1.0, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP,1); 
 	//    childText.animateTo({r:360}, 5.0, 4, 0, function(o) { o.r = 0; }); 
     });
 
@@ -54,37 +54,37 @@ function fancy(p) {
 }
 
 function x1(p) {
-    p.animateTo({x:50}, 1.0, pxInterpLinear, 0, x2);
+    p.animateTo({x:50}, 1.0, pxInterpLinear, scene.animation.OPTION_LOOP,1, x2);
 }
 
 function x2(p) {
-    p.animateTo({x:450}, 3.0, easeOutElastic, 0, fancy);
+    p.animateTo({x:450}, 3.0, easeOutElastic, scene.animation.OPTION_LOOP,1, fancy);
 }
 
 function y1(p) {
     p.y = 100;
-    p.animateTo({y:350}, 1.0, easeOutBounce, 0, y2);
+    p.animateTo({y:350}, 1.0, easeOutBounce, scene.animation.OPTION_LOOP,1, y2);
 }
 
 function y2(p) {
-    p.animateTo({y:150}, 1.0, easeOutElastic, 0);
+    p.animateTo({y:150}, 1.0, easeOutElastic, scene.animation.OPTION_LOOP,1);
 }
 
 function rotate1(p) {
     p.r = 0;
-    p.animateTo({r:-360}, 2.5, easeOutElastic, 0);
+    p.animateTo({r:-360}, 2.5, easeOutElastic, scene.animation.OPTION_LOOP,1);
 }
 
 function scale1(p) {
-    p.animateTo({sx:0.2,sy:0.2}, 1, pxInterpLinear, 0, scale2);
+    p.animateTo({sx:0.2,sy:0.2}, 1, pxInterpLinear, scene.animation.OPTION_LOOP,1, scale2);
 }
 
 function scale2(p) {
-    p.animateTo({sx:2.0,sy:2.0}, 1.0, pxExp, 0, scale3);
+    p.animateTo({sx:2.0,sy:2.0}, 1.0, pxExp, scene.animation.OPTION_LOOP,1, scale3);
 }
 
 function scale3(p) {
-    p.animateTo({sx:1.0,sy:1.0}, 1.0, easeOutElastic, 0);
+    p.animateTo({sx:1.0,sy:1.0}, 1.0, easeOutElastic, scene.animation.OPTION_LOOP,1);
 }
 
 scene.on('onKeyDown', function(e) {

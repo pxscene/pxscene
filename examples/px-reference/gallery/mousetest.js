@@ -10,7 +10,7 @@ text.cy = text.h/2;
 var rTarget = 0;
 text.on("onMouseDown", function(e) {
     rTarget += 360;
-    text.animateTo({r:rTarget}, 1.0, 4, 0); 
+    text.animateTo({r:rTarget}, 1.0, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1); 
 //  console.log(e);
   if (e.target == text)
     console.log("object identity working");

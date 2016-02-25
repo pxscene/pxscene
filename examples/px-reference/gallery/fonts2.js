@@ -85,7 +85,7 @@ for (var i=0; i < fonts.length; i++)
         else
           selectRow(0); // This resizes the select rectangle once we have the first one
 
-        rowCopy.animateTo({a:1},0.6,0,0);
+        rowCopy.animateTo({a:1},0.6,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP,1);
         fulfill(rowCopy);  // done with this row
       }, function() {
         // If .all fails to resolve set the row height to zero and hide it
@@ -114,16 +114,16 @@ var currentRow = 0;
 function selectRow(i) {
     currentRow = i;
     var row = rowcontainer.children[i];
-    select.animateTo({x:row.x,y:row.y,h:row.h},0.3,0,0);
+    select.animateTo({x:row.x,y:row.y,h:row.h},0.3,scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP,1);
     // animate to bring selection into view
     var t = -scrollContent.y;
     if (row.y < t) {
         t = -row.y
-        scrollContent.animateTo({y:t},0.3, 0, 0);
+        scrollContent.animateTo({y:t},0.3, scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP,1);
     }
     else if (row.y+row.h-scene.h > t) {
         t = -(row.y+row.h-scene.h);
-        scrollContent.animateTo({y:t},0.3, 0, 0);
+        scrollContent.animateTo({y:t},0.3, scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP,1);
     }
 }
 

@@ -34,7 +34,7 @@ logo.x = (ball.resource.w-logo.resource.w)/2;
 logo.y = (ball.resource.h-logo.resource.h)/2;
 logo.cx = logo.resource.w/2;
 logo.cy = logo.resource.h/2;
-logo.animateTo({r:360}, 10, 0, 2);
+logo.animateTo({r:360}, 10, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, scene.animation.COUNT_FOREVER);
 
 
 function fancy(o) {
@@ -43,9 +43,9 @@ function fancy(o) {
 
   // animate x and restart the overall animation at end
   o.x = startX;
-  o.animateTo({x:50}, 1.0, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
+  o.animateTo({x:50}, 1.0, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, 1)
     .then(function(z){
-      z.animateTo({x:startX}, 3.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END)
+      z.animateTo({x:startX}, 3.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_LOOP, 1)
         .then(function(z) {
           fancy(z);
       	  return z;
@@ -54,22 +54,22 @@ function fancy(o) {
 
   // animate y
   o.y = startY;
-  o.animateTo({y:350}, 1.0, scene.animation.EASE_OUT_BOUNCE, scene.PX_END)
+  o.animateTo({y:350}, 1.0, scene.animation.EASE_OUT_BOUNCE, scene.animation.OPTION_LOOP, 1)
     .then(function(z) {
-      z.animateTo({y:startY}, 1.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END);
+      z.animateTo({y:startY}, 1.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_LOOP, 1);
       return z;
     });
 
   // animate r
   o.r = 0;
-  o.animateTo({r:-360}, 2.5, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END);
+  o.animateTo({r:-360}, 2.5, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_LOOP, 1);
 
   // animate sx, sy
-  o.animateTo({sx:0.2,sy:0.2}, 1, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_END)
+  o.animateTo({sx:0.2,sy:0.2}, 1, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, 1)
     .then(function(z){
-       z.animateTo({sx:2.0,sy:2.0}, 1.0, scene.animation.TWEEN_EXP1, scene.animation.OPTION_END)
+       z.animateTo({sx:2.0,sy:2.0}, 1.0, scene.animation.TWEEN_EXP1, scene.animation.OPTION_LOOP, 1)
          .then(function(z) {
-            z.animateTo({sx:1.0,sy:1.0}, 1.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_END);
+            z.animateTo({sx:1.0,sy:1.0}, 1.0, scene.animation.EASE_OUT_ELASTIC, scene.animation.OPTION_LOOP, 1);
          })
     });
 }

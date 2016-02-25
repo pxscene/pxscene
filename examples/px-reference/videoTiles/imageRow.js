@@ -59,12 +59,12 @@ px.import("px:scene.1.js").then( function ready(scene) {
           if( m < focusIndex) 
           {
             tiles[m].animateTo({x:(tempX+(imageWidth*focusRatio))-((focusIndex-m)*(imageWidth+imageSeparator))},
-                                0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+                                0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
           }
           else if(m > focusIndex)
           {
             tiles[m].animateTo({x:(tempX+(imageWidth*focusRatio))+((m-focusIndex)*(imageWidth+imageSeparator))},
-                                0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+                                0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
           }
         }
       }      
@@ -90,7 +90,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
           if( m < focusIndex) 
           {
             tiles[m].animateTo({x:scrollPoint-((focusIndex-m)*(imageWidth+imageSeparator))},
-                                0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+                                0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
           }
           else if( m >= focusIndex) 
           {
@@ -102,7 +102,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
             else
             {
               tiles[m].animateTo({x:scrollPoint+((m-focusIndex)*(imageWidth+imageSeparator))},
-                                  0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+                                  0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
 
             }
           }
@@ -131,7 +131,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
         // TODO: When container is losing focus ad items have been scrolled,
         // the OnBlur is animating to non-focused size, but x is slightly off
         c.animateTo({w: imageWidth, h:imageHeight, x:c.x+(imageWidth*focusRatio)-(imageSeparator) , y:c.y+(imageHeight*focusRatio) },
-          0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);      
+          0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);      
       });
       
       /** OnFocus: Blow the image up to indicate focus */
@@ -156,13 +156,13 @@ px.import("px:scene.1.js").then( function ready(scene) {
         }
         // Animate focus lines
         upperLine.animateTo({w: imageWidth * (1+(focusRatio*2)), x:tempX, y:c.y-(imageHeight*focusRatio)-2},
-          0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+          0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
         lowerLine.animateTo({w: imageWidth * (1+(focusRatio*2)), x:tempX, y:(c.y-(imageHeight*focusRatio))+(imageHeight * (1+(focusRatio*2)))},
-          0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+          0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
                   
         c.moveToFront();
         c.animateTo({w: imageWidth * (1+(focusRatio*2)), h:imageHeight * (1+(focusRatio*2)), x:tempX, y:c.y-(imageHeight*focusRatio)},
-          0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+          0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
           
    
      
@@ -244,7 +244,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
     /** Animate the entire container to given x,y coordinates */
     this.animateTo = function(newX, newY)
     {
-      container.animateTo({x:newX,y:newY},0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_END);
+      container.animateTo({x:newX,y:newY},0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
     }
     
 
