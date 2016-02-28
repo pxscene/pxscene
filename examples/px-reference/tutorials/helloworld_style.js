@@ -26,5 +26,5 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
 
 }).catch(function importFailed(err){
-  console.log("Import failed for helloworld_style.js: " + err);
+  console.error("Import failed for helloworld_style.js: " + err);
 });
