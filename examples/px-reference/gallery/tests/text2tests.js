@@ -6,11 +6,11 @@ var root = scene.root;
 // "Hello!  How are you?";//
 // Use fontUrl to load from web
 var fontUrlStart = "http://www.pxscene.org/examples/px-reference/fonts/";
-var XFinityMed = "XFINITYSansTT-New-Med.ttf";
+var IndieFlower = "IndieFlower.ttf";
 var DejaVu = "DejaVuSans.ttf";
 var DejaVuSerif = "DejaVuSerif.ttf";
-var XFinity = "XFINITYSansTT-New-Lgt.ttf";
-var XFinityBold = "XFINITYSansTT-New-Bold.ttf";
+var DancingScript = "DancingScript-Regular.ttf";
+var DancingScriptBold = "DancingScript-Bold.ttf";
 // Different text strings to test
 var longText = "Here is a collection of a bunch of randomness, like words, phrases, and sentences that isn't supposed to make any kind of sense whatsoever. I want to test capital AV next to each other here. In generating this, I'm listening to someone talking, trying to make sense of what they are saying, and at the same time dictating to myself what I am going to type along with actually typing it out, recognizing when I make mistakes, and correcting myself when I do.";
 var longText2 = "I don't think I'm doing a very good job listening to whoever it is that is doing the talking right now.  It probably would have been a lot easier to just copy and paste something from the net, but I'm a typist, not a person that hunts and pecks to find the appropriate key on the keyboard.  Though I do think I'm probably off of my 30 word per minute speed from way back when.  How much more text is appropriate?  Why do I use words like appropriate when I could just say will do instead?  These and other questions generally go on unanswered.  But looking at the output of this text, I realize that its simply not enough and that I need to add more text; which is making me wonder why I simply didn't copy and paste in the first place.  Ah, yes, the strange musings of a software engineer.";
@@ -22,14 +22,14 @@ root.w=800;
 
 // Use the font vars below to preload fonts so that they stay loaded. 
 
-var fontXfinityMed = scene.create({t:"fontResource",url:fontUrlStart+XFinityMed});
+var fontIndieFlower = scene.create({t:"fontResource",url:fontUrlStart+IndieFlower});
 var fontDejaVu = scene.create({t:"fontResource",url:fontUrlStart+DejaVu});
 var fontDejaVuSerif = scene.create({t:"fontResource",url:fontUrlStart+DejaVuSerif});
-var fontXFinity = scene.create({t:"fontResource",url:fontUrlStart+XFinity});
-var fontXFinityBold = scene.create({t:"fontResource",url:fontUrlStart+XFinityBold});
+var fontDancingScript = scene.create({t:"fontResource",url:fontUrlStart+DancingScript});
+var fontDancingScriptBold = scene.create({t:"fontResource",url:fontUrlStart+DancingScriptBold});
 
-fontXfinityMed.ready.then(function(f) {
-  console.log("Ready for fontXfinityMed font!");
+fontIndieFlower.ready.then(function(f) {
+  console.log("Ready for fontIndieFlower font!");
   var tmpMetrics = f.getFontMetrics(35);
  	console.log("height is "+tmpMetrics.height);
 	console.log("ascent is "+tmpMetrics.ascent);
@@ -79,7 +79,7 @@ var xStopPosStatus = scene.create({t:"text", parent:root, x:350, y:container.y+4
 var xStopPosHint = scene.create({t:"text", parent:root, x:465, y:container.y+480, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use small L)"});
 var leadingStatus = scene.create({t:"text", parent:root, x:350, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"leading=0"});
 var leadingHint = scene.create({t:"text", parent:root, x:465, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use + -)"});
-var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+XFinityMed+" (http)"});
+var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+IndieFlower+" (http)"});
 var px = 0;
 var py = 0;
 var leading = 0;
@@ -91,7 +91,7 @@ var text2 = scene.create({t:"textBox", clip:true, parent:container, x:px, y:py, 
    text2.textColor=0xFFDDFFFF;
    text2.pixelSize=20;
    text2.leading=0;
-   text2.fontUrl=fontUrlStart+XFinityMed;
+   text2.fontUrl=fontUrlStart+IndieFlower;
    text2.alignHorizontal=0;
    text2.alignVertical=0;
    text2.xStartPos=0;
@@ -297,26 +297,26 @@ scene.root.on("onChar", function(e) {
     pixelSizeStatus.text="pixelSize="+text2.pixelSize;
   } else if(e.charCode == 102) { // f for font
     
-    if(fontStatus.text == "font="+XFinityMed+" (http)") {
+    if(fontStatus.text == "font="+IndieFlower+" (http)") {
       text2.font = fontDejaVu;
       //text2.fontUrl = fontUrlStart+DejaVu; 
       fontStatus.text = "font="+DejaVu+" (http)";
      } else if(fontStatus.text == "font="+DejaVu+" (http)"){
-       text2.font = fontXFinity;
-      //text2.fontUrl = fontUrlStart+XFinity; 
-      fontStatus.text = "font="+XFinity+" (http)";
-    } else if(fontStatus.text == "font="+XFinity+" (http)"){
+       text2.font = fontDancingScript;
+      //text2.fontUrl = fontUrlStart+DancingScript; 
+      fontStatus.text = "font="+DancingScript+" (http)";
+    } else if(fontStatus.text == "font="+DancingScript+" (http)"){
       text2.font = fontDejaVuSerif;
       //text2.fontUrl = fontUrlStart+DejaVuSerif; 
       fontStatus.text = "font="+DejaVuSerif+" (http)";
     } else if(fontStatus.text == "font="+DejaVuSerif+" (http)"){
-      text2.font = fontXFinityBold;
-      //text2.fontUrl = fontUrlStart+XFinityBold; 
-      fontStatus.text = "font="+XFinityBold+" (http)";
-    } else if(fontStatus.text == "font="+XFinityBold+" (http)"){
-      text2.font = fontXfinityMed;
-      //text2.fontUrl = fontUrlStart+XFinityMed; 
-      fontStatus.text = "font="+XFinityMed+" (http)";
+      text2.font = fontDancingScriptBold;
+      //text2.fontUrl = fontUrlStart+DancingScriptBold; 
+      fontStatus.text = "font="+DancingScriptBold+" (http)";
+    } else if(fontStatus.text == "font="+DancingScriptBold+" (http)"){
+      text2.font = fontIndieFlower;
+      //text2.fontUrl = fontUrlStart+IndieFlower; 
+      fontStatus.text = "font="+IndieFlower+" (http)";
     }
     var font = text2.font;
     font.ready.then(function(f){

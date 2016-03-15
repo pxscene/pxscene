@@ -6,20 +6,18 @@ var root = scene.root;
 // null or "" is the default font FreeSans.ttf
 // Using "" in fonts array tests that local font files can be loaded, too
 var fonts = ["",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-MedCond.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-BoldCond.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-ExLgt.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Lgt.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Med.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-MedCond.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/DejaVuSans.ttf",
-             "http://54.146.54.142/tom/xre2/apps/receiver/fonts/DejaVuSerif.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Bold.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-BRegular.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/Pacifico.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/FontdinerSwanky.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/IndieFlower.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/PoiretOne-Regular.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSans.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf",
             ];
 
 // Example for using getFont for font metrics
-var myFont = scene.create({t:"fontResource",url:"http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf"});
+var myFont = scene.create({t:"fontResource",url:"http://www.pxscene.org/examples/px-reference/fonts/DejaVuSans.ttf"});
 
 myFont.ready.then(function(font) {
   console.log("!CLF: First Promise received");
