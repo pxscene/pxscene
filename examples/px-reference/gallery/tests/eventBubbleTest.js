@@ -29,7 +29,7 @@ var propagate = scene.create({t:"text",parent:bg,x:50, y:50, textColor:0x000000F
 clickMeText.focus = true;
 
 
-function setPropagation( e) 
+function setPropagation( ) 
 {
   if(stopPropagation)
     scene.stopPropagation();
@@ -83,7 +83,7 @@ scene.on("onMouseDown", function (e)
 clickMeText.on("onMouseDown", function (e)
 {
   console.log("clickMeText onMouseDown");
-  setPropagation(e);
+  setPropagation();
   // Get focus on textBox
   clickMeText.focus = true;
   // animate
@@ -121,31 +121,31 @@ root.on("onMouseDown", function (e)
 });
 
 
-/* OnPreFocus */
-clickMeText.on("OnPreFocus", function (e)
+/* onPreFocus */
+clickMeText.on("onPreFocus", function (e)
 {
-  console.log("clickMeText OnPreFocus");
+  console.log("clickMeText onPreFocus");
 
 
 });
-button.on("OnPreFocus", function (e)
+button.on("onPreFocus", function (e)
 {
-  console.log("button OnPreFocus");
+  console.log("button onPreFocus");
 
 });
-container.on("OnPreFocus", function (e)
+container.on("onPreFocus", function (e)
 {
-  console.log("container OnPreFocus");
+  console.log("container onPreFocus");
 
 });
-bg.on("OnPreFocus", function (e)
+bg.on("onPreFocus", function (e)
 {
-  console.log("bg OnPreFocus");
+  console.log("bg onPreFocus");
 
 });
-root.on("OnPreFocus", function (e)
+root.on("onPreFocus", function (e)
 {
-  console.log("root OnPreFocus");
+  console.log("root onPreFocus");
 
 });
 
@@ -155,6 +155,7 @@ clickMeText.on("onFocus", function (e)
 {
   console.log("clickMeText onFocus");
 
+  setPropagation();
 
 });
 button.on("onFocus", function (e)
@@ -177,32 +178,36 @@ root.on("onFocus", function (e)
   console.log("root onFocus");
 
 });
+scene.on("onFocus", function (e)
+{
+  console.log("scene onFocus");
 
+});
 
 /* OnPreBlur */
-clickMeText.on("OnPreBlur", function (e)
+clickMeText.on("onPreBlur", function (e)
 {
-  console.log("clickMeText OnPreBlur");
+  console.log("clickMeText onPreBlur");
 
 });
-button.on("OnPreBlur", function (e)
+button.on("onPreBlur", function (e)
 {
-  console.log("button OnPreBlur");
+  console.log("button onPreBlur");
 
 });
-container.on("OnPreBlur", function (e)
+container.on("onPreBlur", function (e)
 {
-  console.log("container OnPreBlur");
+  console.log("container onPreBlur");
 
 });
-bg.on("OnPreBlur", function (e)
+bg.on("onPreBlur", function (e)
 {
-  console.log("bg OnPreBlur");
+  console.log("bg onPreBlur");
 
 });
-root.on("OnPreBlur", function (e)
+root.on("onPreBlur", function (e)
 {
-  console.log("root OnPreBlur");
+  console.log("root onPreBlur");
 
 });
 
@@ -211,6 +216,8 @@ root.on("OnPreBlur", function (e)
 clickMeText.on("onBlur", function (e)
 {
   console.log("clickMeText onBlur");
+  
+  setPropagation();
 
 });
 button.on("onBlur", function (e)
@@ -234,7 +241,11 @@ root.on("onBlur", function (e)
 
 });
 
+scene.on("onBlur", function (e)
+{
+  console.log("scene onBlur");
 
+});
 
 
 }).catch( function importFailed(err){
