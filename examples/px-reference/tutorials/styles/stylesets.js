@@ -7,8 +7,8 @@ px.import({scene:"px:scene.1.js", fontStore:"../utils/fontstore.js",
   var fontStore = imports.fontStore;
   var Color = imports.Color;
 
-  fontStore.addFont("ErrorFont", "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf", 20, Color.RED);
-  fontStore.addFont("NavBarTextFont", "http://54.146.54.142/tom/xre2/apps/receiver/fonts/XFINITYSansTT-New-Bold.ttf", 24, 0x235760ff);
+  fontStore.addFont("ErrorFont", "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf", 20, 0xc00000ff);
+  fontStore.addFont("NavBarTextFont", "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf", 24, 0x235760ff);
 
   imports.scene.defineStyle({class:"Header"}, {
     textColor: fontStore.getFontProperties("NavBarTextFont").color,

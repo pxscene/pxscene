@@ -49,7 +49,7 @@ px.import({scene:"px:scene.1.js", fontStore:"../utils/fontstore.js", Color:"../e
          text2.text = contentText[args[0]];
        }
     }
-    textElement.text = args[0] + " was just received from a navbar";
+    textElement.text = "\"" + args[0] + "\" was just received from a navbar";
     return {result:"ok"};
   });
 
@@ -91,7 +91,7 @@ px.import({scene:"px:scene.1.js", fontStore:"../utils/fontstore.js", Color:"../e
     parent: bg,
     text: "Please click any navigation button",
     x: 80, y:scene.root.h - 120,
-    textColor:0xff0000ff,
+    textColor:0xc00000ff,
     pixelSize:48
   });
 
