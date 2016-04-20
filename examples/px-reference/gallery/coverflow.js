@@ -6,7 +6,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
   var tiles = [];
  
   // container
-  var s = scene.create({t:"rect", fillColor:0xe0e0e0ff, w:1200, h:400, parent:root,clip:true});
+  var s = scene.create({t:"rect", fillColor:0x808080ff, w:1200, h:400, parent:root,clip:true});
   // sliding view for scrolling
   var cf = scene.create({t:"rect",parent:s});
 
@@ -24,7 +24,13 @@ px.import("px:scene.1.js").then( function ready(scene) {
     var t = scene.create({t:"rect",y:top,parent:cf,w:w,h:h,cx:w/2,cy:h/2,ry:1,rz:0,fillColor:0x00000070});
     // tile image
     var ti = scene.create({t:"image",url:url,parent:t,w:w,h:h,cx:w/2,cy:h/2});
-
+    var sparkleUrl = "http://www.pxscene.org/examples/px-reference/gallery/images/sparkle_small.png";
+    if (Math.random() < 0.3)
+    {
+      var ts = scene.create({t:"image",url:sparkleUrl,x:w-40,y:-20,w:64,h:64,cx:32,cy:32,parent:ti});
+      ts.animateTo({r:360},30,scene.animation.TWEEN_LINEAR,scene.animation.LOOP,
+                   scene.animation.COUNT_FOREVER);
+    }
     // in-order tiles
     tiles.push(t);
   } 
