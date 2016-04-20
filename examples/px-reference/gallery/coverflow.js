@@ -57,7 +57,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
     return min(maxVal,max(minVal,v));
   }
 
-  function updateSelection()
+  function updateSelection(oldSelection, newSelection)
   {
     var x = 50;
     var wspace = 50;
@@ -68,9 +68,9 @@ px.import("px:scene.1.js").then( function ready(scene) {
     for (var i = 0; i < tiles.length;i++)
     {
       var o = tiles[i];
-      if (i == selection)
+      if (i == newSelection)
       {
-        if (selection > 0) x += w;
+        if (newSelection > 0) x += w;
         o.moveToFront();
         o.animateTo({r:0,sx:1.5,sy:1.5,x:x},0.8,tween,
                     scene.animation.LOOP,1);
@@ -79,36 +79,44 @@ px.import("px:scene.1.js").then( function ready(scene) {
                      scene.animation.LOOP,1);
         x += w+wspace;
       }
-      else if (i < selection)
+      else if (i < newSelection)
       {
-        o.animateTo({r:-r,sx:1,sy:1,x:x},0.8,tween,
-                    scene.animation.LOOP,1);
+        if (oldSelection == -1 || i == oldSelection)
+        {
+          o.animateTo({r:-r,sx:1,sy:1,x:x},0.8,tween,
+                      scene.animation.LOOP,1);
+        }
         x+= wspace;
       }
-      else if (i > selection)
+      else if (i > newSelection)
       {
-        o.animateTo({r:r,sx:1,sy:1,x:x},0.8,tween,
-                    scene.animation.LOOP,1);
+        if (oldSelection == -1 || i == oldSelection)
+        {
+          o.animateTo({r:r,sx:1,sy:1,x:x},0.8,tween,
+                      scene.animation.LOOP,1);
+        }
         x+=wspace;
       }
     }
+    selection = newSelection;
   }
 
   cf.on("onKeyDown", function(e){
     var oldSelection = selection;
+    var newSelection = selection;
 
     if (e.keyCode == 37)
-      selection = clamp(selection-1,0,cf.children.length-1);
+      newSelection = clamp(selection-1,0,cf.children.length-1);
     else if (e.keyCode == 39)
-      selection = clamp(selection+1,0,cf.children.length-1);
+      newSelection = clamp(selection+1,0,cf.children.length-1);
     
-    if (oldSelection != selection)
-      updateSelection();    
+    if (oldSelection != newSelection)
+      updateSelection(oldSelection<=1?-1:oldSelection,newSelection);    
   });
   
   cf.focus=true;
 
-  updateSelection();
+  updateSelection(-1,0);
   
 });
 
