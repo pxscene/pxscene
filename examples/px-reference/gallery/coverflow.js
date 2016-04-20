@@ -15,6 +15,8 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
   var top = 80;
   var progs = programs.programs;
+  var sparkleUrl = "http://www.pxscene.org/examples/px-reference/gallery/images/sparkle_small.png";
+  var maskUrl = "http://www.pxscene.org/examples/px-reference/gallery/images/postermask2.png";
 
   for(var i = 0; i <= min(100,progs.length); i++) {
 
@@ -24,7 +26,11 @@ px.import("px:scene.1.js").then( function ready(scene) {
     var t = scene.create({t:"rect",y:top,parent:cf,w:w,h:h,cx:w/2,cy:h/2,ry:1,rz:0,fillColor:0x00000070});
     // tile image
     var ti = scene.create({t:"image",url:url,parent:t,w:w,h:h,cx:w/2,cy:h/2});
-    var sparkleUrl = "http://www.pxscene.org/examples/px-reference/gallery/images/sparkle_small.png";
+    // reflection
+    var tr = scene.create({t:"image",parent:ti,w:w,h:h,cx:w/2,cy:h,rx:1,rz:0,r:180});
+    var tr2 = scene.create({t:"image",url:url,parent:tr,w:w,h:h,a:0.1});
+    // reflection masking... big perf hit so flipped off for now
+    //var trm = scene.create({t:"image",url:maskUrl,parent:tr,y:200,w:w,h:40,draw:false,mask:true});
     if (Math.random() < 0.3)
     {
       var ts = scene.create({t:"image",url:sparkleUrl,x:w-40,y:-20,w:64,h:64,cx:32,cy:32,parent:ti});
