@@ -9,7 +9,7 @@ var root = scene.root;
 // Using "" in fonts array tests that local font files can be loaded, too
 var fonts = ["",
              "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Bold.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-BRegular.ttf",
+             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Regular.ttf",
              "http://www.pxscene.org/examples/px-reference/fonts/Pacifico.ttf",
              "http://www.pxscene.org/examples/px-reference/fonts/FontdinerSwanky.ttf",
              "http://www.pxscene.org/examples/px-reference/fonts/IndieFlower.ttf",
