@@ -27,7 +27,8 @@ var rowcontainer = scene.create({t:"image",parent:scrollContent});
 var prevRow;
 
 var p = 0; 
-for (var i=0; i < fonts.length; i++)
+var len = fonts.length;
+for (var i=0; i < len; i++)
 {
     var row = scene.create({t:"image",parent:rowcontainer,a:0});
 

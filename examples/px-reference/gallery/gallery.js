@@ -25,8 +25,9 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
   var apps = scene.create({t:"image", parent:root, sx: 0.25, sy: 0.25, w: 1280, h: 720});
   //var apps = scene.create({t:"rect",sx: 0.25, sy: 0.25, w: 1280, h: 720});
-
-  for (var i = 0; i < appURLs.length; i++) {
+  
+  var numUrls = appURLs.length;
+  for (var i = 0; i < numUrls; i++) {
     var appUrl = basePackageUri + "/" + appURLs[i];
     var c = scene.create({
       t:"scene", url: appUrl, parent:apps,
@@ -69,7 +70,8 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
 
   function positionApps() {
-    for (var i = 0; i < apps.children.length; i++) {
+    var numApps = apps.numChildren;
+    for (var i = 0; i < numApps; i++) {
       var c = apps.children[i];
       c.animateTo({
           x: ((i % childAcross) * (childAppWidth + childPad)) + childPad,

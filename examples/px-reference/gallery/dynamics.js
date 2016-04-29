@@ -10,8 +10,8 @@ var interpolators = scene.animation.interpolators;
 var bg = scene.create({t:"rect",fillColor:0xffffffff,w:scene.getWidth(),h:scene.getHeight(),parent:root});
 
 var container = scene.create({t:"image",parent:root,w:600});
-
-for (var i = 0; i < interpolators.length; i++) {
+var interpLen = interpolators.length;
+for (var i = 0; i < interpLen; i++) {
     var interpolatorName = interpolators[i];
     console.log("interpolatorName is "+interpolatorName);
     var x = 0;
