@@ -107,7 +107,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
       if(baseNum >= bases.length)
         baseNum = 0;
  
-      baseStatus.animateTo({a:.5},1.0,scene.animation.TWEEN_LINEAR,scene.animation.LOOP,1).
+      baseStatus.animateTo({a:0.5},1.0,scene.animation.TWEEN_LINEAR,scene.animation.LOOP,1).
         then(function(obj) {
           baseStatus.resource = basesImgs[baseNum];
           baseStatus.animateTo({a:1},1.0,scene.animation.TWEEN_LINEAR,scene.animation.LOOP,1)
@@ -173,10 +173,10 @@ px.import("px:scene.1.js").then( function ready(scene) {
       
     oldBoardImage = boardImage;
 
-    boardImage = scene.create({t:"image", parent:scoreboardCont, x:key==39?400:-400, url:scoreboards.boards[index]});
+    boardImage = scene.create({t:"image", parent:scoreboardCont,x:key==39?400:-400, url:scoreboards.boards[index]});
     boardImage.ready.then(function(pic) {
       if( oldBoardImage !== undefined) {
-        oldBoardImage.animateTo({x:key==39?-400:400},1.0,scene.animation.TWEEN_STOP,scene.animation.OPTION_LOOP, 1).
+        oldBoardImage.animateTo({a:0,x:key==39?-400:400},1.0,scene.animation.TWEEN_STOP,scene.animation.OPTION_LOOP, 1).
         then(function() {
           oldBoardImage.remove();
           });
