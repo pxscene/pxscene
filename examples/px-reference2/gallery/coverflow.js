@@ -10,7 +10,7 @@ px.import({scene:"px:scene.1.js",detailView:"coverflow_detail.js"}).then( functi
  
   var tiles = [];
 
-  var font = scene.create({t:"fontResource",url:"http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-New-Med.ttf"});
+  var font = scene.create({t:"fontResource",url:"http://www.pxscene.org/examples/px-reference2/fonts/XFINITYSansTT-New-Med.ttf"});
   var starImage = scene.create({t:"imageResource",url:"http://www.pxscene.org/examples/px-reference/gallery/images/star.png"});
  
   // container

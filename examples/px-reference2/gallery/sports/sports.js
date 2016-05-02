@@ -1,26 +1,26 @@
 // TO DO: Use styles for colors and fonts
 
-var scoreboards = { "boards": ["http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/ingame-live_matchup_overview.png",
-                               "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/ingame-live_matchup_strikeout.png",
-                               "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/ingame-live_matchup_pitch_count.png",
-                               "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/ingame-live_matchup_hit_zone.png",
-                               "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/ingame-live_matchup_spray_chart.png",
-                               "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/ingame-live_pitching_history.png",
-                               "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/ingame-away_hitting.png",
-                               "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/ingame-home_hitting.png",
-                               "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/ingame-fantasy_leaders.png"
+var scoreboards = { "boards": ["http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/ingame-live_matchup_overview.png",
+                               "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/ingame-live_matchup_strikeout.png",
+                               "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/ingame-live_matchup_pitch_count.png",
+                               "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/ingame-live_matchup_hit_zone.png",
+                               "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/ingame-live_matchup_spray_chart.png",
+                               "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/ingame-live_pitching_history.png",
+                               "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/ingame-away_hitting.png",
+                               "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/ingame-home_hitting.png",
+                               "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/ingame-fantasy_leaders.png"
                              ]};
                              
-var bases = ["http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_0.png",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_1.png",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_2.png",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_3.png",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_0.png",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_1.png",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_12.png",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_13.png",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_23.png",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/MLB/bases_123.png"
+var bases = ["http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_0.png",
+             "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_1.png",
+             "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_2.png",
+             "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_3.png",
+             "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_0.png",
+             "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_1.png",
+             "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_12.png",
+             "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_13.png",
+             "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_23.png",
+             "http://www.pxscene.org/examples/px-reference2/gallery/sports/images/MLB/bases_123.png"
             ];                        
                                
 px.import("px:scene.1.js").then( function ready(scene) {
@@ -28,8 +28,8 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
   var r = scene.create({t:"rect",x:900,parent:root,y:10,w:350,h:720,fillColor:0x000000FF});
 
-  var font = scene.create({t:"fontResource", url:"http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/DejaVuSans.ttf"});
-  var fontNames = scene.create({t:"fontResource", url:"http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-New-BoldCond.ttf"});
+  var font = scene.create({t:"fontResource", url:"http://www.pxscene.org/examples/px-reference2/fonts/DejaVuSans.ttf"});
+  var fontNames = scene.create({t:"fontResource", url:"http://www.pxscene.org/examples/px-reference2/fonts/XFINITYSansTT-New-BoldCond.ttf"});
   font.ready.then(function() {
        
   });
@@ -48,7 +48,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
   // Sources for image.  Is quarterback link temporary?
   // http://quarterback-ci-restapi-teamcity.xreapps.net/sports_logos/MLB/1424553350259_17761872300_1424561313664_70_70.png
   // http://legacy.myriad-next.comcast.net/select/logo?entityId=8505044000897014119&width=46&height=46&extent=true
-  var t1Pic = scene.create({t:"image", parent:gameInfo,w:70,h:70,y:10,cx:35,cy:35,url:"http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/Brewers.png"});
+  var t1Pic = scene.create({t:"image", parent:gameInfo,w:70,h:70,y:10,cx:35,cy:35,url:"http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/Brewers.png"});
   var t1Name = scene.create({t:"textBox", parent:gameInfo,x:75,y:50,w:80, h:25,text:"MIL", font:fontNames, pixelSize:17,
               alignHorizontal:scene.alignHorizontal.CENTER, textColor:0xd0d0d0ff});
   var t1Line = scene.create({t:"rect", parent:gameInfo,x:78,y:70,w:70,h:2,lineColor:0xffff55ff,lineWidth:1});
@@ -68,7 +68,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
   // Sources for image.  Is quarterback link temporary?
   // http://quarterback-ci-restapi-teamcity.xreapps.net/sports_logos/MLB/1424553350259_17761872300_1424561313664_70_70.png
   // http://legacy.myriad-next.comcast.net/select/logo?entityId=6363552253441519119&width=70&height=70&extent=true
-  var t2Pic = scene.create({t:"image", parent:gameInfo, x:280, w:70,cx:35,cy:35,h:70,y:10,url:"http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/gallery/sports/images/gameSpecific/Cubs.png"});
+  var t2Pic = scene.create({t:"image", parent:gameInfo, x:280, w:70,cx:35,cy:35,h:70,y:10,url:"http://www.pxscene.org/examples/px-reference2/gallery/sports/images/gameSpecific/Cubs.png"});
   var t2Name = scene.create({t:"textBox", parent:gameInfo,x:190,y:50,w:80,h:25,text:"CHIC", font:fontNames, pixelSize:17,
               alignHorizontal:scene.alignHorizontal.CENTER, textColor:0xd0d0d0ff});
   var t2Line = scene.create({t:"rect", parent:gameInfo,x:195,y:70,w:70,h:2,lineColor:0x5555ffff,lineWidth:1});

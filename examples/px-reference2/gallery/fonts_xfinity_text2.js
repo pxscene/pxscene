@@ -17,14 +17,14 @@ updateSize(scene.w, scene.h);
 // null or "" is the default font FreeSans.ttf
 // Using "" in fonts array tests that local font files can be loaded, too
 var fonts = ["",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-New-Bold.ttf",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-New-BoldCond.ttf",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-New-ExLgt.ttf",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-New-Lgt.ttf",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-New-Med.ttf",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-New-MedCond.ttf",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/DejaVuSans.ttf",
-             "http://xre2-apps.cvs-a.ula.comcast.net/pxscene-samples/examples/px-reference/fonts/DejaVuSerif.ttf",
+             "http://www.pxscene.org/examples/px-reference2/fonts/XFINITYSansTT-New-Bold.ttf",
+             "http://www.pxscene.org/examples/px-reference2/fonts/XFINITYSansTT-New-BoldCond.ttf",
+             "http://www.pxscene.org/examples/px-reference2/fonts/XFINITYSansTT-New-ExLgt.ttf",
+             "http://www.pxscene.org/examples/px-reference2/fonts/XFINITYSansTT-New-Lgt.ttf",
+             "http://www.pxscene.org/examples/px-reference2/fonts/XFINITYSansTT-New-Med.ttf",
+             "http://www.pxscene.org/examples/px-reference2/fonts/XFINITYSansTT-New-MedCond.ttf",
+             "http://www.pxscene.org/examples/px-reference2/fonts/DejaVuSans.ttf",
+             "http://www.pxscene.org/examples/px-reference2/fonts/DejaVuSerif.ttf",
             ];
 
 console.log("fonts: "+fonts.length);
