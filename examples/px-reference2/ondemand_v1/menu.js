@@ -43,12 +43,14 @@ px.import({
     };    
 
     getRoot(function(menuData) {
+        console.log("Got root data");
         var menuMap = new imports.MenuMap(menuData, 'http://' + "localhost:3000" + '/data/submenu');
 
         var urls = [];
         for (var i = 0; i < menuMap.length; i++) {
             if (menuMap[i].title === 'Movies') {
                 menuMap[i].items.forEach(function(item){
+                    console.log("  movie: " + item.title);
                     urls.push({
                         title: item.title,
                         url: item.url

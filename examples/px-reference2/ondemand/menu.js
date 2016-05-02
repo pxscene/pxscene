@@ -215,6 +215,7 @@ px.import({
         };
 
         getOnDemandMenuItems(function (menuData) {
+            console.log("ondemand got menuData");
             var menuMap = new imports.MenuMap(menuData, 'http://' + "localhost:3000" + '/data/submenu');
             ///showObject("MenuMap", menuMap);
 
@@ -225,7 +226,7 @@ px.import({
 
             var initialUrls = [];
             menuMap[0].items.forEach(function (item) {
-                ///console.log("      Movie: " + item.url + ", url=" + item.url);
+                console.log("      Movie: " + item.url + ", url=" + item.url);
                 initialUrls.push({
                     title: item.title,
                     url: item.url

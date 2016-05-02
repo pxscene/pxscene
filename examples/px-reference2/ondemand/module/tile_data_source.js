@@ -37,6 +37,7 @@ var TileDataSource = function(scene, color, model) {
             var w = model[index].width;
             var h = model[index].height;
             var url = model[index].imageUrl;
+            console.log("image url: " + url);
             // tile background - failed image load
             ///var t = scene.create({t:"rect",y:top,parent:tile,w:w,h:h,cx:w/2,cy:h/2,ry:1,rz:0,fillColor:0x00000070});
             // tile image
