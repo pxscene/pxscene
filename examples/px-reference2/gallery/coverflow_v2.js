@@ -98,7 +98,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
     var ti = scene.create({t:"image",resource:res,parent:t,w:w,h:h,cx:w/2,cy:h/2, id:"image"});
     // reflection
     var tr = scene.create({t:"image",parent:ti,w:w,h:h,cx:w/2,cy:h,rx:1,rz:0,r:180,sx:1.0,sy:0.5,});
-    var tr2 = scene.create({t:"image",resource:res,parent:tr,w:w,h:h,a:0.1});
+    var tr2 = scene.create({t:"image",resource:res,parent:tr,w:w,h:h,a:0.075});
     // reflection masking... big perf hit so flipped off for now
     //var trm = scene.create({t:"image",url:maskUrl,parent:tr,y:200,w:w,h:40,draw:false,mask:true});
     if (Math.random() < 0.3)
