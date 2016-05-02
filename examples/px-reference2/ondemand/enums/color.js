@@ -1,0 +1,13 @@
+/**
+ * Created by Comcast
+ * on 7/6/15.
+ */
+
+var Color = {RED:0xff0000ff, GREEN:0x00ff00ff, BLUE:0x0000ffff, CYAN:0x00ffffff,
+  X1_BLUE:0x0085cbff, DARKBLUE:0x33505eff, ALMOST_WHITE:0xffffffe5,
+  GREY:0xffffffb7, DARKGREY:0xffffff73, STROKEGREY:0xffffff35,
+  ALMOST_BLACK:0xffffff26, TRANSPARENT:0xffffff00, BLACK:0x000000,
+  BKG_SOLID:0x000000ff, BKG_DARK10:0x000000f9, BKG_VERY_DARK:0x000000f9,
+  BKG_LIGHT:0x000000d6, BKG_OVERLAY_DARK:0x363636d8};
+
+module.exports = Color;

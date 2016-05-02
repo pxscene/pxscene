@@ -1,0 +1,277 @@
+{
+    "startIndex": 1,
+    "itemsPerPage": 500,
+    "entryCount": 30,
+    "entries": [
+        {
+            "teamName": "Atlanta",
+            "nickName": "Braves",
+            "teamAbbreviation": "ATL",
+            "city": "Atlanta",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/6431720308560978119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/6699804041524049341"
+        },
+        {
+            "teamName": "Los Angeles",
+            "nickName": "Dodgers",
+            "teamAbbreviation": "LAD",
+            "city": "Los Angeles",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/6146532128395077119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/8470105641999564811"
+        },
+        {
+            "teamName": "Washington",
+            "nickName": "Nationals",
+            "teamAbbreviation": "WASH",
+            "city": "Washington",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/4850382826859043119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/6699804041524049341"
+        },
+        {
+            "teamName": "Miami",
+            "nickName": "Marlins",
+            "teamAbbreviation": "MIA",
+            "city": "Miami",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/5974790223351130119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/6699804041524049341"
+        },
+        {
+            "teamName": "San Diego",
+            "nickName": "Padres",
+            "teamAbbreviation": "SD",
+            "city": "San Diego",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/7253114517794144119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/8470105641999564811"
+        },
+        {
+            "teamName": "Seattle",
+            "nickName": "Mariners",
+            "teamAbbreviation": "SEA",
+            "city": "Seattle",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/5828411642569346119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5623622103309543636"
+        },
+        {
+            "teamName": "Colorado",
+            "nickName": "Rockies",
+            "teamAbbreviation": "COLO",
+            "city": "Colorado",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/8456044902542195119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/8470105641999564811"
+        },
+        {
+            "teamName": "Arizona",
+            "nickName": "Diamondbacks",
+            "teamAbbreviation": "ARIZ",
+            "city": "Arizona",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/5621365483845685119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/8470105641999564811"
+        },
+        {
+            "teamName": "San Francisco",
+            "nickName": "Giants",
+            "teamAbbreviation": "SF",
+            "city": "San Francisco",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/6384240857613113119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/8470105641999564811"
+        },
+        {
+            "teamName": "Milwaukee",
+            "nickName": "Brewers",
+            "teamAbbreviation": "MIL",
+            "city": "Milwaukee",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/8505044000897014119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5807892512297405815"
+        },
+        {
+            "teamName": "Cincinnati",
+            "nickName": "Reds",
+            "teamAbbreviation": "CIN",
+            "city": "Cincinnati",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/7851586397152935119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5807892512297405815"
+        },
+        {
+            "teamName": "Chicago",
+            "nickName": "Cubs",
+            "teamAbbreviation": "CHIC",
+            "city": "Chicago",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/6363552253441519119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5807892512297405815"
+        },
+        {
+            "teamName": "Pittsburgh",
+            "nickName": "Pirates",
+            "teamAbbreviation": "PITT",
+            "city": "Pittsburgh",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/8162717333511850119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5807892512297405815"
+        },
+        {
+            "teamName": "St. Louis",
+            "nickName": "Cardinals",
+            "teamAbbreviation": "STL",
+            "city": "St. Louis",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/8140988421796109119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5807892512297405815"
+        },
+        {
+            "teamName": "Philadelphia",
+            "nickName": "Phillies",
+            "teamAbbreviation": "PHIL",
+            "city": "Philadelphia",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/6900185905293109119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/6699804041524049341"
+        },
+        {
+            "teamName": "New York",
+            "nickName": "Mets",
+            "teamAbbreviation": "NYM",
+            "city": "New York",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/8132871531901390119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/6699804041524049341"
+        },
+        {
+            "teamName": "Oakland",
+            "nickName": "Athletics",
+            "teamAbbreviation": "OAK",
+            "city": "Oakland",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/7221985500588533119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5623622103309543636"
+        },
+        {
+            "teamName": "Texas",
+            "nickName": "Rangers",
+            "teamAbbreviation": "TEX",
+            "city": "Texas",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/5523035822795922119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5623622103309543636"
+        },
+        {
+            "teamName": "Houston",
+            "nickName": "Astros",
+            "teamAbbreviation": "HOU",
+            "city": "Houston",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/9140892837861429119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5623622103309543636"
+        },
+        {
+            "teamName": "Los Angeles",
+            "nickName": "Angels",
+            "teamAbbreviation": "LAA",
+            "city": "Los Angeles",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/8877924750151158119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5623622103309543636"
+        },
+        {
+            "teamName": "Chicago",
+            "nickName": "White Sox",
+            "teamAbbreviation": "CHIW",
+            "city": "Chicago",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/5908246779060691119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5120513242606341352"
+        },
+        {
+            "teamName": "Cleveland",
+            "nickName": "Indians",
+            "teamAbbreviation": "CLEV",
+            "city": "Cleveland",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/7016906083543105119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5120513242606341352"
+        },
+        {
+            "teamName": "Detroit",
+            "nickName": "Tigers",
+            "teamAbbreviation": "DET",
+            "city": "Detroit",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/4617731191147392119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5120513242606341352"
+        },
+        {
+            "teamName": "Minnesota",
+            "nickName": "Twins",
+            "teamAbbreviation": "MINN",
+            "city": "Minnesota",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/6944869874880011119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5120513242606341352"
+        },
+        {
+            "teamName": "Kansas City",
+            "nickName": "Royals",
+            "teamAbbreviation": "KC",
+            "city": "Kansas City",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/6443980417781409119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5120513242606341352"
+        },
+        {
+            "teamName": "Boston",
+            "nickName": "Red Sox",
+            "teamAbbreviation": "BOS",
+            "city": "Boston",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/8423261698808351119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5636180128631236145"
+        },
+        {
+            "teamName": "Toronto",
+            "nickName": "Blue Jays",
+            "teamAbbreviation": "TOR",
+            "city": "Toronto",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/5587965397821348119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5636180128631236145"
+        },
+        {
+            "teamName": "Baltimore",
+            "nickName": "Orioles",
+            "teamAbbreviation": "BALT",
+            "city": "Baltimore",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/6822323696565716119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5636180128631236145"
+        },
+        {
+            "teamName": "Tampa Bay",
+            "nickName": "Rays",
+            "teamAbbreviation": "TB",
+            "city": "Tampa Bay",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/5704900848802281119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5636180128631236145"
+        },
+        {
+            "teamName": "New York",
+            "nickName": "Yankees",
+            "teamAbbreviation": "NYY",
+            "city": "New York",
+            "sport": "Baseball",
+            "teamEntityId": "http://merclient-ch2-1p-vip.cable.comcast.com:9002/entityDataService/data/SportsTeam/7461274177830208119",
+            "divisionId": "http://merclient-ch2-1p-vip.cable.comcast.com:10119/sportsDataService/data/Division/5636180128631236145"
+        }
+    ]
+}
