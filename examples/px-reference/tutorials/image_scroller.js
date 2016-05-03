@@ -33,7 +33,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
   var carousel = new ImageCarousel(imageResources);
   carousel.init();
 
-  setInterval(function() {
+  var timerId = setInterval(function() {
     carousel.animateLeft();
   }, 2000);
 
@@ -193,7 +193,8 @@ px.import("px:scene.1.js").then( function ready(scene) {
       animationInProgress = true;
       for(var k=4; k >= 0; --k) {
         //var pictureIndex = (currentPictureIndex+k) % pictures.length;
-        var promise = pictures[k].animateTo({x:pictures[k].x+(1200+20)},
+        var deltaX = (pictureWidth+pictureSideGap);
+        var promise = pictures[k].animateTo({x:pictures[k].x+deltaX},
           duration, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP|scene.FASTFORWARD , 1);
         promises[k] = promise;
       }
@@ -207,7 +208,11 @@ px.import("px:scene.1.js").then( function ready(scene) {
     function completeAnimationRight(isAnimationComplete) {
       if( isAnimationComplete === false ) {
         for(var k=0; k < 5; ++k) {
-          pictures[k].x = (-2400 + k*(1200+20)) + (1200+20);
+          //pictures[k].x = (-2400 + k*(1200+20)) + (1200+20);
+          //var x = (-2400 + k*(1200+20)) + (1200+20);
+          var x = centerPictureLeftX + (k-centerCarouselIndex)*(pictureWidth+pictureSideGap);
+
+          pictures[k].x = x;
         }
       }
 
@@ -230,7 +235,10 @@ px.import("px:scene.1.js").then( function ready(scene) {
       console.log("     endResourceSlot is now " + endResourceSlot);
       pictures[firstImageIndex].resource = imageResources[endResourceSlot];
       console.log("  x=" + (-2320 + firstImageIndex*(1200+20)) );
-      var newX = -2400 + firstImageIndex*(1200+20); //(k+firstImageSlotOffset)*(1200 + 80);
+      ///var newX = -2400 + firstImageIndex*(1200+20); //(k+firstImageSlotOffset)*(1200 + 80);
+      var deltaX = (pictureWidth+pictureSideGap);
+      //var newX = -2400 + lastImageIndex*deltaX; //(k+firstImageSlotOffset)*(1200 + 80);
+      var newX = firstImageX + firstImageIndex*deltaX; //(k+firstImageSlotOffset)*(1200 + 80);
       console.log("  x=" + newX);
       pictures[firstImageIndex].x = newX;
 
@@ -246,10 +254,18 @@ px.import("px:scene.1.js").then( function ready(scene) {
     switch(code.keyCode) {
       case 37:
         console.log("moveRight - " + carousel);
+        if( timerId !== -1 ) {
+          clearInterval(timerId);
+          timerId = -1;
+        }
         carousel.handleLeftKey();
         break;
       case 39:
         console.log("moveLeft - " + carousel);
+        if( timerId !== -1 ) {
+          clearInterval(timerId);
+          timerId = -1;
+        }
         carousel.handleRightKey();
         break;
     }
