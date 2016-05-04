@@ -27,8 +27,8 @@ var rowcontainer = scene.create({t:"image",parent:scrollContent});
 var prevRow;
 
 var p = 0; 
-var len = fonts.length;
-for (var i=0; i < len; i++)
+//var len = fonts.length;
+for (var i=0; i < fonts.length; i++)
 {
     var row = scene.create({t:"image",parent:rowcontainer,a:0});
 
@@ -99,7 +99,7 @@ function selectRow(i) {
     if (row.y < t) {
         t = -row.y
         console.log("one");
-        scrollContent.animateTo({y:t},0.3, scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, 10);
+        scrollContent.animateTo({y:t},0.3, scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, 1);
     }
     else if (row.y+row.h-scene.h > t) {
         t = -(row.y+row.h-scene.h);
@@ -111,13 +111,13 @@ function selectRow(i) {
 selectRow(currentRow);
 
 function scrollUp() {
-    var numRows = rowcontainer.children.length;
+    var numRows = rowcontainer.numChildren;
 //    selectRow(currentRow>0?currentRow-1:0);
     selectRow(clamp(currentRow-1, 0, numRows-1));
 }
 
 function scrollDn() {
-    var numRows = rowcontainer.children.length;
+    var numRows = rowcontainer.numChildren;
     console.log("numRows", numRows);
     console.log(currentRow);
 //    selectRow((currentRow<(numRows-1))?currentRow+1:numRows-1);
