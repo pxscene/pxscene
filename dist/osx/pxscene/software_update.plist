@@ -1,0 +1,22 @@
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Rules</key>
+  <array>
+    <dict>
+      <key>ProductID</key>
+      <string>org.pxscene.pxscene</string>
+      <key>Predicate</key>
+      <string>Ticket.version != '0.1'</string>
+      <key>Codebase</key>
+      <string>http://www.pxscene.org/pxscene/dist/osx/pxscene/pxscene.dmg</string>
+      <key>Hash</key>
+      <string>+XOjzLm6WsZpDQFueYu0e4Vr35E=</string>
+      <key>Size</key>
+      <string>7755486</string>
+      <key>Version</key>
+      <string>0.1</string>
+    </dict>
+  </array>
+</dict>
+</plist>
