@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>pxscene by johnrobinsn</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <h1>px Frameworks</h1>
+
+    </header>
+    
+    
+    <section>
+        <dl>
+        <dt>px.import</dt>
+        <dd>   
+        <p>px.import is used to include modules, jars, and individual javascript files into a javascript page.  It is similar to the Nodejs "require" function, with some available enhancements. 
+            <p/>
+            <p>
+        px.import can include one to many modules in a single call and returns a promise when all imported source is ready for use. 
+        </p>
+        <h4>Limitations</h4>
+            <p>Only the following Nodejs modules are allowed for import: 
+            <ul>
+                <li>fs</li>
+                <li>px</li> 
+                <li>http</li>
+                <li>url</li>
+                <li>os</li>
+                <li>events</li>
+                <li>net</li>
+                <li>querystring</li>
+                <li>htmlparser</li>
+                <li>ws</li>
+            </ul>
+            </p>
+        <h4>Usage</h4>
+    <p>Import a single javascript file</p>
+        <p><pre style="font-family:'Courier New'; font-size:10px">
+  // import the scene object, version 1
+  px.import("px:scene.1.js").then( function ready(scene) {
+  var root = scene.root;
+  .
+  .
+  .
+  }).catch( function importFailed(err){
+  console.error("Imports failed for myexample.js: " + err)
+});
+ 
+            </pre>
+        
+<p>Import multiple items</p>
+        <p>
+    <pre style="font-family:'Courier New'; font-size:10px">
+  // import the scene object, version 1,
+  // import the built-in keycode constants [need reference],
+  // import the Nodejs url module
+  px.import({ scene: 'px:scene.1.js',
+              keys: 'px:tools.keys.js',
+              url: 'url' }).then( function importsAreReady(imports) {
+  var scene = imports.scene;
+  var keys = imports.keys;
+  var url = imports.url;
+  var root = imports.scene.root;
+  .
+  .
+  .
+  }).catch( function importFailed(err){
+  console.error("Imports failed for myexample.js: " + err)
+});
+ 
+</pre></p>
+</dd> 
+    
+    <dt>px.configImport</dt>
+    <dd>
+
+    <p>px.configImport can be used to name a common frameworks location, then that name can be used within px.import.
+        </p>
+        <h4>Usage</h4>
+ <p></p>
+        <p><pre style="font-family:'Courier New'; font-size:10px">
+px.configImport({"pxFramework:":"http://www.pxscene.org/someFrameworks/widgets/"});
+  
+px.import({ scene: 'px:scene.1.js',
+             image: 'pxFramework:ImageAnimator.js'
+}).then( function importsAreReady(imports)
+
+  var root = scene.root;
+  var image = image.ImageAnimator;
+  .
+  .
+  .
+  }).catch( function importFailed(err){
+  console.error("Imports failed for myexample.js: " + err)
+});
+ 
+            </pre>
+        </p>  
+    </dd>
+    </dl>
+ 
+
+    <footer>
+        <p>This project is maintained by <a href="https://github.com/johnrobinsn">johnrobinsn</a></p>
+
+        <p>
+            <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a>
+            </small>
+        </p>
+    </footer>
+</div>
+<script src="javascripts/scale.fix.js"></script>
+
+</body>
+</html>
