@@ -29,55 +29,44 @@ px.import({
                       )
 
     var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg"
-    var photo = pxImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
+
+    // image rendered with polaroid, drop shadow and top shadow
+    var p1 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
                 .addEffects(pxImageEffects()
                   .polaroid(shadowUrl)
                   .topShadow(bgDropShadowUrl)
                   .dropShadow(shadowUrl)
-                )
-    var p1 = pxImageRenderer.render(photo)
+                ))
 
-    var photo2 = pxImage({url:photoUrl,parent:root,x:450,y:50,sx:0.10,sy:0.10})
+    // image rendered with polaroid and shadow
+    var p2 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:450,y:50,sx:0.10,sy:0.10})
                 .addEffects(pxImageEffects()
                   .polaroid(shadowUrl)
-                  // .topShadow(bgDropShadowUrl)
                   .dropShadow(shadowUrl)
-                )
-    var p2 = pxImageRenderer.render(photo2)
+                ))
 
-    var photo3 = pxImage({url:photoUrl,parent:root,x:850,y:50,sx:0.10,sy:0.10})
+    // image rendered with polaroid effect
+    var p3 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:850,y:50,sx:0.10,sy:0.10})
                 .addEffects(pxImageEffects()
                   .polaroid(shadowUrl)
-                  // .topShadow(bgDropShadowUrl)
-                  // .dropShadow(shadowUrl)
-                )
-    var p3 = pxImageRenderer.render(photo3)
+                ))
 
-    var photo4 = pxImage({url:photoUrl,parent:root,x:50,y:380,sx:0.10,sy:0.10})
+    // image rendered with no effects
+    var p4 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:50,y:380,sx:0.10,sy:0.10})
                 .addEffects(pxImageEffects()
-                  // .polaroid(shadowUrl)
-                  // .topShadow(bgDropShadowUrl)
-                  // .dropShadow(shadowUrl)
-                )
-    var p4 = pxImageRenderer.render(photo4)
-
-    var photo5 = pxImage({url:photoUrl,parent:root,x:450,y:380,sx:0.10,sy:0.10})
+                ))
+ 
+    // image rendered with top shadow
+    var p5 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:450,y:380,sx:0.10,sy:0.10})
                 .addEffects(pxImageEffects()
-                  // .polaroid(shadowUrl)
                   .topShadow(bgDropShadowUrl)
-                  // .dropShadow(shadowUrl)
-                )
-    var p5 = pxImageRenderer.render(photo5)
+                ))
 
-    var photo6 = pxImage({url:photoUrl,parent:root,x:850,y:380,sx:0.10,sy:0.10})
+    // image rendered with drop shadow
+    var p6 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:850,y:380,sx:0.10,sy:0.10})
                 .addEffects(pxImageEffects()
-                  // .polaroid(shadowUrl)
-                  // .topShadow(bgDropShadowUrl)
                   .dropShadow(shadowUrl)
-                )
-    var p6 = pxImageRenderer.render(photo6)
-
-
+                ))
 
 }).catch( function(err){
     console.error("Error: " + err)
