@@ -1,4 +1,6 @@
-px.configImport({"pxFramework:":"http://xre2-apps.cvs-a.ula.comcast.net/pxComponents/"});
+var remote = "https://diatrophy.github.io/pxComponents/"
+
+px.configImport({"pxFramework:":remote});
 
 px.import({
     scene           : "px:scene.1.js",

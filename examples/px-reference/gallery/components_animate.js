@@ -1,7 +1,6 @@
-var host = "localhost:8090/"
-var remote = "xre2-apps.cvs-a.ula.comcast.net/pxComponents/"
+var remote = "https://diatrophy.github.io/pxComponents/"
 
-px.configImport({"pxFramework:":"http://" + remote});
+px.configImport({"pxFramework:": remote});
 
 px.import({
     scene           : "px:scene.1.js",
