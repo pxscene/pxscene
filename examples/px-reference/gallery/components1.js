@@ -1,14 +1,14 @@
 var remote    = "https://diatrophy.github.io/pxComponents/"
 var localhost = "http://localhost:8090/"
 
-px.configImport({"pxComponents:":remote});
+px.configImport({"components:":remote});
 
 px.import({
     scene           : "px:scene.1.js",
-    uiMath          : 'pxComponents:math.js',
-    uiImageRenderer : 'pxComponents:image/imageRenderer.js',
-    uiImageEffects  : 'pxComponents:image/imageEffects.js',
-    uiImage         : 'pxComponents:image/image.js'}).then( function importsAreReady(imports) {
+    uiMath          : 'components:math.js',
+    uiImageRenderer : 'components:image/imageRenderer.js',
+    uiImageEffects  : 'components:image/imageEffects.js',
+    uiImage         : 'components:image/image.js'}).then( function importsAreReady(imports) {
 
     var scene           = imports.scene,
         uiImage         = imports.uiImage,
