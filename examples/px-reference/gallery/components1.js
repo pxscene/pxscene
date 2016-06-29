@@ -1,19 +1,20 @@
-var remote = "https://diatrophy.github.io/pxComponents/"
+var remote    = "https://diatrophy.github.io/pxComponents/"
+var localhost = "http://localhost:8090/"
 
-px.configImport({"pxFramework:":remote});
+px.configImport({"pxComponents:":remote});
 
 px.import({
     scene           : "px:scene.1.js",
-    pxMath          : 'pxFramework:pxMath.js',
-    pxImageRenderer : 'pxFramework:image/pxImageRenderer.js',
-    pxImageEffects  : 'pxFramework:image/pxImageEffects.js',
-    pxImage         : 'pxFramework:image/pxImage.js'}).then( function importsAreReady(imports) {
+    uiMath          : 'pxComponents:math.js',
+    uiImageRenderer : 'pxComponents:image/imageRenderer.js',
+    uiImageEffects  : 'pxComponents:image/imageEffects.js',
+    uiImage         : 'pxComponents:image/image.js'}).then( function importsAreReady(imports) {
 
-    var scene     = imports.scene,
-        pxImage   = imports.pxImage,
-        pxImageRenderer = imports.pxImageRenderer(scene),
-        pxImageEffects = imports.pxImageEffects,
-        randomInt = imports.pxMath().randomInt,
+    var scene           = imports.scene,
+        uiImage         = imports.uiImage,
+        uiImageRenderer = imports.uiImageRenderer(scene),
+        uiImageEffects  = imports.uiImageEffects,
+        randomInt       = imports.uiMath().randomInt,
         root      = scene.root;
 
     var basePackageUri = px.getPackageBaseFilePath();
@@ -25,48 +26,48 @@ px.import({
         shadowUrl = basePackageUri+"/images/BlurRect.png"
 
     // first create the background cork board image
-    var bgImage = pxImageRenderer.render(
-                    pxImage({url:bgUrl,parent:root,stretchX:2,stretchY:2,w:scene.w,h:scene.h})
-                      .addEffects(pxImageEffects().topShadow(bgDropShadowUrl))
+    var bgImage = uiImageRenderer.render(
+                    uiImage({url:bgUrl,parent:root,stretchX:2,stretchY:2,w:scene.w,h:scene.h})
+                      .addEffects(uiImageEffects().topShadow(bgDropShadowUrl))
                       )
 
     var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg"
 
     // image rendered with polaroid, drop shadow and top shadow
-    var p1 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
-                .addEffects(pxImageEffects()
+    var p1 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
+                .addEffects(uiImageEffects()
                   .polaroid(shadowUrl)
                   .topShadow(bgDropShadowUrl)
                   .dropShadow(shadowUrl)
                 ))
 
     // image rendered with polaroid and shadow
-    var p2 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:450,y:50,sx:0.10,sy:0.10})
-                .addEffects(pxImageEffects()
+    var p2 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:450,y:50,sx:0.10,sy:0.10})
+                .addEffects(uiImageEffects()
                   .polaroid(shadowUrl)
                   .dropShadow(shadowUrl)
                 ))
 
     // image rendered with polaroid effect
-    var p3 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:850,y:50,sx:0.10,sy:0.10})
-                .addEffects(pxImageEffects()
+    var p3 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:50,sx:0.10,sy:0.10})
+                .addEffects(uiImageEffects()
                   .polaroid(shadowUrl)
                 ))
 
     // image rendered with no effects
-    var p4 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:50,y:380,sx:0.10,sy:0.10})
-                .addEffects(pxImageEffects()
+    var p4 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:380,sx:0.10,sy:0.10})
+                .addEffects(uiImageEffects()
                 ))
  
     // image rendered with top shadow
-    var p5 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:450,y:380,sx:0.10,sy:0.10})
-                .addEffects(pxImageEffects()
+    var p5 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:450,y:380,sx:0.10,sy:0.10})
+                .addEffects(uiImageEffects()
                   .topShadow(bgDropShadowUrl)
                 ))
 
     // image rendered with drop shadow
-    var p6 = pxImageRenderer.render(pxImage({url:photoUrl,parent:root,x:850,y:380,sx:0.10,sy:0.10})
-                .addEffects(pxImageEffects()
+    var p6 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:380,sx:0.10,sy:0.10})
+                .addEffects(uiImageEffects()
                   .dropShadow(shadowUrl)
                 ))
 

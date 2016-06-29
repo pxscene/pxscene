@@ -1,23 +1,24 @@
-var remote = "https://diatrophy.github.io/pxComponents/"
+var remote    = "https://diatrophy.github.io/pxComponents/"
+var localhost = "http://localhost:8090/"
 
-px.configImport({"pxFramework:": remote});
+px.configImport({"pxComponents:": remote});
 
 px.import({
     scene           : "px:scene.1.js",
-    pxMath          : 'pxFramework:pxMath.js',
-    pxImageRenderer : 'pxFramework:image/pxImageRenderer.js',
-    pxImageEffects  : 'pxFramework:image/pxImageEffects.js',
-    pxAnimateEffects    : 'pxFramework:animate/pxAnimateEffects.js',
-    pxImage         : 'pxFramework:image/pxImage.js',
-    pxAnimate       : 'pxFramework:animate/pxAnimate.js'}).then( function importsAreReady(imports) {
+    uiMath              : 'pxComponents:math.js',
+    uiImageRenderer     : 'pxComponents:image/imageRenderer.js',
+    uiImageEffects      : 'pxComponents:image/imageEffects.js',
+    uiAnimateEffects    : 'pxComponents:animate/animateEffects.js',
+    uiImage             : 'pxComponents:image/image.js',
+    uiAnimate           : 'pxComponents:animate/animate.js'}).then( function importsAreReady(imports) {
 
     var scene     = imports.scene,
-        pxImage   = imports.pxImage,
-        pxImageRenderer = imports.pxImageRenderer(scene),
-        pxImageEffects = imports.pxImageEffects,
-        pxAnimate = imports.pxAnimate(scene),
-        pxAnimateEffects = imports.pxAnimateEffects,
-        randomInt = imports.pxMath().randomInt,
+        uiImage             = imports.uiImage,
+        uiImageRenderer     = imports.uiImageRenderer(scene),
+        uiImageEffects      = imports.uiImageEffects,
+        uiAnimate           = imports.uiAnimate(scene),
+        uiAnimateEffects    = imports.uiAnimateEffects,
+        randomInt           = imports.uiMath().randomInt,
         root      = scene.root;
 
     var basePackageUri = px.getPackageBaseFilePath();
@@ -29,23 +30,24 @@ px.import({
         shadowUrl = basePackageUri+"/images/BlurRect.png"
 
     // first create the background cork board image
-    var bgImage = pxImageRenderer.render(
-                    pxImage({url:bgUrl,parent:root,stretchX:2,stretchY:2,w:scene.w,h:scene.h})
-                      .addEffects(pxImageEffects().topShadow(bgDropShadowUrl))
-                      )
+    uiImageRenderer.render(uiImage({url:bgUrl,parent:root,stretchX:2,stretchY:2,w:scene.w,h:scene.h})
+                      .addEffects(uiImageEffects().topShadow(bgDropShadowUrl)),
+                      function(bgImage){
 
-    var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg"
+        var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg"
 
-    // first create the image definition ( here the x/y co-ordinate reflect the final location)
-    var p1 = pxImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
-                        .addEffects(pxImageEffects()
-                          .polaroid(shadowUrl)
-                          .topShadow(bgDropShadowUrl)
-                          .dropShadow(shadowUrl)
-                        )
+        // then create the image definition ( here the x/y co-ordinate reflect the final location)
+        var p1 = uiImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
+                            .addEffects(uiImageEffects()
+                              .polaroid(shadowUrl)
+                              .topShadow(bgDropShadowUrl)
+                              .dropShadow(shadowUrl)
+                            )
 
-    // then tell pxAnimate how to animate it
-    pxAnimate.animate(p1,pxAnimateEffects().randomFlyIn())
+        // then tell uiAnimate how to animate it
+        uiAnimate.animate(p1,uiAnimateEffects().randomFlyIn())
+
+    })
 
 }).catch( function(err){
     console.error("Error: " + err)
