@@ -1,5 +1,5 @@
-var remote    = "https://diatrophy.github.io/pxComponents/"
-var localhost = "http://localhost:8090/"
+var remote    = "https://diatrophy.github.io/pxComponents/";
+var localhost = "http://localhost:8090/";
 
 px.configImport({"components:": remote});
 
@@ -27,14 +27,14 @@ px.import({
     // than in the examples
     var bgUrl = basePackageUri+"/images/cork.png",
         bgDropShadowUrl = basePackageUri+"/images/radial_gradient.png",
-        shadowUrl = basePackageUri+"/images/BlurRect.png"
+        shadowUrl = basePackageUri+"/images/BlurRect.png";
 
     // first create the background cork board image
     uiImageRenderer.render(uiImage({url:bgUrl,parent:root,stretchX:2,stretchY:2,w:scene.w,h:scene.h})
                       .addEffects(uiImageEffects().topShadow(bgDropShadowUrl)),
                       function(bgImage){
 
-        var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg"
+        var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg";
 
         // then create the image definition ( here the x/y co-ordinate reflect the final location)
         var p1 = uiImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
@@ -42,13 +42,13 @@ px.import({
                               .polaroid(shadowUrl)
                               .topShadow(bgDropShadowUrl)
                               .dropShadow(shadowUrl)
-                            )
+                            );
 
         // then tell uiAnimate how to animate it
-        uiAnimate.animate(p1,uiAnimateEffects().randomFlyIn())
+        uiAnimate.animate(p1,uiAnimateEffects().randomFlyIn());
 
     })
 
 }).catch( function(err){
-    console.error("Error: " + err)
+    console.error("Error: " + err);
 });
