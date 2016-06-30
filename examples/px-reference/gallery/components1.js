@@ -28,48 +28,48 @@ px.import({
     // first create the background cork board image
     var bgImage = uiImageRenderer.render(
                     uiImage({url:bgUrl,parent:root,stretchX:2,stretchY:2,w:scene.w,h:scene.h})
-                      .addEffects(uiImageEffects().topShadow(bgDropShadowUrl))
-                      )
+                      .addEffects(uiImageEffects().topShadow(bgDropShadowUrl)), function(bgImage){
 
-    var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg"
+        var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg"
 
-    // image rendered with polaroid, drop shadow and top shadow
-    var p1 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
-                .addEffects(uiImageEffects()
-                  .polaroid(shadowUrl)
-                  .topShadow(bgDropShadowUrl)
-                  .dropShadow(shadowUrl)
-                ))
+        // image rendered with polaroid, drop shadow and top shadow
+        var p1 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
+                    .addEffects(uiImageEffects()
+                      .polaroid(shadowUrl)
+                      .topShadow(bgDropShadowUrl)
+                      .dropShadow(shadowUrl)
+                    ))
 
-    // image rendered with polaroid and shadow
-    var p2 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:450,y:50,sx:0.10,sy:0.10})
-                .addEffects(uiImageEffects()
-                  .polaroid(shadowUrl)
-                  .dropShadow(shadowUrl)
-                ))
+        // image rendered with polaroid and shadow
+        var p2 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:450,y:50,sx:0.10,sy:0.10})
+                    .addEffects(uiImageEffects()
+                      .polaroid(shadowUrl)
+                      .dropShadow(shadowUrl)
+                    ))
 
-    // image rendered with polaroid effect
-    var p3 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:50,sx:0.10,sy:0.10})
-                .addEffects(uiImageEffects()
-                  .polaroid(shadowUrl)
-                ))
+        // image rendered with polaroid effect
+        var p3 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:50,sx:0.10,sy:0.10})
+                    .addEffects(uiImageEffects()
+                      .polaroid(shadowUrl)
+                    ))
 
-    // image rendered with no effects
-    var p4 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:380,sx:0.10,sy:0.10})
-                .addEffects(uiImageEffects()
-                ))
- 
-    // image rendered with top shadow
-    var p5 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:450,y:380,sx:0.10,sy:0.10})
-                .addEffects(uiImageEffects()
-                  .topShadow(bgDropShadowUrl)
-                ))
+        // image rendered with no effects
+        var p4 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:380,sx:0.10,sy:0.10})
+                    .addEffects(uiImageEffects()
+                    ))
 
-    // image rendered with drop shadow
-    var p6 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:380,sx:0.10,sy:0.10})
-                .addEffects(uiImageEffects()
-                  .dropShadow(shadowUrl)
-                ))
+        // image rendered with top shadow
+        var p5 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:450,y:380,sx:0.10,sy:0.10})
+                    .addEffects(uiImageEffects()
+                      .topShadow(bgDropShadowUrl)
+                    ))
+
+        // image rendered with drop shadow
+        var p6 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:380,sx:0.10,sy:0.10})
+                    .addEffects(uiImageEffects()
+                      .dropShadow(shadowUrl)
+                    ))
+    })
 
 }).catch( function(err){
     console.error("Error: " + err)
