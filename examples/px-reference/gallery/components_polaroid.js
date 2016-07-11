@@ -1,3 +1,18 @@
+// components_polaroid.js
+//
+// This example demonstrates a polaroid effect applied to two images
+// The image on the left is scaled across its height and centered, while
+// the image on the right is scaled across its width and centered. Both
+// images are then cropped so that they fit into the polaroid effect.
+//
+// In the following case the size of the polaroid is defined by the effect
+// because polaroid picture have a predifined top/side/bottom border ratio
+//
+// Example -
+//
+// .addEffects(uiImageEffects()
+//                      .polaroid(450)
+
 var remote    = "https://diatrophy.github.io/pxComponents/";
 var localhost = "http://localhost:8090/";
 
@@ -19,8 +34,6 @@ px.import({
 
     var basePackageUri = px.getPackageBaseFilePath();
 
-    // TODO - ideally some of these images may be generic enough that they can eventually live in the framework rather
-    // than in the examples
     var bgUrl = basePackageUri+"/images/cork.png",
         bgDropShadowUrl = basePackageUri+"/images/radial_gradient.png",
         shadowUrl = basePackageUri+"/images/BlurRect.png";
@@ -29,46 +42,22 @@ px.import({
     var bgImage = uiImageRenderer.render(
                     uiImage({url:bgUrl,parent:root,stretchX:2,stretchY:2,w:scene.w,h:scene.h})
                       .addEffects(uiImageEffects()
-                        // .topShadow(bgDropShadowUrl)
                         ), function(bgImage){
 
         var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg";
+        var photoUrl3 = "http://farm9.staticflickr.com/8812/28156824236_311618606c_b.jpg";
 
+        var scale = 0.15
         // image rendered with polaroid, drop shadow and top shadow
-        var p1 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
+        var p1 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:50,sx:scale,sy:scale})
                     .addEffects(uiImageEffects()
-                      .polaroid(300)
-                      .topShadow(bgDropShadowUrl)
+                      .polaroid(450)
                       .dropShadow(shadowUrl)
                     ));
 
-        // image rendered with polaroid and shadow
-        var p2 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:450,y:50,sx:0.10,sy:0.10})
+        var p2 = uiImageRenderer.render(uiImage({url:photoUrl3,parent:root,x:650,y:50,sx:scale,sy:scale})
                     .addEffects(uiImageEffects()
-                      .polaroid(250)
-                      .dropShadow(shadowUrl)
-                    ));
-
-        // image rendered with polaroid effect
-        var p3 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:50,sx:0.10,sy:0.10})
-                    .addEffects(uiImageEffects()
-                      .polaroid(400)
-                    ));
-
-        // image rendered with no effects
-        var p4 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:580,sx:0.10,sy:0.10})
-                    .addEffects(uiImageEffects()
-                    ));
-
-        // image rendered with top shadow
-        var p5 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:450,y:580,sx:0.10,sy:0.10})
-                    .addEffects(uiImageEffects()
-                      .topShadow(bgDropShadowUrl)
-                    ));
-
-        // image rendered with drop shadow
-        var p6 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:580,sx:0.10,sy:0.10})
-                    .addEffects(uiImageEffects()
+                      .polaroid(450)
                       .dropShadow(shadowUrl)
                     ));
     });

@@ -39,7 +39,7 @@ px.import({
         // then create the image definition ( here the x/y co-ordinate reflect the final location)
         var p1 = uiImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
                             .addEffects(uiImageEffects()
-                              .polaroid(shadowUrl)
+                              .polaroid(450)
                               .topShadow(bgDropShadowUrl)
                               .dropShadow(shadowUrl)
                             );
