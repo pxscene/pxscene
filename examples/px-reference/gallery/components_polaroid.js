@@ -5,13 +5,18 @@
 // the image on the right is scaled across its width and centered. Both
 // images are then cropped so that they fit into the polaroid effect.
 //
-// In the following case the size of the polaroid is defined by the effect
+// In the following case the WIDTH of the polaroid is a parameter
 // because polaroid picture have a predifined top/side/bottom border ratio
 //
 // Example -
 //
 // .addEffects(uiImageEffects()
 //                      .polaroid(450)
+// 
+// This demo also show-cases applying a shadow to a polaroid image, and 
+// the ability to rotate images
+//
+// Jason Coelho
 
 var remote    = "https://diatrophy.github.io/pxComponents/";
 var localhost = "http://localhost:8090/";
@@ -49,16 +54,16 @@ px.import({
 
         var scale = 0.15
         // image rendered with polaroid, drop shadow and top shadow
-        var p1 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:50,sx:scale,sy:scale})
+        var p1 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:70,y:150,r:-15,sx:scale,sy:scale})
                     .addEffects(uiImageEffects()
-                      .polaroid(450)
-                      .dropShadow(shadowUrl)
+                      .polaroid(650)
+                      .dropShadow(shadowUrl,10)
                     ));
 
-        var p2 = uiImageRenderer.render(uiImage({url:photoUrl3,parent:root,x:650,y:50,sx:scale,sy:scale})
+        var p2 = uiImageRenderer.render(uiImage({url:photoUrl3,parent:root,x:950,y:150, r:0, sx:scale,sy:scale})
                     .addEffects(uiImageEffects()
-                      .polaroid(450)
-                      .dropShadow(shadowUrl)
+                      .polaroid(550)
+                      .dropShadow(shadowUrl,10)
                     ));
     });
 

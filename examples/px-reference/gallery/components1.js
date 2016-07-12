@@ -1,3 +1,14 @@
+// components1.js
+//
+// This example show cases effects that can be applied to pxScene images
+//
+// The first row has the polaroid effect applied, with 3 different sizes.
+// The first image had both a drop shadow and a top shadow effect.
+//
+// The second row has only drop shadow and top shadow effects applied
+//
+// Jason Coelho
+
 var remote    = "https://diatrophy.github.io/pxComponents/";
 var localhost = "http://localhost:8090/";
 
@@ -34,22 +45,22 @@ px.import({
 
         var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg";
 
-        // image rendered with polaroid, drop shadow and top shadow
+        // image rendered with polaroid of 300px width, drop shadow 10px and top shadow
         var p1 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
                     .addEffects(uiImageEffects()
                       .polaroid(300)
                       .topShadow(bgDropShadowUrl)
-                      .dropShadow(shadowUrl)
+                      .dropShadow(shadowUrl,10)
                     ));
 
-        // image rendered with polaroid and shadow
+        // image rendered with polaroid width 250px and shadow 10px
         var p2 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:450,y:50,sx:0.10,sy:0.10})
                     .addEffects(uiImageEffects()
                       .polaroid(250)
-                      .dropShadow(shadowUrl)
+                      .dropShadow(shadowUrl,10)
                     ));
 
-        // image rendered with polaroid effect
+        // image rendered with polaroid effect with width 400px
         var p3 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:50,sx:0.10,sy:0.10})
                     .addEffects(uiImageEffects()
                       .polaroid(400)
@@ -66,10 +77,10 @@ px.import({
                       .topShadow(bgDropShadowUrl)
                     ));
 
-        // image rendered with drop shadow
+        // image rendered with drop shadow of 10px
         var p6 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:850,y:580,sx:0.10,sy:0.10})
                     .addEffects(uiImageEffects()
-                      .dropShadow(shadowUrl)
+                      .dropShadow(shadowUrl,10)
                     ));
     });
 
