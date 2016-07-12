@@ -39,7 +39,7 @@ function getImageURL() {
     "IMG_4765.jpg",
     "IMG_4077.jpg",
   ];
-	return basePackageUri+"/images_large/photos/"+
+	return basePackageUri+"/images/photos_large/"+
     urls[randomInt(0,urls.length-1)];
 }
 
