@@ -1,6 +1,10 @@
-px.import("px:scene.1.js").then( function ready(scene) {
-var root = scene.root;
-
+px.import({ scene: 'px:scene.1.js',
+             keys: 'px:tools.keys.js'
+}).then( function importsAreReady(imports)
+{
+  var scene = imports.scene;
+  var keys = imports.keys;
+  var root = scene.root;
 
 //var bg = scene.create({t:"rect",fillColor:0xccccccff, parent:root});
 function updateSize(w, h) {
@@ -104,9 +108,9 @@ function updateText(s) {
 var str = "";
 scene.root.on("onKeyDown", function (e) {
     var keycode = e.keyCode; var flags = e.flags;
-    if (keycode == 38) scrollUp();
-    else if (keycode == 40) scrollDn();
-    else if (keycode == 8) {
+    if (keycode == keys.UP) scrollUp();
+    else if (keycode == keys.DOWN) scrollDn();
+    else if (keycode == keys.BACKSPACE) {
 //        str = str.substr(0,str.length-1);
 //        str = str.slice(0,str.length-2);
       str = str.slice(0,-1);
@@ -115,7 +119,8 @@ scene.root.on("onKeyDown", function (e) {
 });
 
 scene.root.on("onChar", function(e) {
-  if (e.charCode != 8) {
+  console.log("onChar: "+e.charCode);
+  if (e.charCode != keys.BACKSPACE) {
     str += String.fromCharCode(e.charCode);
     updateText(str);
   }
