@@ -1,3 +1,16 @@
+// components_animate.js
+//
+// This example demonstrates animating a polaroid image so that it fly's in
+// to random location on the screen
+//
+// Example -
+//
+// uiAnimate.animate(p1,uiAnimateEffects().randomFlyIn(root.w,root.h));
+//
+// The components library determines the START and TARGET position
+//
+// Jason Coelho
+
 var remote    = "https://diatrophy.github.io/pxComponents/";
 var localhost = "http://localhost:8090/";
 
@@ -37,16 +50,15 @@ px.import({
         var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg";
 
         // then create the image definition ( here the x/y co-ordinate reflect the final location)
-        var p1 = uiImage({url:photoUrl,parent:root,x:50,y:50,sx:0.10,sy:0.10})
+        var p1 = uiImage({url:photoUrl,parent:root,x:550,y:50,sx:0.10,sy:0.10})
                             .addEffects(uiImageEffects()
-                              .polaroid(shadowUrl)
+                              .polaroid(650)
                               .topShadow(bgDropShadowUrl)
-                              .dropShadow(shadowUrl)
+                              .dropShadow(shadowUrl,10)
                             );
 
         // then tell uiAnimate how to animate it
-        uiAnimate.animate(p1,uiAnimateEffects().randomFlyIn());
-
+        uiAnimate.animate(p1,uiAnimateEffects().randomFlyIn(root.w,root.h));
     })
 
 }).catch( function(err){
