@@ -52,7 +52,7 @@ px.import({
         var photoUrl = basePackageUri+"/images/photos/"+ "IMG_4765.jpg";
         var photoUrl3 = "http://farm9.staticflickr.com/8812/28156824236_311618606c_b.jpg";
 
-        var scale = 0.15
+        var scale = 0.75
         // image rendered with polaroid, drop shadow and top shadow
         var p1 = uiImageRenderer.render(uiImage({url:photoUrl,parent:root,x:70,y:150,r:-15,sx:scale,sy:scale})
                     .addEffects(uiImageEffects()
