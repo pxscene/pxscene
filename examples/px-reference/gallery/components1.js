@@ -12,7 +12,7 @@
 var remote = "https://diatrophy.github.io/pxComponents/";
 var localhost = "http://localhost:8090/";
 
-px.configImport({ "components:": localhost });
+px.configImport({ "components:": remote });
 
 px.import({
   scene: "px:scene.1.js",
