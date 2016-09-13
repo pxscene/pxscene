@@ -29,10 +29,10 @@ var propagate = scene.create({t:"text",parent:bg,x:50, y:50, textColor:0x000000F
 clickMeText.focus = true;
 
 
-function setPropagation( ) 
+function setPropagation( event) 
 {
-  if(stopPropagation)
-    scene.stopPropagation();
+  if(stopPropagation === true)
+    event.stopPropagation();
   
 }
 
@@ -70,20 +70,20 @@ root.on("onPreMouseDown", function (e)
 scene.on("onPreMouseDown", function (e)
 {
   console.log("scene onPreMouseDown");
-  scene.stopPropagation();
+  stopPropagation(e);
 
 });
 scene.on("onMouseDown", function (e)
 {
   console.log("scene onMouseDown");
-  scene.stopPropagation();
+  stopPropagation(e);
 
 });
 /* OnMouseDown */
 clickMeText.on("onMouseDown", function (e)
 {
   console.log("clickMeText onMouseDown");
-  setPropagation();
+  setPropagation(e);
   // Get focus on textBox
   clickMeText.focus = true;
   // animate
@@ -155,7 +155,7 @@ clickMeText.on("onFocus", function (e)
 {
   console.log("clickMeText onFocus");
 
-  setPropagation();
+  setPropagation(e);
 
 });
 button.on("onFocus", function (e)
@@ -217,7 +217,7 @@ clickMeText.on("onBlur", function (e)
 {
   console.log("clickMeText onBlur");
   
-  setPropagation();
+  setPropagation(e);
 
 });
 button.on("onBlur", function (e)
