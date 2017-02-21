@@ -1,11 +1,11 @@
 px.import("px:scene.1.js").then( function ready(scene) {
-var root = scene.root;
-var basePackageUri = px.getPackageBaseFilePath();
+let root = scene.root;
+let basePackageUri = px.getPackageBaseFilePath();
 
-var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
+let txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
 
-var url = "http://www.pxscene.org/examples/px-reference/gallery/images/apng/cube.png";
-var ball = scene.create({t:"imageA",w:300,h:300,url:url,parent:root});
+let url = "http://www.pxscene.org/examples/px-reference/gallery/images/apng/cube.png";
+let ball = scene.create({t:"imageA",w:300,h:300,url:url,parent:root});
 ball.ready.then(function() {
   ball.cx=ball.w/2;
   ball.cy=ball.h/2;
@@ -13,8 +13,8 @@ ball.ready.then(function() {
   fancy(ball);
 });
 function fancy(o) {
-  var startX = 450;
-  var startY = 100;
+  let startX = 450;
+  let startY = 100;
 
   // animate x and restart the overall animation at end
   o.x = startX;
