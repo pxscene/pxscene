@@ -1,8 +1,8 @@
 px.import("px:scene.1.js").then( function ready(scene) {
 
-  var basePackageUri = px.getPackageBaseFilePath();
+  let basePackageUri = px.getPackageBaseFilePath();
 
-  var url = "http://www.pxscene.org/examples/px-reference/gallery/images/apng/cube.png";
+  let url = "http://www.pxscene.org/examples/px-reference/gallery/images/apng/cube.png";
 
   let i = scene.create({t:"imageA",url:url,parent:scene.root});
   
