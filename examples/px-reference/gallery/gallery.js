@@ -1,15 +1,12 @@
 px.import("px:scene.1.js").then( function ready(scene) {
   var root = scene.root;
-  var appURLs = [/*"play.js","play2.js","playmask.js","playmask_star.js","playmask_star2.js",*/
-    "dom.js", "events.js", "apng1.js", "picturepile2.js", "dynamics.js",
-    "mousetest2.js", "fancy.js", "apng2.js", "masktest.js", "fonts.js",
-    "mousetest.js", "external.js"];
+  var appURLs = [
+    "picturepile2.js", "apng1.js", "dynamics.js",
+    "mousetest2.js", "fancy.js", "apng2.js", 
+    "masktest.js", "fonts.js", "events.js"];
 
   var url;
   var basePackageUri = px.getPackageBaseFilePath();
-
-  url = basePackageUri + "/images/skulls.png";
-  var bg = scene.create({t:"rect", parent:root, url: url, stretchX:scene.stretch.REPEAT, stretchY:scene.stretch.REPEAT, fillColor: 0xe0e0e0ff});
 
   url = basePackageUri + "/images/status_bg.png";
   var bgShade = scene.create({t:"image", parent:root, url: url, stretchX: scene.stretch.STRETCH, stretchY: scene.stretch.STRETCH});
@@ -24,7 +21,6 @@ px.import("px:scene.1.js").then( function ready(scene) {
   var select;
 
   var apps = scene.create({t:"image", parent:root, sx: 0.25, sy: 0.25, w: 1280, h: 720});
-  //var apps = scene.create({t:"rect",sx: 0.25, sy: 0.25, w: 1280, h: 720});
   
   var numUrls = appURLs.length;
   for (var i = 0; i < numUrls; i++) {
@@ -83,8 +79,6 @@ px.import("px:scene.1.js").then( function ready(scene) {
   }
 
   function updateSize(w, h) {
-    bg.w = w;
-    bg.h = h;
     bgShade.w = w;
     bgShade.h = h;
     root.w = w;
@@ -93,7 +87,6 @@ px.import("px:scene.1.js").then( function ready(scene) {
     if (childAcross < 1)
       childAcross = 1;
     positionApps();
-
   }
 
   scene.on("onResize", function (e) {
