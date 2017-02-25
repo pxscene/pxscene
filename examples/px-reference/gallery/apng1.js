@@ -1,4 +1,4 @@
-px.import("px:scene.1.js").then( function ready(scene) {
+px.import("px:scene.1.js").then(scene=>{
 
   let basePackageUri = px.getPackageBaseFilePath();
 
@@ -37,7 +37,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
   scene.on("onResize", e=>{layout();});
   
-}).catch( function importFailed(err){
-  console.error("Import failed for fancy.js: " + err)
+}).catch(e=>{
+  console.error("Import failed for fancy.js: " + e)
 });
 
