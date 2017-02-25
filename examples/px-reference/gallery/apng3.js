@@ -3,8 +3,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
   let basePackageUri = px.getPackageBaseFilePath();
 
   let url = "http://www.pxscene.org/examples/px-reference/gallery/images/apng/cube.png";
-  //let url = "http://www.pxscene.org/examples/px-reference/gallery/images/cork.png";
-
+  
   let i = scene.create({t:"imageA",url:url,parent:scene.root});
   let it;
   
