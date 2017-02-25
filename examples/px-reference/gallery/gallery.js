@@ -2,7 +2,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
   var root = scene.root;
   var appURLs = [/*"play.js","play2.js","playmask.js","playmask_star.js","playmask_star2.js",*/
     "dom.js", "events.js", "apng1.js", "picturepile.js", "dynamics.js",
-    "mousetest2.js", "fancy.js", "cliptest.js", "masktest.js", "fonts.js",
+    "mousetest2.js", "fancy.js", "apng2.js", "masktest.js", "fonts.js",
     "mousetest.js", "external.js"];
 
   var url;
