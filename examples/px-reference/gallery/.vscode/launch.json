@@ -1,0 +1,69 @@
+// Reference
+// https://code.visualstudio.com/Docs/editor/debugging
+// https://github.com/Microsoft/vscode/issues/102
+
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "DBG file in pxscene",
+      "type": "node",
+      "request": "launch",
+      "cwd": "/Applications/pxscene.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/pxscene.app/Contents/MacOS/pxscene",
+      "args":["${file}"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/pxscene.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/pxscene.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1    
+      }
+    },
+    {
+      "name": "DBG pxscene",
+      "type": "node",
+      "request": "launch",
+      "cwd": "/Applications/pxscene.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/pxscene.app/Contents/MacOS/pxscene",
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/pxscene.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/pxscene.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1      
+      }
+    },
+    {
+      "name": "DDBG file in pxscene",
+      "type": "node",
+      "request": "launch",
+      "cwd": "/Users/johnrobinson/Documents/npxcore/pxCore/examples/pxScene2d/src/pxscene.app/Contents/MacOS",
+      "runtimeExecutable": "/Users/johnrobinson/Documents/npxcore/pxCore/examples/pxScene2d/src/pxscene.app/Contents/MacOS/pxscene",
+      "args":["${file}"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Users/johnrobinson/Documents/npxcore/pxCore/examples/pxScene2d/src/pxscene.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Users/johnrobinson/Documents/npxcore/pxCore/examples/pxScene2d/src/pxscene.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1    
+      }
+    },
+    {
+      "name": "DDBG pxscene",
+      "type": "node",
+      "request": "launch",
+      "cwd": "/Users/johnrobinson/Documents/npxcore/pxCore/examples/pxScene2d/src/pxscene.app/Contents/MacOS",
+      "runtimeExecutable": "/Users/johnrobinson/Documents/npxcore/pxCore/examples/pxScene2d/src/pxscene.app/Contents/MacOS/pxscene",
+      "env" : {
+      "LD_LIBRARY_PATH":"/Users/johnrobinson/Documents/npxcore/pxCore/examples/pxScene2d/src/pxscene.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Users/johnrobinson/Documents/npxcore/pxCore/examples/pxScene2d/src/pxscene.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1  
+      }
+    },    
+    {
+    "name": "Attach pxscene",
+    "type": "node",
+    "request": "attach",
+    // TCP/IP address. Default is "localhost".
+    "address": "localhost",
+    // Port to attach to.
+    "port": 5858,
+    "sourceMaps": false
+    }
+  ]
+}

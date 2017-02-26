@@ -32,11 +32,17 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
     c.on("onMouseDown", function (e) {
       var c = e.target;
-      console.log("flags:", e.flags);
-      if (e.flags == 4) {  // ctrl-mousedown
+      if (e.flags & 16) {  // ctrl-mousedown
         c.cx = c.w / 2;
         c.cy = c.h / 2;
-        c.animateTo({r: c.r + 360}, 3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP,1);
+
+        // rewind if cancelled; reset to 0 when complete
+        // ready for the next one
+        c.animateTo({r: 360}, 3, scene.animation.TWEEN_STOP, 
+          scene.animation.OPTION_REWIND).then(o=>{o.r=0;});
+
+        // TODO this should work too... see what's wrong
+        //c.animateTo({r: 360}, 3, scene.animation.TWEEN_STOP).then(o=>{o.r=0}).catch(o=>{o.r=0});
       }
       c.focus = true;
       select.animateTo({x: (c.x - childPad) * 0.25, y: (c.y - childPad) * 0.25},
