@@ -12,11 +12,14 @@ px.import("px:scene.1.js").then(scene=>{
 
   let ready = urls.map(url=>{return scene.create({t:"imageA",url:url,parent:scene.root}).ready.catch(e=>{return null})})
 
-  let images = {}
+  let images = []
+  let imageTargets;
 
   let layout = ()=>{
     let x = 0; let y = 0; let rowHeight = 0;
-    for (let o of images) {
+    for (let i in images) {
+      let o = images[i]
+      let t = imageTargets[i];
       if (!o) continue;
       if (x+o.w > scene.getWidth())
       {
@@ -24,7 +27,13 @@ px.import("px:scene.1.js").then(scene=>{
         y += rowHeight;
         rowHeight = 0;
       }
-      o.animateTo({x:x,y:y},1,scene.animation.TWEEN_STOP);
+      // TODO should we have an option to not cancel
+      // animations if targets haven't changed
+      if (t.x != x || t.y != y) {
+        o.animateTo({x:x,y:y},1,scene.animation.TWEEN_STOP).catch(()=>{});
+        imageTargets[i].x = x;
+        imageTargets[i].y = y;
+      }
       x += o.w;
       rowHeight = Math.max(rowHeight,o.h);
     }  
@@ -32,6 +41,7 @@ px.import("px:scene.1.js").then(scene=>{
 
   Promise.all(ready).then(values=>{
     images = values;
+    imageTargets = images.map(image=>{return {x:-1,y:-1};});
     layout();
   });
 
