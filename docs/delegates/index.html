@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>pxscene by johnrobinsn</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+
+<h1>px Delegates</h1>
+<p></p>
+    Delegates are customization points that permit a JavaScript (JS) program running in <b>pxscene</b> to make optional behavior of the 
+    <b>pxscene</b> core framework.
+<p></p>
+    Currently the following <i>delegate</i> patterns are supported...
+<p></p>
+<dl>
+<dt><h2>- Clearsceen<h2/></dt>
+<dd> 
+A given <b>pxscene</b> JS app can choose to "decline" the default clear screen (to BLACK) by implementing the delegate method below.
+<p></p>
+
+This can offer performance improvements where App will be painting an opaque background, making a "clear to Black" redundant.
+ 
+<p></p>
+
+<pre style="font-family:'Courier New'; font-size:10px; max-width: 600px;">
+
+    // Delegate for Clearscreen
+    module.exports.wantsClearscreen = function()
+    {
+        return false;
+    };
+
+</pre>
+
+<p>
+... if implemented and exposed to the pxscene  framework (present in your source file) this will skip the "clear to Black".
+</p> 
+
+<p> 
+For example ...
+</p>
+
+<pre style="font-family:'Courier New'; font-size:10px; max-width: 600px;">
+  
+    px.import("px:scene.1.js").then( function ready(scene) 
+    {  
+        // Delegate for Clearscreen
+        module.exports.wantsClearscreen = function()
+        {
+            return false;
+        };
+
+        // additional code for pxscene JS app
+        ...
+        ...
+
+    }).catch( function importFailed(err){
+      console.error("Import failed for myApp.js: " + err)
+    });
+
+</pre>
+
+<p> </p>
+    
+
+  
+ 
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<p>This project is maintained by <a href="https://github.com/johnrobinsn">johnrobinsn</a></p>
+
+<p>
+<small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a>
+</small>
+</p>
+
+<script src="javascripts/scale.fix.js"></script>
+
+</body>
+</html>
