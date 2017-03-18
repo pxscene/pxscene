@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>pxscene Release Notes</title>
+
+    <link rel="stylesheet" href="../../stylesheets/styles.css">
+    <link rel="stylesheet" href="../../stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body style="text">
+
+    <u><h2>Release 0.27 - 16Mar2017</h2></u>
+
+    <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/johnrobinsn/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/johnrobinsn/pxCore</a>: master - SHA </em>59f476d<em>)</em></p>
+    <h3>Known Issues:</h3>
+
+    <bullets>
+        <ul>
+            <li>pxscene crash in pxResource::processDownloadedResource()</li>
+            <li>pxscene crash in rtString::cString()</li>
+            <li>rect background color seems slow to render</li>
+            <li>With clip=false, textBox text that exceeds width is getting &quot;stretched&quot;</li>
+            <li>pxscene app causes &quot;unidentified developer&quot; warning on launch</li>
+        </ul>
+    </bullets>
+
+    <h3>Fixes:</h3>
+    <bullets>
+        <ul>
+            <li>Change promises: resolve rather than reject for cancelAnimation and reloading page (resetting url)</li>
+            <li>Problem/inconsistency when running wayland apps as child scene</li>
+            <li>node2 support</li>
+            <li>[textBox] Issue with vertical alignment which seems to be related to size of parent container</li>
+            <li>Enabling cache for MAC, handling intermediate script errors,ignore caching for pxcore dirs</li>
+            <li>Fix for rtLog.h compilation error</li>
+            <li>Added logging to performance tests.</li>
+            <li>printing test timing information</li>
+            <li>Added rtRemote perf test harnes</li>
+            <li>added methods to retrieve texture usage </li>
+            <li>changes for trust model - limited functionality availability for few libs</li>
+            <li>Fixing a compilation warning</li>
+            <li>Use monotonic clock to measure objects life time</li>
+            <li>Fix build of rpcSampleApp</li>
+            <li>Log warning when cache size is big</li>
+            <li>Fix crash on trying to send keepalive on destroyed stream</li>
+            <li>Remove object from emit entries on stream closed error</li>
+            <li>Fix possible corruption of keep alive message - rapidjson only holds a pointer to string stored in m_objects vector, we should keep lock until message is sent.</li>
+            <li>Remove very old samples from node_modules</li>
+            <li>Reinstate animation promise rejection</li>
+            <li>Update net.js</li>
+            <li>Fix for passing ip mode before doing dns lookup</li>
+            <li>removing build of old libnode</li>
+            <li>Changes for clipping wayland applications in pxscene</li>
+            <li>revert change to hide rtLogPrintf</li>
+            <li>updated Makefile for unit tests</li>
+            <li>updates for platform builds</li>
+            <li>rtRefT.h was replaced with rtRef.h</li>
+            <li>cursor_pos was incorrect when using ^L shortcut</li>
+            <li>tab changes</li>
+            <li>add num keyword</li>
+            <li>changes for adding number of iterations</li>
+            <li>changes for perf client</li>
+            <li>Commenting out 1 line. A debug log at an annoying level. It's redundant</li>
+            <li>node2 debugging support for pxscene</li>
+            <li>ensure some key events are not bubbled up twice on the rpi</li>
+            <li>Adding perftest server.</li>
+            <li>Update README.md</li>
+            <li>Some more header reviews and cleanup</li>
+            <li>Merge some header refactoring</li>
+            <li>A bit of header refactoring and new file comment</li>
+            <li>Squelched build warnings</li>
+            <li>Cleanup unused objects</li>
+            <li>enable retry option for build failure on package update</li>
+            <li>freetype build (fix libpng mismatch)</li>
+        </ul>
+    </bullets>
+    <h3 style="margin-left: 30.0px;" talk-marker="65" talk-page-id="114000371" talk-page-version="85" id="pxsceneReleaseNotes-Notes:"><u>Notes:</u></h3>
+    <p style="margin-left: 30.0px;" talk-marker="66" talk-page-id="114000371" talk-page-version="85">This build fixes up some issues that might have been occurring while debugging in VSCode, for example, crashes when an unhandled promise rejection occurred. </p>
+    <p style="margin-left: 30.0px;" talk-marker="67" talk-page-id="114000371" talk-page-version="85">In addition, an animation that cancels because one of the animating properties is explicitly set will now resolve the promise for that canceled animation rather than rejecting it.</p>
+    <p talk-marker="68" talk-page-id="114000371" talk-page-version="85">
+    </p>
+    <br/>
+    <br/>
+    <br/>
+    <p>This project is maintained by <a href="https://github.com/johnrobinsn">johnrobinsn</a></p>
+
+    <p>
+        <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a>
+            </small>
+    </p>
+
+
+    <script src="javascripts/scale.fix.js"></script>
+
+</body>
+
+</html>

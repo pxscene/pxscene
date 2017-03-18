@@ -71,6 +71,12 @@ pre {
   overflow-x: auto;
 }
 
+bullets {
+    border-radius: 5px;
+    font-size: 18px;
+    color: #555;
+}
+
 table {
   width:100%;
   border-collapse:collapse;
