@@ -84,6 +84,8 @@
     <h3 style="margin-left: 30.0px;" talk-marker="65" talk-page-id="114000371" talk-page-version="85" id="pxsceneReleaseNotes-Notes:"><u>Notes:</u></h3>
     <p style="margin-left: 30.0px;" talk-marker="66" talk-page-id="114000371" talk-page-version="85">This build fixes up some issues that might have been occurring while debugging in VSCode, for example, crashes when an unhandled promise rejection occurred. </p>
     <p style="margin-left: 30.0px;" talk-marker="67" talk-page-id="114000371" talk-page-version="85">In addition, an animation that cancels because one of the animating properties is explicitly set will now resolve the promise for that canceled animation rather than rejecting it.</p>
+    <p style="margin-left: 30.0px;" talk-marker="67" talk-page-id="114000371" talk-page-version="85">This release also contains changes to restrict the node libraries that can be imported into a pxscene javascript application. Specifically, fs, os and events will no longer be allowed. Imports of ws, net, http and https will be restricted to client
+        functionality.</p>
     <p talk-marker="68" talk-page-id="114000371" talk-page-version="85">
     </p>
     <br/>

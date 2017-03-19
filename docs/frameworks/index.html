@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -12,49 +13,47 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
+
 <body>
 
 
-        <h1>px Frameworks</h1>
+    <h1>px Frameworks</h1>
 
 
-    
-    
 
-        <dl>
+
+
+    <dl>
         <dt><h2>px.import<h2/></dt>
-        <dd>   
-        <p>px.import is used to include modules, jars, and individual javascript files into a javascript page.  It is similar to the Nodejs "require" function, with some available enhancements. 
-            <p/>
-            <p>
-        px.import can include one to many modules in a single call and returns a promise when all imported source is ready for use. 
-        </p>
-        <h4>Limitations</h4>
-            <p>Only the following Nodejs modules are allowed for import: </p>
-            <ul>
-                <li>fs</li>
-                <li>px</li> 
-                <li>http</li>
-                <li>https</li>
-                <li>url</li>
-                <li>os</li>
-                <li>events</li>
-                <li>net</li>
-                <li>querystring</li>
-                <li>htmlparser</li>
-                <li>ws</li>
-            </ul>
+        <dd>
+            <p>px.import is used to include modules, jars, and individual javascript files into a javascript page. It is similar to the Nodejs "require" function, with some available enhancements.
+                <p/>
+                <p>
+                    px.import can include one to many modules in a single call and returns a promise when all imported source is ready for use.
+                </p>
+                <h4>Limitations</h4>
+                <p>Only the following Nodejs modules are allowed for import: </p>
+                <ul>
+                    <li>px</li>
+                    <li>http - restricted to client functionality</li>
+                    <li>https - restricted to client functionality</li>
+                    <li>url</li>
+                    <li>net - restricted to client functionality</li>
+                    <li>querystring</li>
+                    <li>htmlparser</li>
+                    <li>ws - restricted to client functionality</li>
+                </ul>
 
-        <h4>Prefix</h4>
-        <p>The px: prefix has special meaning and references javascript built in to pxscene.
-            <ul>
-                <li>px:scene: import version of pxscene scene graph objects</li>
-                <li>px:tools: import file from builtin tools here: ><a href="https://github.com/johnrobinsn/pxCore/tree/_temp_refactor/examples/pxScene2d/src/rcvrcore/tools">tools in github        </a></li>
-            </ul>
-        </p>
-        <h4>Usage</h4>
-    <p>Import a single javascript file</p>
-        <p><pre style="font-family:'Courier New'; font-size:10px">
+                <h4>Prefix</h4>
+                <p>The px: prefix has special meaning and references javascript built in to pxscene.
+                    <ul>
+                        <li>px:scene: import version of pxscene scene graph objects</li>
+                        <li>px:tools: import file from builtin tools here: ><a href="https://github.com/johnrobinsn/pxCore/tree/_temp_refactor/examples/pxScene2d/src/rcvrcore/tools">tools in github        </a></li>
+                    </ul>
+                </p>
+                <h4>Usage</h4>
+                <p>Import a single javascript file</p>
+                <p><pre style="font-family:'Courier New'; font-size:10px">
   // import the scene object, version 1
   px.import("px:scene.1.js").then( function ready(scene) {
   var root = scene.root;
@@ -66,10 +65,10 @@
 });
  
             </pre>
-        
-<p>Import multiple items</p>
-        <p>
-    <pre style="font-family:'Courier New'; font-size:10px">
+
+                    <p>Import multiple items</p>
+                    <p>
+                        <pre style="font-family:'Courier New'; font-size:10px">
   // import the scene object, version 1,
   // import the built-in keycode constants [need reference],
   // import the Nodejs url module
@@ -88,16 +87,16 @@
 });
  
 </pre></p>
-</dd> 
-    
-    <dt><h2>px.configImport</h2></dt>
-    <dd>
+        </dd>
 
-    <p>px.configImport can be used to name a common frameworks location, then that name can be used within px.import.
-        </p>
-        <h4>Usage</h4>
- <p></p>
-        <p><pre style="font-family:'Courier New'; font-size:10px">
+        <dt><h2>px.configImport</h2></dt>
+        <dd>
+
+            <p>px.configImport can be used to name a common frameworks location, then that name can be used within px.import.
+            </p>
+            <h4>Usage</h4>
+            <p></p>
+            <p><pre style="font-family:'Courier New'; font-size:10px">
 px.configImport({"pxFramework:":"http://www.pxscene.org/someFrameworks/widgets/"});
   
 px.import({ scene: 'px:scene.1.js',
@@ -114,21 +113,22 @@ px.import({ scene: 'px:scene.1.js',
 });
  
             </pre>
-        </p>  
-    </dd>
+            </p>
+        </dd>
     </dl>
- 
 
 
-        <p>This project is maintained by <a href="https://github.com/johnrobinsn">johnrobinsn</a></p>
 
-        <p>
-            <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a>
+    <p>This project is maintained by <a href="https://github.com/johnrobinsn">johnrobinsn</a></p>
+
+    <p>
+        <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a>
             </small>
-        </p>
+    </p>
 
 
-<script src="javascripts/scale.fix.js"></script>
+    <script src="javascripts/scale.fix.js"></script>
 
 </body>
+
 </html>
