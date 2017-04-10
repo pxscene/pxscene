@@ -16,6 +16,96 @@
 
 <body style="text">
 
+
+    <u><h2>Release 0.28 - 07Apr2017</h2></u>
+
+    <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/johnrobinsn/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/johnrobinsn/pxCore</a>: master - SHA </em>a04e0f2<em>)</em></p>
+    <h3>Known Issues:</h3>
+
+    <bullets>
+      <ul>
+        <li>pxscene crash in rtString::cString()</li>
+        <li>Crash when debugging in vscode for font.measureText</li>
+      </ul>
+    </bullets>
+
+    <h3>Fixes:</h3>
+
+    <bullets>
+        <ul>
+          <li>pxscene crash in pxResource::processDownloadedResource()</li>
+          <li>Memory leaks - increasing on continuous runs</li>
+          <li>Fix warnings in pxCore build about deprecated nodejs items</li>
+          <li>XCrash when reloading page in Ubuntu</li>
+          <li>OSX app crashes when closing via File Quit or Ctrl-q</li>
+          <li>Memory leaks with assert.js in testrunner app during module exports</li>
+          <li>Changed direct function callback to interface. Changing the function pointer style callback to use an interface allows us to pass down a smart pointer to simplify resource management.</li>
+          <li>Fix issue where with clip=false, wordWrap=false, truncate=NONE, textBox text that exceeds width is getting stretched</li>
+          <li>Adding Google Closure Compiler for JS file optimization</li>
+          <li>Fix for leaks due to module exports and import of user-defined js file</li>
+          <li>Prevent animation on disposed px object</li>
+          <li>Fixed getting object references when not set. A special 'nil' object id is returned when fetching properties that are function references or object references that are unset instead of returning a reference to something that doesn't actually exist.</li>
+          <li>Added auto-expand on rtArrayObject. Added length property to rtArrayObject.</li>
+          <li>pxScene FPS slowness tracker: log fps if the fps dips too low</li>
+          <li>Changes to build breakpad only for non-mac platform</li>
+          <li>Update Makefile</li>
+          <li>Changes for integrating breakpad for Linux platform</li>
+          <li>Fixed scene loading promise rejection</li>
+          <li>ensure the image is loaded before created a apng texture</li>
+          <li>empty resource crash fix</li>
+          <li>fixed leak</li>
+          <li>adding pxResource support to pxImageA</li>
+          <li>glyph cache wasn't being populated</li>
+          <li>Adding breakpad module to pxscene externals</li>
+          <li>adding ability for platforms to disable apng features if they do not support it</li>
+          <li>fbo snapshot updates</li>
+          <li>add ability for platforms to disable egl extensions</li>
+          <li>fixing snapshots of fbos</li>
+          <li>Ignore performance test outputs.</li>
+          <li>Don't do hole punching when drawing without FBO</li>
+          <li>automate valgrind memory leak detection with travis for linux</li>
+          <li>adding pxContextUtil support to wayland libs</li>
+          <li>Add apng support to pxscene enabling apng support for egl platforms</li>
+          <li>Fix for memory leak from cloned contexts</li>
+          <li>fix for memory leaks</li>
+          <li>Enabled changes for printing pxobject count and texture memory usage. Automated validation of pxobject and texture memory usage in travis</li>
+          <li>multisampling fbo support for egl platforms</li>
+          <li>pxContext code cleanup for multi-platform multithreading changes</li>
+          <li>painting support for mac os multithreading</li>
+          <li>changes for execl argument and order of remote call invokation to server</li>
+          <li>Updating perf tests - Added rtFunctionRef proptery to use a callback simulator.</li>
+          <li>Trim whitespace to ensure URL's load as expected</li>
+          <li>Making FPS box inactive. Transparent to click events etc.</li>
+          <li>Improved visual quality for scaled text and bugs …</li>
+          <li>Fixed bug in rtObject::Set(). Was returning RT_OK on missing property.</li>
+          <li>painting support for multithreading</li>
+          <li>changes for support to add function callback and calling it remotely</li>
+          <li>fixing pxobject leaks</li>
+          <li>Don't send keep alive on closed stream</li>
+      </ul>
+    <h3 style="margin-left: 30.0px;" talk-marker="65" talk-page-id="114000371" talk-page-version="85" id="pxsceneReleaseNotes-028-Notes:"><u>Notes:</u></h3>
+    <ul>
+      <li style="list-style-type: none;background-image: none;">
+        <ul>
+          <li>Support for apng is now complete.  The caveats that have been in place since Release 0.25 should no longer apply.  In particular, you can now access apngs using paths relative to base package uri.</li>
+          <li>Text scaling improvements in this release improve the quality of scaled text See textscale.js example. 
+            <ul>
+              <li>Separated glyph texture caching from glyph metric caching. </li>
+              <li>Glyph textures are no longer one for one with a glyph's pixelSize. A given pixelSize glyph may use the texture from a larger pixelSize glyph. This reduces overall memory and provides more pixel data for sampling. </li>
+              <li>Glyph rendering is done using the exact metrics for the specific pixelSize as reported by free type. The selected glyph texture (which may be for a larger pixelSize) is scaled (down) to fit inside the glyph bounding box for the specified pixelSize. </li>
+              <li>Glyph texture selection now takes into account the necessary LOD (Level of Detail) needed based on sx and sy scale factors. Greatly improving visual quality when scaling text.</li>
+            </ul>
+          </li>
+          <li>Several memory leak fixes went into this build.  If you're following the pxCore github project, you may have noticed that the Travis CI builds now check for memory leaks for every pull request and merge.</li>
+        </ul>
+      </li>
+    </ul>
+
+  <br/>
+  <br/>
+  <br/>
+
+
     <u><h2>Release 0.27 - 16Mar2017</h2></u>
 
     <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/johnrobinsn/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/johnrobinsn/pxCore</a>: master - SHA </em>59f476d<em>)</em></p>
