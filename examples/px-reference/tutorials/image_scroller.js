@@ -27,7 +27,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
   imageResources[0].ready.then(function(o) {
     console.log("Image is ready: " +o.w + ", h=" + o.h);
     console.log("   img.w = " + o.w + ", img.h="+o.h);
-    asdfasdf
+
   });
 
   var carousel = new ImageCarousel(imageResources);
