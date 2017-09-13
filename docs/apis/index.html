@@ -51,6 +51,7 @@ A 2d scene graph API supporting the following:
 <br/>Use json t: to construct specific object types: 
 <li><a href="#text">text</a></li>
 <li><a href="#textBox">textBox</a></li>
+<li><a href="#wayland">wayland</a></li>
 <li><a href="#image">image</a></li>
 <li><a href="#image9">image9</a></li>
 <li><a href="#rectangle">rect</a></li>
@@ -300,6 +301,35 @@ alignHorizontal RIGHT
 <li>charLast - {x:0, y:0} - The x position represents the right most rendered pixel of the last character on the last line of text.  The y position represents the baseline.</li>
 </li>
 </dd>
+<hr/>
+<br/><br/>
+
+<h2><a name="wayland"></a><code>Wayland</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
+Creates an element which contains a Wayland display.  Any Wayland clients that connect to this display will appear in this element.
+<h3>Properties</h3>
+<dt class="string">displayName</dt>
+<dd>Specifies the name of the Wayland display.  If no value is assigned a unique name will be generated</dd>
+<dt class="string">cmd</dt>
+<dd>Specifies a command to launch a Wayland client app to connect to the display.  Consists of the client name optionally followed by arguments</dd>
+<dt class="string">remoteServer</dt>
+<dd>Specifies the name of an rtRemote server</dd>
+<dt class="number readonly">clientPID</dt>
+<dd>Gives the process pid of the connected Wayland client</dd>
+<dt class="number">fillColor</dt>
+<dd>specifies the color to fill the interior of the element. eg. 0xff0000ff, opaque red, 0xrrggbbaa.  This will provide background for the connected Wayland client</dd>
+<dt class="boolean">hasApi</dt>
+<dd>indicates if the element exports an API.</dd>
+<dt class="promise">remoteReady</dt>
+<dd>returns a promise for when the remote object is ready</dd>
+<hr/>
+<h3>Methods</h3>
+<dt class="void">suspend(bool)</dt>
+<dd>Causes the element to cease drawing</dd>
+<dt class="void">resume(bool)</dt>
+<dd>Causes the element to resume drawing</dd>
+<dt class="void">destroy(bool)</dt>
+<dd>Destroys the element</dd>
+
 <hr/>
 <br/><br/>
 <h2><a name="scenecontainer"></a><code>SceneContainer</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
