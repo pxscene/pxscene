@@ -16,6 +16,51 @@
 
 <body style="text">
 
+  <u><h2>Release 0.33.0.1 - 03Oct2017</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.33.0.1)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+          <li>Memory leak fix</li>
+          <li>Remove exposure of scene.logDebugMetrics() - this is only meant for memory leak testing and CI builds</li>
+          <li>CMD-A in [browser.js] edit box adds undeletable "a" in editBox - Fix is CMD key exclusion to onChar() call</li>
+          <li>[browser.js] Change Spinner timeout to show in 500 ms</li>
+          <li>[browser.js] alias CMD-L to CTRL-L behavior on the Mac</li>
+          <li>Add cmake support to build rtCore only</li>
+          <li>Added script url to createService call. Added script url to createService call. Fixed warning, initialized mScriptView after mDisposed.</li>      
+        </ul>
+      </bullets>
+      <h3>Commits/Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>Update Info.plist for 0.33.0.x builds</li>
+            <li>changes for considering coverage in header files</li>
+            <li>SVG Rounded Rectangles: Minor refactoring; Adding support for SVG Rounded Rectangles ... some other optimizations; Fix for cmake build... deavtivated Debug code; Removing console.log() per review comment</li>
+            <li>Codecov: changed onCloseRequest() to pure virtual. Added stubs to instances</li>
+            <li>SVG Path ... benign code update </li>
+            <li>Support rtGuid on systems without libuuid</li>
+            <li>Added support for guid without libuuid</li>
+            <li>pxTexture unit test</li>
+            <li>steps to build and run the unit tests</li>
+            <li>updated build instructions for rtRemote</li>
+            <li>code coverage for pxWindowUtil; a fix for PX_KEY_ZERO + PX_MOD_SHIFT</li>
+            <li>configuration support of which libraries you would like to build</li>
+            <li>support to configure which libraries you would like to build (instead of all)</li>
+            <li>Image is rendered incorrectly when stretchX is specified as -5(negative value)</li>
+            <li>Added a few samples for rtRemote usage</li>
+            <li>change script to take branch and org parameters</li>
+            <li>code coverage changes for utf8</li>
+            <li>change script to take branch</li>
+            <li>Add org to script</li>
+            <li>fix for push undefined from nodejs in travis</li>
+          </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+
+
   <u><h2>Release 0.32.0.1 - 01Sep2017</h2></u>
   
       <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.32.0.1)</em></p>
