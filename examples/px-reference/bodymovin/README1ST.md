@@ -8,7 +8,7 @@ Bodymovin is a Open Source plugin for Adobe After Effects, combined with
 JavaScript code to render the animated scene - typically in a Web Browser.
 
 <br/>
-This (inital) 'fork' of the Bodymovin player code is for development of 
+This (initial) 'fork' of the Bodymovin player code is for development of 
 support for `pxscene` as a player.
 
 The only file you'll need in your pxApp is `bodymovin/test_BallEase/bodymovin.1.js`
