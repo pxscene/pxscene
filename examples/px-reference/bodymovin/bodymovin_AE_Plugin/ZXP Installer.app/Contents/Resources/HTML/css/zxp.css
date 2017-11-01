@@ -1,0 +1,222 @@
+
+html, body { height:100% !important; }
+
+/*	Main	*/
+
+#ks_zxp_list
+{
+	margin: 0 px;
+	padding: 0 px;
+	
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-bottom: 20px;
+	
+	height: 100%;
+	
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+/*	Scrolbars	*/
+
+::-webkit-scrollbar
+{
+	-webkit-appearance: none;
+	width: 7px;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 4px;
+	background-color: rgba(0,0,0,.5);
+	-webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+/*	Utils	*/
+
+.ks_reveal
+{
+	height: 14px;
+	width: 14px;
+	
+	border-radius: 14px;
+	border: solid 1px #ccc;
+	
+	display: inline-block;
+	
+	margin-top: -2px;
+	margin-right: 7px;
+	
+	font-size: 14px;
+	line-height: 14px;
+	vertical-align: middle;
+	text-align: center;
+	
+	-webkit-transition: all 0.2s ease-in;
+	transition: all 0.2s ease-in;
+}
+
+.ks_reveal:hover
+{
+	background: #ccc;
+}
+
+.ks_hide
+{
+	-webkit-transform:	rotate(135deg);
+	transform: rotate(135deg);
+}
+
+/*	ZXP Host Application */
+
+#ks_zxp_list .ks_application, #ks_zxp_list .ks_settings
+{
+	margin-top: 20px;
+}
+
+#ks_zxp_list .ks_application .ks_title, #ks_zxp_list .ks_settings .ks_title
+{
+	font-weight: bold;
+	font-size: 14px;
+	
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#ks_zxp_list .ks_application .ks_title
+{
+	margin-bottom: 10px;
+}
+
+#ks_zxp_list .ks_settings
+{
+	border-bottom: solid 1px #999999;
+	padding-bottom: 10px;
+}
+
+#ks_settings_title
+{
+    text-align: right;
+}
+
+/*	ZXP Extension */
+
+#ks_zxp_list .ks_extension
+{
+	padding-left: 10px;
+	
+	height: 30px;
+    line-height: 30px;
+}
+
+#ks_zxp_list .ks_disabled
+{
+	opacity: 1;
+	color: #cccccc;
+}
+
+#ks_zxp_list input[type="checkbox"]
+{
+	margin-top: -2px;
+	margin-right: 5px;
+	position: relative;
+
+	border: 1px solid #999;
+	
+	line-height: 30px;
+	
+	-webkit-appearance: none;
+	display: inline-block;
+	
+	width: 12px;
+	height: 12px;
+	-webkit-border-radius: 12px;
+}
+
+#ks_zxp_list input[type="checkbox"]:hover
+{
+	border: solid 1px #222;
+}
+
+#ks_zxp_list input[type="checkbox"]:checked:after
+{
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	
+	-webkit-border-radius: 4px;
+	width: 6px;
+	height: 6px;
+	
+	background: #000000;
+}
+
+#ks_zxp_list .ks_extension .ks_buttons
+{
+	float: right;
+	
+	width: 210px;
+	
+	display: inline-block;
+}
+
+#ks_zxp_list .ks_extension .ks_button
+{
+	transition: opacity 0.1s ease-in-out;
+
+	float: right;
+}
+
+#ks_zxp_list .ks_extension:hover .ks_button
+{
+	opacity: 1 !important;
+}
+
+#ks_zxp_list .ks_extension .ks_buttons .ks_button
+{
+	margin-top: 4px;
+}
+
+#ks_zxp_list .ks_extension .ks_title
+{
+	font-weight: bold;
+	font-size: 12px;
+	
+	width: auto;
+
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#ks_zxp_list .ks_extension .ks_text
+{
+    font-size: 12px;
+    
+    width: auto;
+    
+    line-height: 20px;
+    
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+#ks_zxp_list .ks_extension .ks_status
+{
+	color: #000000;
+}
+
+#ks_zxp_list .ks_extension .ks_version
+{
+	float: right;
+	text-align: right;
+	
+	width: 50px;
+	
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
