@@ -1,7 +1,7 @@
 # Bodymovin pxscene support
 
 Support for the "playback" of Adobe After Effects designed animated scenes 
-in `pxscene` is porvided by Bodymovin.
+in `pxscene` is provided by Bodymovin.
 <br/>
 
 Bodymovin is a Open Source plugin for Adobe After Effects, combined with 
