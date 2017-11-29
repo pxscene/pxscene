@@ -16,6 +16,52 @@
 
 <body style="text">
 
+  <u><h2>Release 0.35.0.0 (OSX) and 0.35.0.1 (Windows) - 29Nov2017</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.35.0.0 and 0.35.0.1)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+          <li>Updates for partner support: enable custom animators</li>
+          <li>Fix for Issue #640: Remove Windows binary dependency on debug lib</li>
+          <li>Implement moveForward and moveBackward to allow moving an object up or down the z-order by one</li>
+          <li>framerate improvements</li>
+        </ul>
+      </bullets>
+      <h3>Commits/Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>build fixes when building without http cache (#703)</li>
+            <li>framerate updates (#671) (#692)</li>
+            <li>fix compilation errors in pxWindowNative.cpp (#683)</li>
+            <li>use precision for es firmware only (#690)</li>
+            <li>Remove Windows exe VS run time dependency (#691) - Fixes Issue #640</li>
+            <li>print real (not hardcoded) node version (#688)</li>
+            <li>add support for auto-generated files using cmake (#677)</li>
+            <li>remove binary blobs: librtRemote_s.a and rpcSampleApp from git repository; update .gitignore to ignore archive files</li>
+            <li>updates when building with the service manager</li>
+            <li>unittests for ioapi.c (#685)</li>
+            <li>updated link directories</li>
+            <li>Fix coverity issue</li>
+            <li>ensure linked libraries are always marked as needed</li>
+            <li>adding build switch to control rasterizer path item (#675)</li>
+            <li>add missing header file (#674)</li>
+            <li>fix cmake 'mis-matching arguments' warning (#673)</li>
+            <li>Bunio restack with repaints and tests (#664)</li>
+            <li>custom animator (#670)</li>
+            <li>Modified strcpy to strncpy in rtFileDownloadRequest::setHTTPError (#667)</li>
+            <li>Removal of freeglut related information (#646)</li>
+            <li>updated build instructions for rtRemote (#669)</li>
+            <li>Fixed deadlock on shutown. (#649)</li>
+            <li>Trigger repaints and mark scene as dirty for moveToFront and moveToBack (#653)</li>
+            <li>Added curl verbose,errorbuffer,timeout handling for caching http download (#657)</li>
+          </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+
+
   <u><h2>Release 0.34.0.1 - 09Nov2017</h2></u>
   
       <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.34.0.1)</em></p>
