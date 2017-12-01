@@ -16,9 +16,352 @@
 
 <body style="text">
 
+  <u><h2>Release 0.35.0.0 (OSX) and 0.35.0.1 (Windows) - 29Nov2017</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.35.0.0 and 0.35.0.1)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+          <li>Updates for partner support: enable custom animators</li>
+          <li>Fix for Issue #640: Remove Windows binary dependency on debug lib</li>
+          <li>Implement moveForward and moveBackward to allow moving an object up or down the z-order by one</li>
+          <li>framerate improvements</li>
+        </ul>
+      </bullets>
+      <h3>Commits/Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>build fixes when building without http cache (#703)</li>
+            <li>framerate updates (#671) (#692)</li>
+            <li>fix compilation errors in pxWindowNative.cpp (#683)</li>
+            <li>use precision for es firmware only (#690)</li>
+            <li>Remove Windows exe VS run time dependency (#691) - Fixes Issue #640</li>
+            <li>print real (not hardcoded) node version (#688)</li>
+            <li>add support for auto-generated files using cmake (#677)</li>
+            <li>remove binary blobs: librtRemote_s.a and rpcSampleApp from git repository; update .gitignore to ignore archive files</li>
+            <li>updates when building with the service manager</li>
+            <li>unittests for ioapi.c (#685)</li>
+            <li>updated link directories</li>
+            <li>Fix coverity issue</li>
+            <li>ensure linked libraries are always marked as needed</li>
+            <li>adding build switch to control rasterizer path item (#675)</li>
+            <li>add missing header file (#674)</li>
+            <li>fix cmake 'mis-matching arguments' warning (#673)</li>
+            <li>Bunio restack with repaints and tests (#664)</li>
+            <li>custom animator (#670)</li>
+            <li>Modified strcpy to strncpy in rtFileDownloadRequest::setHTTPError (#667)</li>
+            <li>Removal of freeglut related information (#646)</li>
+            <li>updated build instructions for rtRemote (#669)</li>
+            <li>Fixed deadlock on shutown. (#649)</li>
+            <li>Trigger repaints and mark scene as dirty for moveToFront and moveToBack (#653)</li>
+            <li>Added curl verbose,errorbuffer,timeout handling for caching http download (#657)</li>
+          </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+
+
+  <u><h2>Release 0.34.0.1 - 09Nov2017</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.34.0.1)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+          <li>Updates for partner support: enabling global object support and require support via runtime check</li>
+          <li>Remove confusing console log message: There was an incorrect "<span style="color: rgb(3,47,98);">http status code: undefined" in the logs; this has been removed. </span>         
+        </ul>
+      </bullets>
+      <h3>Commits/Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>enabling global object support (#652)</li>
+            <li>wayland app config updates (#651)</li>
+            <li>update vm and port for build logs uploads (#650)</li>
+            <li>configuration to enable require support (#648)</li>
+            <li>key code fixes for wayland</li>
+            <li>Change address for ci results server</li>
+            <li>updates for building app linking against shared library (#642)</li>
+            <li>fix incorrect length modifier - causes compiler error using newer g++ (&gt;6.4) (#639)</li>
+            <li>Remove confusing console log (#641)</li>
+            <li>rasterizer build updates</li>
+          </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+
+
+  <u><h2>Release 0.34.0.0 - 23Oct2017</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.34.0.0)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+            <li>obfuscate key code logging when environment variable <span style="color: rgb(0,92,197);">
+                <span style="color: rgb(0,0,0);">PXSCENE_KEY_LOGGING_DISABLED</span> </span>is set</li>
+            <li>reject promise handling for invalid wayland apps</li>
+            <li>Use INFO for scene url logging</li>          
+        </ul>
+      </bullets>
+      <h3>Commits/Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>code coverage for pxWindow</li>
+            <li>updates for wayland builds</li>
+            <li>service manager updates</li>
+            <li>Passing Decoder Handle from Westeros to Receiver for Helio player CC support</li>
+            <li>Code coverage for pxMatrix4T</li>
+            <li>unit test instruction updates</li>
+            <li>Fix expiration data in cacheHeader test</li>
+            <li>Use INFO for scene url logging</li>
+            <li>Add back timed tests for fancy, picturepile and gallery that used to be in the ci/testRunner js files</li>
+            <li>adding back default implementation for onCloseRequest now that codecov header issues are fixed</li>
+            <li>reject promise handling for invalid wayland apps</li>
+            <li>ability to disable wst decoder methods</li>
+            <li>obfuscate key code logging when environment variable is set</li>
+            <li>Fixes for Coverity raster issues</li>
+            <li>frame rate updates for pxscene standalone</li>
+          </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+
+
+  <u><h2>Release 0.33.0.1 - 03Oct2017</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.33.0.1)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+          <li>Memory leak fix</li>
+          <li>Remove exposure of scene.logDebugMetrics() - this is only meant for memory leak testing and CI builds</li>
+          <li>CMD-A in [browser.js] edit box adds undeletable "a" in editBox - Fix is CMD key exclusion to onChar() call</li>
+          <li>[browser.js] Change Spinner timeout to show in 500 ms</li>
+          <li>[browser.js] alias CMD-L to CTRL-L behavior on the Mac</li>
+          <li>Add cmake support to build rtCore only</li>
+          <li>Added script url to createService call. Added script url to createService call. Fixed warning, initialized mScriptView after mDisposed.</li>      
+        </ul>
+      </bullets>
+      <h3>Commits/Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>Update Info.plist for 0.33.0.x builds</li>
+            <li>changes for considering coverage in header files</li>
+            <li>SVG Rounded Rectangles: Minor refactoring; Adding support for SVG Rounded Rectangles ... some other optimizations; Fix for cmake build... deavtivated Debug code; Removing console.log() per review comment</li>
+            <li>Codecov: changed onCloseRequest() to pure virtual. Added stubs to instances</li>
+            <li>SVG Path ... benign code update </li>
+            <li>Support rtGuid on systems without libuuid</li>
+            <li>Added support for guid without libuuid</li>
+            <li>pxTexture unit test</li>
+            <li>steps to build and run the unit tests</li>
+            <li>updated build instructions for rtRemote</li>
+            <li>code coverage for pxWindowUtil; a fix for PX_KEY_ZERO + PX_MOD_SHIFT</li>
+            <li>configuration support of which libraries you would like to build</li>
+            <li>support to configure which libraries you would like to build (instead of all)</li>
+            <li>Image is rendered incorrectly when stretchX is specified as -5(negative value)</li>
+            <li>Added a few samples for rtRemote usage</li>
+            <li>change script to take branch and org parameters</li>
+            <li>code coverage changes for utf8</li>
+            <li>change script to take branch</li>
+            <li>Add org to script</li>
+            <li>fix for push undefined from nodejs in travis</li>
+          </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+
+
+  <u><h2>Release 0.32.0.1 - 01Sep2017</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.32.0.1)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+          <li>Added Help screen that lists hotkeys available when running pxscene browser.js.  Access it via Ctrl-Alt-K.</li>
+          <li>Added About screen when running pxscene browser.js.  Access it via Ctrl-Alt-A.</li>
+          <li>Fix issue that was preventing file:// syntax from accepting query parameters.</li>        
+        </ul>
+      </bullets>
+      <h3>Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>localhost should only be accessible to pxScene applications loaded from the local host</li>
+            <li>Complete Breakpad Integration for Windows</li>
+            <li>Remove support for USE_EXTERNALS_GLUT from Ubuntu</li>
+            <li>browser.js regression in 0.31.0.0 - local file:/// does not accept query parameters</li>
+            <li>sprintf should be snprintf to prevent buffer overflow</li>
+            <li>Add smooth down scaling for images</li>
+          </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+  
+  
+      <u><h2>Release 0.31.0.0 - 09Aug2017</h2></u>
+
+    <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.31.0.0)</em></p>
+    <h3>Highlights:</h3>
+    <bullets>
+      <ul>
+        <li>ServiceManager integration changes: API changed from scene.getServiceManager() to scene.createService(). For OS X builds, the scene.createService() will return NULL.</li>
+        <li>Fixes based on Coverity scan results</li>
+        <li>Build enhancements: CMAKE integration for all builds. See <a href="https://github.com/pxscene/pxCore/blob/master/examples/pxScene2d/README.md">Readme </a>for instructions.</li>
+        <li>Support for Windows builds (<em>first pxscene release for Windows coming soon!</em>)</li>
+      </ul>
+    </bullets>
+    <h3>Fixes:</h3>
+    <bullets>
+        <ul>
+
+  <li>Status of Animation was returned as "UNKNOWN" when type is set as "OPTION_LOOP"</li>
+  <li>Fix leaks happening due to deleting any object without parent</li>
+  <li>Status of Animation was returned as "UNKNOWN" when type is set as "OPTION_OSCILLATE"</li>
+        </ul>
+    </bullets>
+    <br/>
+    <br/>
+    <br/>
+
+
+
+
+
+    <u><h2>Release 0.30.0.0 - 14Jul2017</h2></u>
+
+    <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.30.0.0)</em></p>
+    <h3>Highlights:</h3>
+    <bullets>
+      <ul>
+        <li>Integration with ServiceManager, where supported</li>
+        <li>pxObject leak fixes</li>
+        <li>Added unit tests for OS X CI builds</li>
+      </ul>
+    </bullets>
+    <br/>
+    <br/>
+    <br/>
+
+    <u><h2>Release 0.29.1.3 - 10Jul2017</h2></u>
+
+    <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: master - SHA </em>6dda2d8<em>)</em></p>
+    <h3>Highlights:</h3>
+    <bullets>
+      <ul>
+        <li>Enhanced functionality for the pxscene browser - drag and drop files from Finder directly into the text input field to launch; better copy, paste and selection; better focus with mouse clicks</li>
+        <li>Better support of jar and zip files for pxApps</li>
+        <li>Better configuration for Wayland applications</li>
+        <li>Improved stability when debugging pxApps in VSCode</li>
+        <li>Change default log level to be less noisy for OS X app</li>
+        <li>Support for new animation mechanism that returns an animation object.  See animate() method in pxscene documentation.</li>
+        <li>Minify javascript in the pxscene binary</li>
+        <li>Fix greyscale JPEG rendering</li>
+        <li>Improved continuous integration and code coverage</li>
+        <li>Memory leak fixes</li>
+        <li>Stability fixes</li>
+        <li>Return scene object for scene creation promise parm (rather than api property)</li>
+        <li>Return NULL rather than empty object for getObjectById when Id does not exist</li>
+      </ul>
+    </bullets>
+    <br/>
+    <br/>
+    <br/>
+
+    <u><h2>Release 0.28 - 07Apr2017</h2></u>
+
+    <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: master - SHA </em>a04e0f2<em>)</em></p>
+    <h3>Known Issues:</h3>
+
+    <bullets>
+      <ul>
+        <li>pxscene crash in rtString::cString()</li>
+        <li>Crash when debugging in vscode for font.measureText</li>
+      </ul>
+    </bullets>
+
+    <h3>Fixes:</h3>
+
+    <bullets>
+        <ul>
+          <li>pxscene crash in pxResource::processDownloadedResource()</li>
+          <li>Memory leaks - increasing on continuous runs</li>
+          <li>Fix warnings in pxCore build about deprecated nodejs items</li>
+          <li>XCrash when reloading page in Ubuntu</li>
+          <li>OSX app crashes when closing via File Quit or Ctrl-q</li>
+          <li>Memory leaks with assert.js in testrunner app during module exports</li>
+          <li>Changed direct function callback to interface. Changing the function pointer style callback to use an interface allows us to pass down a smart pointer to simplify resource management.</li>
+          <li>Fix issue where with clip=false, wordWrap=false, truncate=NONE, textBox text that exceeds width is getting stretched</li>
+          <li>Adding Google Closure Compiler for JS file optimization</li>
+          <li>Fix for leaks due to module exports and import of user-defined js file</li>
+          <li>Prevent animation on disposed px object</li>
+          <li>Fixed getting object references when not set. A special 'nil' object id is returned when fetching properties that are function references or object references that are unset instead of returning a reference to something that doesn't actually exist.</li>
+          <li>Added auto-expand on rtArrayObject. Added length property to rtArrayObject.</li>
+          <li>pxScene FPS slowness tracker: log fps if the fps dips too low</li>
+          <li>Changes to build breakpad only for non-mac platform</li>
+          <li>Update Makefile</li>
+          <li>Changes for integrating breakpad for Linux platform</li>
+          <li>Fixed scene loading promise rejection</li>
+          <li>ensure the image is loaded before created a apng texture</li>
+          <li>empty resource crash fix</li>
+          <li>fixed leak</li>
+          <li>adding pxResource support to pxImageA</li>
+          <li>glyph cache wasn't being populated</li>
+          <li>Adding breakpad module to pxscene externals</li>
+          <li>adding ability for platforms to disable apng features if they do not support it</li>
+          <li>fbo snapshot updates</li>
+          <li>add ability for platforms to disable egl extensions</li>
+          <li>fixing snapshots of fbos</li>
+          <li>Ignore performance test outputs.</li>
+          <li>Don't do hole punching when drawing without FBO</li>
+          <li>automate valgrind memory leak detection with travis for linux</li>
+          <li>adding pxContextUtil support to wayland libs</li>
+          <li>Add apng support to pxscene enabling apng support for egl platforms</li>
+          <li>Fix for memory leak from cloned contexts</li>
+          <li>fix for memory leaks</li>
+          <li>Enabled changes for printing pxobject count and texture memory usage. Automated validation of pxobject and texture memory usage in travis</li>
+          <li>multisampling fbo support for egl platforms</li>
+          <li>pxContext code cleanup for multi-platform multithreading changes</li>
+          <li>painting support for mac os multithreading</li>
+          <li>changes for execl argument and order of remote call invokation to server</li>
+          <li>Updating perf tests - Added rtFunctionRef proptery to use a callback simulator.</li>
+          <li>Trim whitespace to ensure URL's load as expected</li>
+          <li>Making FPS box inactive. Transparent to click events etc.</li>
+          <li>Improved visual quality for scaled text and bugs …</li>
+          <li>Fixed bug in rtObject::Set(). Was returning RT_OK on missing property.</li>
+          <li>painting support for multithreading</li>
+          <li>changes for support to add function callback and calling it remotely</li>
+          <li>fixing pxobject leaks</li>
+          <li>Don't send keep alive on closed stream</li>
+      </ul>
+    <h3 style="margin-left: 30.0px;" talk-marker="65" talk-page-id="114000371" talk-page-version="85" id="pxsceneReleaseNotes-028-Notes:"><u>Notes:</u></h3>
+    <ul>
+      <li style="list-style-type: none;background-image: none;">
+        <ul>
+          <li>Support for apng is now complete.  The caveats that have been in place since Release 0.25 should no longer apply.  In particular, you can now access apngs using paths relative to base package uri.</li>
+          <li>Text scaling improvements in this release improve the quality of scaled text See textscale.js example. 
+            <ul>
+              <li>Separated glyph texture caching from glyph metric caching. </li>
+              <li>Glyph textures are no longer one for one with a glyph's pixelSize. A given pixelSize glyph may use the texture from a larger pixelSize glyph. This reduces overall memory and provides more pixel data for sampling. </li>
+              <li>Glyph rendering is done using the exact metrics for the specific pixelSize as reported by free type. The selected glyph texture (which may be for a larger pixelSize) is scaled (down) to fit inside the glyph bounding box for the specified pixelSize. </li>
+              <li>Glyph texture selection now takes into account the necessary LOD (Level of Detail) needed based on sx and sy scale factors. Greatly improving visual quality when scaling text.</li>
+            </ul>
+          </li>
+          <li>Several memory leak fixes went into this build.  If you're following the pxCore github project, you may have noticed that the Travis CI builds now check for memory leaks for every pull request and merge.</li>
+        </ul>
+      </li>
+    </ul>
+
+  <br/>
+  <br/>
+  <br/>
+
+
     <u><h2>Release 0.27 - 16Mar2017</h2></u>
 
-    <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/johnrobinsn/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/johnrobinsn/pxCore</a>: master - SHA </em>59f476d<em>)</em></p>
+    <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: master - SHA </em>59f476d<em>)</em></p>
     <h3>Known Issues:</h3>
 
     <bullets>
@@ -91,7 +434,7 @@
     <br/>
     <br/>
     <br/>
-    <p>This project is maintained by <a href="https://github.com/johnrobinsn">johnrobinsn</a></p>
+    <p>This project is maintained by <a href="https://github.com/pxscene">pxscene</a></p>
 
     <p>
         <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a>

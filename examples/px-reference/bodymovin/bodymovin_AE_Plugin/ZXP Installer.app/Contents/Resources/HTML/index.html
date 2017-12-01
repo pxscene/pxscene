@@ -1,0 +1,165 @@
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<meta name="viewport" content="user-scalable=no, initial-scale=1,
+		maximum-scale=1, minimum-scale=1, width=device-width, height=device-height,
+		target-densitydpi=device-dpi"/>
+
+		<link rel="stylesheet" type="text/css" href="./css/default.css">
+		<link rel="stylesheet" type="text/css" href="./css/extra.css">
+		<link rel="stylesheet" type="text/css" href="./css/zxp.css">
+		<link rel="stylesheet" type="text/css" href="./css/win.css">
+
+		<!-- Libraries >>> -->
+		<script src='./lib/jquery.js'></script>
+		<script src='./lib/jquery.easing.js'></script>
+		<!-- <<< Libraries -->
+		
+		<!-- Prototypes >>> -->
+		<script src='./js/prototypes.js'></script>
+		<script src='./js/prototypes/RegExp.js'></script>
+		<!-- <<< Prototypes -->
+		
+		<script src='./js/bridge.js'></script>
+		<script src='./js/callbacks.js'></script>
+		
+		<!-- Classes >>> -->
+		<script src='./js/classes.js'></script>
+		<script src='./js/classes/Application.js'></script>
+		<script src='./js/classes/DialogManager.js'></script>
+		<script src='./js/classes/DialogManagerEx.js'></script>
+		<script src='./js/classes/ErrorManager.js'></script>
+		<script src='./js/classes/Extension.js'></script>
+		<script src='./js/classes/System.js'></script>
+		<script src='./js/classes/System/FileManager.js'></script>
+		<script src='./js/classes/ZXPManager.js'></script>
+		<!-- <<< Classes -->
+		
+		<script type='text/javascript'>
+		
+			//	Key Events
+			
+			$(document).on("keydown", keydownCb);
+			
+			function keydownCb(e)
+			{
+				switch (e.keyCode)
+				{
+					case 27:
+						//	Escape
+						dialogMng.tryClose();
+						break;
+					case 9:
+						//	Tab
+						if (e.shiftKey)
+						{
+							toggleLog();
+						}
+						break;
+				}
+			}
+			
+			//	Log
+			
+			function log(txt)
+			{
+				var div = document.getElementById('log');
+				div.innerHTML += txt + "<br>";
+			}
+		
+			function toggleLog()
+			{
+				var div = $('#ks_container_header_collapse');
+				
+				var visible = div.position().top == 0;
+
+				div.animate({'top': (  visible  ?  -div.height()-20 : 0  ) + "px"}, 350, 'easeOutExpo');
+			}
+
+		</script>
+		
+	</head>
+	<body onload='onLoad();' onselectstart="return false;" style="-moz-user-select: none;">
+		
+		<div id='ks_container_content'>
+			
+			<div id='ks_zxp_list'>
+			</div>
+		
+			<div id='ks_container_header_collapse'>
+				<div id='log'>
+					<br>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div id='ks_container_dialog' onclick='dialogMng.onClick()' oncontextmenu='dialogMng.onClick(event)'>
+			<div id='ks_dialog'>
+				
+				<!--	Default dialog, dynamically populated	-->
+				<div class='ks_dialog_content' id='ks_dialog_content'>
+				</div>
+				
+				<!--	On Error	-->
+				<div class='ks_dialog_content' id='ks_dialog_onError'>
+					<b><span id='ks_dialog_onError_text'>#</span></b>
+					<br><br>
+					Visit the <span id='ks_dialog_onError_link' class='ks_clickable'>ZXP Installer FAQ</span> for more information
+				</div>
+				
+				<!--	Wait dialog	-->
+				<div class='ks_dialog_content' id='ks_dialog_onUpdate'>
+					<b>Updating...</b><br><br>
+					The Adobe Extension Manager may ask for authorization.
+				</div>
+				
+				<!--	Custom installation	-->
+				<div class='ks_dialog_content' id='ks_dialog_confirmCustomInstall'>
+					<b>Please select the installation type. This product will appear under "Custom Installations".</b>
+					<br><br>
+					<select id='ks_dialog_installation_custom_type'>\
+						<option value='0'>Install For All Users</option>\
+						<option value='1'>Install Only For Me</option>\
+					</select>
+				</div>
+				
+				<!--	On ExManCmd reset	-->
+				<div class='ks_dialog_content' id='ks_dialog_onReset'>
+                    Your CC applications could not be detected, which may cause installation issues. Would you like to detect installed applications?
+				</div>
+				
+				<!--	On ZXP installation	-->
+				<div class='ks_dialog_content' id='ks_dialog_onInstalling'>
+					Installing <b><span id='ks_dialog_onInstalling_text'>#</span></b>
+				</div>
+				
+				<!--	Confirm ZXP removal	-->
+				<div class='ks_dialog_content' id='ks_dialog_confirmRemoval'>
+					You are about to uninstall <b><span id='ks_dialog_confirmRemoval_text'>#</span></b>
+				</div>
+				
+				<!--	Confirm ZXP Clear	-->
+				<div class='ks_dialog_content' id='ks_dialog_confirmClear'>
+					You are about to reset <b><span id='ks_dialog_confirmClear_text'>#</span></b>
+					<br><br>
+					The following preferences wil be deleted:<br>
+					<b><span id='ks_dialog_confirmClear_prefs'>#</span></b>
+				</div>
+				
+				
+				<!--	Buttons ...	-->
+				<div id='ks_dialog_buttons'>
+					<button class='button ks_button ks_button_small' id='ks_dialog_buttons_cancel' onclick='dialogMng.close()'>Cancel</button>
+					<button class='button ks_button' id='ks_dialog_buttons_ok'>OK</button>
+				</div>
+				<div id='ks_dialog_close'>
+					<button class='button ks_button ks_button_small' id='ks_dialog_buttons_cancel' onclick='dialogMng.close()'>Close</button>
+				</div>
+				
+			</div>
+		</div>
+		
+    </body>
+	
+</html>

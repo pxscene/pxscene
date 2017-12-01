@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>pxScene - Scene Graph API</title>
+<link href="./style/style.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+
+<div id="container">
+
+<h1>pxScene - Scene Graph API</h1>
+
+A 2d scene graph API supporting the following:
+<ul>
+<li>2d hierarchical affine scene graph.</li>
+<li>Small set of atomic UI elements</li>
+<li>Complex components built through composition.</li>
+<li>animation primitives</li>
+<li>rich masking primitives</li>
+<li>more to come... </li>
+</ul>
+<br/>
+<br/>
+
+<h2><a name="scene"></a><code>Scene</code> instance</h2>
+<h3>Properties</h3>
+<dl>
+<dt class="object readonly">root</dt>
+<dd>returns the root <a href="#object">Object</a> for the scene</dd>
+<dt class="number readonly">w</dt>
+<dd>returns the width in pixel-sized units of the scene</dd>
+<dt class="number readonly">h</dt>
+<dd>returns the height in pixel-sized units of the scene</dd>
+<dt class="object">animation</dt>
+<dd><a href="#animation">animation</a> for animation-related constants</dd>
+<dt class="object">stretch</dt>
+<dd><a href="#stretch">stretch</a> for x/y stretch-related constants (for <a href="#image">image</a>)</dd>
+<dt class="object">alignVertical</dt>
+<dd><a href="#alignVertical">alignVertical</a> for vertical alignment-related constants (for <a href="#textBox">textBox</a>)</dd>
+<dt class="object">alignHorizontal</dt>
+<dd><a href="#alignHorizontal">alignHorizontal</a> for horizontal alignment-related constants (for <a href="#textBox">textBox</a>)</dd>
+<dt class="object">truncation</dt>
+<dd><a href="#truncation">truncation</a> for truncation-related constants (for <a href="#textBox">textBox</a>)</dd>
+
+</dl>
+<hr/>
+<h3>Methods</h3>
+<dl>
+<dt class="object">create(json)</dt>
+<dd>create a subtree of scene graph <a href="#object">Objects</a>
+<br/>Use json t: to construct specific object types: 
+<li><a href="#text">text</a></li>
+<li><a href="#textBox">textBox</a></li>
+<li><a href="#wayland">wayland</a></li>
+<li><a href="#image">image</a></li>
+<li><a href="#image9">image9</a></li>
+<li><a href="#rectangle">rect</a></li>
+<li><a href="#object">object</a></li>
+<dt class="resource">create(json)</dt>
+<dd>create resources that can be shared
+<br/>Use json t: to construct specific resource types:
+<li><a href="#imageResource">imageResource</a></li>
+<li><a href="#fontResource">fontResource</a></li>
+</dd>
+</dd>
+<!--<dt class="object">createRectangle(json)</dt>
+<dd>create a <a href="#rectangle">Rectangle</a> object</dd>
+<dt class="image">createImage(json)</dt>
+<dd>create a <a href="#image">Image</a> object</dd>
+<dt class="image9">createImage9(json)</dt>
+<dd>create a <a href="#image9">Image9</a> object - a nine slice image</dd>
+<dt class="text">createText(json)</dt>
+<dd>create a <a href="#text">Text</a> object</dd>
+<dt class="text">createTextBox(json)</dt>
+<dd>create a <a href="#textBox">TextBox</a> object</dd>
+<dt class="scenecontainer">createScene(json)</dt>
+<dd>create a <a href="#scenecontainer">SceneContainer</a> object</dd>-->
+<dt class="void">on(string, function)</dt>
+<dd>registers a function callback for the specified event:
+<li>onMouseDown - parameter object has properties: x, y, flags </li>
+<li>onMouseUp - parameter object hasproperties: x, y, flags </li>
+<li>onMouseMove - parameter object has properties: x, y </li>
+<li>onMouseEnter  - parameter object has properties: target, stopPropagation()   </li>
+<li>onMouseLeave  - parameter object has properties: target, stopPropagation()  </li>
+<li>onFocus  - parameter object has properties: target, stopPropagation()  </li>
+<li>onBlur  - parameter object has properties: target, stopPropagation()  </li>
+<li>onKeyDown  - parameter object has properties: target, keyCode, flags, stopPropagation() </li>
+<li>onKeyUp  - parameter object has properties: target, keyCode, flags, stopPropagation() </li>
+<li>onChar  - parameter object has properties: target, charCode, stopPropagation()</li>
+<li>onResize - parameter object has properties w, h</li>
+</dd>
+<dt class="void">delListener(string, function)</dt>
+<dd>unregister a callback function for the specified event</dd>
+<dt class="void">getFocus(Object)</dt>
+<dd>will return the object that has keyboard focus</dd>
+<hr/>
+
+
+<hr/>
+<br/><br/>
+<h2><a name="object"></a><code>Object</code> instance</h2>
+<h3>Properties</h3>
+<dt class="object readonly">parent</dt>
+<dd>returns this object's parent <a href="#object">Object</a></dd>
+<dt class="number">x</dt>
+<dd>x-coordinate used as input into the object's transform function in pixel units</dd>
+<dt class="number">y</dt>
+<dd>y-coordinate used as input into the object's transform function in pixel units</dd>
+<dt class="number">w</dt>
+<dd>pixel unit width of the object</dd>
+<dt class="number">h</dt>
+<dd>pixel unit height of the object</dd>
+<dt class="number">cx</dt>
+<dd>x offset used as the center of rotation and scale</dd>
+<dt class="number">cy</dt>
+<dd>y offset used as the center of rotation and scale</dd>
+<dt class="number">sx</dt>
+<dd>scale factor in the x dimension</dd>
+<dt class="number">sy</dt>
+<dd>scale factor in the y dimension</dd>
+<dt class="number">a</dt>
+<dd>opacity of the object [0-1]</dd>
+<dt class="number">r</dt>
+<dd>angle of rotation in degrees</dd>
+<dt class="string">id</dt>
+<dd>user-assigned associated string identifier for the object. defaults to "".</dd>
+<dt class="boolean">interactive</dt>
+<dd>determines whether the object is mouse interactive. defaults to true.</dd>
+<dt class="boolean">painting</dt>
+<dd>when set to false the object and it's children will be snapshotted. when set to true the object and it's children will immediately reflect any changes</dd> 
+<dt class="boolean">clip</dt>
+<dd>determines whether the drawing done by the object and it's children will be clipped by the objects w and h properties. defaults to false.</dd>
+<dt class="boolean">mask</dt>
+<dd>determines whether this object will be used to define an alpha layer mask for the siblings of this object. defaults to false.</dd>
+<dt class="boolean">draw</dt>
+<dd>determines whether this object will be drawn</dd>
+<dt class="boolean">focus</dt>
+<dd>when set to true, this object will be given keyboard focus. the object that had previous focus will be blurred.</dd>
+<dt class="number">numChildren</dt>
+<dd>returns the number of immediate child objects that this object parents</dd>
+<dt class="array">children</dt>
+<dd>returns a collection of child objects for this object</dd>
+<hr/>
+<h3>Methods</h3>
+<dt class="object">getChild(i)</dt>
+<dd>returns the i-th child for this object</dd>
+<dt class="void">remove</dt>
+<dd>removes this object from the scene</dd>
+<dt class="void">removeAll</dt>
+<dd>removes all children and their descendents from the scene.</dd>
+<dt class="void">moveToFront</dt>
+<dd>Moves this child to the top of the z-order within its siblings</dd>
+<dt class="void">moveToBack</dt>
+<dd>Moves this child to the bottom of the z-order within its siblings</dd>
+<dt class="void">moveForward</dt>
+<dd>Moves this child one forward in the z-order within its siblings</dd>
+<dt class="void">moveBackward</dt>
+<dd>Moves this child one backward in the z-order within its siblings</dd>
+<dt class="promise">animateTo(json, duration, tween, type, count)</dt>
+<dd>tween the object's properties to the targets specified over the specified duration using the tween function.
+<li>Tween indicates the interpolator to be used for the animation.  See <a href="#animation_interpolators">animation constants</a> for valid values. Defaults to TWEEN_LINEAR.</li>  
+<li>Type (option) determines whether the animation loops or oscillates. See <a href="#animation_options">animation constants</a> for valid values. Defaults to OPTION_LOOP.</li>
+<li>Count is the number of times the animation should repeat.  Defaults to 1. Use COUNT_FOREVER to create an animation that won't end until canceled.</li>
+Returns a promise that will fulfill when the animation is complete.</dd>
+<dt class="object">animate(json, duration, tween, type, count)</dt>
+<dd>tween the object's properties to the targets specified over the specified duration using the tween function.  </li>
+<li>Tween indicates the interpolator to be used for the animation.  See <a href="#animation_interpolators">interpolator animation constants</a> for valid values. Defaults to TWEEN_LINEAR.</li>  
+<li>Type (option) determines whether the animation loops or oscillates. See <a href="#animation_options">option animation constants</a> for valid values. Defaults to OPTION_LOOP.</li>
+<li>Count is the number of times the animation should repeat.  Defaults to 1. Use COUNT_FOREVER to create an animation that won't end until canceled.</li>
+Returns an <a href="#Animate">Animate</a> object that can be used to cancel or check on status of the animation.</dd>
+<dt class="void">on(string, function)</dt>
+<dd>registers a function callback for the specified event:
+<li>onMouseDown - parameter object has properties: x, y, flags </li>
+<li>onMouseUp - parameter object hasproperties: x, y, flags </li>
+<li>onMouseMove - parameter object has properties: x, y </li>
+<li>onMouseEnter </li>
+<li>onMouseLeave </li>
+<li>onFocus </li>
+<li>onBlur </li>
+<li>onKeyDown  - parameter object has properties: target, keyCode, flags </li>
+<li>onKeyUp  - parameter object has properties: target, keyCode, flags </li>
+<li>onChar  - parameter object has properties: target, charCode</li>
+<li>onSize - parameter object has properties w, h</li>
+</dd>
+<dt class="void">delListener(string, function)</dt>
+<dd>unregisters a function callback for the specified event</dd>
+<dt class="void">getObjectById(id)</dt>
+<dd>returns object with associated id.  search scope is this object and its children.</dd>
+<hr/>
+<br/><br/>
+<h2><a name="rectangle"></a><code>Rectangle</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
+<h3>Properties</h3>
+<dt class="number">fillColor</dt>
+<dd>specifies the color to fill the interior of the rectangle. eg. 0xff0000ff, opaque red, 0xrrggbbaa</dd>
+<dt class="number">lineColor</dt>
+<dd>specifies the color to stroke the edge of the rectangle. eg. 0xff0000ff, opaque red, 0xrrggbbaa</dd>
+<dt class="number">lineWidth</dt>
+<dd>species the width of the line to stroke around the ege of the rectangle. defaults to 0.</dd>
+<hr/>
+<br/><br/>
+<h2><a name="image"></a><code>Image</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
+<h3>Properties</h3>
+<dt class="string">url</dt>
+<dd>specifies the url of the image to load. supports .png and .jpg</dd>
+<dt class="number">stretchX</dt>
+<dd>specifies the stretch option to use for the x-coordinate. See <a href="#stretch">stretch constants.</a></dd>
+<dt class="number">stretchY<dt>
+<dd>specifies the stretch option to use for the y-coordinate. See <a href="#stretch">stretch constants.</a></dd>
+<dt class="promise">ready</dt>
+<dd>returns a promise for when the object is ready</dd>
+<dt class="resource">resource</dt>
+<dd>specifies the <a href="#imageResource"><code>imageResource</code></a> to be used by this image</dd>
+<br/>
+<dd>Note that setting url will create an <a href="#imageResource"><code>imageResource</code></a> and set the resource property for this image.
+<br/><br/> Note that w or h equal to -1 will cause the image to be rendered using the <a href="#imageResource"><code>imageResource</code></a>'s associated property.</dd>
+<hr/>
+<br/><br/>
+<h2><a name="image9"></a><code>Image9</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
+<h3>Properties</h3>
+<dt class="string">url</dt>
+<dd>specifies the url of the image to load. supports .png and .jpg</dd>
+<dt class="number">insetLeft</dt>
+<dd>specifies the first slicing offset on the x-axis</dd>
+<dt class="number">insetTop</dt>
+<dd>specifies the first slicing offset on the y-axis</dd>
+<dt class="number">insetRight</dt>
+<dd>specifies the second slicing offset on the x-axis</dd>
+<dt class="number">insetBottom</dt>
+<dd>specifies the second slicing offset on the y-axis</dd>
+<dt class="promise">ready</dt>
+<dd>returns a promise for when the object is ready</dd>
+<dt class="resource">resource</dt>
+<dd>specifies the <a href="#imageResource"><code>imageResource</code></a> to be used by this image9</dd>
+<br/>
+<dd>Note that setting url will create an <a href="#imageResource"><code>imageResource</code></a> and set the resource property for this image9.</dd>
+<hr/>
+<br/><br/>
+<h2><a name="text"></a><code>Text</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
+Text height and width are determined at runtime based on the text value, font, pixelSize, etc.
+<h3>Properties</h3>
+<dt class="string">text</dt>
+<dd>specifies the text to render</dd>
+<dt class="number">textColor</dt>
+<dd>specifies the color to render the text. eg. 0xff0000ff,opaque red,0xrrggbbaa. defaults to opaque black [0x000000ff].</dd>
+<dt class="number">pixelSize</dt>
+<dd>specifies the pixelSize of the rendered text</dd>
+<dt class="string">fontUrl</dt>
+<dd>specifies the url of the face to use.</dd>
+<dt class="promise">ready</dt>
+<dd>returns a promise for when the object is ready</dd>
+<dt class="resource">font</dt>
+<dd>specifies the <a href="#fontResource"><code>fontResource</code></a> to be used by this text</dd>
+<br/>
+<dd>Note that setting url will create a <a href="#fontResource"><code>fontResource</code></a> and set the font property for this text.</dd>
+<hr/>
+<br/><br/>
+<h2><a name="textBox"></a><code>TextBox</code> instance inherits from <a href="#text"><code>Text</code></a></h2>
+Unlike <a href="#text"><code>Text</code></a>, the height and width of TextBox does NOT change based on the text value; instead, the height and width values in constructor and assignments are respected, and the text is rendered within those dimensions, according to the property values, below.
+<br/><br/>
+<div>Behaviors for alignment, wordWrap and clip:
+<ul>
+<li>If truncation is none and wrap is true, then the text will continue to flow beyond the height of the bounding rectangle, possibly cut off if clip is applied.</li>
+
+<li>If truncation is none, and wrap is false, then the line(s) (that /n case has to be taken into consideration) should be centered in the view, even if the text goes beyond its x/width boundaries.  If clip is true, text is cut off on either end.  Such as:
+<br/><br/>
+<ul/>alignHorizontal CENTER
+<br/><ul>The qu|ick brown fox jumped over the la|zy dog</ul>
+<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|ick brown fox jumped over the la|</ul>
+<br/>
+Or
+<br/><br/>
+alignHorizontal RIGHT
+<br/><ul>The quick br|own fox jumped over the lazy dog|</ul>
+<ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|own fox jumped over the lazy dog|</ul>
+</li>
+</ul>
+</ul>
+</div>
+<h3>Properties</h3>
+<dt class="boolean">wordWrap</dt>
+<dd>when width > 0, and wordWrap is true, wraps text at width of text box. defaults to false.</dd>
+<dt class="number">xStartPos</dt>
+<dd>x position relative to the text box object, in pixels, for the first line of text only, similar to an indent. defaults to 0.</dd>
+<dt class="number">xStopPos</dt>
+<dd>x position where text must stop flowing on the last line of text only.  If ellipses are applied, the ellipses must also stop at this location.  defaults to 0.
+<br/>NOTE:  xStartPos and xStopPos are only applied when horizontalAlign=LEFT.
+<br/>NOTE:  xStopPos can only be applied when truncation is true.</dd>
+<dt class="boolean">ellipsis</dt>
+<dd>indicates if ellipsis shall be shown when truncation occurs. Ignored if truncation=NONE. defaults to false.</dd>
+<dt class="number">truncation</dt>
+<dd>see <a href="#truncation">truncation constants</a>.  defaults to NONE.</dd>
+<dt class="number">alignHorizontal</dt>
+<dd>see <a href="#alignHorizontal">horizontal alignment constants</a>. defaults to LEFT.</dd>
+<dt class="number">alignVertical</dt>
+<dd>see <a href="#alignVertical">vertical alignment constants</a>. defaults to TOP.</dd>
+<dt class="number">leading</dt>
+<dd>number of pixels of height to apply between lines of text when multiple lines of text exist.  May be negative.  defaults to 0.</dd>
+</dd>
+<hr/>
+<h3>Methods</h3>
+<dt class="object">measureText</dt>
+<dd>returns an object with the following properties (measurements are relative to (x,y) of the TextBox object):
+<li>bounds - object - {x1:0, y1:0, x2:0, y2:0} - The two points representing the bounding rectangle of the complete text</li>
+<li>charFirst - {x:0, y:0} - The x position represents the left most rendered pixel of the first character on the first line of text. The y position represents the baseline.</li>
+<li>charLast - {x:0, y:0} - The x position represents the right most rendered pixel of the last character on the last line of text.  The y position represents the baseline.</li>
+</li>
+</dd>
+<hr/>
+<br/><br/>
+
+<h2><a name="wayland"></a><code>Wayland</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
+Creates an element which contains a Wayland display.  Any Wayland clients that connect to this display will appear in this element.
+<h3>Properties</h3>
+<dt class="string">displayName</dt>
+<dd>Specifies the name of the Wayland display.  If no value is assigned a unique name will be generated</dd>
+<dt class="string">cmd</dt>
+<dd>Specifies a command to launch a Wayland client app to connect to the display.  Consists of the client name optionally followed by arguments</dd>
+<dt class="string">remoteServer</dt>
+<dd>Specifies the name of an rtRemote server</dd>
+<dt class="number readonly">clientPID</dt>
+<dd>Gives the process pid of the connected Wayland client</dd>
+<dt class="number">fillColor</dt>
+<dd>specifies the color to fill the interior of the element. eg. 0xff0000ff, opaque red, 0xrrggbbaa.  This will provide background for the connected Wayland client</dd>
+<dt class="boolean">hasApi</dt>
+<dd>indicates if the element exports an API.</dd>
+<dt class="promise">remoteReady</dt>
+<dd>returns a promise for when the remote object is ready</dd>
+<hr/>
+<h3>Methods</h3>
+<dt class="void">suspend(bool)</dt>
+<dd>Causes the element to cease drawing</dd>
+<dt class="void">resume(bool)</dt>
+<dd>Causes the element to resume drawing</dd>
+<dt class="void">destroy(bool)</dt>
+<dd>Destroys the element</dd>
+
+<hr/>
+<br/><br/>
+<h2><a name="scenecontainer"></a><code>SceneContainer</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
+<h3>Properties</h3>
+<dt class="string">url</dt>
+<dd>specifies the url of the JavaScript to use for the child scene</dd>
+<hr/>
+
+<br/><br/>
+<h2><a name="resource"></a><code>Resource</code> instance</h2>
+ Note: Once Resource is created, the url and proxy are readonly.
+<h3>Properties</h3>
+<dt class="string">url</dt>
+<dd>url to the resource to be loaded</dd>
+<dt class="string">proxy</dt>
+<dd>http proxy url to be used while downloading</dd>
+<dt class="promise">ready</dt>
+<dd>returns a promise when the resource is loaded (Read only)</dd>
+<dt class="array">loadStatus</dt>
+<dd>array of status values (Read only)</dd>
+<hr/>
+
+<br/><br/>
+<h2><a name="imageResource"></a><code>imageResource</code> instance inherits from <a href="#resource"><code>Resource</code></a></h2>
+<h3>Properties</h3>
+<dt class="number">w</dt>
+<dd>pixel unit width of the image</dd>
+<dt class="number">h</dt>
+<dd>pixel unit height of the image</dd>
+<hr/>
+
+<br/><br/>
+<h2><a name="fontResource"></a><code>fontResource</code> instance inherits from <a href="#resource"><code>Resource</code></a></h2>
+<hr/>
+<h3>Methods</h3>
+<dt class="object">getFontMetrics(pixelSize)</dt>
+<dd>Returns information about the font based on pixelSize.  See section 3.a in http://www.freetype.org/freetype2/docs/tutorial/step2.html.  The returned object has the following properties:
+<li>height - float - the distance between baselines</li>
+<li>ascent - float - the distance from the baseline to the font ascender (note that this is a hint, not a solid rule)</li>
+<li>descent - float - the distance from the baseline to the font descender  (note that this is a hint, not a solid rule)</li>
+<li>naturalLeading - float - the distance that must be placed between two lines of text (See linegap in section 2 in http://www.freetype.org/freetype2/docs/glyphs/glyphs-3.html#section-1)</li>
+<li>baseline - float - the baseline position for a line of text</li>
+</dd>
+<dt class="object">measureText(pixelSize, textToMeasure)</dt>
+<dd>Returns an object from which height and width of the measured text can be obtained.  Note that this measurement does not consider truncation, word wrapping or alignment that could be used in a TextBox containing this text.
+<li>h - float - the height of the text</li>
+<li>w - float - the width of the text</li>
+</dd>
+<hr/>
+<br/><br/>
+<h2><a name="Animate"></a><code>Animate</code></h2>
+The Animate object is returned from the animate() method. It can be used to check on the status of an animation, as well as to cancel the animation. 
+<br/><br/>
+<h3>Properties</h3>
+<dt class="promise">done</dt>
+<dd>Promise that indicates completion of the animation</dd>
+<dt class="number">type</dt>
+<dd>the type (option) of the animation, e.g. whether the animation loops or oscillates. See <a href="#animation_options">option animation constants</a> for valid values. (Read only)</dd>
+<dt class="number">interp</dt>
+<dd>Indicates the interpolator used for this animation. See <a href="#animation_interpolators">interpolator animation constants</a> for valid values. (Read only)</dd>
+<dt class="string">status</dt>
+<dd>status of the animation. See <a href="#animation_status">status animation constants</a> for valid values. Note that this is the constant name returned as a string rather than as its numeric value. (Read only)</dd>
+<dt class="number">provduration</dt>
+<dd>duration value used when the animate function was called (Read only)</dd>
+<dt class="number">provcount</dt>
+<dd>count value used when the animate function was called. Could be positive numeric value or a constant. See <a href="#animation_status">animation constants</a> for valid constant values. (Read only)/dd>
+<dt class="boolean">cancelled</dt>
+<dd>reflects whether or not the animation has been canceled. (Read only)</dd>
+<dt class="object">props</dt>
+<dd>object whose properties are the properties that are being animated, and those property values are the target values for the animation</dd>
+<dt class="object">details</dt>
+<dd>object whose properties are the properties that are being animated, and those property values are an <a href="#AnimationDetail">AnimationDetail</a> object reflecting the current state of the animation for that property.</dd>
+</dd>
+<hr/>
+<h3>Methods</h3>
+<dt class="object">cancel()</dt>
+<dd>Cancels the animation.</dd>
+<hr/>
+<br/><br/>
+<h2><a name="AnimationDetail"></a><code>AnimationDetail</code></h2>
+<h3>Properties</h3>
+<dt class="number">from</dt>
+<dd>the start value for the current state of this animation. (Read only)</dd>
+<dt class="number">to</dt>
+<dd>the end value for the current state of this animation. (Read only)</dd>
+<dt class="number">duration</dt>
+<dd>the duration value for the current state of this animation. (Read only)</dd>
+<dt class="number">count</dt>
+<dd>current count number for this animation. (Read only)</dd>
+<dt class="string">status</dt>
+<dd>current status for this animation. See <a href="#animation_status">status animation constants</a> for valid values. Note that this is the constant name returned as a string rather than as its numeric value. (Read only)</dd>
+</dd>
+<hr/>
+<br/><br/>
+
+
+<h2><a name="animation"></a><code>animation Constants</code></h2>
+<hr>http://www.pxscene.org/examples/px-reference/gallery/dynamics.js demonstrates the different animation interpolators available.</hr>
+
+<hr/>
+<h3>Properties</h3>
+<hr/>
+<a name="animation_interpolators"></a>
+<h4>Interpolators</h4>
+<dl>
+<dd>returns a collection of valid TWEEN_ and EASE_ interpolator constants</dd>
+<dt class="number">TWEEN_LINEAR</dt>
+<dd>constant for specifying a linear tween. constant value is 0.</dd>
+<dt class="number">TWEEN_EXP1</dt>
+<dd>constant for specifying a exp1 tween. constant value is 1.</dd>
+<dt class="number">TWEEN_EXP2</dt>
+<dd>constant for specifying a exp2 tween. constant value is 2.</dd>
+<dt class="number">TWEEN_EXP3</dt>
+<dd>constant for specifying a exp3 tween. constant value is 3.</dd>
+<dt class="number">TWEEN_STOP</dt>
+<dd>constant for specifying a stop (easein) tween. constant value is 4.</dd>
+<dt class="number">EASE_IN_QUAD</dt>
+<dd>constant for specifying a "inquad" tween. constant value is 5.</dd>
+<dt class="number">EASE_IN_CUBIC</dt>
+<dd>constant for specifying a "incubic" tween. constant value is 6.</dd>
+<dt class="number">EASE_IN_BACK</dt>
+<dd>constant for specifying a "inback" tween. constant value is 7.</dd>
+<dt class="number">EASE_IN_ELASTIC</dt>
+<dd>constant for specifying a "easeinelastic" tween. constant value is 8.</dd>
+<dt class="number">EASE_OUT_ELASTIC</dt>
+<dd>constant for specifying a "easeoutelastic" tween. constant value is 9.</dd>
+<dt class="number">EASE_OUT_BOUNCE</dt>
+<dd>constant for specifying a "easeoutbounce" tween. constant value is 10.</dd>
+</dl>
+<hr/>
+<a name="animation_options"></a>
+<h4>Options</h4>
+<dl>
+<dt class="number">OPTION_OSCILLATE</dt>
+<dd>constant for use as the type in the animateTo method. the animation with oscillate back and forth. constant value is 1.</dd>
+<dt class="number">OPTION_LOOP</dt>
+<dd>constant for use as the type in the animateTo method.  the animation will loop continuously. constant value is 2.</dd>
+<dt class="number">OPTION_FASTFORWARD</dt>
+<dd>constant for use as an option in the animateTo method.  This value can be OR'd with the OPTION type to indicate that any animations in progress should fastforward to their ending values. constant value is 8.</dd>
+<dt class="number">OPTION_REWIND</dt>
+<dd>constant for use as the type in the animateTo method. This value can be OR'd with the OPTION type to indicate that any animations in progress should rewind to their beginning values.  constant value is 2.</dd>
+</dl>
+<hr/>
+<a name="animation_count"></a>
+<h4>Count</h4>
+<dl>
+<dt class="number">COUNT_FOREVER</dt>
+<dd>constant to use as count to indicate the animation should never end. When using this value, the promise for the animation will resolve immediately.  constant value is -1.</dd>
+</dl>
+<hr/>
+<hr/>
+<a name="animation_status"></a>
+<h4>Status</h4>
+<dl>
+<dt class="number">IDLE</dt>
+<dd>constant to indicate that the animation has not yet started. constant value is 0.</dd>
+<dt class="number">INPROGRESS</dt>
+<dd>constant to indicate that the animation is in progress. constant value is 1.</dd>
+<dt class="number">CANCELLED</dt>
+<dd>constant to indicate that the animation has been cancelled. constant value is 2.</dd>
+<dt class="number">ENDED</dt>
+<dd>constant to indicate that the animation has ended. constant value is 3.</dd>
+</dl>
+<hr/>
+<hr/>
+<br/><br/>
+
+<h2><a name="stretch"></a><code>stretch Constants</code></h2>
+<hr/>
+<h3>Properties</h3>
+<dl>
+<dt class="number">NONE</dt>
+<dd>constant for use in image stretch options. constant value is 0.</dd>
+<dt class="number">STRETCH</dt>
+<dd>constant for use in image stretch options. constant value is 1.</dd>
+<dt class="number">REPEAT</dt>
+<dd>constant for use in image stretch options. constant value is 2.</dd>
+</dl>
+<hr/>
+<br/><br/>
+
+<h2><a name="alignVertical"></a><code>Vertical Alignment Constants</code></h2>
+<hr/>
+<h3>Properties</h3>
+<dl>
+<dt class="number">TOP</dt>
+<dd>begin text at the upper-most y-coordinate of the <a href="#textBox">textBox</a>. constant value is 0.</dd>
+<dt class="number">CENTER</dt>
+<dd>center text vertically within the <a href="#textBox">textBox</a>. constant value is 1.</dd>
+<dt class="number">BOTTOM</dt>
+<dd>justify text to the bottom of the <a href="#textBox">textBox</a>. constant value is 2.</dd>
+</dl>
+<hr/>
+<br/><br/>
+
+<h2><a name="alignHorizontal"></a><code>Horizontal Alignment Constants</code></h2>
+<hr/>
+<h3>Properties</h3>
+<dl>
+<dt class="number">LEFT</dt>
+<dd>left-justify text in the <a href="#textBox">textBox</a>. constant value is 0.</dd>
+<dt class="number">CENTER</dt>
+<dd>center text horizontally in the <a href="#textBox">textBox</a>. constant value is 1.</dd>
+<dt class="number">RIGHT</dt>
+<dd>right-justify text in the <a href="#textBox">textBox</a>. constant value is 2.</dd>
+</dl>
+<hr/>
+<br/><br/>
+
+
+<h2><a name="truncation"></a><code>Truncation Constants</code></h2>
+<hr/>
+<h3>Properties</h3>
+<dl>
+<dt class="number">NONE</dt>
+<dd>text is not truncated. constant value is 0.</dd>
+<dt class="number">TRUNCATE</dt>
+<dd>text is truncated at the bottom of the <a href="#textBox">textBox</a>.  The last word may be partially truncated. constant value is 1.</dd>
+<dt class="number">TRUNCATE_AT_WORD</dt>
+<dd>text is truncated at the bottom of the <a href="#textBox">textBox</a>.  Truncation occurs at the word boundary. constant value is 2.</dd>
+</dl>
+<hr/>
+<br/><br/>
+
+
+<div style="background-color:#eee;padding:10px;border-radius:7px;"><a href="http://johnrobinsn.github.io/pxScene2d/docs/">Version: Bleeding Edge</a>.
+</div>
+
+<br/>
+</div>
+<script src="/projects/analytics.js"></script>
+</body>
+</html>
