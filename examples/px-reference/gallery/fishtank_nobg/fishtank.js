@@ -20,6 +20,7 @@ px.import({ scene:      'px:scene.1.js',
   var bgURL     = basePackageUri + "/images/background-flip2.jpg";
   var fishstripURL = basePackageUri + "/images/fishstrip.png";
   //var bg        = scene.create({t:"image", parent: root, url: bgURL, stretchX: myStretch, stretchY: myStretch});
+  var bg = root;
   var fishstrip  = scene.create({t:"image", parent: root, url: fishstripURL, stretchX: scene.stretch.NONE, stretchY: scene.stretch.NONE, draw:false}); 
   var numFish= 20;
   var fishW= 307;
@@ -28,7 +29,7 @@ px.import({ scene:      'px:scene.1.js',
 
   function createFish()
   {
-     var newfish= scene.create({t:"scene", parent: bg, clip:true, draw:true});
+     var newfish= scene.create({t:"object", parent: root, clip:true, draw:true});
      var fishimg= scene.create({t:"image", parent: newfish, url: fishstripURL, stretchX: scene.stretch.NONE, stretchY: scene.stretch.NONE, draw:true});
      newfish.species= Math.floor(Math.random()*3);
      newfish.cell= 0;
@@ -47,8 +48,8 @@ px.import({ scene:      'px:scene.1.js',
      var scale= 0.1+Math.random()*0.5;
      newfish.scale= scale;
      newfish.zadj= 0.99+Math.random()*0.02;
-     newfish.x= 100+Math.floor(Math.random()*bg.w-200);
-     newfish.y= 100+Math.floor(Math.random()*bg.h-200);
+     newfish.x= 100+Math.floor(Math.random()*root.w-200);
+     newfish.y= 100+Math.floor(Math.random()*root.h-200);
      newfish.w= fishW;
      newfish.h= fishH;
      newfish.img= fishimg;
@@ -64,10 +65,10 @@ px.import({ scene:      'px:scene.1.js',
      f.img.x= -fishW*f.cell;
      f.x += f.xAngle*f.velocity;
      f.y += f.yAngle*f.velocity;
-     if ( (f.flip == 1) && (f.x+f.w*f.scale > bg.w) )
+     if ( (f.flip == 1) && (f.x+f.w*f.scale > root.w) )
      {
         f.xAngle= -f.xAngle;
-        f.x= bg.w;
+        f.x= root.w;
      }
      if ( (f.flip == -1) && (f.x-f.w*f.scale < 0) )
      {
@@ -139,7 +140,7 @@ px.import({ scene:      'px:scene.1.js',
      }
   });
 
-  Promise.all([ bg, fishstrip ])
+  Promise.all([ /*bg,*/ fishstrip ])
       .catch( (err) => 
       {
           console.log(">>> Loading Assets ... err = " + err);
