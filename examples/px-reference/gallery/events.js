@@ -99,8 +99,8 @@ function blah(eventname) {
     var text = scene.create({t:"text",r:randomInt(-10,10),
                                  text:eventname, parent:root});
     text.ready.then(function() {
-      text.x = scene.getWidth()-text.w/2;
-      text.y = scene.getHeight()-text.h/2;
+      text.x = (scene.getWidth()-text.w)/2;
+      text.y = (scene.getHeight()-text.h)/2;
       text.cx = text.w/2;
       text.cy = text.h/2;
       text.animateTo({y: text.y-10}, 0.3, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP, 1)
@@ -114,8 +114,8 @@ function blah(eventname) {
   }
 }
 
-scene.on("mouseenter", blah("mouseenter"));
-scene.on("mouseleave", blah("mouseleave"));
+scene.on("onMouseEnter", blah("mouseenter"));
+scene.on("onMouseLeave", blah("mouseleave"));
 
 }).catch( function importFailed(err){
   console.error("Import failed for events.js: " + err)
