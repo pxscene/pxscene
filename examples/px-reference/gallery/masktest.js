@@ -8,7 +8,7 @@ var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
 
 var container = scene.create({t:"rect",parent:root,fillColor:0x00000000});
 
-url = basePackageUri + "/images/ball.png";
+url = basePackageUri + "/images/spark_logo.png";
 // ball will draw since draw:true, but will also be used as mask for childText
 var ball = scene.create({t:"image",url:url,parent:container,clip:true,mask:true,draw:true});
   ball.ready.then(function() {
@@ -18,13 +18,13 @@ var ball = scene.create({t:"image",url:url,parent:container,clip:true,mask:true,
     container.cy = ball.resource.h/2;
     fancy(container);
 
-    var childText = scene.create({t:"text",text:"Hello There!!!",parent:container,textColor:0xff0000ff,pixelSize:64});
+    var childText = scene.create({t:"text",text:"SPARK",parent:container,textColor:0x800080ff,pixelSize:65});
     childText.ready.then(function() {
       childText.y = ball.resource.h/2-childText.h/2;
       childText.x = ball.resource.w/2-childText.w/2;
       childText.cx = childText.w/2;
       childText.cy = childText.h/2;
-      childText.animateTo({"r":360}, 1, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP,scene.animation.COUNT_FOREVER);
+      childText.animateTo({"r":360}, 1.5, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_LOOP,scene.animation.COUNT_FOREVER);
     });
   });
 

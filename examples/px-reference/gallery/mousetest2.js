@@ -13,12 +13,12 @@ var bgShade = scene.create({t:"image",id:"bg", url:url,stretchX:1,stretchY:1,par
 var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
 
 //var childText;
-url = basePackageUri + "/images/ball.png"
+url = basePackageUri + "/images/spark_logo.png"
 var ballImg = scene.create({t:"image",id:"ball",url:url,x:450,y:150,parent:root});
 ballImg.ready.then(function(e){
        e.cx = e.resource.w/2;
     e.cy = e.resource.h/2;
-    childText = scene.create({t:"text",id:"text",text:"CLICK ME!!!",parent:e,textColor:0xff0000ff, 
+    childText = scene.create({t:"text",id:"text",text:"CLICK ME!!!",parent:e,textColor:0x800080ff, 
 				  r:30, pixelSize:64});
     childText.y = e.resource.h/2-childText.h/2;
     childText.x = e.resource.w/2-childText.w/2;
