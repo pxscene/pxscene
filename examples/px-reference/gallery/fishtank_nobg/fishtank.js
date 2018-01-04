@@ -1,4 +1,3 @@
-"use strict";
 
 px.configImport({ "fishtank:": /*px.getPackageBaseFilePath() + */"fishtank/" });
 

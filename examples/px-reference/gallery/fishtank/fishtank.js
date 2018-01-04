@@ -1,10 +1,9 @@
-"use strict";
-
 px.configImport({ "fishtank:": /*px.getPackageBaseFilePath() + */"fishtank/" });
 
 px.import({ scene: 'px:scene.1.js',
    keys: 'px:tools.keys.js'
 }).then(function importsAreReady(imports) {
+
    var url = "";
    var helpShown = false;
 
@@ -113,7 +112,7 @@ px.import({ scene: 'px:scene.1.js',
    Promise.all([bg, fishstrip]).catch(function (err) {
       console.log(">>> Loading Assets ... err = " + err);
    }).then(function (success, failure) {
-      updateSize(scene.w, scene.h);
+    updateSize(scene.w, scene.h);
       for (i = 0; i < numFish; ++i) {
          createFish();
          swim(fish[i]);
