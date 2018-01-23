@@ -20,4 +20,5 @@ px.import("px:scene.1").then(function(scene) {
       o.animateTo({r:o.r+(360*direction)},speed,scene.animation.LINEAR,scene.animation.OPTION_LOOP, scene.animation.COUNT_FOREVER);
     });
   }
+  
 });
