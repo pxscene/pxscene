@@ -44,7 +44,7 @@ function randomIntFromList(li) {
 }
 
 // Load the static json with image urls
-var screensaverPromise = px.getModuleFile('/images.json');
+var screensaverPromise = px.getModuleFile('http://www.pxscene.org/examples/px-reference/polaroid/images.json');
 
 
 var firstPicture = null;
