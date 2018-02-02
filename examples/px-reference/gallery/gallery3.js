@@ -1,6 +1,6 @@
 px.import("px:scene.1.js").then( function ready(scene) {
   var root = scene.root;
-  var appURLs = ["dynamics.js","fonts.js","events.js","apng1.js"];
+  var appURLs = ["dynamics.js","fonts.js","playmask2.js","apng1.js"];
 
   var url;
   var basePackageUri = px.getPackageBaseFilePath();
