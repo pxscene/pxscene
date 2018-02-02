@@ -5,16 +5,16 @@
 	"caption": "Family Meal at PF Chang's"
 },
 {
+	"width": 773,
+	"height": 580,
+	"url": "http://pxscene.org/examples/px-reference/polaroid/pics/philliesFamily.jpg",
+	"caption": "Go, Phillies!"
+},
+{
 	"width": 600,
 	"height": 800,
 	"url": "http://pxscene.org/examples/px-reference/polaroid/pics/HarryPotterWorld.jpg",
 	"caption": "Wizarding World of Harry Potter at Universal Studios Hollywood.  What a blast!"
-}, 
-{
-	"width": 960,
-	"height": 720,
-	"url": "http://pxscene.org/examples/px-reference/polaroid/pics/cenoteScuba.jpg",
-	"caption": "Cenote diving in the Yucatan!"
 },
 {
 	"width": 870,
@@ -27,6 +27,12 @@
 	"height": 580,
 	"url": "http://pxscene.org/examples/px-reference/polaroid/pics/nightAtTheZoo.jpg",
 	"caption": "A night at the Philadelphia Zoo with Cub Scouts"
+},
+{
+	"width": 960,
+	"height": 720,
+	"url": "http://pxscene.org/examples/px-reference/polaroid/pics/cenoteScuba.jpg",
+	"caption": "Cenote diving in the Yucatan!"
 },
 {
 	"width": 1078,
