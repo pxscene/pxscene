@@ -36,7 +36,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
     var n = scene.getService(".navigate");
     if (n) {
       console.log("before navigation request");
-      n.setUrl("http://localhost/pxscene/examples/px-reference/gallery/gallery.js");
+      n.setUrl("http://www.pxscene.org/examples/px-reference/gallery/gallery.js");
     }
     else console.log(".navigate service not available");
   });
