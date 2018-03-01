@@ -88,6 +88,23 @@ th, td {
   border-bottom:1px solid #e5e5e5;
 }
 
+#tableSmall {
+  width:100%;
+  border-collapse:collapse;
+}
+
+#tableSmall th, #tableSmall td {
+  text-align:left;
+  padding:5px 10px;
+  border-bottom:1px solid #e5e5e5;
+}
+#tableSmall td {
+  font-size: 11px;
+}
+#tableSmall th {
+  font-size: 12px;
+}
+
 dt {
   color:#444;
   font-weight:700;
