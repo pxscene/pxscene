@@ -13,12 +13,11 @@ var manualTest = manual.getManualTestValue();
 var basePackageUri = px.getPackageBaseFilePath();
 
 var urls = [
-  "http://arun-govindan.github.io/pxscene/examples/px-reference/gallery/images/gold_star.png", 
-  "http://arun-govindan.github.io/pxscene/examples/px-reference/gallery/images/banana.png",     
-  "http://arun-govindan.github.io/pxscene/examples/px-reference/gallery/images/grapes.png",  
-  "http://arun-govindan.github.io/pxscene/examples/px-reference/gallery/images/star.png",          
-  "http://arun-govindan.github.io/pxscene/examples/px-reference/gallery/images/flower1.jpg",         
-  "http://arun-govindan.github.io/pxscene/examples/px-reference/tests/images/ball.png",         
+  "http://www.pxscene.org/examples/px-reference/gallery/images/gold_star.png", 
+  "http://www.pxscene.org/examples/px-reference/gallery/images/banana.png",     
+  "http://www.pxscene.org/examples/px-reference/gallery/images/grapes.png",  
+  "http://www.pxscene.org/examples/px-reference/gallery/images/star.png",          
+  "http://www.pxscene.org/examples/px-reference/gallery/images/flower1.jpg",         
 ];
 
 var container = scene.create({t:'object',parent:root});
