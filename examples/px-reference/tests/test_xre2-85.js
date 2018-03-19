@@ -83,7 +83,7 @@ var tests = {
       var results = [];
       var measurements = textBox.measureText();
       
-      results.push(assert(measurements.bounds.x2 === 459,"Text bounds "+measurements.bounds.x2+" does not match expected value of 459"));
+      results.push(assert(measurements.bounds.x2 === 506,"Text bounds "+measurements.bounds.x2+" does not match expected value of 506"));
       
       var fontMeasurements = fontDejaVuSans.measureText(textBox.pixelSize,textBox.text);
       results.push(assert(measurements.bounds.x2 === fontMeasurements.w, "Text width from TextBox does not match font measurement width"));
@@ -111,7 +111,7 @@ var tests = {
       var results = [];
       var measurements = textBox.measureText();
       
-      results.push(assert(measurements.bounds.x2 === 459,"Text bounds "+measurements.bounds.x2+" does not match expected value of 459"));
+      results.push(assert(measurements.bounds.x2 === 506,"Text bounds "+measurements.bounds.x2+" does not match expected value of 506"));
       var fontMeasurements = fontDejaVuSans.measureText(textBox.pixelSize,textBox.text);
       results.push(assert(measurements.bounds.x2 === fontMeasurements.w, "Text width from TextBox does not match font measurement width"));
       if( doScreenshot) 
