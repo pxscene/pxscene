@@ -73,8 +73,8 @@ px.import({scene:"px:scene.1.js",
   // Allow parm to indicate a single story to show in specific position
   console.log("index "+px.appQueryParams.index);
 
-  var titleFont = scene.create({t:"fontResource", url:"http://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-Medium.ttf"});
-  var bodyFont = scene.create({t:"fontResource", url:"http://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTTCond-Medium.ttf"});
+  var titleFont = scene.create({t:"fontResource", url:"http://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/DejaVuSerif.ttf"});
+  var bodyFont = scene.create({t:"fontResource", url:"http://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/DejaVuSans.ttf"});
   
   var stories = textStories.stories;
   var storyStartIndex = 0;
@@ -114,10 +114,10 @@ px.import({scene:"px:scene.1.js",
   ];
   var expectedValuesMeasure = [
     // bounds.x1, bounds.y1, bounds.x2, bounds.y2, charFirst.x, charFirst.y, charLast.x, charLast.y
-    [[25,10,391,82,25,39,366,65],[25,10,367,94,25,44,364,76]], // test0
-    [[25,10,385,46,25,39,360,29],[25,10,385,94,25,44,70,76]], // test1
-    [[25,10,382,82,25,39,307,65],[25,10,325,94,25,44,233,76]], // test2
-    [[25,10,342,82,25,39,317,65],[25,10,400,94,25,44,375,76]] // test3
+    [[25,10,357,80,25,38,351,63],[25,10,410,92,25,42,345,73]], // test0
+    [[25,10,372,80,25,38,67,63],[25,10,304,92,25,42,201,73]], // test1
+    [[25,10,314,80,25,38,222,63],[25,10,360,92,25,42,259,73]], // test2
+    [[25,10,393,80,25,38,368,63],[25,10,342,92,25,42,209,73]] // test3
 
 
   ];

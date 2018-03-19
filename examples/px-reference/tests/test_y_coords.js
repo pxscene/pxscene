@@ -17,7 +17,7 @@ var timeoutForScreenshot = 40;
 var basePackageUri = px.getPackageBaseFilePath();
 
 var fontUrlStart = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/";
-var XFinityMed = "XFINITYSansTT-New-Med.ttf";
+var XFinityMed = "DejaVuSans.ttf";
 
 var fontXfinityMed = scene.create({t:"fontResource",url:fontUrlStart+XFinityMed});
 
@@ -125,19 +125,19 @@ var tests = {
       
       // Measure text in textbox
       var measurements = obj.measureText();
-      results.push(assert(measurements.bounds.x1 == 0, "textBox bounds.x1 is "+measurements.bounds.y1+" but should be 0"));
-      results.push(assert(measurements.bounds.x2 == 412, "textBox bounds.x2 is "+measurements.bounds.y1+" but should be 412"));
+      results.push(assert(measurements.bounds.x1 == 0, "textBox bounds.x1 is "+measurements.bounds.x1+" but should be 0"));
+      results.push(assert(measurements.bounds.x2 == 453, "textBox bounds.x2 is "+measurements.bounds.x2+" but should be 453"));
       results.push(assert(measurements.bounds.y1 == 0, "textBox bounds.y1 is "+measurements.bounds.y1+" but should be 0"));
-      results.push(assert(measurements.bounds.y2 == 30, "textBox bounds.y2 is "+measurements.bounds.y1+" but should be 30"));
-      results.push(assert(measurements.charFirst.y == 19, "textBox charFirst.y is "+measurements.charFirst.y+" but should be 19"));
-      results.push(assert(measurements.charLast.y == 19, "textBox charLast.y is "+measurements.charLast.y+" but should be 19"));
+      results.push(assert(measurements.bounds.y2 == 29, "textBox bounds.y2 is "+measurements.bounds.y2+" but should be 29"));
+      results.push(assert(measurements.charFirst.y == 23, "textBox charFirst.y is "+measurements.charFirst.y+" but should be 23"));
+      results.push(assert(measurements.charLast.y == 23, "textBox charLast.y is "+measurements.charLast.y+" but should be 23"));
       results.push(assert(measurements.charFirst.x == 0, "textBox charFirst.y is "+measurements.charFirst.x+" but should be 0"));
-      results.push(assert(measurements.charLast.x == 412, "textBox charLast.y is "+measurements.charLast.x+" but should be 412"));
+      results.push(assert(measurements.charLast.x == 453, "textBox charLast.y is "+measurements.charLast.x+" but should be 453"));
             
       // Test font metrics
       var metrics = fontXfinityMed.getFontMetrics(obj.pixelSize);
       console.log("metrics baseline is "+metrics.baseline);
-      results.push( assert(metrics.baseline === 19,"textBox baseline does not match expected value of 19"));
+      results.push( assert(metrics.baseline === 23,"textBox baseline does not match expected value of 23"));
       
       // Measure text via font
       var fontMeasurements = fontXfinityMed.measureText(obj.pixelSize,obj.text);
@@ -156,19 +156,19 @@ var tests = {
       
       // Measure text in textbox
       var measurements = obj.measureText();
-      results.push(assert(measurements.bounds.x1 == 0, "textboxInContainer bounds.x1 is measurements.bounds.y1 but should be 0"));
-      results.push(assert(measurements.bounds.x2 == 412, "textboxInContainer bounds.x2 is measurements.bounds.y1 but should be 412"));
-      results.push(assert(measurements.bounds.y1 == 0, "textboxInContainer bounds.y1 is measurements.bounds.y1 but should be 0"));
-      results.push(assert(measurements.bounds.y2 == 30, "textboxInContainer bounds.y2 is measurements.bounds.y1 but should be 30"));
-      results.push(assert(measurements.charFirst.y == 19, "textboxInContainer charFirst.y is "+measurements.charFirst.y+" but should be 19"));
-      results.push(assert(measurements.charLast.y == 19, "textboxInContainer charLast.y is "+measurements.charLast.y+" but should be 19"));
-      results.push(assert(measurements.charFirst.x == 0, "textboxInContainer charFirst.y is "+measurements.charFirst.x+" but should be 0"));
-      results.push(assert(measurements.charLast.x == 412, "textboxInContainer charLast.y is "+measurements.charLast.x+" but should be 412"));
+      results.push(assert(measurements.bounds.x1 == 0, "textboxInContainer bounds.x1 is " +measurements.bounds.x1+" but should be 0"));
+      results.push(assert(measurements.bounds.x2 == 453, "textboxInContainer bounds.x2 is "+measurements.bounds.x2+" but should be 453"));
+      results.push(assert(measurements.bounds.y1 == 0, "textboxInContainer bounds.y1 is "+measurements.bounds.y1+" but should be 0"));
+      results.push(assert(measurements.bounds.y2 == 29, "textboxInContainer bounds.y2 is "+measurements.bounds.y1+" but should be 29"));
+      results.push(assert(measurements.charFirst.y == 23, "textboxInContainer charFirst.y is "+measurements.charFirst.y+" but should be 23"));
+      results.push(assert(measurements.charLast.y == 23, "textboxInContainer charLast.y is "+measurements.charLast.y+" but should be 23"));
+      results.push(assert(measurements.charFirst.x == 0, "textboxInContainer charFirst.x is "+measurements.charFirst.x+" but should be 0"));
+      results.push(assert(measurements.charLast.x == 453, "textboxInContainer charLast.x is "+measurements.charLast.x+" but should be 453"));
       
       // Test font metrics
       var metrics = fontXfinityMed.getFontMetrics(obj.pixelSize);
       console.log("metrics baseline is "+metrics.baseline);
-      results.push( assert(metrics.baseline === 19,"textboxInContainer baseline does not match expected value of 19"));
+      results.push( assert(metrics.baseline === 23,"textboxInContainer baseline does not match expected value of 19"));
       
       // Measure text via font
       var fontMeasurements = fontXfinityMed.measureText(obj.pixelSize,obj.text);
