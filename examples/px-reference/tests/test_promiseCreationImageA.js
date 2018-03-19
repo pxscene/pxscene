@@ -9,11 +9,11 @@ var scene = imports.scene;
 var root = scene.root;
 var assert = imports.assert.assert;
 var manual = imports.manual;
-
+var basePackageUri = px.getPackageBaseFilePath();
 var manualTest = manual.getManualTestValue();
 
 var badImageUrl = "http://pxscene.org/images/notthere.png";
-var goodImageUrl = "http://pxscene.org/examples/px-reference/tests/images/ball.png";
+var goodImageUrl = basePackageUri+"/images/ball.png";
 // Use a bogus url to cause promise rejection
 var image = scene.create({t:"imageA",parent:root, x:0,y:100, url:badImageUrl});
 

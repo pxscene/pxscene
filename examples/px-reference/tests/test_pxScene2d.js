@@ -91,7 +91,7 @@ var tests = {
         console.log("test3: testing scene childrens");
         var url = basePackageUri+"/simpleTestApiChild.js";
         var sceneChild = scene.create({t:'scene',parent:root,url:url});
-        url = "http://pxscene.org/examples/px-reference/tests/images/ball.png"; 
+        url = basePackageUri+"/images/ball.png"; 
         var ball = scene.create({t:"image",url:url,parent:sceneChild});
         ball.ready.then(function() {
           var childrens = sceneChild.children;
@@ -162,7 +162,7 @@ var tests = {
   test10: function() {
     return new Promise(function(resolve, reject) {
         console.log("test10: testing c property");
-        var url = "http://pxscene.org/examples/px-reference/tests/images/ball.png"; 
+        var url = basePackageUri+"/images/ball.png"; 
         var ball = scene.create({t:"image",url:url, c:[{t:"rect"}]});
         ball.ready.then(function() {
         var results = [];
@@ -179,7 +179,7 @@ var tests = {
       var sceneChild = scene.create({t:'scene',parent:root,url:url,painting:true,draw:true,focus:true,w:100,h:100});
       sceneChild.ready.then(function()  {
           console.log("test11: scene child is ready");
-          url = "http://pxscene.org/examples/px-reference/tests/images/ball.png"; 
+          url = basePackageUri+"/images/ball.png"; 
           ball = scene.create({t:"image",url:url,draw:true,mask:true,parent:sceneChild});
           //ball.ready.then(function() {});
           var results = [];

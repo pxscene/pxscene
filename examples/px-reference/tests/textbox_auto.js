@@ -73,8 +73,8 @@ px.import({scene:"px:scene.1.js",
   // Allow parm to indicate a single story to show in specific position
   console.log("index "+px.appQueryParams.index);
 
-  var titleFont = scene.create({t:"fontResource", url:"http://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/DejaVuSerif.ttf"});
-  var bodyFont = scene.create({t:"fontResource", url:"http://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/DejaVuSans.ttf"});
+  var titleFont = scene.create({t:"fontResource", url:"http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf"});
+  var bodyFont = scene.create({t:"fontResource", url:"http://www.pxscene.org/examples/px-reference/fonts/DejaVuSans.ttf"});
   
   var stories = textStories.stories;
   var storyStartIndex = 0;

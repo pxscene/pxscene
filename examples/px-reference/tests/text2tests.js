@@ -19,12 +19,12 @@ var basePackageUri = px.getPackageBaseFilePath();
 //var longText = textA + "\n" + textA + "\n" + textA;
 // "Hello!  How are you?";//
 // Use fontUrl to load from web
-var fontUrlStart = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/";
-var XFinityMed = "Pacifico.ttf";//"XFINITYSansTT-New-Med.ttf";
+var fontUrlStart = "http://www.pxscene.org/examples/px-reference/fonts/";
+var pacifico = "Pacifico.ttf";
 var DejaVu = "DejaVuSans.ttf";
 var DejaVuSerif = "DejaVuSerif.ttf";
-var XFinity = "DancingScript-Regular.ttf";//"XFINITYSansTT-New-Lgt.ttf";
-var XFinityBold = "DancingScript-Bold.ttf";//"XFINITYSansTT-New-Bold.ttf";
+var DancingScriptReg = "DancingScript-Regular.ttf";
+var DancingScriptBold = "DancingScript-Bold.ttf";
 // Different text strings to test
 var longText = "Here is a collection of a bunch of randomness, like words, phrases, and sentences that isn't supposed to make any kind of sense whatsoever. I want to test capital AV next to each other here. In generating this, I'm listening to someone talking, trying to make sense of what they are saying, and at the same time dictating to myself what I am going to type along with actually typing it out, recognizing when I make mistakes, and correcting myself when I do.";
 var longText2 = "I don't think I'm doing a very good job listening to whoever it is that is doing the talking right now.  It probably would have been a lot easier to just copy and paste something from the net, but I'm a typist, not a person that hunts and pecks to find the appropriate key on the keyboard.  Though I do think I'm probably off of my 30 word per minute speed from way back when.  How much more text is appropriate?  Why do I use words like appropriate when I could just say will do instead?  These and other questions generally go on unanswered.  But looking at the output of this text, I realize that its simply not enough and that I need to add more text; which is making me wonder why I simply didn't copy and paste in the first place.  Ah, yes, the strange musings of a software engineer.";
@@ -36,14 +36,14 @@ root.w=800;
 
 // Use the font vars below to preload fonts so that they stay loaded. 
 
-var fontXfinityMed = scene.create({t:"fontResource",url:fontUrlStart+XFinityMed});
+var fontPacifico = scene.create({t:"fontResource",url:fontUrlStart+pacifico});
 var fontDejaVu = scene.create({t:"fontResource",url:fontUrlStart+DejaVu});
 var fontDejaVuSerif = scene.create({t:"fontResource",url:fontUrlStart+DejaVuSerif});
-var fontXFinity = scene.create({t:"fontResource",url:fontUrlStart+XFinity});
-var fontXFinityBold = scene.create({t:"fontResource",url:fontUrlStart+XFinityBold});
+var fontDancingScriptReg = scene.create({t:"fontResource",url:fontUrlStart+DancingScriptReg});
+var fontDancingScriptBold = scene.create({t:"fontResource",url:fontUrlStart+DancingScriptBold});
 
-fontXfinityMed.ready.then(function(f) {
-  console.log("Ready for fontXfinityMed font!");
+fontPacifico.ready.then(function(f) {
+  console.log("Ready for fontPacifico font!");
   var tmpMetrics = f.getFontMetrics(35);
  	console.log("height is "+tmpMetrics.height);
 	console.log("ascent is "+tmpMetrics.ascent);
@@ -94,7 +94,7 @@ var xStopPosStatus = scene.create({t:"text", parent:root, x:350, y:container.y+4
 var xStopPosHint = scene.create({t:"text", parent:root, x:465, y:container.y+480, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use small L)"});
 var leadingStatus = scene.create({t:"text", parent:root, x:350, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"leading=0"});
 var leadingHint = scene.create({t:"text", parent:root, x:465, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use + -)"});
-var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+XFinityMed+" (http)"});
+var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+pacifico+" (http)"});
 var leading = 0;
 
 
@@ -104,7 +104,7 @@ var text2 = scene.create({t:"textBox", clip:true, parent:container, x:0, y:0, rx
    text2.textColor=0xFFDDFFFF;
    text2.pixelSize=20;
    text2.leading=0;
-   text2.fontUrl=fontUrlStart+XFinityMed;
+   text2.fontUrl=fontUrlStart+pacifico;
    text2.alignHorizontal=0;
    text2.alignVertical=0;
    text2.xStartPos=0;
@@ -362,16 +362,16 @@ scene.root.on("onChar", function(e) {
     }
   } 
   else if(e.charCode == 102) { // f for font
-    if(fontStatus.text == "font="+XFinityMed+" (http)") {
+    if(fontStatus.text == "font="+pacifico+" (http)") {
       setFont(fontDejaVu,"font="+DejaVu+" (http)");
      } else if(fontStatus.text == "font="+DejaVu+" (http)"){
-       setFont(fontXFinity, "font="+XFinity+" (http)");
-    } else if(fontStatus.text == "font="+XFinity+" (http)"){
+       setFont(fontDancingScriptReg, "font="+DancingScriptReg+" (http)");
+    } else if(fontStatus.text == "font="+DancingScriptReg+" (http)"){
       setFont(fontDejaVuSerif,"font="+DejaVuSerif+" (http)");
     } else if(fontStatus.text == "font="+DejaVuSerif+" (http)"){
-      setFont(fontXFinityBold,"font="+XFinityBold+" (http)");
-    } else if(fontStatus.text == "font="+XFinityBold+" (http)"){
-      setFont(fontXfinityMed,"font="+XFinityMed+" (http)");
+      setFont(fontDancingScriptBold,"font="+DancingScriptBold+" (http)");
+    } else if(fontStatus.text == "font="+DancingScriptBold+" (http)"){
+      setFont(fontPacifico,"font="+pacifico+" (http)");
     }
     var font = text2.font;
     font.ready.then(function(f){
@@ -447,7 +447,7 @@ var beforeStart = function() {
 
     // Setup all properties as assumed for start of tests
     // set to short text, wordWrap=false, pixelSize, hAlign=left 
-    setFont(fontXfinityMed,"font="+XFinityMed+" (http)");
+    setFont(fontPacifico,"font="+pacifico+" (http)");
     if( text2.wordWrap) {
       toggleWordWrap();
     }

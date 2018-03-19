@@ -16,17 +16,17 @@ var timeoutForScreenshot = 40;
 
 var basePackageUri = px.getPackageBaseFilePath();
 
-var fontUrlStart = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/";
-var XFinityMed = "DejaVuSans.ttf";
+var fontUrlStart = "http://www.pxscene.org/examples/px-reference/fonts/";
+var dejaVuSans = "DejaVuSans.ttf";
 
-var fontXfinityMed = scene.create({t:"fontResource",url:fontUrlStart+XFinityMed});
+var fontDejaVuSans = scene.create({t:"fontResource",url:fontUrlStart+dejaVuSans});
 
 var container = scene.create({parent:root, t:"object",x:825, y:100,w:800, h:400, clip:false});
-var textBoxInContainer = scene.create({parent:container, t:"textBox", font:fontXfinityMed, 
+var textBoxInContainer = scene.create({parent:container, t:"textBox", font:fontDejaVuSans, 
               w:800, h:300, textColor:0xFFFFFFFF, pixelSize:25,
               text:"Test Upper and Low-gery characters",
               clip:false, wordWrap:true});
-var textBox = scene.create({parent:root, t:"textBox", font:fontXfinityMed, 
+var textBox = scene.create({parent:root, t:"textBox", font:fontDejaVuSans, 
               x:20, y:100, w:800, h:300, textColor:0xFFFFFFFF, pixelSize:25,
               text:"Test Upper and Low-gery characters",
               clip:false, wordWrap:true});
@@ -42,10 +42,10 @@ textBox.ready.then(function(obj) {
   console.log("charLast.y is "+measurements.charLast.y);
   console.log("charLast.x is "+measurements.charLast.x);
   
-  var metrics = fontXfinityMed.getFontMetrics(obj.pixelSize);
+  var metrics = fontDejaVuSans.getFontMetrics(obj.pixelSize);
   console.log("metrics baseline is "+metrics.baseline);
   
-  var fontMeasurements = fontXfinityMed.measureText(obj.pixelSize,obj.text);
+  var fontMeasurements = fontDejaVuSans.measureText(obj.pixelSize,obj.text);
   console.log("font measure gives width = "+fontMeasurements.w);
   
   console.log("textBox width is "+obj.w);
@@ -65,17 +65,17 @@ textBoxInContainer.ready.then(function(obj) {
   console.log("charLast.y is "+measurements.charLast.y);
   console.log("charLast.x is "+measurements.charLast.x);
   
-  var metrics = fontXfinityMed.getFontMetrics(obj.pixelSize);
+  var metrics = fontDejaVuSans.getFontMetrics(obj.pixelSize);
   console.log(" textBoxInContainermetrics baseline is "+metrics.baseline);
   
-  var fontMeasurements = fontXfinityMed.measureText(obj.pixelSize,obj.text);
+  var fontMeasurements = fontDejaVuSans.measureText(obj.pixelSize,obj.text);
   console.log(" textBoxInContainerfont measure gives width = "+fontMeasurements.w);
   
   console.log(" textBoxInContainertextBox width is "+obj.w);
 
 });
               
-var text = scene.create({parent:root, t:"text",font:fontXfinityMed, x:425,y:100,w:800,h:300,textColor:0xFFFFFFFF, pixelSize:25,
+var text = scene.create({parent:root, t:"text",font:fontDejaVuSans, x:425,y:100,w:800,h:300,textColor:0xFFFFFFFF, pixelSize:25,
               text:"Test Upper and Low-gery characters",
               clip:false}); 
 
@@ -135,15 +135,15 @@ var tests = {
       results.push(assert(measurements.charLast.x == 453, "textBox charLast.y is "+measurements.charLast.x+" but should be 453"));
             
       // Test font metrics
-      var metrics = fontXfinityMed.getFontMetrics(obj.pixelSize);
+      var metrics = fontDejaVuSans.getFontMetrics(obj.pixelSize);
       console.log("metrics baseline is "+metrics.baseline);
       results.push( assert(metrics.baseline === 23,"textBox baseline does not match expected value of 23"));
       
       // Measure text via font
-      var fontMeasurements = fontXfinityMed.measureText(obj.pixelSize,obj.text);
+      var fontMeasurements = fontDejaVuSans.measureText(obj.pixelSize,obj.text);
       console.log("font measure gives width = "+fontMeasurements.w);
       
-      var fontMeasurements = fontXfinityMed.measureText(obj.pixelSize,obj.text);
+      var fontMeasurements = fontDejaVuSans.measureText(obj.pixelSize,obj.text);
       results.push( assert(measurements.bounds.x2 === fontMeasurements.w, "Text width from textBox does not match font measurement width"));
       
       // Check textBox width 
@@ -166,15 +166,15 @@ var tests = {
       results.push(assert(measurements.charLast.x == 453, "textboxInContainer charLast.x is "+measurements.charLast.x+" but should be 453"));
       
       // Test font metrics
-      var metrics = fontXfinityMed.getFontMetrics(obj.pixelSize);
+      var metrics = fontDejaVuSans.getFontMetrics(obj.pixelSize);
       console.log("metrics baseline is "+metrics.baseline);
       results.push( assert(metrics.baseline === 23,"textboxInContainer baseline does not match expected value of 19"));
       
       // Measure text via font
-      var fontMeasurements = fontXfinityMed.measureText(obj.pixelSize,obj.text);
+      var fontMeasurements = fontDejaVuSans.measureText(obj.pixelSize,obj.text);
       console.log("font measure gives width = "+fontMeasurements.w);
       
-      var fontMeasurements = fontXfinityMed.measureText(obj.pixelSize,obj.text);
+      var fontMeasurements = fontDejaVuSans.measureText(obj.pixelSize,obj.text);
       results.push( assert(measurements.bounds.x2 === fontMeasurements.w, "Text width from textboxInContainer does not match font measurement width"));
       
       // Check textBox width 

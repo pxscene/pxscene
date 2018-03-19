@@ -22,7 +22,7 @@ module.exports.beforeStart = function() {
 var tests = {
   test1: function() {
   return new Promise(function(resolve, reject) {
-    var url = "http://pxscene.org/examples/px-reference/tests/images/ball.png";
+    var url = basePackageUri+"/images/ball.png";
     var ball = scene.create({t:"image",url:url,parent:root});
     ball.ready.then(function() {
       var startX = 450;
@@ -89,7 +89,7 @@ var tests = {
   test4: function() {
   return new Promise(function(resolve, reject) {
     var results = [];
-    var url = "http://pxscene.org/examples/px-reference/tests/images/ball.png";
+    var url = basePackageUri + "/images/ball.png";
     var ball = scene.create({t:"image",url:url,parent:root});
     ball.ready.then(function() {});
     var animateX = ball.animate({x:0}, 10.0, scene.animation.TWEEN_LINEAR,scene.animation.OPTION_LOOP, -1);
@@ -102,7 +102,7 @@ var tests = {
   test5: function() {
   return new Promise(function(resolve, reject) {
     var results = [];
-    var url = "http://pxscene.org/examples/px-reference/tests/images/ball.png";
+    var url = basePackageUri + "images/ball.png";
     var ball = scene.create({t:"image",url:url,parent:root});
     ball.x = 0;
     ball.ready.then(function() {});
@@ -117,7 +117,7 @@ var tests = {
   return new Promise(function(resolve, reject) {
     var results = [];
     var startX = 450;
-    var url = "http://pxscene.org/examples/px-reference/tests/images/ball.png";
+    var url = basePackageUri + "/images/ball.png";
     var ball = scene.create({t:"image",url:url,parent:root});
     ball.x = startX;
     ball.ready.then(function() {});
