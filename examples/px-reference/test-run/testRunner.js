@@ -4,8 +4,7 @@ px.import("px:scene.1.js").then( function ready(scene) {
 
 var root = scene.root;
 
-var basePackageUri = "/home/binu/arun/pxScene-samples/toMove/examples/px-reference/test-run"
-//px.getPackageBaseFilePath();
+var basePackageUri = px.getPackageBaseFilePath();
 
 // Info about tests to be run
 var testUrls; // See tests.json for test urls to be run
