@@ -16,8 +16,6 @@ var timeoutForScreenshot = 40;
 
 var basePackageUri = px.getPackageBaseFilePath();
 
-//var fontUrlStart = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/";
-//var XFinityMed = "XFINITYSansTT-New-Med.ttf";
 
 var fontUrlStart = "http://www.pxscene.org/examples/px-reference/fonts/";
 var dejaVuSans = "DejaVuSans.ttf";
