@@ -20,11 +20,11 @@ var basePackageUri = px.getPackageBaseFilePath();
 // "Hello!  How are you?";//
 // Use fontUrl to load from web
 var fontUrlStart = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/";
-var XFinityMed = "XFINITYStandardTT-Medium.ttf";//"XFINITYSansTT-New-Med.ttf";
+var IndieFlower = "IndieFlower.ttf";
 var DejaVu = "DejaVuSans.ttf";
 var DejaVuSerif = "DejaVuSerif.ttf";
-var XFinity = "XFINITYStandardTT-Light.ttf";//"XFINITYSansTT-New-Lgt.ttf";
-var XFinityBold = "XFINITYStandardTT-Bold.ttf";//"XFINITYSansTT-New-Bold.ttf";
+var DancingScript = "DancingScript-Regular.ttf";
+var DancingScriptBold = "DancingScript-Bold.ttf";
 // Different text strings to test
 var longText = "Here is a collection of a bunch of randomness, like words, phrases, and sentences that isn't supposed to make any kind of sense whatsoever. I want to test capital AV next to each other here. In generating this, I'm listening to someone talking, trying to make sense of what they are saying, and at the same time dictating to myself what I am going to type along with actually typing it out, recognizing when I make mistakes, and correcting myself when I do.";
 var longText2 = "I don't think I'm doing a very good job listening to whoever it is that is doing the talking right now.  It probably would have been a lot easier to just copy and paste something from the net, but I'm a typist, not a person that hunts and pecks to find the appropriate key on the keyboard.  Though I do think I'm probably off of my 30 word per minute speed from way back when.  How much more text is appropriate?  Why do I use words like appropriate when I could just say will do instead?  These and other questions generally go on unanswered.  But looking at the output of this text, I realize that its simply not enough and that I need to add more text; which is making me wonder why I simply didn't copy and paste in the first place.  Ah, yes, the strange musings of a software engineer.";
@@ -36,11 +36,11 @@ root.w=800;
 
 // Use the font vars below to preload fonts so that they stay loaded. 
 
-var fontXfinityMed = scene.create({t:"fontResource",url:fontUrlStart+XFinityMed});
+var fontIndieFlowerMed = scene.create({t:"fontResource",url:fontUrlStart+IndieFlower});
 var fontDejaVu = scene.create({t:"fontResource",url:fontUrlStart+DejaVu});
 var fontDejaVuSerif = scene.create({t:"fontResource",url:fontUrlStart+DejaVuSerif});
-var fontXFinity = scene.create({t:"fontResource",url:fontUrlStart+XFinity});
-var fontXFinityBold = scene.create({t:"fontResource",url:fontUrlStart+XFinityBold});
+var fontDancingScript = scene.create({t:"fontResource",url:fontUrlStart+DancingScript});
+var fontDancingScriptBold = scene.create({t:"fontResource",url:fontUrlStart+DancingScriptBold});
 
 
 
@@ -81,7 +81,7 @@ var xStopPosStatus = scene.create({t:"text", parent:root, x:350, y:container.y+4
 var xStopPosHint = scene.create({t:"text", parent:root, x:465, y:container.y+480, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use small L)"});
 var leadingStatus = scene.create({t:"text", parent:root, x:350, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"leading=0"});
 var leadingHint = scene.create({t:"text", parent:root, x:465, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use + -)"});
-var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+XFinityMed+" (http)"});
+var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+IndieFlower+" (http)"});
 var leading = 0;
 
 
@@ -91,7 +91,7 @@ var text2 = scene.create({t:"textBox", clip:true, parent:container, x:0, y:0, rx
    text2.textColor=0xFFDDFFFF;
    text2.pixelSize=20;
    text2.leading=0;
-   text2.fontUrl=fontUrlStart+XFinityMed;
+   text2.fontUrl=fontUrlStart+IndieFlower;
    text2.alignHorizontal=0;
    text2.alignVertical=0;
    text2.xStartPos=0;
@@ -286,28 +286,28 @@ var expectedTextDesc = [
 ];
 var expectedValuesMeasure = {
   // bounds.x1, bounds.y1, bounds.x2, bounds.y2, charFirst.x, charFirst.y, charLast.x, charLast.y
-  "shortTextNoWrapH0":[0,0,189,24,0,20,189,20], // shortTextNoWrapH0
-  "shortTextNoWrapH1":[105.5,0,294.5,24,105.5,20,294.5,20], // shortTextNoWrapH1
-  "shortTextNoWrapH2":[211,0,400,24,211,20,400,20], // shortTextNoWrapH2
-  "shortTextNoWrapH0V1":[0,188,189,212,0,208,189,208], // shortTextNoWrapH0V1
-  "shortTextNoWrapH0V2":[0,376,189,400,0,396,189,396], // shortTextNoWrapH0V2
-  "shortTextNoWrapH1V1":[105.5,188,294.5,212,105.5,208,294.5,208], //shortTextNoWrapH1V1
-  "shortTextNoWrapH1V2":[105.5,376,294.5,400,105.5,396,294.5,396], //shortTextNoWrapH1V2
-  "shortTextNoWrapH2V1":[211,188,400,212,211,208,400,208], //shortTextNoWrapH2V1
-  "shortTextNoWrapH2V2":[211,376,400,400,211,396,400,396], //shortTextNoWrapH2V2
-  "longestTextNoWrapNoTruncateNoClipH0V0":[0,0,2029,24,0,20,2029,20], //longestTextNoWrapNoTruncateNoClipH0V0
-  "longestTextNoWrapNoTruncateNoClipH1V0":[-803.5,0,1203.5,24,-803.5,20,1203.5,20], //longestTextNoWrapNoTruncateNoClipH1V0
-  "longestTextWrapNoTruncateNoClipH0V1":[0,-184,399,584,0,-164,87,580], //longestTextWrapNoTruncateNoClipH0V1
-  "longestTextWrapNoTruncateNoClipH0V2":[0,-368,399,400,0,-348,87,396], //longestTextWrapNoTruncateNoClipH0V2
-  "longestTextNoWrapNoTruncateNoClipH0V1":[0,188,2029,212,0,208,2029,208], //longestTextNoWrapNoTruncateNoClipH0V1
-  "longestTextNoWrapNoTruncateNoClipH0V2":[0,376,2029,400,0,396,2029,396], //longestTextNoWrapNoTruncateNoClipH0V2
-  "longestTextWrapTruncateNoClipH0V0":[0,0,399,384,0,20,398,380], //longestTextWrapNoTruncateNoClipH0V0
-  "longestTextWrapTruncateNoClipH0V1":[0,8,399,392,0,28,398,388], //longestTextWrapNoTruncateNoClipH0V1
-  "longestTextWrapTruncateNoClipH0V2":[0,16,399,400,0,36,398,396], //longestTextWrapTruncateNoClipH0V2
-  "longestTextWrapTruncateNoClipH1V0":[0.5,0,399.5,384,46,20,399,380], //longestTextWrapNoTruncateNoClipH0V0
-  "longestTextWrapTruncateNoClipH1V1":[0.5,8,399.5,392,46,28,399,388], //longestTextWrapNoTruncateNoClipH0V1
-  "longestTextWrapTruncateNoClipH1V2":[0.5,16,399.5,400,46,36,399,396], //longestTextWrapTruncateNoClipH1V2
-  "newlinesTextNoWrapTruncateClipH1V1":[118.5,164,281.5,236,151,184,275.5,232], //newlinesTextNoWrapTruncateClipH1V1
+  "shortTextNoWrapH0":[0,0,164,29,0,19,164,19], // shortTextNoWrapH0
+  "shortTextNoWrapH1":[118,0,282,29,118,19,282,19], // shortTextNoWrapH1
+  "shortTextNoWrapH2":[236,0,400,29,236,19,400,19], // shortTextNoWrapH2
+  "shortTextNoWrapH0V1":[0,185.5,164,214.5,0,204.5,164,204.5], // shortTextNoWrapH0V1
+  "shortTextNoWrapH0V2":[0,371,164,400,0,390,164,390], // shortTextNoWrapH0V2
+  "shortTextNoWrapH1V1":[118,185.5,282,214.5,118,204.5,282,204.5], //shortTextNoWrapH1V1
+  "shortTextNoWrapH1V2":[118,371,282,400,118,390,282,390], //shortTextNoWrapH1V2
+  "shortTextNoWrapH2V1":[236,185.5,400,214.5,236,204.5,400,204.5], //shortTextNoWrapH2V1
+  "shortTextNoWrapH2V2":[236,371,400,400,236,390,400,390], //shortTextNoWrapH2V2
+  "longestTextNoWrapNoTruncateNoClipH0V0":[0,0,2036,29,0,19,2036,19], //longestTextNoWrapNoTruncateNoClipH0V0
+  "longestTextNoWrapNoTruncateNoClipH1V0":[-821,0,1221,29,-821,19,1221,19], //longestTextNoWrapNoTruncateNoClipH1V0
+  "longestTextWrapNoTruncateNoClipH0V1":[0,-206,400,606,0,-187,372,596], //longestTextWrapNoTruncateNoClipH0V1
+  "longestTextWrapNoTruncateNoClipH0V2":[0,-412,400,400,0,-393,372,390], //longestTextWrapNoTruncateNoClipH0V2
+  "longestTextNoWrapNoTruncateNoClipH0V1":[0,185.5,2036,214.5,0,204.5,2036,204.5], //longestTextNoWrapNoTruncateNoClipH0V1
+  "longestTextNoWrapNoTruncateNoClipH0V2":[0,371,2036,400,0,390,2036,390], //longestTextNoWrapNoTruncateNoClipH0V2
+  "longestTextWrapTruncateNoClipH0V0":[0,0,393,377,0,19,399,367], //longestTextWrapNoTruncateNoClipH0V0
+  "longestTextWrapTruncateNoClipH0V1":[0,11.5,393,388.5,0,30.5,399,378.5], //longestTextWrapNoTruncateNoClipH0V1
+  "longestTextWrapTruncateNoClipH0V2":[0,23,393,400,0,42,399,390], //longestTextWrapTruncateNoClipH0V2
+  "longestTextWrapTruncateNoClipH1V0":[3.5,0,396.5,377,3.5,19,399.5,367], //longestTextWrapNoTruncateNoClipH0V0
+  "longestTextWrapTruncateNoClipH1V1":[3.5,11.5,396.5,388.5,3.5,30.5,399.5,378.5], //longestTextWrapNoTruncateNoClipH0V1
+  "longestTextWrapTruncateNoClipH1V2":[3.5,23,396.5,400,3.5,42,399.5,390], //longestTextWrapTruncateNoClipH1V2
+  "newlinesTextNoWrapTruncateClipH1V1":[132,156.5,268,243.5,158.5,175.5,266.5,233.5], //newlinesTextNoWrapTruncateClipH1V1
 };
 
 var textMeasurementResults = function(values) {
@@ -325,7 +325,7 @@ var beforeStart = function() {
 
     // Setup all properties as assumed for start of tests
     // set to short text, wordWrap=false, pixelSize, hAlign=left 
-    setFont(fontXfinityMed,"font="+XFinityMed+" (http)");
+    setFont(fontIndieFlowerMed,"font="+IndieFlower+" (http)");
     if( text2.wordWrap) {
       toggleWordWrap();
     }
