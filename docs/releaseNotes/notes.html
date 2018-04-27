@@ -16,6 +16,149 @@
 
 <body style="text">
 
+  <u><h2>Release 0.37.0.0 (OSX and Windows) - 2April2018</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.37.0.0)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+          <li>Service Provider and Service bubbling: Example available in pxscene.org: <a href="https://github.com/pxscene/pxscene/tree/gh-pages/examples/px-reference/gallery/serviceprovider">https://github.com/pxscene/pxscene/tree/gh-pages/examples/px-reference/gallery/serviceprovider</a>
+            </li>
+        </li>
+        <li>Optimus support</li>
+        <li>Stability and Texture memory improvements</li>
+        <li>Initial support for duktape</li>
+        </ul>
+      </bullets>
+      <h3>Commits/Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>change desktop version numbers (#1017)</li>
+            <li>updating optimus dependencies (#1016)</li>
+            <li>download updates (#1011)</li>
+            <li>Stability - font load failure and promises (#1010)</li>
+            <li>free up resources before reassigning (#1009)</li>
+            <li>stability updates (#943)</li>
+            <li>dispose updates (#1006)</li>
+            <li>ensure promise is not fired after object is disposed (#1004)</li>
+            <li>updates for stability (#1003)</li>
+            <li>coverity fixes (#989)</li>
+            <li>ci fix updates (#1001)</li>
+            <li>thread sanitizer cleanup (#987)</li>
+            <li>try testRunner_v4 (#998)</li>
+            <li>updates for optimus config names (#997)</li>
+            <li>Reverting thread contention cleanup for short term (#982)</li>
+            <li>resolve name conflicts between duktape and node (#942)</li>
+            <li>thread contention cleanup (#966)</li>
+            <li>optimus updates (#947)</li>
+            <li>Easter Egg file for Spark called .sparkFps (#917)</li>
+            <li>fix 'unused-result' compilation error (#908)</li>
+            <li>fix 'uninitialized' &amp; 'maybe-uninitialized' compilation errors (#907)</li>
+            <li>remove unused code (wayland_egl / shell_surface_listener) (#901)</li>
+            <li>AddressSanitizer: fix heap-use-after-free in downloadedDataTest() (#898)</li>
+            <li>wayland updates for double buffering with dirty rectangles (#921)</li>
+            <li>Update pxscene version as edge for edge builds (#937)</li>
+            <li>Changes to support StrokeType ... inside, outside, center (#927)</li>
+            <li>Appveyor cron build (#923)</li>
+            <li>Fixes for NULL pointer dereference (#930)</li>
+            <li>Updated ReadME for PREFER_SYSTEM_LIBRARIES, with suggested note. (#902)</li>
+            <li>Revert "Temp clearscreen delegate refactor" (#922)</li>
+            <li>support for optimus to get available apps (#926)</li>
+            <li>add all necessary remote java code (#924)</li>
+            <li>update rtRemote java (remote/java/src/org only for git trace java code) (#924)</li>
+            <li>add AppVeyor artifacts management (#863)</li>
+            <li>Temp clearscreen delegate refactor (#915)</li>
+            <li>prefer to use built-in versions of sincos() and sincosf() (#910)</li>
+            <li>fix 'clobbered' compilation errors (#906)</li>
+            <li>fix format-truncation compilation errors (#905)</li>
+            <li>remove unused zlib-1.2.8 (#903)</li>
+            <li>fix write-strings compilation errors (#900)</li>
+            <li>fix misleading-indentation compilation error (#899)</li>
+            <li>AddressSanitizer: fix heap-use-after-free in setDefaultCallbackFunctionNullTest() (#897)</li>
+            <li>fix SIGSEGV caused by redefining realloc() (#896)</li>
+            <li>AddressSanitizer: fix heap-use-after-free crash in disableCacheTest() (895)</li>
+            <li>AddressSanitizer: fix heap-buffer-overflow (caused by base64_decode()) (894)</li>
+            <li>AddressSanitizer: fix allocating too big buffers (libjpeg-turbo) (#893)</li>
+            <li>AddressSanitizer: fix alloc-dealloc-mismatch (operator new [] vs operator delete) (#892)</li>
+            <li>ThreaddSanitizer: fix data race pxWayland(mWaitingForRemoteObject) (#879)</li>
+            <li>websocket updates for leaks (#841)</li>
+            <li>Fix some typos (#918)</li>
+            <li>Fix for crash in pxWayland::launchAndMonitorClient (#904)</li>
+            <li>Add test_permissionsDefault.js in CI tests (#914)</li>
+            <li>optimus library and module (#916)</li>
+            <li>Add test_permissions.js to CI tests.json (#884)</li>
+            <li>Remove unused files</li>
+            <li>Commits on Feb 20, 2018</li>
+            <li>windows build fix (#889)</li>
+            <li>Excluding the usage of key file in PR (#891)</li>
+            <li>Fix drawing of border in drawImage9Border2 again (#878)</li>
+            <li>syntax checks for permissions config + test (#859)</li>
+            <li>setup appveyor cron job (#887)</li>
+            <li>Cron job support for Windows (#869)</li>
+            <li>Upload the osx binary to build server (#855)</li>
+            <li>Change font data loading (#883)</li>
+            <li>bootstrap permissions config for pxscene and a unit test for it (#858)</li>
+            <li>Adding Spark logo resources (#840)</li>
+            <li>fix scene retention by http/https wrap modules (#874)</li>
+            <li>corrected leak suppression for httpparser (#872)</li>
+            <li>fix -Werror compilation errors (#882)</li>
+            <li>fix unknown-pragmas compilation errors (#881)</li>
+            <li>fix parentheses compilation warning (#880)</li>
+            <li>fix unused-but-set-variable and unused-variable compilation errors (#868)</li>
+            <li>fix missing-field-initializers compilation errors (#866)</li>
+            <li>fix cmake-warning (#839) (#871)</li>
+            <li>fix delete-non-virtual-dtor copmilation errors (#870)</li>
+            <li>fix maybe-uninitialized compilation error (#865)</li>
+            <li>fix reorder compilation errors (#864)</li>
+            <li>fix for executing promise resolved immediately (#876)</li>
+            <li>resolve 'duktape merge hacks', reinstate CORS/permissions for duktape (#852)</li>
+            <li>Added support for bubbling getService requests (#867)</li>
+            <li>PNG with 16 bit data creates memory corruption in pxscene with random crashes (#861)</li>
+            <li>Fix drawing of border in drawImage9Border2 (#857)</li>
+            <li>Warnings scrub on macOS ... correctly branched for PR (#850)</li>
+            <li>fix for ccache failure in travis OSX build (#856)</li>
+            <li>Install quilt for OSX cache rebuild job</li>
+            <li>fix -Werror=unused-but-set-variable compilation error (#827)</li>
+            <li>Implement rtRemoteShutdown immediate (ignoring RefCount) (#825)</li>
+            <li>Tidy/Merge of CI scripts. Turn ON the SVG code by Default (#838)</li>
+            <li>Fix double free error with sandbox imports (#843)</li>
+            <li>Fix undefined reference to keepFocus and showFocus (#842)</li>
+            <li>Removed artifacts approval (#847)</li>
+            <li>Reverting DecodeHandler passing code. (#848)</li>
+            <li>Create rtremote.md</li>
+            <li>Added Scene Graph API doc (#835)</li>
+            <li>utilize build parallelism (up to number of online CPUs) (#830)</li>
+            <li>fix compilation error using -DUSE_STD_THREADS option (#829)</li>
+            <li>fix compilation errors -Werror=unused-variable (#828)</li>
+            <li>fix data race in rtMutexNative.cpp (#826)</li>
+            <li>coverity fix for dukctx (#824)</li>
+            <li>Limit the number of worker threads (#817)</li>
+            <li>Fix for log dumpipng failed in OSX. (#833)</li>
+            <li>image border unit test (#836)</li>
+            <li>few build fixes (#832)</li>
+            <li>Commits on Jan 31, 2018</li>
+            <li>Reinstate CORS and permissions in master (#822)</li>
+            <li>add possibility to resolve servicemanager dependencies (#735)</li>
+            <li>Fixing Xcode Workspace - adding DukTape stuff (#823)</li>
+            <li>pxPixel.h code coverage (#805)</li>
+            <li>Fixed tcp endpoint parsing</li>
+            <li>http parser asserion validation on socket close (#815)</li>
+            <li>SVG testing changes on re-synced sandbox (#707)</li>
+            <li>Provided access to application to use the FilePointer to read the data in a smaller chunk. (#811)</li>
+            <li>fix for ES5 javascript engines (#814)</li>
+            <li>double buffering support for dirty rects (#812)</li>
+            <li>build updates (#813)</li>
+            <li>Reduce rss memory used by rtremote (#807)</li>
+            <li>unit test fix when debugging is not enabled (#808)</li>
+            <li>Cleanup the mFileSizeMap, if the file was deleted manually and not erased (#789)</li>
+        </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+
+
+
   <u><h2>Release 0.35.0.0 (OSX) and 0.35.0.1 (Windows) - 29Nov2017</h2></u>
   
       <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.35.0.0 and 0.35.0.1)</em></p>
