@@ -4,8 +4,6 @@
  * Verifies pxscene's default (bootstrap) permissions config
  */
 
-'use strict';
-
 px.import({
   scene: 'px:scene.1.js',
   url: 'url',
@@ -20,8 +18,8 @@ px.import({
   function make_url_test(url, allow) {
     return function () {
       return new Promise(function(resolve) {
-        let moduleFn = url.indexOf("https") === 0 ? https_module.request : http_module.request;
-        let req = moduleFn(url);
+        var moduleFn = url.indexOf("https") === 0 ? https_module.request : http_module.request;
+        var req = moduleFn(url);
         if (req) {
           req.abort();
           resolve(allow ? "SUCCESS" : "FAILURE");
@@ -60,7 +58,7 @@ px.import({
 
   function getUrlOrigin(url) {
     if (typeof url === 'string') {
-      let urlObject = imports.url.parse(url);
+      var urlObject = imports.url.parse(url);
       if (urlObject.host && urlObject.protocol) {
         return urlObject.protocol + (urlObject.slashes ? "//" : "") + urlObject.host;
       }
@@ -68,10 +66,10 @@ px.import({
     return null;
   }
 
-  const this_file_origin = getUrlOrigin(px.getPackageBaseFilePath());
-  const no_origin = !this_file_origin;
+  var this_file_origin = getUrlOrigin(px.getPackageBaseFilePath());
+  var no_origin = !this_file_origin;
   console.log("this file's origin: "+this_file_origin);
-  const isSTB = px.appQueryParams.stb === "true";
+  var isSTB = px.appQueryParams.stb === "true";
   if (isSTB) {
     // permissions config on STB should allow everything
     // for the trusted hosts
