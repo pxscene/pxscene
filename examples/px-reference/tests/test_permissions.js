@@ -4,8 +4,6 @@
  * Verifies that HTTP requests succeed when not blocked by scene permissions
  */
 
-'use strict';
-
 px.import({
   scene: 'px:scene.1.js'
 })
