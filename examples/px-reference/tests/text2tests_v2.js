@@ -19,7 +19,7 @@ var basePackageUri = px.getPackageBaseFilePath();
 //var longText = textA + "\n" + textA + "\n" + textA;
 // "Hello!  How are you?";//
 // Use fontUrl to load from web
-var fontUrlStart = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/";
+var fontUrlStart = "http://www.pxscene.org/examples/px-reference/fonts/";
 var IndieFlower = "IndieFlower.ttf";
 var DejaVu = "DejaVuSans.ttf";
 var DejaVuSerif = "DejaVuSerif.ttf";
