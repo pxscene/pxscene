@@ -16,6 +16,90 @@
 
 <body style="text">
 
+  <u><h2>Release 0.38.0.1 (OSX and Windows) - 1May2018</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.38.0.1)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+        <li>Added use of font atlas for better text rendering</li>
+        <li>Added new flag to OnBlur to indicate loss of focus chain. Documentation: TBD</li>
+        <li>Stability fixes</li>
+        <li>Optimus fixes</li>
+        </ul>
+      </bullets>
+      <h3>Commits/Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>version 0.38 (#1121)</li>
+            <li>fix for permissions interfering with service bubbling within a scene's hierarchy (#1114)</li>
+            <li>store the git revision used for building into the SPARK_BUILD_GIT_REVISION define (#1119)</li>
+            <li>Merge pull request #1115 from aj-amitjain/master: Fixing correlation key issue and Changing component name</li>
+            <li>fix error: invalid new-expression of abstract class type ‘rtRemoteFunction’ (#1111)</li>
+            <li>fix error: unused variable ‘i’ (#1110)</li>
+            <li>Possible fix for deleting event listeners from javascript (#1041)</li>
+            <li>Fix coverity issues introduced by fontatlas changes (#1107)</li>
+            <li>fix 'overloaded-virtual' compilation errors (#1057)</li>
+            <li>Adding CTRL-ALT F toggle full-window mode to Browser.js (#981)</li>
+            <li>Clang diagnostics for all platforms (#744)</li>
+            <li>improve code coverage for rtthreadpool (#1063)</li>
+            <li>test builds (#1100)</li>
+            <li>add new text2tests_v2 (#1101)</li>
+            <li>double clock (#1062)</li>
+            <li>fix error: unused variable ‘eDisplay’ (#1058)</li>
+            <li>allow to use 'override' keyword independently of gcc version being used (#1103)</li>
+            <li>NULL check for output length (#1102)</li>
+            <li>Code coverage for utf_8.c (#1048)</li>
+            <li>optimus fix for calling ready on load (#1099)</li>
+            <li>Do not reject promises for animation cancellations (#1094)</li>
+            <li>removed call to nextBuffer (#1060)</li>
+            <li>fix 'pessimizing-move' compiler errors (#1056)</li>
+            <li>Fontatlas implementation (#1045)</li>
+            <li>Adding java build file.</li>
+            <li>Adding missing symlink</li>
+            <li>Enabling cmake for DFB platforms (#1040)</li>
+            <li>changing browser.js key shortcut from ctrl+L to ctrl+alt+shift+L (#1084)</li>
+            <li>crash fix and fixing package.json file (#1085)</li>
+            <li>fix initialize order (#1081)</li>
+            <li>Do not call checkStretch in setResource (#1069)</li>
+            <li>2nd queue fix</li>
+            <li>Print ETAG update with Url and Filename. Removed cache expiration duplicate log prints. (#1049)</li>
+            <li>fix incorrect memory access (#1067)</li>
+            <li>add pxImage9::setResource (#1047)</li>
+            <li>Select ALL ahead of Drag'n'Drop PASTE of file URL (#957)</li>
+            <li>Fix test config for test_onBlur_loseFocusChain (#1046)</li>
+            <li>Added loseFocusChain bool property for onBlur Event (#1038)</li>
+            <li>Update <a href="http://GRAPH_API.md">GRAPH_API.md</a> (#1036)</li>
+            <li>threading safety fix to prevent multiple thread reads to localtime() (#1039)</li>
+            <li>removing unneeded tickCallback() call (#1037)</li>
+            <li>updates for cleanup (#1033)</li>
+            <li>thread sanitizer cmake support (#1029)</li>
+            <li>moved permissions checks to avoid cases where they could be bypassed (928)</li>
+            <li>updated ReadME for intendation (#1022)</li>
+            <li>Stricter data types for Rasterizer (#955)</li>
+            <li>Node unit tests</li>
+            <li>adding back log output on failure (#1023)</li>
+            <li>Removed cmake in osx build, because travis provides an inbuilt cmake (#941)</li>
+            <li>fix 'format-nonliteral' compilation error (#909)</li>
+            <li>fix error reorder when PX_DIRTY_RECTANGLES is enabled (#925)</li>
+            <li>add new test for fonts and text (#1013)</li>
+            <li>Updated the links to <a href="http://pxscene.org">pxscene.org</a> (#992)</li>
+            <li>fix 'strict-aliasing' compilation errors and typo in pxClamp usage (#990)</li>
+            <li>a fix for capturing multisample FBO (#1019)</li>
+            <li>Update AppSceneContext.js (#984)</li>
+            <li>fix mData NULL deref in rtString::append (#974)</li>
+            <li>fine selection of which external node package to pick-up (#967)</li>
+            <li>Restricted pxscene version update for edge builds (#951)</li>
+            <li>Read me intendation (#952)</li>
+            <li>LSA Ad Cache telemetry requires to print cache expiration print. (#938)</li>
+        </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+
+
+
   <u><h2>Release 0.37.0.0 (OSX and Windows) - 2April2018</h2></u>
   
       <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.37.0.0)</em></p>
