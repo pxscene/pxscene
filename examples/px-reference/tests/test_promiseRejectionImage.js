@@ -11,9 +11,9 @@ var manual = imports.manual;
 var manualTest = manual.getManualTestValue();
 
 // Use a bogus url to cause promise rejection
-var image = scene.create({t:"image",parent:root, x:0,y:100, url:"https://px-apps.sys.comcast.net/pxscene-samples/notthere.png"});
+var image = scene.create({t:"image",parent:root, x:0,y:100, url:"http://www.pxscene.org/examples/px-reference/notthere.png"});
 
-var image2 = scene.create({t:"image",parent:root, x:0,y:100, url:"https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/tests/images/ball.png"});
+var image2 = scene.create({t:"image",parent:root, x:0,y:100, url:"http://www.pxscene.org/examples/px-reference/tests/images/ball.png"});
 
 var tests = {
   testBadImageUrl: function() {
