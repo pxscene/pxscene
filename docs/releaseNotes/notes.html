@@ -16,6 +16,59 @@
 
 <body style="text">
 
+  <u><h2>Release 0.38.0.2 (OSX and Windows) - 14May2018</h2></u>
+  
+      <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.38.0.2)</em></p>
+      <h3>Highlights:</h3>
+      <bullets>
+        <ul>
+          <li>Fix issue where promise was not sent for textBox with draw=false</li>
+          <li>Fix issue where some fonts are displayed too thin when alignHorizontal values are non-default.</li>
+          <li>Optimus fix: Fix for calling suspend or resume on an Optimus app that doesn't implement it</li>
+          <li>Optimus fix: Fix Optimus Application.setFocus()</li>
+          <li>Turn on CORS and Permissions checks</li>
+          <li>Added inverted mask capability</li>
+          <li>Fix for issue where permissions was interfering with service bubbling within a scene's hierarchy</li>
+        </ul>
+      </bullets>
+      <h3>Commits/Fixes:</h3>
+      <bullets>
+          <ul>
+            <li>Update Version to 0.38.0.2 (#1159)</li>
+            <li>ifdef out a function not used with font atlas (#1157)</li>
+            <li>Fix crash while adding new events within events handler (#1149)</li>
+            <li>Draw fix - fix for hAligned textBox where characters were too thin (#1154)</li>
+            <li>Added support for rdkbrowser2 in optimus (#1152)</li>
+            <li>Draw fix - fix for textBox promise when draw=false (#1148)</li>
+            <li>fix AddressSanitizer: stack-buffer-overflow (too small sscanf buffer) (#1150)</li>
+            <li>use no origin for file:// (#1123)</li>
+            <li>make use of USE_CONTEXTIFY_CLONES configurable (#1055)</li>
+            <li>performance updates for processing images (#1138)</li>
+            <li>make it easier to run pxscene2dtests.sh under debugger (#1140)</li>
+            <li>Fix for setFocus() not working (#1145)</li>
+            <li>Modified logging valgrind logs on error case (#1137)</li>
+            <li>Fix stack out of scope Sanitizer issue (#1124)</li>
+            <li>remove bodymovin from externals (#1118)</li>
+            <li>remove util._extend (#1116)</li>
+            <li>fix error: unused variable ‘listenerCountBeforeAdd’ (re-enable assertion) (#1112)</li>
+            <li>disable process.binding (#1096)</li>
+            <li>Avoid assertion when read input returns -1 (#1139)</li>
+            <li>Fix for SVG Unit Test... re-enable SVG by Default (#1143)</li>
+            <li>Modifying few things: rtRemoteAdaptor (#1127)</li>
+            <li>Cleaner PR for adding INVERTED mask support (#1134)</li>
+            <li>Check that suspend/resume are defined (#1126)</li>
+            <li>adding a runtime option to configure the texture memory limits for OpenGL platforms (#1125)</li>
+            <li>Added license banner for new files (#1122)</li>
+            <li>Updates for Release window build (#1032)</li>
+            <li>Update license (#958)</li>
+        </ul>
+      </bullets>
+      <br/>
+      <br/>
+      <br/>
+
+
+
   <u><h2>Release 0.38.0.1 (OSX and Windows) - 1May2018</h2></u>
   
       <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.38.0.1)</em></p>
