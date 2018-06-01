@@ -66,27 +66,25 @@ px.import({
     return null;
   }
 
+  // Figure out which default permissions are for this origin and platform
   var this_file_origin = getUrlOrigin(px.getPackageBaseFilePath());
-  var no_origin = !this_file_origin;
-  console.log("this file's origin: "+this_file_origin);
   var isSTB = px.appQueryParams.stb === "true";
-  if (isSTB) {
-    // permissions config on STB should allow everything
-    // for the trusted hosts
-    console.log("STB mode");
-  }
+  var no_origin = !this_file_origin;
+  var is_pxscene_org = this_file_origin === "https://www.pxscene.org";
+  var is_localhost_allowed = no_origin || isSTB || is_pxscene_org;
+  console.log("this file's origin:",this_file_origin,"isSTB:",isSTB);
 
   module.exports.tests = {
     test_url_google: make_url_test('https://google.com/', true),
-    test_url_localhost: make_url_test('http://localhost', no_origin || isSTB),
-    test_url_localhostHttps: make_url_test('https://localhost', no_origin || isSTB),
-    test_url_localhostPort: make_url_test('http://localhost:50050', no_origin || isSTB),
-    test_url_127001: make_url_test('http://127.0.0.1', no_origin || isSTB),
-    test_url_127001Port: make_url_test('http://127.0.0.1:50050', no_origin || isSTB),
-    test_url_1: make_url_test('http://[::1]', no_origin || isSTB),
-    test_url_1Port: make_url_test('http://[::1]:50050', no_origin || isSTB),
-    test_url_00000001: make_url_test('http://[0:0:0:0:0:0:0:1]', no_origin || isSTB),
-    test_url_00000001Port: make_url_test('http://[0:0:0:0:0:0:0:1]:50050', no_origin || isSTB),
+    test_url_localhost: make_url_test('http://localhost', is_localhost_allowed),
+    test_url_localhostHttps: make_url_test('https://localhost', is_localhost_allowed),
+    test_url_localhostPort: make_url_test('http://localhost:50050', is_localhost_allowed),
+    test_url_127001: make_url_test('http://127.0.0.1', is_localhost_allowed),
+    test_url_127001Port: make_url_test('http://127.0.0.1:50050', is_localhost_allowed),
+    test_url_1: make_url_test('http://[::1]', is_localhost_allowed),
+    test_url_1Port: make_url_test('http://[::1]:50050', is_localhost_allowed),
+    test_url_00000001: make_url_test('http://[0:0:0:0:0:0:0:1]', is_localhost_allowed),
+    test_url_00000001Port: make_url_test('http://[0:0:0:0:0:0:0:1]:50050', is_localhost_allowed),
     test_service_warehouse: make_service_test("Warehouse", isSTB),
     test_feature_screenshot: make_screenshot_test(true)
   };
