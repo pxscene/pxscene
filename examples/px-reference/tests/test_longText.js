@@ -14,7 +14,7 @@ manual:"../test-run/tools_manualTests.js"}).then( function ready(imports) {
   var array_objects = [];
   var test = [];
   var fonts = [
-               "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/XFINITYSansTT-BoldItalic.ttf",
+               "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf",
               ];
   
   var x_axis=0;
@@ -42,7 +42,7 @@ manual:"../test-run/tools_manualTests.js"}).then( function ready(imports) {
           var string1 = "Text Measurement\n" + "Height:" + metrics1.h + "\nWidth:" + metrics1.w;
           scene.create({t:"text",x:180,y:40,text:string1,parent:root});
 
-          results.push(assert((metrics1.w == 2690000), 'text width does not match expected value. actual: '+metrics1.w+'; expected: 2690000'));          
+          results.push(assert((metrics1.w == 2860000), 'text width does not match expected value. actual: '+metrics1.w+'; expected: 2860000'));          
         },function(){
           results.push(assert(false, 'promise for text was rejected!'));
           root.removeAll();
