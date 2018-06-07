@@ -22,7 +22,7 @@ A 2d scene graph API supporting the following:
 <br/>
 <br/>
 
-<h2><a name="scene"></a><code>Scene</code> instance</h2>
+<h2><a name="Scene"></a><code>Scene</code> instance</h2>
 <h3>Properties</h3>
 <dl>
 <dt class="object readonly">root</dt>
@@ -56,6 +56,7 @@ A 2d scene graph API supporting the following:
 <li><a href="#image9">image9</a></li>
 <li><a href="#rectangle">rect</a></li>
 <li><a href="#object">object</a></li>
+<li><a href="#scene">scene</a></li>
 <dt class="resource">create(json)</dt>
 <dd>create resources that can be shared
 <br/>Use json t: to construct specific resource types:
@@ -84,15 +85,18 @@ A 2d scene graph API supporting the following:
     <li>onMouseEnter  - parameter object has properties: target, stopPropagation()   </li>
     <li>onMouseLeave  - parameter object has properties: target, stopPropagation()  </li>
     <li>onFocus  - parameter object has properties: target, stopPropagation()  </li>
-    <li>onBlur  - parameter object has properties: target, loseFocusChain, stopPropagation()  
+    <li>onBlur  - parameter object has properties: target, loseFocusChain, stopPropagation() - 
       <ul>loseFocusChain: true or false to indicate whether the object receiving this onBlur event is 
         within the heirarchy of the object losing focus.  Example usage: <a href="../../examples/px-reference/tests/test_onBlur_loseFocusChainChild.js">loseFocusChain example</a> </li></ul>
       </li>
     <li>onKeyDown  - parameter object has properties: target, keyCode, flags, stopPropagation() </li>
     <li>onKeyUp  - parameter object has properties: target, keyCode, flags, stopPropagation() </li>
     <li>onChar  - parameter object has properties: target, charCode, stopPropagation()</li>
-<li>onResize - parameter object has properties w, h</li>
-</ul>
+    <li>onResize - parameter object has properties w, h</li>
+    <li>onClose - parameter object no properties -
+        <ul>onClose indicates the object scene is destructed and garbage collected</ul>
+    </li>
+  </ul>
 </dd>
 <dt class="void">delListener(string, function)</dt>
 <dd>unregister a callback function for the specified event</dd>
@@ -101,7 +105,8 @@ A 2d scene graph API supporting the following:
 <hr/>
 
 
-<hr/>
+
+<hr>
 <br/><br/>
 <h2><a name="object"></a><code>Object</code> instance</h2>
 <h3>Properties</h3>
@@ -192,6 +197,16 @@ Returns an <a href="#Animate">Animate</a> object that can be used to cancel or c
 <dt class="void">getObjectById(id)</dt>
 <dd>returns object with associated id.  search scope is this object and its children.</dd>
 <hr/>
+
+<hr>
+<br/><br/>
+<h2><a name="scene"></a><code>scene</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
+<h3>Properties</h3>
+<dt class="readonly string">url</dt>
+<dd>the url to JavaScript file that defines this scene</dd>
+<hr/>
+
+<hr>
 <br/><br/>
 <h2><a name="rectangle"></a><code>Rectangle</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
 <h3>Properties</h3>
@@ -285,7 +300,8 @@ alignHorizontal RIGHT
 <dt class="boolean">wordWrap</dt>
 <dd>when width > 0, and wordWrap is true, wraps text at width of text box. defaults to false.</dd>
 <dt class="number">xStartPos</dt>
-<dd>x position relative to the text box object, in pixels, for the first line of text only, similar to an indent. defaults to 0.</dd>
+<dd>x position relative to the text box object, in pixels, for the first line of text only, similar to an indent. defaults to 0.
+<br/>NOTE:  xStartPos and xStopPos are only applied when horizontalAlign=LEFT.</dd>
 <dt class="number">xStopPos</dt>
 <dd>x position where text must stop flowing on the last line of text only.  If ellipses are applied, the ellipses must also stop at this location.  defaults to 0.
 <br/>NOTE:  xStartPos and xStopPos are only applied when horizontalAlign=LEFT.
@@ -328,6 +344,8 @@ Creates an element which contains a Wayland display.  Any Wayland clients that c
 <dd>specifies the color to fill the interior of the element. eg. 0xff0000ff, opaque red, 0xrrggbbaa.  This will provide background for the connected Wayland client</dd>
 <dt class="boolean">hasApi</dt>
 <dd>indicates if the element exports an API.</dd>
+<dt class="object">api</dt>
+<dd>If hasApi is true, then this is the element's exported API</dd>
 <dt class="promise">remoteReady</dt>
 <dd>returns a promise for when the remote object is ready</dd>
 <hr/>
