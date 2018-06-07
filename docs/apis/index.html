@@ -77,17 +77,22 @@ A 2d scene graph API supporting the following:
 <dd>create a <a href="#scenecontainer">SceneContainer</a> object</dd>-->
 <dt class="void">on(string, function)</dt>
 <dd>registers a function callback for the specified event:
-<li>onMouseDown - parameter object has properties: x, y, flags </li>
-<li>onMouseUp - parameter object hasproperties: x, y, flags </li>
-<li>onMouseMove - parameter object has properties: x, y </li>
-<li>onMouseEnter  - parameter object has properties: target, stopPropagation()   </li>
-<li>onMouseLeave  - parameter object has properties: target, stopPropagation()  </li>
-<li>onFocus  - parameter object has properties: target, stopPropagation()  </li>
-<li>onBlur  - parameter object has properties: target, stopPropagation()  </li>
-<li>onKeyDown  - parameter object has properties: target, keyCode, flags, stopPropagation() </li>
-<li>onKeyUp  - parameter object has properties: target, keyCode, flags, stopPropagation() </li>
-<li>onChar  - parameter object has properties: target, charCode, stopPropagation()</li>
+  <ul>
+    <li>onMouseDown - parameter object has properties: x, y, flags </li>
+    <li>onMouseUp - parameter object hasproperties: x, y, flags </li>
+    <li>onMouseMove - parameter object has properties: x, y </li>
+    <li>onMouseEnter  - parameter object has properties: target, stopPropagation()   </li>
+    <li>onMouseLeave  - parameter object has properties: target, stopPropagation()  </li>
+    <li>onFocus  - parameter object has properties: target, stopPropagation()  </li>
+    <li>onBlur  - parameter object has properties: target, loseFocusChain, stopPropagation()  
+      <ul>loseFocusChain: true or false to indicate whether the object receiving this onBlur event is 
+        within the heirarchy of the object losing focus.  Example usage: <a href="../../examples/px-reference/tests/test_onBlur_loseFocusChainChild.js">loseFocusChain example</a> </li></ul>
+      </li>
+    <li>onKeyDown  - parameter object has properties: target, keyCode, flags, stopPropagation() </li>
+    <li>onKeyUp  - parameter object has properties: target, keyCode, flags, stopPropagation() </li>
+    <li>onChar  - parameter object has properties: target, charCode, stopPropagation()</li>
 <li>onResize - parameter object has properties w, h</li>
+</ul>
 </dd>
 <dt class="void">delListener(string, function)</dt>
 <dd>unregister a callback function for the specified event</dd>
