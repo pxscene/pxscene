@@ -7,15 +7,15 @@
       <key>ProductID</key>
       <string>org.pxscene.pxscene</string>
       <key>Predicate</key>
-      <string>Ticket.version != '0.38.0.2'</string>
+      <string>Ticket.version != '0.39.2.0'</string>
       <key>Codebase</key>
       <string>http://www.pxscene.org/dist/osx/pxscene/pxscene.dmg</string>
       <key>Hash</key>
-      <string>Qr4DdfgmOYiKD3TMIEmIvpW7TEw=</string>
+      <string>l63hedh1+/dDAMsQFJsl98mEeJk=</string>
       <key>Size</key>
-      <string>13118113</string>
+      <string>13133522</string>
       <key>Version</key>
-      <string>0.38.0.2</string>
+      <string>0.39.2.0</string>
     </dict>
   </array>
 </dict>
