@@ -16,6 +16,103 @@
 
 <body style="text">
 
+  <u><h2>Release 0.39.2.0 (OSX and Windows) - 13June2018</h2></u>
+  
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.39.2.0)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+    <ul>
+      <li>All changes from 0.39.0.0, plus: </li>
+      <li>Turn on CORS enforcement</li>
+      <li>Optimus related changes:<ul>
+          <li>Remove access to 'externalApp' on Optimus Applications</li>
+          <li>updated key handling support for optimus launched apps</li>
+          <li>New serviceContext can be set when creating a scene and is read-accessible on getService calls</li>
+        </ul>
+      </li>
+    </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+      <ul>
+        <li >Increment version to 0.39.2.0 (#1242)</li>
+        <li>updated key handling support for optimus launched apps (#1243)</li>
+        <li >Increment to 0.39.1.0 (#1240)</li>
+        <li >Add conditions to isolate leaks and execution stop from valgrind (#1234)</li>
+        <li >dfb platform updates (#1231)</li>
+        <li >coverity fixes (#1224)</li>
+        <li >Fixing of conversion warnings in windows (#1190)</li>
+        <li >Script to download the last available artifact and upload it to build… (#1221)</li>
+        <li >Add license to new files (#1217)</li>
+        <li >Removing legacy SVG test ... (#1206)</li>
+        <li >enable capturing coredump during exit of spark in travis (#1197)</li>
+        <li >adding pid information of spark and shell process to logs (#1184)</li>
+        <li >update macOS building procedure (#1144)</li>
+        <li >fix -Wunused-parameter errors when ENABLE_LRU_TEXTURE_EJECTION is undefined (#1187)</li>
+        <li >Renable default signal handler after SEGV reception (#1220)</li>
+        <li >Add serviceContext (#1212)</li>
+        <li >suspend and resume take object (#1226)</li>
+        <li >run micro tasks before uv loop (#1201)</li>
+        <li >texture memory monitoring to use settings (#1208)</li>
+        <li >settings support (#1199)</li>
+        <li >ready promise for Optimus apps (#1211)</li>
+        <li>copy permissions conf in mac bundle (#1200)</li>
+        <li>do not check script extension (#1097)</li>
+        <li>Integrate 'nanosvg', SVG support for pxImage, pxImageResource and pxPath (#1198)</li>
+        <li>Fix textBox promise resolution (#1215)</li>
+        <li>Change the browser's name in Optimus from rdkbrowser to WebApp (#1203)</li>
+        <li>compiler fix for older compilers (#1207)</li>
+        <li>Adding Fullscreen App mode (#1204)</li>
+        <li>Just adding new Spark assets (#1210)</li>
+    </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/>
+
+
+  <u><h2>Release 0.39.0.0 (OSX and Windows) - 31May2018 - cancelled</h2></u>
+  
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.39.0.0)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+    <ul>
+      <li>Exposed build and version information to clients - this can be seen by launching About.js via Ctrl-Alt-A or the property can be directly accessed via scene.info.build.revision</a>
+      </li>
+      <li>Fixed issue introduced in 0.38.0.2 where Optimus api() function was not working for Spark apps created by Optimus</li>
+      <li>Fix issue where really long text string was not displayed</li>
+    </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+      <ul>
+        <li>Update version to 0.39.0.0</li>
+        <li>Avoid clearing promise queue when event loop is running (#1172)</li>
+        <li>updates for git revision (#1191)</li>
+        <li>Commits on May 17, 2018</li>
+        <li>Long text fix (#1185)</li>
+        <li>disable rasterizer by default (#1188)</li>
+        <li>fix SIGSEGV in wl_egl_window_resize() (#1179)</li>
+        <li>Adding SPARK_BUILD_GIT_REVISION to 'about.js' (#1183)</li>
+        <li>fix for PXCORE_WAYLAND_DISPLAY_READ_EVENTS=ON (#1178)</li>
+        <li>fix for screenshots (#1176)</li>
+        <li>add support for node8 (&gt;v8.9.0) (tracing-controller fix) (#1166)</li>
+        <li>allow to use RTREMOTE_GENERATOR_EXPORT not only during cross-compilation (#1164)</li>
+        <li>nuke unused xs_code (follow-up: #990) (#1141)</li>
+        <li>fix -Werror=stringop-truncation compilation error (#1163)</li>
+        <li>avoid creating objects from disposed scene (#1130)</li>
+        <li>CORS/permissions runtime checks, renamings (#1128)</li>
+        <li>fix -Werror=sign-compare in rtScriptDuk.cpp (#1156)</li>
+        <li>node v8.9.4 compatibility (#1165)</li>
+        <li>Fix declare the application type constants in Optimus outside Application (#1170)</li>
+        <li>Adding some missed library (#1162)</li>
+    </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/>
+
+
   <u><h2>Release 0.38.0.2 (OSX and Windows) - 14May2018</h2></u>
   
       <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.38.0.2)</em></p>
