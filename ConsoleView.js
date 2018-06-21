@@ -95,10 +95,6 @@ px.import({scene: 'px:scene.1.js',
   scrollFrame.on("onMouseDown",   function(e) { mouseActive();   } );
   scrollFrame.on("onMouseUp",     function(e) { if(!mouseDragging) mouseMoveKnob(e); mouseInactive(); mouseDragging = false; } );
 
-  // var memoryInfo = scene.getService("org.openrdk.MemoryInfo");
-
-  // console.log("\n\n   >>>  memoryInfo: " + memoryInfo);
-
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   function scrollByLines(lines)
@@ -223,7 +219,7 @@ px.import({scene: 'px:scene.1.js',
     }
     else
     {
-      console.log("DEBUG: onKeyDown > [ " + e.keyCode + " ]   << No Key modifier");
+      // console.log("DEBUG: onKeyDown > [ " + e.keyCode + " ]   << No Key modifier");
 
       // No Key modifier
       switch(code)
@@ -259,8 +255,7 @@ px.import({scene: 'px:scene.1.js',
 
      easterTimer = setTimeout( function(o) 
      {
-        console.log("Too late");
-
+        // Timeout
         easterTimer = null; // reset
         easterKeys  = "";   // reset
 
