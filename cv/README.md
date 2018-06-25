@@ -23,7 +23,7 @@ Where -
   arrowKeys   ... enables Arrow Up / Arrow Dn scrolling support  (line-by-line)
   
 
-## Console View
+## Activation
 
 To activate the Console View use the following, Remote Control friendly, "Easter Egg" key sequence.
 
