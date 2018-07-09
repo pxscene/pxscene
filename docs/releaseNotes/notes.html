@@ -16,6 +16,83 @@
 
 <body style="text">
 
+  <u><h2>Release 0.40.0.0 (OSX and Windows) - 06July2018</h2></u>
+  
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.40.0.0)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+    <ul>
+      <li>SVG support: <a href="http://www.pxscene.org/docs/apis/svg_page.html">http://www.pxscene.org/docs/apis/svg_page.html</a>
+      </li>
+      <li>Fix for 'Windows Spark is showing artifacts in text'</li>
+      <li>Optimus related changes: <ul>
+          <li>Expose moveForward/moveBackward APIs via Optimus APIs</li>
+          <li>Service Bubbling issues found when tests were added: added uppercase ALLOW and DENY for service provider responses</li>
+          <li>Optimus should have a hook for 'destroying' Spark applications without being dependent on garbage collection: have optimus call destroy on spark app</li>
+          <li>ability to query the focus status of the app</li>
+          <li>Add Suspend/Resume to Spark Apps</li>
+        </ul>
+      </li>
+    </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+      <ul>
+        <li>Increment version to 0.40.0.0</li>
+        <li>Edge update properties (#1304)</li>
+        <li>keep texture object valid, to reuse font atlas (#1248)</li>
+        <li>Update icons for mac (#1287)</li>
+        <li>Expose moveForward/moveBackward APIs via Optimus APIs (#1291)</li>
+        <li>fix socket wrapping (#1296)</li>
+        <li>Edge update properties (#1286)</li>
+        <li>Enable stack frames during image hang in osx (#1288)</li>
+        <li>Rename wayland type to external (#1289)</li>
+        <li>Edited <a href="http://README.md">README.md</a> (#1295)</li>
+        <li>scene suspend and resume support (#1294)</li>
+        <li>Reject promise when animation is invoked after dispose (#1284)</li>
+        <li>Access of service manager from another device. (#1252)</li>
+        <li>Fix _rtEmitEntry intilization bug (#1285)</li>
+        <li>optimus: fix 'hasApi', return bool for resume/suspend/destory, change state only if succeeded (#1272)</li>
+        <li>fix data-race in setTextureData (fixes #1257) (#1261)</li>
+        <li>fix error: control reaches end of non-void function -Werror=return-type (#1282)</li>
+        <li>adding uppercase ALLOW and DENY for service provider responses (#1281)</li>
+        <li>fix exception in getService (#1251)</li>
+        <li>fix '-Werror,-Wsign-compare' compilation errors (#1142)</li>
+        <li>remove pump call from dispose (#1173)</li>
+        <li>fix data-race in removeFromTextureList (fixes #1262) (#1263)</li>
+        <li>Added new mono Spark logo (#1275)</li>
+        <li>Update icons for mac (#1273)</li>
+        <li>Adding Reference Points (#1258)</li>
+        <li>Edge update properties (#1266)</li>
+        <li>compile fixes (#1279)</li>
+        <li>Adding scaling parameters to [ imageResource ] for SVG (#1264)</li>
+        <li>Code coverage for pxText.h (#1277)</li>
+        <li>Changes for clearing resource promises pending in downloads (#1271)</li>
+        <li>Fail and log errors if env is not running (#1268)</li>
+        <li>Log error RT_ERROR_PROTOCOL_ERROR; Fail and log errors if env is not running (#1267)</li>
+        <li>CORS enhancements - js (#1247)</li>
+        <li>Fix compilation error with nullptr (#1276)</li>
+        <li>Enable printing stack frames on image9 hang in travis for linux (#1265)</li>
+        <li>update the clipping snapshot if dirty (#1274)</li>
+        <li>Cached external libs, for reducing the appveyor build time. (#1108)</li>
+        <li>fix issue with thin characters (#1255)</li>
+        <li>fix AddressSanitizer: alloc-dealloc-mismatch in ~NSVGrasterizerEx() (#1256)</li>
+        <li>fix for -Werror=misleading-indentation compilation errors (#1236)</li>
+        <li>Fix windows warnings (#1230)</li>
+        <li>fix AddressSanitizer: alloc-dealloc-mismatch error (fixes #1227) (#1253)</li>
+        <li>Remove pxPath from the build (#1238)</li>
+        <li>Adding Mutex to protect *nanosvg* usage (#1246)</li>
+        <li>Fix Xcode build. (#1250)</li>
+        <li>have optimus call destroy on spark app (#1232)</li>
+        <li>ability to query the focus status of the app (#1244)</li>
+    </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/>
+
+
+
   <u><h2>Release 0.39.2.0 (OSX and Windows) - 13June2018</h2></u>
   
   <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 0.39.2.0)</em></p>
