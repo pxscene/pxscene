@@ -1,13 +1,13 @@
 [
     {
-        "width": 773,
-        "height": 580,
-        "url": "https://picsum.photos/200/300/?random",
+        "width": 300,
+        "height": 200,
+        "url": "https://picsum.photos/200/300",
         "caption": "Image of an american ready service at the time of world war 2"
     },
     {
-        "width": 773,
-        "height": 580,
+        "width": 300,
+        "height": 200,
         "url": "https://picsum.photos/200/300/?random",
         "caption": "An old plane on the runway"
     }
