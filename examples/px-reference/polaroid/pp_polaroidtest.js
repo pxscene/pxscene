@@ -44,7 +44,7 @@ px.import({ scene: "px:scene.1.js" }).then(function ready(imports) {
   }
 
   // Load the static json with image urls
-  var screensaverPromise = px.getModuleFile('testimages.json');
+  var screensaverPromise = px.getModuleFile('https://github.com/jaga456456/pxscene-1/blob/gh-pages/examples/px-reference/polaroid/testimages.json');
 
   var firstPicture = null;
   var firstFg = null;
