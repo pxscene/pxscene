@@ -44,6 +44,7 @@ px.import({ scene: "px:scene.1.js" }).then(function ready(imports) {
   }
 
   // Load the static json with image urls
+  
   var screensaverPromise = px.getModuleFile('testimages.json');
 
   var firstPicture = null;
