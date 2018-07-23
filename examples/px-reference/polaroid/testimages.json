@@ -2,13 +2,19 @@
     {
         "width": 300,
         "height": 200,
-        "url": "https://picsum.photos/200/300",
+        "url": "https://c1.staticflickr.com/2/1825/28692401397_71c6fc2156_z.jpg",
+        "caption": "An image from the static"
+    },
+    {
+        "width": 300,
+        "height": 200,
+        "url": "https://c1.staticflickr.com/2/1821/43409516941_bbcc760c22_z.jpg",
         "caption": "An image from the picsum.photos"
     },
     {
         "width": 300,
         "height": 200,
-        "url": "https://picsum.photos/200/300/?random",
+        "url": "https://c1.staticflickr.com/1/835/28692401407_c92692e839_z.jpg",
         "caption": "An image from the picsum.photos"
     }
 ]
