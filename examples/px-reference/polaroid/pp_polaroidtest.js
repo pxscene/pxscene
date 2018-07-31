@@ -18,8 +18,30 @@ px.import({ scene: "px:scene.1.js" }).then(function ready(imports) {
   var shadowUrl = basePackageUri + "/images/BlurRect.png";
   var shadowImageObj = scene.create({ t: "imageResource", url: shadowUrl });
 
-  var numimages = px.appQueryParams.numimages;
-  if (numimages === undefined) { numimages = 8; }
+
+
+  // var numimages = px.appQueryParams.numimages;
+  // if (numimages === undefined) { numimages = 9; }                                                                                                                                                                                                
+  // console.log("name2 :: "+numimages);
+
+  // //var numimages = px.appQueryParams.numimages;
+  // if (numimages === 5) { numimages = 5; }
+  // console.log("name2 :: "+numimages);
+
+  var jsonName = px.appQueryParams.jsonName;
+
+  if (jsonName === undefined) { jsonName = "testimages.json" }
+  console.log("name :: " + jsonName);
+  if(jsonName==="images2.json"){jsonName="images2.json"}
+  
+
+  
+
+  // if (jsonName === "testimages.json") { jsonName = "testimages.json" }                                                                                                                                                                                               
+  // console.log("json " + jsonName);
+
+  // if (jsonName === "images2.json") { jsonName = "images2.json" }
+  // console.log("images2.json " + jsonName);
 
   var doRotation = px.appQueryParams.rotation;
   if (doRotation === undefined || (doRotation != 1 && doRotation != 0)) { doRotation = 1; }
@@ -44,8 +66,8 @@ px.import({ scene: "px:scene.1.js" }).then(function ready(imports) {
   }
 
   // Load the static json with image urls
-  
-  var screensaverPromise = px.getModuleFile('testimages.json');
+
+  var screensaverPromise = px.getModuleFile(jsonName);
 
   var firstPicture = null;
   var firstFg = null;

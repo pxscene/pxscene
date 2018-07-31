@@ -19,6 +19,7 @@ var shadowUrl = basePackageUri+"/images/BlurRect.png";
 var shadowImageObj = scene.create({t:"imageResource",url:shadowUrl});
  
 var numimages = px.appQueryParams.numimages;
+console.log("numimages ::"+numimages);
 if( numimages === undefined) { numimages = 8;}
 
 var doRotation = px.appQueryParams.rotation;
