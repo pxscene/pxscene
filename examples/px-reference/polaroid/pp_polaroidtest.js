@@ -20,25 +20,16 @@ px.import({ scene: "px:scene.1.js" }).then(function ready(imports) {
 
 
 
-  // var numimages = px.appQueryParams.numimages;
-  // if (numimages === undefined) { numimages = 9; }                                                                                                                                                                                                
-  // console.log("name2 :: "+numimages);
-
-  // //var numimages = px.appQueryParams.numimages;
-  // if (numimages === 5) { numimages = 5; }
-  // console.log("name2 :: "+numimages);
+  var numimages = px.appQueryParams.numimages;
+  if (numimages === undefined) { numimages = 9; }                                                                                                                                                                                                
+  console.log("name2 :: "+numimages);
+  
 
   var jsonName = px.appQueryParams.jsonName;
 
-  if (jsonName === undefined) { jsonName = "testimages.json" }
+  if (jsonName === undefined) { jsonName =  "C:/Users/jmalla381/comcast_pxscene/pxscene-1/examples/px-reference/polaroid/images.json"};
   console.log("name :: " + jsonName);
-  if(jsonName==="images2.json"){jsonName="images2.json"}
-  
-
-  
-
-  // if (jsonName === "testimages.json") { jsonName = "testimages.json" }                                                                                                                                                                                               
-  // console.log("json " + jsonName);
+ // "C:/Users/jmalla381/comcast_pxscene/pxscene-1/examples/px-reference/polaroid/testimages.json
 
   // if (jsonName === "images2.json") { jsonName = "images2.json" }
   // console.log("images2.json " + jsonName);

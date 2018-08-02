@@ -20,7 +20,7 @@ var shadowImageObj = scene.create({t:"imageResource",url:shadowUrl});
  
 var numimages = px.appQueryParams.numimages;
 console.log("numimages ::"+numimages);
-if( numimages === undefined) { numimages = 8;}
+if( numimages === undefined) { numimages = 9;}
 
 var doRotation = px.appQueryParams.rotation;
 if( doRotation === undefined || (doRotation != 1 && doRotation != 0)) {doRotation = 1;}
