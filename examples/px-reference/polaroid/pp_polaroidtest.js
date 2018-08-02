@@ -27,7 +27,7 @@ px.import({ scene: "px:scene.1.js" }).then(function ready(imports) {
 
   var jsonName = px.appQueryParams.jsonName;
 
-  if (jsonName === undefined) { jsonName =  "C:/Users/jmalla381/comcast_pxscene/pxscene-1/examples/px-reference/polaroid/images.json"};
+  if (jsonName === undefined) { jsonName =  "https://github.com/jaga456456/pxscene-1/blob/gh-pages/examples/px-reference/polaroid/testimages.json"};
   console.log("name :: " + jsonName);
  // "C:/Users/jmalla381/comcast_pxscene/pxscene-1/examples/px-reference/polaroid/testimages.json
 
