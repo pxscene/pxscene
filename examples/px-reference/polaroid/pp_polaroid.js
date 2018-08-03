@@ -17,6 +17,12 @@ var bgUrl = basePackageUri+"/images/cork.png";
 var bgShadowUrl = basePackageUri+"/images/radial_gradient.png";
 var shadowUrl = basePackageUri+"/images/BlurRect.png";
 var shadowImageObj = scene.create({t:"imageResource",url:shadowUrl});
+	
+var family = "images.json";
+var flickr = "flickr_images.json";
+
+var pics = px.appQueryParams.family;
+if (pics === undefined) { pics = family};
  
 var numimages = px.appQueryParams.numimages;
 if( numimages === undefined) { numimages = 8;}
