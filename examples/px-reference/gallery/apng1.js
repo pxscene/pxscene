@@ -15,6 +15,7 @@ px.import("px:scene.1.js").then(function (scene) {
       return null;
     });
   });
+  
 
   var images = [];
   var imageTargets = void 0;
