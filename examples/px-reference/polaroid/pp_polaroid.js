@@ -17,6 +17,15 @@ var bgUrl = basePackageUri+"/images/cork.png";
 var bgShadowUrl = basePackageUri+"/images/radial_gradient.png";
 var shadowUrl = basePackageUri+"/images/BlurRect.png";
 var shadowImageObj = scene.create({t:"imageResource",url:shadowUrl});
+	
+var jsonName = "images.json";
+var flickr = "flickr_images.json";
+ 
+var pics = px.appQueryParams.pics; 
+if (pics === undefined) { pics = jsonName}
+else if(pics == "flickr"){  pics = flickr};
+  
+console.log("the pics "+pics);
  
 var numimages = px.appQueryParams.numimages;
 if( numimages === undefined) { numimages = 8;}
@@ -44,7 +53,7 @@ function randomIntFromList(li) {
 }
 
 // Load the static json with image urls
-var screensaverPromise = px.getModuleFile('http://www.pxscene.org/examples/px-reference/polaroid/images.json');
+var screensaverPromise = px.getModuleFile("http://www.pxscene.org/examples/px-reference/polaroid/"+pics);
 
 
 var firstPicture = null;
