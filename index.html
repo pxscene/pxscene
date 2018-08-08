@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Spark (aka pxscene) by johnrobinsn</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="javascripts/downloadEdge.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <h1>Spark (aka pxscene)</h1>
+
+        <p></p>
+
+        <p class="view"><a href="https://github.com/pxscene/pxscene">View the Project on GitHub
+            <small>pxscene/pxscene</small>
+        </a></p>
+
+
+        <ul>
+            <li><a href="https://github.com/pxscene/pxscene/zipball/master">Download <strong>ZIP File</strong></a>
+            </li>
+            <li><a href="https://github.com/pxscene/pxscene/tarball/master">Download <strong>TAR Ball</strong></a>
+            </li>
+            <li><a href="https://github.com/pxscene/pxscene">View On <strong>GitHub</strong></a></li>
+        </ul>
+
+        <br/>
+        <br/>
+
+        <div>
+            <p><img src="Spark128.png"><br/>
+                <strong>pxscene stable</strong><br/>
+                Installer: <a href="dist/osx/pxscene/pxscene.dmg">OSX</a> | <a href="https://github.com/pxscene/pxCore/releases/download/0.39.2.0/pxscene-setup.exe.zip">Windows</a> | <a href="./docs/releaseNotes/notes.html">Release Notes</a>
+            </p>
+
+            <p><img src="SparkEdge128.png"><br/>
+                <strong>pxscene edge</strong><br/>
+                Installer: <a href="http://96.116.56.119/edge/osx/artifacts/pxscene.dmg">OSX</a> | <a
+                        href="http://96.116.56.119/edge/windows/pxscene-setup.exe">Windows</a>
+            </p>
+        </div>
+    </br></br></br>
+        <strong>Minimum Requirements for Installation</strong></br>
+        <table id="tableSmall">
+           
+            <tr>
+                <th>Platform</th>
+                <th>OS</th>
+                <th>RAM</th>
+                <th>Disk Space</th>
+                <th>Processor Speed</th>
+            </tr>
+            <tr>
+                <td>Mac OS</td>
+                <td>Macbook Pro (macOS Sierra)</td>
+                <td>256 MB</td>
+                <td>24 MB</td>
+                <td>1 GHz</td>
+            </tr>
+            <tr>
+                <td>PC</td>
+                <td>Windows 10 (Build 15063)</td>
+                <td>128 MB</td>
+                <td>24 MB</td>
+                <td>1 GHz</td>
+            </tr>
+
+        </table>  
+            
+        
+</header>
+    <section>
+        <h3>
+            <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span
+                    class="octicon octicon-link"></span></a>Welcome to home of the px framework</h3>
+
+        <p>px is a framework for creating cross platform UI applications using JavaScript modules,
+            with primary goals of creating light weight reusable components and applications that work in a browser like
+            environment.
+        </p>
+
+        <p>A high level representation of the px stack is shown below.
+        </p>
+
+        <p><img src="images/pxFrameworkStackHighLevel.png"></p>
+
+        <p>The stack components.
+        <ul>
+            <li>Native OS and graphic drivers - provides specific kernal, OS and UI services for the native system</li>
+            <li>pxCore - provides UI scene and primitive components used by the px Framework to render components.  Most
+                of pxCore is creating using C++, with JavaScript bindings to its UI API.</li>
+            <li>Cross-Platform Environment - provides asynchronous runtime services required by applications, such as
+                http access, task scheduling, etc.  The initial implementation is based on Node-JS and Chrome's V8
+                JavaScript engine.  However, this may vary based on the target platform.</li>
+            <li>px Framework - provides the public JavaScript API for creating reusable UI modules and applications, in
+                addition to the facilities for loading and launching px-based application modules.</li>
+        </ul>
+        </p>
+
+        <h3><span class="octicon octicon-link"></span>The pxscene API</h3>
+        <p>pxscene supports a set of widgets and functions for application authoring via its bindings to JavaScript.  The supported 
+            APIs are documented here: 
+            <p><a href="./docs/apis/index.html">pxscene API</a></p>
+        </p>
+
+        <h3><span class="octicon octicon-link"></span>Simple Hello World Example</h3>
+
+        <p>
+        The following code example is a minimal module covering the traditional "Hello, World" that many tutorials
+        use as the initial presentation.
+            <pre style="font-family:'Courier New'; font-size:10px">
+  // scene object is provided to the module when it is created
+  scene.create({
+               t:"text",                // Element type will be text
+               parent: scene.root,      // Parent element
+               text:"Hello, World!",    // the text
+               x:100, y:100,            // position
+               textColor:0xff0000ff,    // RGBA - red text
+               pixelSize:64});          // font height
+            </pre>
+        The Hello World example will produce the example screen shown below.
+        <p><img src="images/HelloWorldSceneSmall.png"></p>
+
+        </p>
+        
+         <h3><span class="octicon octicon-link"></span>Frameworks documentation</h3>
+         <p>
+          <ul>
+              <li><a href="./docs/frameworks/index.html">px Frameworks</a>
+              </li>
+          </ul>
+          <ul>
+              <li><a href="./docs/delegates/index.html">px Delegates</a>
+              </li>
+          </ul>          
+         </p>
+    </section>
+
+    <footer>
+        <p>This project is maintained by <a href="https://github.com/pxscene">pxscene</a></p>
+
+        <p>
+            <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a>
+            </small>
+        </p>
+    </footer>
+</div>
+<script src="javascripts/scale.fix.js"></script>
+
+</body>
+</html>

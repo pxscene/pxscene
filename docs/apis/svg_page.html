@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>pxScene - Scene Graph API</title>
+<link href="./style/style.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+
+<div id="container">
+
+
+<br>
+<br>
+
+<div style="background-color:#eee;padding:10px;border-radius:7px; display: grid">
+    <div style="grid-column: 1"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/SVG_Logo.svg/2000px-SVG_Logo.svg.png" 
+    alt="SVG Logo" height="50" width="50"></img> </div>
+    <div style="grid-column: 2"><h1>Scalable Vector Graphics</h1></div>
+</div>
+
+<div style="text-align: center" >
+<img src="images/Bitmap_VS_SVG.svg" style="display: block;  margin-left: auto; margin-right: auto"
+        alt="SVG Logo" height="250" width="350"></img>
+      </div>
+<br>
+
+Read more:  <a href="https://commons.wikimedia.org/wiki/Help:Vector_graphics_tutorial">Vector graphics tutorial</a>
+
+<br>
+<br>
+pxScene now supports Scalable Vector Graphics (SVG) via the <b>imageResource</b>.
+<br>
+<br>
+<br>
+
+<hr>
+<br>
+<h1>pxScene - SVG Support</h1>
+
+
+<h2><a name="Scene"></a><code>Scene</code> imageResource</h2>
+<h3>Properties</h3>
+<dl>
+  <dt class="object">url</dt>
+  <dd>URL to the SVG image</dd>
+  <dt class="object">w</dt>
+  <dd>desired <i>aspect</i> width, or native size if omitted.</dd>
+  <dt class="object">h</dt>
+  <dd>desired <i>aspect</i> height, or native size if omitted.</dd>
+  <dt class="object">sx</dt>
+  <dd>desired <i>horizontal</i> scale factor.</dd>
+  <dt class="object">sy</dt>
+  <dd>desired <i>vertical</i> scale factor.</dd>
+</dl>
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+
+The <b>width</b> and <b>height</b> properties define the maximum-height aspect fit for the SVG image  
+<br><br>
+
+The <b>sx</b> and <b>sy</b> properties act as scling values for the Horizontal and Vertical dimensions of the source SVG image.
+<br><br> NOTE: Scaling values take precedence over width and height values, if both are passed to <b>imageResource</b>.
+<br><br><br>
+
+
+Whilst <b>pxscene</b> supports SVG images - the resulting images is <i>rasterized</i> to a bitmap at creation.
+<br><br>
+
+
+The resulting "bitmap" will <b>stretch</b> if scaled, in the same way as PNG or JPG resources.
+<br><br>
+
+
+The <b>width</b> and <b>height</b> tell the <i>SVG rasterizer</i> the desired scale within which to fit the 
+SVG image being loaded.
+
+<br>
+<br>
+<br>
+
+pxScene has the following support for Scalable Vector Graphics (SVG):
+<br>
+<br>
+
+<section style="display: grid" >
+  <div style="grid-column: 1">
+
+    <h3>SVG Elements</h3>
+
+    <ul>
+      <li>path
+      <li>move</li>
+      <li>line</li>
+      <li>bezier curves etc</li>
+      <li>arc</li>
+      <li>rect</li>
+      <li>circle</li>
+      <li>ellipse</li>
+      <li>polyline</li>
+      <li>polygon</li>
+    </li>
+    
+      <li>fill-rule</li>
+    </ul>
+  </div>
+
+  <div style="grid-column: 2">
+
+    <h3>SVG Attributes</h3>
+    <ul>
+      <li>transform
+        <ul>
+          <li>translate</li>
+          <li>scale</li>
+          <li>rotate</li>
+          <li>skewX</li>
+          <li>skewY</li>
+        </ul>
+      </li>
+      <li>viewBox</li>
+    </ul>
+  </div>
+
+  <br/>
+
+  <div style="grid-column: 1">
+
+      <h3>Gradient Fills</h3>
+      <ul>
+        <li>linearGradient</li>
+        <li>radialGradient</li>
+      </ul>
+
+      <br>
+
+      <h3>NOT CURRENTLY SUPPORTED</h3>
+      <ul>
+        <li>Embedded <b>'image'</b> data (base64)</li>
+      </ul>
+  </div>
+
+  <div style="grid-column: 2">
+      <h3>Stroke</h3>
+      <ul>
+        <li>stroke-width</li>
+        <li>stroke-dasharray</li>
+        <li>stroke-dashoffset</li>
+        <li>stroke-opacity</li>
+        <li>stroke-linecap</li>
+        <li>stroke-linejoin</li>
+        <li>stroke-miterlimit</li>
+      </ul>
+  </div>
+
+</section>
+
+<br>
+<hr>
+<br>
+
+<h1> SVG Advantages </h1>
+<br>
+
+<h2>Scalability</h2>
+A major benefit of SVG images is that they are resolution independent. Unlike file types such as JPG or PNG, SVGs maintain the same quality no matter what screen resolution 
+or size they are being drawn at. On a retina display, for instance, a JPG/PNG might stretched if it’s not large enough, an SVG will still look high-quality.
+
+
+<h2>File size</h2>
+
+SVGs can result in smaller file sizes than other file types when optimized/minimized properly. This can be helpful when dealing with higher resolution screens, since SVGs don’t need to be created at larger sizes to accommodate the difference like raster images do. 
+If you are using SVG files on your website, smaller file sizes mean your images will load faster.
+Editing capabilities
+SVG files are unique in that they can be edited in graphic editing programs (such as Adobe Illustrator, Inkscape or Sketch) like other images, 
+but also in a text editor where the markup can be adjusted directly.
+
+<br>
+<br>
+<br>
+<hr>
+<br>
+
+<h2>Size</h2>
+File sizes for SVG can be significantly smaller ...
+<br>
+
+<section style="display: grid">
+  <div style="grid-column: 1; text-align: center">
+    <h3>SVG Logo</h3>
+    <img src="images/Spark_logo.svg" 
+        alt="SVG Logo" width="256" height="256"><br><br>Filesize: 4 KB <br> Dimensions: N x N</img>
+  </div>
+
+  <div style="grid-column: 2; text-align: center">
+    <h3>PNG Logo</h3>
+    <img src="images/Spark_logo512px.png" 
+        alt="SVG Logo" width="256" height="256"><br><br>Filesize: 29 KB <br> Dimensions: 512 x 512</img>
+  </div>
+</section>
+
+<br>
+<br>
+<hr>
+<br>
+<h2>Placeholders</h2>
+Image place can be easily created using stylish linear gradients to imporve the visual appeal...
+
+<section style="display: grid">
+  <div style="grid-column: 1">
+    <a href="images/GradientRect/GradientRect1.svg">
+        <img src="images/GradientRect/GradientRect1.svg" alt="GradientRect1.svg" style="width: 180px; height: auto; transform: translate(-25%,-25%)">
+    </a>
+  </div>
+
+  <div style="grid-column: 2">
+    <a href="images/GradientRect/GradientRect2.svg">
+      <img src="images/GradientRect/GradientRect2.svg" alt="GradientRect2.svg" style="width: 180px; height: auto; transform: translate(-25%,-25%)">
+    </a>
+  </div>
+
+  <div style="grid-column: 3">
+    <a href="images/GradientRect/GradientRect3.svg">
+      <img src="images/GradientRect/GradientRect3.svg" alt="GradientRect3.svg" style="width: 180px; height: auto; transform: translate(-25%,-25%)">
+    </a>
+  </div>
+
+  <div style="grid-column: 5">
+    <a href="images/GradientRect/GradientRect5.svg">
+      <img src="images/GradientRect/GradientRect5.svg" alt="GradientRect5.svg" style="width: 180px; height: auto; transform: translate(-25%,-25%)">
+    </a>
+  </div>
+  <br>
+</section>
+
+
+<hr>
+<br>
+
+<div style="text-align: center" >
+    <img src="images/SampleText.svg" style="display: block;  margin-left: auto; margin-right: auto; height: auto; "
+            alt="Sample Text" width="400"><br>Filesize: 12 KB <br> Dimensions: N x N</img>
+          </div>
+
+
+<br>
+<br>
+In this case the "Sample Text" is an SVG file of 12 KB - and does not require the overhead of a TrueType font file, and associated resources to render at any resolution.
+<br>
+<br>
+NOTE:  The TTF file for the above font is 42 KB.
+<br>
+<br>
+
+<hr>
+<br>
+
+<h1> SVG Essentials - Shapes</h1>
+<br>
+Below are some useful essential SVG shapes, demonstrating both <i>linear</i> and <i>radial</i>   Gradient Fills.
+<br>
+
+
+<section style="display: grid; text-align: center" >
+
+  <div style="grid-column: 1">
+      <a href="images/Shapes/rect.svg">
+          <img src="images/Shapes/rect.svg" alt="Rect" style="width: 180px; height: auto; transform: translate(0%,20%)">
+      </a>Rectangle
+  </div>
+
+  <div style="grid-column: 2">
+    <a href="images/Shapes/rrect.svg">
+        <img src="images/Shapes/rrect.svg" alt="RRect" style="width: 180px; height: auto; transform: translate(0%,20%)">
+    </a>Rounded Rectangle
+  </div>
+
+  <div style="grid-column: 3">
+    <a href="images/Shapes/circle.svg">
+        <img src="images/Shapes/circle.svg" alt="Circle" style="width: 180px; height: auto; transform: translate(-0%,20%)">
+    </a>Circle
+  </div>
+
+  <div style="grid-column: 5">
+    <a href="images/Shapes/ellipse.svg">
+        <img src="images/Shapes/ellipse.svg" alt="Ellipse" style="width: 180px; height: auto; transform: translate(-0%,20%)">
+    </a>Ellipse
+  </div>
+</section>
+<br>
+<br>
+
+<div style="background-color:#eee;padding:10px;border-radius:7px;"><a href="http://johnrobinsn.github.io/pxScene2d/docs/">Version: Bleeding Edge</a>.
+</div>
+
+
+<br/>
+</div>
+<script src="/projects/analytics.js"></script>
+</body>
+</html>

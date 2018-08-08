@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="200px" height="200px" viewBox="0 0 200 200" xml:space="preserve">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="32.0229" y1="142.4004" x2="171.9757" y2="61.5986" gradientTransform="matrix(-4.371139e-08 -1 1 -4.371139e-08 -2 201.9995)">
+	<stop  offset="0.0056" style="stop-color:#375270"/>
+	<stop  offset="0.1022" style="stop-color:#455E7C"/>
+	<stop  offset="0.2503" style="stop-color:#556C89"/>
+	<stop  offset="0.4143" style="stop-color:#5F7591"/>
+	<stop  offset="0.6236" style="stop-color:#627793"/>
+	<stop  offset="0.7103" style="stop-color:#637995"/>
+	<stop  offset="0.78" style="stop-color:#677E9C"/>
+	<stop  offset="0.8437" style="stop-color:#6C86A7"/>
+	<stop  offset="0.9039" style="stop-color:#7291B6"/>
+	<stop  offset="0.9611" style="stop-color:#789DC8"/>
+	<stop  offset="1" style="stop-color:#7DA7D9"/>
+</linearGradient>
+<rect x="25" y="50" fill="url(#SVGID_1_)" width="150" height="100"/>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
