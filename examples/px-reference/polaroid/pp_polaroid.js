@@ -17,7 +17,8 @@ var bgUrl = basePackageUri+"/images/cork.png";
 var bgShadowUrl = basePackageUri+"/images/radial_gradient.png";
 var shadowUrl = basePackageUri+"/images/BlurRect.png";
 var shadowImageObj = scene.create({t:"imageResource",url:shadowUrl});
- 
+var imagesUrl = 'http://www.pxscene.org/examples/px-reference/polaroid/images.json';
+
 var numimages = px.appQueryParams.numimages;
 if( numimages === undefined) { numimages = 8;}
 
@@ -27,6 +28,9 @@ if( doRotation === undefined || (doRotation != 1 && doRotation != 0)) {doRotatio
 var usePainting = px.appQueryParams.usePainting;
 if( usePainting === undefined || (usePainting != 1 && usePainting != 0)) {usePainting = 1;}
 console.log("usePainting = "+usePainting);
+
+var pics = px.appQueryParams.pics;
+if( pics != undefined && pics == 'flickr') { imagesUrl = 'http://www.pxscene.org/examples/px-reference/polaroid/flickr_images.json';}
 
 // Number of images on screen before they start to fade away
 var numVisible = 5;
@@ -44,7 +48,7 @@ function randomIntFromList(li) {
 }
 
 // Load the static json with image urls
-var screensaverPromise = px.getModuleFile('http://www.pxscene.org/examples/px-reference/polaroid/images.json');
+var screensaverPromise = px.getModuleFile(imagesUrl);
 
 
 var firstPicture = null;
