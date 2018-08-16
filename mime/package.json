@@ -1,0 +1,11 @@
+{
+  "name": "mime_server",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.15.2",
+    "morgan": "^1.8.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
