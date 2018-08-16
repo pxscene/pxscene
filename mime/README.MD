@@ -1,9 +1,9 @@
-# Heroku deployment
+# Spark MIME decoders
 
-```
-git init
-git add .
-git commit -m "init"
-heroku create
-git push heroku master
-```
+
+Support for ...
+
+- IMAGES (svg, png, jpg) 
+- TEXT   (tt) 
+- MARKDOWN (md)
+
