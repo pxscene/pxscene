@@ -9,11 +9,11 @@
       <key>Predicate</key>
       <string>Ticket.version != '1.0.0.0'</string>
       <key>Codebase</key>
-      <string>http://www.pxscene.org/dist/osx/pxscene/pxscene.dmg</string>
+      <string>http://www.pxscene.org/dist/osx/pxscene/Spark.dmg</string>
       <key>Hash</key>
-      <string>1APggbncUj7bzTWSmA5t0/WHBwY=</string>
+      <string>tYck78vj8Tng+CU9ueN5f4kP0hE=</string>
       <key>Size</key>
-      <string>11932578</string>
+      <string>11932590</string>
       <key>Version</key>
       <string>1.0.0.0</string>
     </dict>
