@@ -24,16 +24,14 @@
   <h3>Highlights:</h3>
   <bullets>
       <ul>
-	  <li>Renaming of the application from pxscene to spark.</li>
-	  <li>Top part of the fonts is cut off when using "sy:0.5", "clip:false".</li>
-	  <li>Extend [ imageResource ] API to support Data URI/URLs</li>
-	  <li>Provide bookmarking/history in browser.js</li>
-	  <li>Implemented spark versioning.</li>
-	  <li>"test_pxImage9.HANGING: FAILURE AND CANCEL TESTS".</li>
-	  <li>http2 functionality is not limited to client-only.</li>
-	  <li>textColor, fillColor, lineColor from pxText/pxRect,  always returns 0.</li>
+	  <li>Renamed application from pxscene to Spark</li>
+	  <li>Extend imageResource API to support Data URI/URLs</li>
+	  <li>Provide bookmarking/history in browser.js - use PAGE DOWN key to toggle on/off a bookmark list of urls used during this Spark session</li>
+	  <li>Implemented spark versioning - use scene.capabilities.graphics.svg to check if SVG support is available.  More capabilities to come...</li>
+	  <li>Fix issue that was causing pxImage9 hanging behavior during CI tests</li>
+	  <li>Limit http2 functionality to client-only</li>
+	  <li>Implement get function for color properties:  textColor, fillColor, lineColor from pxText/pxRect</li>
 	  <li>Add a build time switch to turn off CORS enforcement for image and font downloads.</li>
-	  <li>Fix errors with browser.js + listbox.</li>
 	  <li>Implement List Box Component.</li>
       </ul>
   </bullets>
