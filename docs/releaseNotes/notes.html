@@ -16,6 +16,65 @@
 
 <body style="text">
 
+<u><h2>Release 1.0.0.0 (OSX) - 16August2018</h2></u>
+<p>16August2018 - Windows release cancelled due to an issue.<br/>
+</p>
+
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.0.0.0)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+      <ul>
+	  <li>Renamed application from pxscene to Spark</li>
+	  <li>Extend imageResource API to support Data URI/URLs</li>
+	  <li>Provide bookmarking/history in browser.js - use PAGE DOWN key to toggle on/off a bookmark list of urls used during this Spark session</li>
+	  <li>Implemented spark versioning - use scene.capabilities.graphics.svg to check if SVG support is available.  More capabilities to come...</li>
+	  <li>Fix issue that was causing pxImage9 hanging behavior during CI tests</li>
+	  <li>Limit http2 functionality to client-only</li>
+	  <li>Implement get function for color properties:  textColor, fillColor, lineColor from pxText/pxRect</li>
+	  <li>Add a build time switch to turn off CORS enforcement for image and font downloads.</li>
+	  <li>Implement List Box Component.</li>
+      </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+      <ul>
+	  <li>Fixes for spark and sparkEdge name conversion issues (#1397)</li>
+	  <li>Added initializers - Coverity flagged (#1396)</li>
+	  <li>Trigger mac build for tag push (#1395)</li>
+	  <li>update to 1.0.0.0 (#1393)</li>
+	  <li>Fix errors with listbox (#1387)</li>
+	  <li>Revert "unlock rtWrapperSceneUpdate when calling js from scene's onUpdate; simplify rtMapObject wrapping (#1355)" (#1391)</li>
+	  <li>Spark rename changes (#1385)</li>
+	  <li>Changes for fixing font cut-off on less scale values (#1371)</li>
+	  <li>fix for openssl externals (#1384)</li>
+	  <li>capability versioning support (#1381)</li>
+	  <li>Revised DataURI (SVG + Base64 image) scheme with MD5 hash keys... (#1337)</li>
+	  <li>integrate license check in CI (#1051)</li>
+	  <li>Avoid calling scene update after close (#1378)</li>
+	  <li>To fix the openssl releated resource missing in travis. (#1379)</li>
+	  <li>updates for the raspberry pi build (#1380)</li>
+	  <li>unlock rtWrapperSceneUpdate when calling js from scene's onUpdate; simplify rtMapObject wrapping (#1355)</li>
+	  <li>build switch for resources to use CORS (#1368)</li>
+	  <li>http2 functionality is not limited to client-only (#1362)</li>
+	  <li>ensure http requests are processed as quickly as possible (#1376)</li>
+	  <li>texture memory updates (#1369)</li>
+	  <li>Edge enhancements (#1365)</li>
+	  <li>Adding getter functions for colors. Previously marked as TODO (#1363)</li>
+	  <li>listbox component (#1349)</li>
+	  <li>Trigger Mac build in travis for tag push (#1361)</li>
+	  <li>Edge enhancements (#1360)</li>
+	  <li>Add license to new files (#1354)</li>
+	  <li>Fix for travis build not getting stopped on a crash. (#1352)</li>
+	  <li>Updatebg (#1350)</li>
+	  <li>fix for pxImage9 hang on loads (#1348)</li>
+	  <li>Adding testing for OSCILLATE animation property (#1342)</li>
+	  <li>xcode version update in travis build (#1326)</li>
+	  <li>adding unittest for externals (#1310)</li>
+      </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/>
 
 <u><h2>Release 0.41.2.0 (OSX) - 07August2018</h2></u>
 <p>07August2018 - Windows release cancelled due to an issue.<br/>
