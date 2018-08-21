@@ -1,265 +1,600 @@
 "use strict";
 
-px.import({ scene:      'px:scene.1.js',
-             keys:      'px:tools.keys.js'
+px.import({ scene: 'px:scene.1.js',
+             keys: 'px:tools.keys.js'
 }).then( function importsAreReady(imports)
 {
   var scene = imports.scene;
-  var keys  = imports.keys;
   var root  = imports.scene.root;
+  var keys  = imports.keys;
 
-  var appURLs = [
-    "SVG/LogosSVGres.js",
-    "SVG/LogoIcons.js",
-    "SVG/WikiIcons.js",
-    "SVG/Saturn/Saturn.js",
-    "SVG/Tiger/Tiger.js",
-   // "SVG/GradientTestSVG.js", 
-   // "SVG/TinyIconsSVG.js", 
-  ];
+  var base = px.getPackageBaseFilePath();
 
-  var basePackageUri = px.getPackageBaseFilePath();
+  var pos_x = 0, pos_y = 0;
 
-  var url     = basePackageUri + "/images/status_bg.png";
-  var bgShade = scene.create({ t: "image", parent: root, url: url, stretchX: scene.stretch.STRETCH, stretchY: scene.stretch.STRETCH });
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  var appURLs = [     "SVG/LogosSVGres.js",   "SVG/LogoIcons.js",      "SVG/WikiIcons.js",
+                      "SVG/Saturn/Saturn.js", "SVG/Tiger/Tiger.js", // "SVG/GradientTestSVG.js",
+                ]; // "SVG/TinyIconsSVG.js",
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var RATIO_16_9  = 16/9;
-  var child_sx    = 0.25;
-  var child_sy    = 0.25;
-  
+  var url  = base + "/images/status_bg.svg";
+
+  var bgShade = scene.create({ t: "image", parent: root, url: url, w: scene.w, h: scene.h,
+                              stretchX: scene.stretch.STRETCH, stretchY: scene.stretch.STRETCH });
+
+  var demoMode          = false;
+  var demoStopping      = false;
+  var demoIndex         = 0;
+  var demoTimer         = null;
+
+  var animSelectMoveTo  = null;
+  var animSelectFadeOut = null;
+//  var animSelectFadeIn  = null;
+  var animAppZoomIn     = null;
+  // var animAppZoomOut    = null;
+
   var childPad    =   48;
   var child_w     = 1280;
   var child_h     =  720;
 
-  var childRows   =    3;
-  var childCols   =    3;
+  var num_rows    =    3;
+  var num_cols    =    3;
 
   var select_w    = 1280 + (2 * childPad);
   var select_h    =  720 + (2 * childPad);
 
-  var select;
+  var child_sx    =  0.29;
+  var child_sy    =  0.29;
 
-  var apps    = scene.create({ t: "image", parent: root, sx: child_sx, sy: child_sy, w: child_w, h: child_h });
+  // console.log("DEBUG: aspect: " + aspect + "  child_sx: " + child_sx + " child_sy: " + child_sy);
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  var doppel = null;  // 'Doppelganger' aka. Clone !
+  var select = null;
 
-  var numUrls = appURLs.length;
 
+  var fontRes = scene.create({ t: "fontResource",  url: "FreeSans.ttf" });
+  var    apps = scene.create({ t: "image", parent: root, sx: child_sx, sy: child_sy, w: child_w, h: child_h });
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //
   // Create the child App scenes...
-  for (var i = 0; i < numUrls; i++)
+  //
+  appURLs.map( (url, index) =>
   {
-    var appUrl = basePackageUri + "/" + appURLs[i];
-    var c = scene.create(
+    if(url.indexOf("dummyScene") >= 0) /// Using offline Dummy scenes
     {
-      t: "scene", url: appUrl, parent: apps, w: child_w, h: child_h, clip: true
-    });
+      url += "&text='Scene "+index+"'"; // append "Scene (index)"
 
-    c.on("onMouseDown", function (e)
+      url = url.replace(/#/, "%23"  ); // Escape #
+      url = url.replace(/'/g, ""  );   // remove '
+      url = url.replace(/"/g, ""  );   // remove "
+    }
+
+    var appUrl = base + "/" + url;
+    var app = scene.create( { t: "scene", parent: apps, id: index, url: appUrl, w: child_w, h: child_h, clip: true });
+
+    app.on("onMouseDown", function (e)
     {
-      var c = e.target;
+      var hit = e.target;
 
-      if ( (e.flags & 48) == 48) // CTRL ALT
+      if(demoMode == false)
+      {
+        demoIndex = parseInt(hit.id);
+      }
+
+      select.id = hit.id; // always
+
+      //--------------------------------[ CTRL ALT + Click ]-------------------------------
+      //
+      if ( (e.flags & 48) == 48) // CTRL ALT + Click
       // if ( keys.is_CTRL_ALT(e.flags) ) // Zoom-In
       {
-        var tt = 1;
-
-        console.log("updateSize() >>  child_sx: "+ child_sx + "  child_w: " + (child_w * child_sx) );
-
-        if(select.a == 1)
+        if(demoMode == false)
         {
-          select.a = 0;
-
-          // update selection position
-          select.x = (c.x - childPad) * child_sx;
-          select.y = (c.y - childPad) * child_sy;
-
-          var sx = (root.w /c.w);
-          var sy = (root.h /c.h);
-
-          apps.animateTo({ sx: sx, sy: sy, x: -c.x * sx,  y: -c.y * sy }, tt, scene.animation.TWEEN_STOP, scene.animation.OPTION_FASTFORWARD)
-          .then(function (o)
-          {
-            // nothing
-          });
-        }
-        else
-        {
-          apps.animateTo({ sx: child_sx, sy: child_sy, x: 0, y: 0 }, tt, scene.animation.TWEEN_STOP, scene.animation.OPTION_FASTFORWARD)
-          .then(function (o)
-          {
-            select.animateTo({ a: 1 }, 0.5, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_FASTFORWARD);
-          });
+          (select.a == 1) ? zoomIn(hit.id) : zoomOut(hit.id);
+          e.stopPropagation();
         }
       }
       else
-      if ( (e.flags & 16) == 16)
-      // if ( keys.is_CTRL(e.flags) )
+      //----------------------------------[ CTRL + Click ]---------------------------------
+      //
+      if (e.flags & 16) // CTRL + Click
       {
-        // ctrl-mousedown
-        c.cx = c.w / 2;
-        c.cy = c.h / 2;
+        hit.cx = hit.w / 2;
+        hit.cy = hit.h / 2;
 
         // rewind if cancelled; reset to 0 when complete
         // ready for the next one
-        c.animateTo({ r: 360 }, 3, scene.animation.TWEEN_STOP, scene.animation.OPTION_REWIND).then(function (o) {
-          o.r = 0;
-        });
+        hit.animateTo({ r: 360 }, 3, scene.animation.TWEEN_STOP, scene.animation.OPTION_REWIND)
+        .then(function (o) { o.r = 0; });
+
+        e.stopPropagation();
 
         // TODO this should work too... see what's wrong
         //c.animateTo({r: 360}, 3, scene.animation.TWEEN_STOP).then(o=>{o.r=0}).catch(o=>{o.r=0});
       }
-      else
-      {
-        c.focus = true;
-        if(select.a > 0)
-          select.animateTo({ x: (c.x - childPad) * child_sx, y: (c.y - childPad) * child_sy }, 0.3, 
-                              scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
-      }
+      //-----------------------------------------------------------------------------------
+
+      hit.focus = true;
+      select.animateTo({ x: (hit.x - childPad) * child_sx,
+                          y: (hit.y - childPad) * child_sy }, 0.3,
+          scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
+
+      pos_x = Math.round( hit.x / (select_w ) )
+      pos_y = Math.round( hit.y / (select_h ) )
+
+          //console.log("DEBUG: moveTo() >> pos_x: " + pos_x + " pos_y: " + pos_y + " <<<<<< MOUSE CLICKED");
     });
 
-    if (i == 0) c.focus = true;
-  }//FOR
+    if (index == 0) app.focus = true;
+  }, scene); // MAP
 
-  var ccx = scene.alignHorizontal.CENTER;
-  var ccy = scene.alignVertical.CENTER;
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var textTimer = null;
-  var textMsg = scene.create({t: 'textBox', parent: apps, text: "CTRL - ALT  + \"Mouse Click\" to toggle Zoom ", x: 100, y: scene.h - 60, 
-                    textColor: "#fff", pixelSize: 50, alignHorizontal: ccx, alignVertical: ccy });
+  var url = base + "/images/select.png";
 
-  var url = basePackageUri + "/images/select.png";
+  // Create Shadow Highlight
+  doppel = scene.create({ t: "image9", parent: root, url: url, a: 0,
+                          insetLeft: 16, insetTop: 16, insetRight: 16, insetBottom: 16,
+                          w: (select_w * child_sx), h: (select_h * child_sy), x: 0, y: 0, interactive: false });
 
   // Create Highlight
-  select = scene.create({ t: "image9", parent: root, url: url, 
+  select = scene.create({ t: "image9", parent: root, url: url, id: 0, // <<< Using ID
                           insetLeft: 16, insetTop: 16, insetRight: 16, insetBottom: 16,
-                          w: (select_w * child_sx), h: (select_h * child_sy), x: 0, y: 0, interactive: false
-  });
+                          w: (select_w * child_sx), h: (select_h * child_sy), x: 0, y: 0, interactive: false });
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  function sub2ind(x,y)
+  {
+    return (y * num_cols) + x;
+  }
+
+  function ind2sub(sel)
+  {
+      return { x: Math.floor(sel % num_cols),
+                y: Math.floor(sel / num_rows)  };
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   scene.root.on('onKeyDown', function (e)
   {
-    if (e.keyCode == keys.SPACE)
+    //----------------------------------[ CTRL - SHIFT]----------------------------------
+    //
+    if ( keys.is_CTRL_SHIFT(e.flags) )
     {
-      root.painting = !root.painting;
+      if (e.keyCode == keys.D) // Demo mode
+      {
+        demoIndex = 0; // reset
+        (demoMode == false) ? startDemo() : stopDemo();
+      }
     }
+    //--------------------------------------[ CTRL ]-------------------------------------
+    //
+    else
+    if ( keys.is_CTRL(e.flags) )
+    {
+      if (e.keyCode == keys.D) // Demo mode
+      {
+        (demoMode == false) ? startDemo() : stopDemo();
+      }
+      else
+      if (e.keyCode == keys.L) // LAST
+      {
+        if(select.a == 0)
+        {
+          zoomOut(hit.id);
+        }
+      }
+    }
+    //-----------------------------------[ CTRL - ALT ]----------------------------------
+    //
+    else if ( keys.is_CTRL_ALT(e.flags) )
+    {
+        if(e.keyCode == keys.ENTER)
+        {
+          var index = parseInt(select.id);
+          (select.a == 1.0) ? zoomIn(index) : zoomOut();
+          e.stopPropagation();
+        }
+    }
+    //--------------------------------------[ KEYS ]-------------------------------------
+    //
+    else
+    //if ( keys.is_CTRL_ALT(e.flags) ) // Arrows
+    {
+      var dx = 0, dy = 0;
+      var index = parseInt(select.id);
+
+      switch(e.keyCode)
+      {
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        case keys.SPACE: root.painting = !root.painting; break; // TOGGLE Painting
+        case keys.ENTER: zoomIn(index);                  break; // SELECT App
+        case keys.UP:    dx =  0; dy = -1;               break; //    UP a row
+        case keys.DOWN:  dx =  0; dy =  1;               break; //  DOWN a row
+        case keys.LEFT:  dx = -1; dy =  0;               break; //  LEFT a square
+        case keys.RIGHT: dx =  1; dy =  0;               break; // RIGHT a square
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      }//SWITCH
+
+      if(animSelectMoveTo == null && (dx != 0 || dy !=0) ) // Not currently moving, and did change ?
+      {
+        pos_x += dx;   pos_y += dy;
+
+        moveTo(dx,dy);
+      }
+    }
+    //-----------------------------------------------------------------------------------
   });
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   function repositionApps()
   {
     var numApps = apps.numChildren;
     for (var i = 0; i < numApps; i++)
     {
-      var c = apps.children[i]; 
+      var c = apps.children[i];
       c.animateTo(
       {
-        x:             i % childCols * (child_w + childPad) + childPad,
-        y: Math.floor(i / childCols) * (child_h + childPad) + childPad
+        x:             i % num_cols * (child_w + childPad) + childPad,
+        y: Math.floor(i / num_cols) * (child_h + childPad) + childPad
       }, 0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
     }
   }
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  function moveTo(dx, dy)
+  {
+    return new Promise(function(resolve,reject)
+    {
+      let tt = 0.4;
+
+      var index = sub2ind(pos_x, pos_y);
+
+      console.log("DEBUG: moveTo() >> index: " + index);
+
+    // Do we need the "offscreen" / Pac-Mac  effect ?
+    if(pos_x < 0 || pos_x == num_cols ||
+        pos_y < 0 || pos_y == num_rows )
+    {
+        var doppel_x = pos_x * (child_w + childPad) * child_sx;
+        var doppel_y = pos_y * (child_h + childPad) * child_sy;
+
+        doppel.a = 1;
+        doppel.x = select.x;
+        doppel.y = select.y;
+
+        // Compute offscreen position
+            if(pos_x < 0)         pos_x = num_cols;
+        else if(pos_x == num_cols) pos_x =  -1;
+
+            if(pos_y < 0)         pos_y = num_cols;
+        else if(pos_y == num_rows) pos_y =  -1;
+
+        // Teleport selection position
+        select.draw = false;
+        select.x = pos_x * (child_w + childPad) * child_sx;
+        select.y = pos_y * (child_h + childPad) * child_sy;
+        select.draw = true;
+
+        // Final correction
+        pos_x += dx;
+        pos_y += dy;
+
+        doppel.animate({ x: doppel_x, y: doppel_y, a: 0 }, tt, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
+      }
+
+      var xx = pos_x * (child_w + childPad) * child_sx;
+      var yy = pos_y * (child_h + childPad) * child_sy;
+
+      // ANIMATE: move Select
+      animSelectMoveTo = select.animate({ x: xx, y: yy }, tt, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
+      animSelectMoveTo.done.then(function (o)
+      {
+        select.id = index;
+
+        animSelectMoveTo = null;
+        resolve();
+      });
+    });
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //
+  // ANIMATE - move Selection, fade-out Selection, zoom-in on App
+  //
+  function switchTo(i)
+  {
+    // console.log("DEBUG: switchTo() >> index: " + i);
+
+    return new Promise(function(resolve,reject)
+    {
+        var p = ind2sub(i)
+
+        pos_x = p.x; pos_y = p.y;
+
+        moveTo(p.x, p.y)
+        .then(function(o)
+        {
+          zoomIn( parseInt( i ) )
+          .then(function(o)
+          {
+            resolve();
+
+          }, function() { console.log("DEBUG: zoomIn() >> REJECT "); } )
+
+        }, function() { console.log("DEBUG: selectSquare() >> REJECT "); } )
+    }); // Pomise
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //
+  // ANIMATE - fade-out Selection, zoom-in to App
+  //
+  function zoomIn(i)
+  {
+    // console.log("DEBUG: zoomIn() >> index: " + i);
+
+    return new Promise(function(resolve,reject)
+    {
+      var c = apps.children[ parseInt(i) ];
+
+      if(c == undefined)
+      {
+        return;
+      }
+
+      var tt = 1;
+
+      // ANIMATE: fade Select
+      animSelectFadeOut = select.animate({ a: 0 }, 0.3, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_FASTFORWARD, 1);
+      animSelectFadeOut.done.then( function()
+      {
+        animSelectFadeOut = null;
+
+//      if(demoStopping == true) return;
+
+        var sx = (root.w / c.w);
+        var sy = (root.h / c.h);
+
+        var xx = -c.x * sx;
+        var yy = -c.y * sy;
+
+        // ANIMATE: zoom-in App
+        animAppZoomIn = apps.animate({ sx: sx, sy: sy,  x: xx, y: yy }, tt, scene.animation.TWEEN_STOP, scene.animation.OPTION_FASTFORWARD)
+        animAppZoomIn.done.then(function()
+        {
+          animAppZoomIn = null;
+
+          c.focus = true;
+          resolve();
+
+        }) // animAppZoomIn
+      });//promise
+    });
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  //
+  // ANIMATE - zoom-out from App, fade-in Selection
+  //
+  function zoomOut()
+  {
+    console.log("DEBUG: zoomOut() >> index: " + select.id);
+
+    return new Promise(function(resolve,reject)
+    {
+      if(select.a == 1.0) // already zoomed out.
+      {
+        resolve();
+        return;
+      }
+
+      apps.animateTo({ sx: child_sx, sy: child_sy, x: 0, y: 0 }, 1, scene.animation.TWEEN_STOP, scene.animation.OPTION_FASTFORWARD)
+      .then( function()
+      {
+        select.animateTo({ a: 1 }, 0.35, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_FASTFORWARD, 1)
+        .then( function()
+        {
+          resolve();
+        });
+      });//fade in
+    });//promise
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  function runDemo(i = 0, timeout = 10000) // default to 10 seconds
+  {
+    if(demoStopping == true)
+    {
+      return;
+    }
+
+    demoIndex = i;
+    var nextApp = i + 1;
+    if(nextApp >= apps.children.length)
+    {
+      nextApp = 0; //wrap
+    }
+
+    console.log("DEMO MODE:  Scheduling App Index " + nextApp + " ...")
+    demoTimer = setTimeout( function()
+    {
+      if(demoStopping == true)
+      {
+        return // turn off
+      }
+
+      zoomOut(i).then(function() // ANIMATE - Selection
+      {
+        if(demoStopping == true)
+        {
+          return;
+        }
+
+        switchTo(nextApp).then(function()
+        {
+          if(demoMode == true)
+          {
+            runDemo( nextApp, timeout ); // next !!
+          }
+        }); // switchTo()
+
+      }); // zoomOut()
+
+    }, timeout);
+  }  // animSelectFadeOut
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  // startDemo  >>  runDemo
+  //
+  //  REPEAT:  zoomOut  >> switchTo  >> moveTo  >> zoomIn
+
+  function startDemo()
+  {
+    demoMode = true;
+
+    showBanner("Demo Mode: ON")
+    .then(function()
+    {
+      zoomIn(demoIndex);
+
+      demoStopping = false;
+
+      runDemo(demoIndex, 3000);
+    });
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  function stopDemo()
+  {
+    demoStopping = true;
+
+    if(animAppZoomIn != null)
+    {
+      animAppZoomIn.cancel();
+      // revert ZoomIn
+    }
+    else
+    if(animSelectFadeOut != null)
+    {
+      animSelectFadeOut.cancel();
+    }
+    else
+    if(animSelectMoveTo != null)
+    {
+      animSelectMoveTo.cancel();
+    }
+
+    demoStopping = true;
+    demoMode     = false;
+
+    clearTimeout(demoTimer);
+    demoTimer = null;
+
+    showBanner("Demo Mode: OFF");
+  }
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  function showBanner(txt)
+  {
+    return new Promise(function(resolve,reject)
+    {
+      var bw = 400;
+      var bh = 100;
+      var bx = (scene.w - bw)/2;
+      var by = (scene.h - bh)/2;
+
+      var banner = scene.create({t:"rect",    parent: root,   interactive: false, fillColor: "#000", x: bx, y: by, w: bw, h: bh });
+      var text   = scene.create({t:"textBox", parent: banner, interactive: false, textColor: "#fff",
+                            w: bw, h: bh ,
+                        font: fontRes, pixelSize: 40,
+                        text: txt,
+                        alignHorizontal: scene.alignHorizontal.CENTER,
+                        alignVertical:   scene.alignVertical.CENTER})
+
+      Promise.all([banner.ready, text.ready])
+      .catch( function (err)
+      {
+          console.log(">>> Loading Assets ... err = " + err);
+      })
+      .then( function (success, failure)
+      {
+        banner.moveToFront();
+
+        setTimeout(function()
+        {
+          banner.animateTo({ a: 0 }, 1.35, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_FASTFORWARD, 1)
+          .then(function ()
+          {
+            banner.remove();
+            resolve();
+          })
+        }, 1000);
+      });
+    }); // promise
+
+  }//function()
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   function updateSize(w, h)
   {
+    child_sx = scene.w / select_w / num_cols * 0.98;
+    child_sy = scene.w / select_h / num_rows * 0.98;
+
+    child_sx = Math.min(child_sx, child_sy);
+    child_sy = child_sx;
+
     bgShade.w = w;
     bgShade.h = h;
 
-    root.w    = w;
-    root.h    = h;
+    root.w = w;
+    root.h = h;
 
-    childCols = 3;// Math.floor(w / ((child_w + childPad) * child_sx));
-
-    if (childCols < 1) childCols = 1;
-    if (childCols > 3) childCols = 3;
-
-    var max_w = child_sx * child_w * childCols;
-    var pad_x = (w - max_w) / 4;
-
-    // Max width
-    child_sx  = (w / childCols) / (child_w + (2 * childPad));
-    child_sy  = child_sx;
-
-    //childPad = pad_x;
-
-    var max_h = child_sy * child_h * childRows;
-    var pad_y = (h - max_h) / childRows;
-
-    if(max_h > h)
-    {
-      // Max Height
-      child_sy  = (h / childCols) / (child_h + (2 * childPad));
-      child_sx  = child_sy;
-
-      //childPad = pad_y;
-    }
-
-    textMsg.w = w;
-    textMsg.y = h - 60;
-
-    apps.w  = w;
-    apps.h  = h;
     apps.sx = child_sx;
     apps.sy = child_sy;
 
-    var select_w = (child_w * child_sx) + (childPad / 2);
-    var select_h = (child_h * child_sy) + (childPad / 2);
+    doppel.remove();
+    doppel = null;
 
-    console.log("resizeApps() >> select WxH: "+ select_w + " x " + select_h );
+    // Re-Create Shadow Highlight
+    doppel = scene.create({ t: "image9", parent: root, url: url, a: 0,
+                insetLeft: 16, insetTop: 16, insetRight: 16, insetBottom: 16,
+                w: (select_w * child_sx), h: (select_h * child_sy), x: 0, y: 0, interactive: false });
 
-    if( (select.w != select_w) || (select.h != select_h) )
-    {
-      select.animateTo(
-      {
-        w: select_w,
-        h: select_h
-      }, 0.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
-    }//ENDIF
+    select.remove();
+    select = null;
 
-    console.log("updateSize() >> Screen WxH: " + w + " x " + h+  "  child WxH: "+ child_w + " x " + child_h + "  childAcross: " + childCols);
-    console.log("updateSize() >>  child_sx: "+ child_sx + "  child_w: " + (child_w * child_sx) );
-    console.log("updateSize() >>  child_sy: "+ child_sy + "  child_h: " + (child_h * child_sy) );
-    console.log("updateSize() >>     max_w: "+ max_w    + "    max_h: " + max_h + "  pad_x: "+ pad_y    + "    pad_y: " + pad_y );
+    // Re-Create Highlight
+    select = scene.create({ t: "image9", parent: root, url: url, id: 0,  // <<< Using ID
+                insetLeft: 16, insetTop: 16, insetRight: 16, insetBottom: 16,
+                w: (select_w * child_sx), h: (select_h * child_sy), x: 0, y: 0, interactive: false });
 
     repositionApps();
   }
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   scene.on("onResize", function (e)
   {
     updateSize(e.w, e.h);
   });
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-  scene.on("onMouseMove", function (e)
-  {
-    if(textTimer == null)
-    {
-      textMsg.a = 1.0;
-
-      textTimer = setTimeout(function()
-      {
-        textTimer = null;
-
-        textMsg.animateTo(
-        {
-          a: 0
-        }, 1.3, scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
-
-      }, 4000 ); // milliseconds
-    }
-  });
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   updateSize(scene.getWidth(), scene.getHeight());
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 }).catch(function importFailed(err) {
   console.error("Import for gallery.js failed: " + err);
