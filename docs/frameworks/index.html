@@ -35,12 +35,15 @@
                 <p>Only the following Nodejs modules are allowed for import: </p>
                 <ul>
                     <li>px</li>
+                    <li>crypto (as of Release 0.41)</li>
+                    <li>htmlparser</li>
                     <li>http - restricted to client functionality</li>
                     <li>https - restricted to client functionality</li>
+                    <li>http2 (as of Release 0.41) - restricted to client functionality </li>
                     <li>url</li>
-                    <li>net - restricted to client functionality</li>
+                    <li><strike>net - restricted to client functionality</strike><i> deprecated as of Release 0.40</i></li>
+                    <li>oauth (as of Release 0.41)</li>
                     <li>querystring</li>
-                    <li>htmlparser</li>
                     <li>ws - restricted to client functionality</li>
                 </ul>
 
