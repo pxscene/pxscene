@@ -31,7 +31,7 @@ A 2d scene graph API supporting the following:
 <dd>returns the width in pixel-sized units of the scene</dd>
 <dt class="number readonly">h</dt>
 <dd>returns the height in pixel-sized units of the scene</dd>
-<dt class="object">animation</dt>
+<dt class="object"> animation </dt>
 <dd><a href="#animation">animation</a> for animation-related constants</dd>
 <dt class="object">stretch</dt>
 <dd><a href="#stretch">stretch</a> for x/y stretch-related constants (for <a href="#image">image</a>)</dd>
@@ -211,9 +211,9 @@ Returns an <a href="#Animate">Animate</a> object that can be used to cancel or c
 <h2><a name="rectangle"></a><code>Rectangle</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
 <h3>Properties</h3>
 <dt class="number">fillColor</dt>
-<dd>specifies the color to fill the interior of the rectangle. eg. 0xff0000ff, opaque red, 0xrrggbbaa</dd>
+<dd>specifies the color to fill the interior of the rectangle. eg. 0xff0000ff, opaque red, Format: 0xrrggbbaa<br><br>NOTE:  Web style <b>"#rgb"</b> and <b>"#rrggbb"</b> are also supported at "create()" time, as a convenience shortcut.</dd>
 <dt class="number">lineColor</dt>
-<dd>specifies the color to stroke the edge of the rectangle. eg. 0xff0000ff, opaque red, 0xrrggbbaa</dd>
+<dd>specifies the color to stroke the edge of the rectangle. eg. 0xff0000ff, opaque red, Format: 0xrrggbbaa<br><br>NOTE:  Web style <b>"#rgb"</b> and <b>"#rrggbb"</b> are also supported at "create()" time, as a convenience shortcut.</dd>
 <dt class="number">lineWidth</dt>
 <dd>species the width of the line to stroke around the ege of the rectangle. defaults to 0.</dd>
 <hr/>
@@ -261,7 +261,7 @@ Text height and width are determined at runtime based on the text value, font, p
 <dt class="string">text</dt>
 <dd>specifies the text to render</dd>
 <dt class="number">textColor</dt>
-<dd>specifies the color to render the text. eg. 0xff0000ff,opaque red,0xrrggbbaa. defaults to opaque black [0x000000ff].</dd>
+<dd>specifies the color to render the text. eg. 0xff0000ff,opaque red,0xrrggbbaa. defaults to opaque black [0x000000ff].<br><br>NOTE:  Web style <b>"#rgb"</b> and <b>"#rrggbb"</b> are also supported at "create()" time, as a convenience shortcut.</dd>
 <dt class="number">pixelSize</dt>
 <dd>specifies the pixelSize of the rendered text</dd>
 <dt class="string">fontUrl</dt>
