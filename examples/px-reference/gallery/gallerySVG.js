@@ -18,7 +18,7 @@ px.import({ scene: 'px:scene.1.js',
                 ]; // "SVG/TinyIconsSVG.js",
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var url  = base + "/images/status_bg.svg";
+  var url = base + "/images/status_bg.svg";
 
   var bgShade = scene.create({ t: "image", parent: root, url: url, w: scene.w, h: scene.h,
                               stretchX: scene.stretch.STRETCH, stretchY: scene.stretch.STRETCH });
@@ -32,26 +32,24 @@ px.import({ scene: 'px:scene.1.js',
   var animSelectFadeOut = null;
 //  var animSelectFadeIn  = null;
   var animAppZoomIn     = null;
-  // var animAppZoomOut    = null;
+  var animAppZoomOut    = null;
 
-  var childPad    =   48;
-  var child_w     = 1280;
-  var child_h     =  720;
+  var childPad =   48;
+  var child_w  = 1280;
+  var child_h  =  720;
 
-  var num_rows    =    3;
-  var num_cols    =    3;
+  var num_rows =    3;
+  var num_cols =    3;
 
-  var select_w    = 1280 + (2 * childPad);
-  var select_h    =  720 + (2 * childPad);
+//var aspect   = child_w / child_h; 
+  var select_w = child_w + (2 * childPad);
+  var select_h = child_h + (2 * childPad);
 
-  var child_sx    =  0.29;
-  var child_sy    =  0.29;
-
-  // console.log("DEBUG: aspect: " + aspect + "  child_sx: " + child_sx + " child_sy: " + child_sy);
+  var child_sx = child_w / select_w / num_cols;
+  var child_sy = child_h / select_h / num_cols;
 
   var doppel = null;  // 'Doppelganger' aka. Clone !
   var select = null;
-
 
   var fontRes = scene.create({ t: "fontResource",  url: "FreeSans.ttf" });
   var    apps = scene.create({ t: "image", parent: root, sx: child_sx, sy: child_sy, w: child_w, h: child_h });
@@ -76,6 +74,11 @@ px.import({ scene: 'px:scene.1.js',
 
     app.on("onMouseDown", function (e)
     {
+      if(animAppZoomIn || animAppZoomOut)
+      {
+        return; // busy
+      }
+      
       var hit = e.target;
 
       if(demoMode == false)
@@ -118,7 +121,7 @@ px.import({ scene: 'px:scene.1.js',
 
       hit.focus = true;
       select.animateTo({ x: (hit.x - childPad) * child_sx,
-                          y: (hit.y - childPad) * child_sy }, 0.3,
+                         y: (hit.y - childPad) * child_sy }, 0.3,
           scene.animation.TWEEN_STOP, scene.animation.OPTION_LOOP, 1);
 
       pos_x = Math.round( hit.x / (select_w ) )
@@ -154,7 +157,7 @@ px.import({ scene: 'px:scene.1.js',
   function ind2sub(sel)
   {
       return { x: Math.floor(sel % num_cols),
-                y: Math.floor(sel / num_rows)  };
+               y: Math.floor(sel / num_rows)  };
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -169,6 +172,8 @@ px.import({ scene: 'px:scene.1.js',
       {
         demoIndex = 0; // reset
         (demoMode == false) ? startDemo() : stopDemo();
+
+        e.stopPropagation();
       }
     }
     //--------------------------------------[ CTRL ]-------------------------------------
@@ -179,6 +184,7 @@ px.import({ scene: 'px:scene.1.js',
       if (e.keyCode == keys.D) // Demo mode
       {
         (demoMode == false) ? startDemo() : stopDemo();
+        e.stopPropagation();
       }
       else
       if (e.keyCode == keys.L) // LAST
@@ -186,6 +192,7 @@ px.import({ scene: 'px:scene.1.js',
         if(select.a == 0)
         {
           zoomOut(hit.id);
+          e.stopPropagation();
         }
       }
     }
@@ -193,13 +200,14 @@ px.import({ scene: 'px:scene.1.js',
     //
     else if ( keys.is_CTRL_ALT(e.flags) )
     {
-        if(e.keyCode == keys.ENTER)
-        {
+       if(e.keyCode == keys.ENTER)
+       {
           var index = parseInt(select.id);
           (select.a == 1.0) ? zoomIn(index) : zoomOut();
           e.stopPropagation();
-        }
+       }
     }
+
     //--------------------------------------[ KEYS ]-------------------------------------
     //
     else
@@ -225,6 +233,7 @@ px.import({ scene: 'px:scene.1.js',
         pos_x += dx;   pos_y += dy;
 
         moveTo(dx,dy);
+        e.stopPropagation();
       }
     }
     //-----------------------------------------------------------------------------------
@@ -260,7 +269,7 @@ px.import({ scene: 'px:scene.1.js',
 
     // Do we need the "offscreen" / Pac-Mac  effect ?
     if(pos_x < 0 || pos_x == num_cols ||
-        pos_y < 0 || pos_y == num_rows )
+       pos_y < 0 || pos_y == num_rows )
     {
         var doppel_x = pos_x * (child_w + childPad) * child_sx;
         var doppel_y = pos_y * (child_h + childPad) * child_sy;
@@ -352,8 +361,8 @@ px.import({ scene: 'px:scene.1.js',
       var tt = 1;
 
       // ANIMATE: fade Select
-      animSelectFadeOut = select.animate({ a: 0 }, 0.3, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_FASTFORWARD, 1);
-      animSelectFadeOut.done.then( function()
+      animSelectFadeOut = select.animateTo({ a: 0 }, 0.3, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_FASTFORWARD, 1);
+      animSelectFadeOut.then( function()
       {
         animSelectFadeOut = null;
 
@@ -366,8 +375,8 @@ px.import({ scene: 'px:scene.1.js',
         var yy = -c.y * sy;
 
         // ANIMATE: zoom-in App
-        animAppZoomIn = apps.animate({ sx: sx, sy: sy,  x: xx, y: yy }, tt, scene.animation.TWEEN_STOP, scene.animation.OPTION_FASTFORWARD)
-        animAppZoomIn.done.then(function()
+        animAppZoomIn = apps.animateTo({ sx: sx, sy: sy,  x: xx, y: yy }, tt, scene.animation.TWEEN_STOP, scene.animation.OPTION_FASTFORWARD)
+        animAppZoomIn.then(function()
         {
           animAppZoomIn = null;
 
@@ -395,12 +404,17 @@ px.import({ scene: 'px:scene.1.js',
         return;
       }
 
-      apps.animateTo({ sx: child_sx, sy: child_sy, x: 0, y: 0 }, 1, scene.animation.TWEEN_STOP, scene.animation.OPTION_FASTFORWARD)
-      .then( function()
+      animAppZoomOut = apps.animateTo({ sx: child_sx, sy: child_sy, x: 0, y: 0 }, 1, scene.animation.TWEEN_STOP, scene.animation.OPTION_FASTFORWARD);
+      animAppZoomOut.then( function()
       {
+        // animAppZoomOut = null;
+
+        // Move Selection
         select.animateTo({ a: 1 }, 0.35, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_FASTFORWARD, 1)
         .then( function()
         {
+          animAppZoomOut = null;
+
           resolve();
         });
       });//fade in
@@ -515,8 +529,7 @@ px.import({ scene: 'px:scene.1.js',
       var by = (scene.h - bh)/2;
 
       var banner = scene.create({t:"rect",    parent: root,   interactive: false, fillColor: "#000", x: bx, y: by, w: bw, h: bh });
-      var text   = scene.create({t:"textBox", parent: banner, interactive: false, textColor: "#fff",
-                            w: bw, h: bh ,
+      var text   = scene.create({t:"textBox", parent: banner, interactive: false, textColor: "#fff",               w: bw, h: bh,
                         font: fontRes, pixelSize: 40,
                         text: txt,
                         alignHorizontal: scene.alignHorizontal.CENTER,
@@ -549,11 +562,11 @@ px.import({ scene: 'px:scene.1.js',
 
   function updateSize(w, h)
   {
-    child_sx = scene.w / select_w / num_cols * 0.98;
-    child_sy = scene.w / select_h / num_rows * 0.98;
+    select_w = child_w + (2 * childPad);
+    select_h = child_h + (2 * childPad);
 
-    child_sx = Math.min(child_sx, child_sy);
-    child_sy = child_sx;
+    child_sx = w / select_w / num_cols;
+    child_sy = h / select_h / num_cols;
 
     bgShade.w = w;
     bgShade.h = h;
@@ -597,5 +610,5 @@ px.import({ scene: 'px:scene.1.js',
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 }).catch(function importFailed(err) {
-  console.error("Import for gallery.js failed: " + err);
+  console.error("Import for gallerySVG.js failed: " + err);
 });
