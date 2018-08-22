@@ -48,9 +48,6 @@ px.import({ scene: 'px:scene.1.js',
   var child_sx = child_w / select_w / num_cols;
   var child_sy = child_h / select_h / num_cols;
 
-  var child_sx = 0.29;
-  var child_sy = 0.29;
-
   var doppel = null;  // 'Doppelganger' aka. Clone !
   var select = null;
 
@@ -81,7 +78,7 @@ px.import({ scene: 'px:scene.1.js',
       {
         return; // busy
       }
-
+      
       var hit = e.target;
 
       if(demoMode == false)
@@ -210,6 +207,7 @@ px.import({ scene: 'px:scene.1.js',
           e.stopPropagation();
        }
     }
+
     //--------------------------------------[ KEYS ]-------------------------------------
     //
     else
@@ -531,8 +529,7 @@ px.import({ scene: 'px:scene.1.js',
       var by = (scene.h - bh)/2;
 
       var banner = scene.create({t:"rect",    parent: root,   interactive: false, fillColor: "#000", x: bx, y: by, w: bw, h: bh });
-      var text   = scene.create({t:"textBox", parent: banner, interactive: false, textColor: "#fff",
-                           w: bw, h: bh ,
+      var text   = scene.create({t:"textBox", parent: banner, interactive: false, textColor: "#fff",               w: bw, h: bh,
                         font: fontRes, pixelSize: 40,
                         text: txt,
                         alignHorizontal: scene.alignHorizontal.CENTER,

@@ -52,9 +52,6 @@ px.import({ scene: 'px:scene.1.js',
   var child_sx = child_w / select_w / num_cols;
   var child_sy = child_h / select_h / num_cols;
 
-  var child_sx = 0.29;
-  var child_sy = 0.29;
-
   var doppel = null;  // 'Doppelganger' aka. Clone !
   var select = null;
 
@@ -191,6 +188,7 @@ px.import({ scene: 'px:scene.1.js',
       if (e.keyCode == keys.D) // Demo mode
       {
         (demoMode == false) ? startDemo() : stopDemo();
+
         e.stopPropagation();
       }
       else
@@ -199,6 +197,7 @@ px.import({ scene: 'px:scene.1.js',
         if(select.a == 0)
         {
           zoomOut(hit.id);
+
           e.stopPropagation();
         }
       }
@@ -239,6 +238,7 @@ px.import({ scene: 'px:scene.1.js',
         pos_x += dx;   pos_y += dy;
 
         moveTo(dx,dy);
+
         e.stopPropagation();
       }
     }
@@ -413,14 +413,11 @@ px.import({ scene: 'px:scene.1.js',
       animAppZoomOut = apps.animateTo({ sx: child_sx, sy: child_sy, x: 0, y: 0 }, 1, scene.animation.TWEEN_STOP, scene.animation.OPTION_FASTFORWARD);
       animAppZoomOut.then( function()
       {
-        // animAppZoomOut = null;
-
         // Move Selection
         select.animateTo({ a: 1 }, 0.35, scene.animation.TWEEN_LINEAR, scene.animation.OPTION_FASTFORWARD, 1)
         .then( function()
         {
           animAppZoomOut = null;
-
           resolve();
         });
       });//fade in
@@ -535,8 +532,7 @@ px.import({ scene: 'px:scene.1.js',
       var by = (scene.h - bh)/2;
 
       var banner = scene.create({t:"rect",    parent: root,   interactive: false, fillColor: "#000", x: bx, y: by, w: bw, h: bh });
-      var text   = scene.create({t:"textBox", parent: banner, interactive: false, textColor: "#fff",
-                           w: bw, h: bh ,
+      var text   = scene.create({t:"textBox", parent: banner, interactive: false, textColor: "#fff",               w: bw, h: bh,
                         font: fontRes, pixelSize: 40,
                         text: txt,
                         alignHorizontal: scene.alignHorizontal.CENTER,
