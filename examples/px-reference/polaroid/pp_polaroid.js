@@ -17,7 +17,7 @@ var bgUrl = basePackageUri+"/images/cork.png";
 var bgShadowUrl = basePackageUri+"/images/radial_gradient.png";
 var shadowUrl = basePackageUri+"/images/BlurRect.png";
 var shadowImageObj = scene.create({t:"imageResource",url:shadowUrl});
-var imagesUrl = 'http://www.pxscene.org/examples/px-reference/polaroid/images.json';
+var imagesUrl = '/images.json';
 
 var numimages = px.appQueryParams.numimages;
 if( numimages === undefined) { numimages = 8;}
@@ -30,7 +30,7 @@ if( usePainting === undefined || (usePainting != 1 && usePainting != 0)) {usePai
 console.log("usePainting = "+usePainting);
 
 var pics = px.appQueryParams.pics;
-if( pics != undefined && pics == 'flickr') { imagesUrl = 'http://www.pxscene.org/examples/px-reference/polaroid/flickr_images.json';}
+if( pics != undefined && pics == 'flickr') { imagesUrl = '/flickr_images.json';}
 
 // Number of images on screen before they start to fade away
 var numVisible = 5;
@@ -48,6 +48,8 @@ function randomIntFromList(li) {
 }
 
 // Load the static json with image urls
+// Note: because we are using getModuleFile, it will already prepend 
+// the base path to the url, so we don't have to.
 var screensaverPromise = px.getModuleFile(imagesUrl);
 
 
