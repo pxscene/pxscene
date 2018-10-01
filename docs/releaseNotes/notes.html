@@ -16,6 +16,133 @@
 
 <body style="text">
 
+<u><h2>Release 1.1.0.3 - 27September2018</h2></u>
+
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.1.0.3)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+      <ul>
+	 <li>Reverted : map functionality to http2 </li>
+      </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+      <ul>
+	 <li>update to 1.1.0.3</li>
+	 <li>Revert "sending ready promise for textbox and text elements without parent (#1235)"</li>
+	 <li>update to 1.1.0.2</li>
+	 <li>Revert "map functionality to http2: (#1388)"</li>
+	 <li>reverting PR 1439</li>
+	 <li>update to 1.1.0.1</li>
+	 <li>reverting PR 1359</li>
+      </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/>
+
+<u><h2>Release 1.1.0.0 - 24September2018</h2></u>
+
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.1.0.0)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+      <ul>
+	  <li>Added capabilities to apps that can check to determine if CORS is being enforced</li>
+	  <li>Removed http/https node modules and the functionality has been mapped to http2 instead</li>
+	  <li>Additional API support to the scene for texture memory usage</li>
+	  <li>Upgraded external freetype to version 2.8.1</li>
+	  <li>Add ability to load Resources from JAR files</li>
+	  <li>TestRunner can accept multiple tests.json files as parameters</li>
+	  <li>Implemented Tree Control Component</li>
+	  <li>Set default permissions to allow testRunner to access local json test files for CI builds</li>
+	  <li>Optimus logs about launch/load time on loading applications</li>
+	  <li>Fixed : Native apps that implement suspend/resume will cause pxscene to freeze on suspend sometimes (graphics_lifecycle app, mse_player app)</li>
+	  <li>Fixed : px.getFile(filename) exposes files on disk</li>
+	  <li>Fixed : px.import() fails when importing http/https multiple times</li>
+	  <li>Fixed : OPTIMUS PRIME: Shouldn't be able to create multiple applications with same App ID</li>
+	  <li>Fixed : Spark crashes while loading applications in windows</li>
+	  <li>Fixed : Error in reusing SVG Images from http cache at /tmp/cache</li>
+	  <li>Fixed : TextBox promise doesn't fire unless the textBox has a parent</li>
+	  <li>Fixed : Error in reusing SVG Images from http cache at /tmp/cache</li>
+      </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+      <ul>
+          <li>updates to the pxBenchmark app (#1464)</li>
+          <li>adding ability to set cache directory (#1460)</li>
+          <li>Improve code coverage for pxCore examples/pxScene2d/src/pxScene2d.cpp (#1462)</li>
+          <li>Remove duplicate access test (#1458)</li>
+          <li>fix reorder error (mUseCallbackDataSize, mDownloadProgressUserPtr) (#1455)</li>
+          <li>more debug prints to warn animation after dispose (#1386)</li>
+          <li>Enable local file access for testrunner (#1453)</li>
+          <li>Merged between master and pxBenchmark (#1451)</li>
+          <li>fix for potential memory leak (#1454)</li>
+          <li>Added more prints during close (#1444)</li>
+          <li>DELIA-28961 : Fixing the issue reported in DELIA-28961, for LSA AD cache with back to back ad insertion. (#1437)</li>
+          <li>Fix for SVG caching bug. (#1449)</li>
+          <li>fix for log message not printing (#1442)</li>
+          <li>capabilities for CORS (#1448)</li>
+          <li>Make rtError test platform independent (#1443)</li>
+          <li>disallow create of optimus app with duplicate ID (#1420)</li>
+          <li>Fix coverity errors from scene getArchive call (#1440)</li>
+          <li>Add access permission checks for local and remote file accesses (#1439)</li>
+          <li>Spark Edge naming convention (#1441)</li>
+          <li>Freetype 2.8.1 upgrade (#1237)</li>
+          <li>add exit test to testRunner (#1180)</li>
+          <li>fix initialization order error (mLastFrameDirtyRect, mArchive) (#1438)</li>
+          <li>local access file - 2nd generation (#1327)</li>
+          <li>fix for undefined process errors (#1426)</li>
+          <li>Use testRunner that can take multiple tests files (#1430)</li>
+          <li>Wayland container should be able to support processes spawning sub processes (#1429)</li>
+          <li>fix XModule async callbacks (#1359)</li>
+          <li>Loading resources from jar (#1414)</li>
+          <li>Revert "Adding MIME files for desktop (for now)  (#1403)" (#1434)</li>
+          <li>Revert "Add access permission checks for local and remote file accesses (#1249)" (#1433)</li>
+          <li>Add license to new files (#1432)</li>
+          <li>fix error: unused variable ‘v’ and parameter 'result' (#1428)</li>
+          <li>Update gcc version (#1425)</li>
+          <li>fix compilation error: 'error: comparison of integer expressions' (#1424)</li>
+          <li>To avoid release builds getting downloaded in place of edge (#1419)</li>
+          <li>Fix sanitizer issues with test_cors (#1417)</li>
+          <li>Tree control component support (#1413)</li>
+          <li>Added option to update files with the apache license, if the license is missing.  (#1412)</li>
+          <li>Adding MIME files for desktop (for now)  (#1403)</li>
+          <li>Add delete cache file (#1377)</li>
+          <li>Enabling thread sanitizer on travis (#1136)</li>
+          <li>Autoupdate edge optionally (#1373)</li>
+          <li>Update README.MD (#1372)</li>
+          <li>Add tests for oscillate type animations (#1366)</li>
+          <li>Add access permission checks for local and remote file accesses (#1249)</li>
+          <li>sending ready promise for textbox and text elements without parent (#1235)</li>
+          <li>add skeleton to compile sources within docker container (#1174)</li>
+          <li>add & use components' specific build.sh scripts (#1167)</li>
+          <li>fix -Wsign-compare (and some of -Wunused-parameter) errors (#1151)</li>
+          <li>v8 support (#1390)</li>
+          <li>map functionality to http2: (#1388)</li>
+          <li>PR #1355 restore (with a fix for pxObjectChildren) (#1394)</li>
+          <li>Make onClose,onSceneTermimate call asynchronous (#1418)</li>
+          <li>Fix linking regression "cannot find -lSpark" (#1423)</li>
+          <li>Fix for crash in yosemite version (#1411)</li>
+          <li>Add more log for handleDownloadRequest failure (#1410)</li>
+          <li>New Spark logo from SVG ... remove 'configure' from [ clean.sh ] (#1409)</li>
+          <li>fix init of rtCORSRef for windows (#1407)</li>
+          <li>Update to 1.0.0.1 for an osx deployment fix (#1406)</li>
+          <li>Fixes for issues in renaming for pxscene to spark and sparkEdge. (#1404)</li>
+          <li>Ignore Spark binary for git (#1399)</li>
+          <li>for older pxscene named version to get updated to spark version. (#1401)</li>
+          <li>Changing testrunner version to 5.2 (#1392)</li>
+          <li>Fixes for spark and sparkEdge name conversion issues (#1397)</li>
+          <li>Added initializers - Coverity flagged (#1396)</li>
+          <li>Trigger mac build for tag push (#1395)</li>
+          <li>Added initializers - Coverity flagged (#1396)</li>
+          <li>Trigger mac build for tag push (#1395)</li>
+      </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/>
+
 <u><h2>Release 1.0.0.0 (OSX) - 16August2018</h2></u>
 <p>16August2018 - Windows release cancelled due to an issue.<br/>
 </p>
