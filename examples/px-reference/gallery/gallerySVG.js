@@ -14,7 +14,7 @@ px.import({ scene: 'px:scene.1.js',
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   var appURLs = [     "SVG/LogosSVGres.js",   "SVG/LogoIcons.js",      "SVG/WikiIcons.js",
-                      "SVG/Saturn/Saturn.js", "SVG/Tiger/Tiger.js", // "SVG/GradientTestSVG.js",
+                      "SVG/Saturn/Saturn.js", "SVG/Tiger/Tiger.js",    "SVG/EqualizerSVG/dist/equalizer.js" // "SVG/GradientTestSVG.js",
                 ]; // "SVG/TinyIconsSVG.js",
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
