@@ -186,32 +186,34 @@ px.import({ scene: 'px:scene.1.js',
         (demoMode == false) ? startDemo() : stopDemo();
         e.stopPropagation();
       }
+    }
+    //-----------------------------------[ CTRL - ALT ]----------------------------------
+    //
+    if ( select.a == 0 )
+    {
+      if( keys.is_CTRL_ALT(e.flags) )
+      {
+        if(e.keyCode == keys.ENTER)
+        {
+          var index = parseInt(select.id);
+          zoomOut();
+          e.stopPropagation();
+        }
+      }
       else
-      if (e.keyCode == keys.L) // LAST
+      if ( keys.is_CTRL(e.flags) && e.keyCode == keys.L) // LAST
       {
         if(select.a == 0)
         {
-          zoomOut(hit.id);
+          zoomOut();
           e.stopPropagation();
         }
       }
     }
-    //-----------------------------------[ CTRL - ALT ]----------------------------------
-    //
-    else if ( keys.is_CTRL_ALT(e.flags) )
-    {
-       if(e.keyCode == keys.ENTER)
-       {
-          var index = parseInt(select.id);
-          (select.a == 1.0) ? zoomIn(index) : zoomOut();
-          e.stopPropagation();
-       }
-    }
-
     //--------------------------------------[ KEYS ]-------------------------------------
     //
     else
-    //if ( keys.is_CTRL_ALT(e.flags) ) // Arrows
+    if( select.a == 1 )
     {
       var dx = 0, dy = 0;
       var index = parseInt(select.id);
@@ -219,12 +221,13 @@ px.import({ scene: 'px:scene.1.js',
       switch(e.keyCode)
       {
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        case keys.SPACE: root.painting = !root.painting; break; // TOGGLE Painting
-        case keys.ENTER: zoomIn(index);                  break; // SELECT App
-        case keys.UP:    dx =  0; dy = -1;               break; //    UP a row
-        case keys.DOWN:  dx =  0; dy =  1;               break; //  DOWN a row
-        case keys.LEFT:  dx = -1; dy =  0;               break; //  LEFT a square
-        case keys.RIGHT: dx =  1; dy =  0;               break; // RIGHT a square
+        case keys.SPACE: e.stopPropagation(); root.painting = !root.painting; break; // TOGGLE Painting
+        case keys.ENTER: e.stopPropagation(); zoomIn(index);                  break; // SELECT App
+        case keys.UP:    e.stopPropagation(); dx =  0; dy = -1;               break; //    UP a row
+        case keys.DOWN:  e.stopPropagation(); dx =  0; dy =  1;               break; //  DOWN a row
+        case keys.LEFT:  e.stopPropagation(); dx = -1; dy =  0;               break; //  LEFT a square
+        case keys.RIGHT: e.stopPropagation(); dx =  1; dy =  0;               break; // RIGHT a square
+        default: console.log("############## AA e.keyCode: " + e.keyCode + "  passed to PARENT"); break;
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       }//SWITCH
 
@@ -233,9 +236,9 @@ px.import({ scene: 'px:scene.1.js',
         pos_x += dx;   pos_y += dy;
 
         moveTo(dx,dy);
-        e.stopPropagation();
       }
     }
+
     //-----------------------------------------------------------------------------------
   });
 
