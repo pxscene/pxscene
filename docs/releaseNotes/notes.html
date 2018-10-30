@@ -16,6 +16,78 @@
 
 <body style="text">
 
+<u><h2>Release 1.2.0.1 - 30October2018</h2></u>
+
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.2.0.1)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+      <ul>
+	 <li>Fixed : Could not load font face.</li>
+	 <li>Fixed : Application present on base url are failed to load.</li>
+	 <li>Fixed : answers.js smoke test failed in edge_2018-10-01</li>
+	 <li>Fixed : px.import() fails when importing http/https multiple times</li>
+	 <li>Fixed : px.getFile(filename) exposes files on disk</li>
+	 <li>Fixed : TextBox promise doesn't fire unless the textBox has a parent</li>
+	 <li>Support relative paths for 'require' in v8</li>
+	 <li>Investigate why https:// takes so much longer than http://</li>
+	 <li>Rework on dirty rectangles to improve the CPU performance.</li>
+	 <li>rtRemoteRunUntil() is extremely CPU greedy</li>
+	 <li>Disabled the Font/Glyph 'scaling' memory saving strategy.</li>
+	 <li>Resolving image paths for images used within imported .js files</li>
+         <li>Avoid ETag check if cache is not stale.</li>
+      </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+      <ul>
+         <li> update to 1.2.0.1 (#1539)</li>
+         <li> Avoid using etag on non-stale objects (#1534)</li>
+         <li> update to 1.2.0.0 (#1532) </li>
+         <li> Moving the test*.js file to tests/pxScene2d/ (#1513) </li>
+         <li> logging changes (#1528) </li>
+         <li> removed the async sends in dispose (#1530) </li>
+         <li> rtValue updates for unsigned ints (#1527) </li>
+         <li> add ability to disable pxWayland fbo rendering (#1524) </li>
+         <li> Revert reverting PR 1359 (#1481) (#1488) </li>
+         <li> Avoid setting archive multiple times (#1517) </li>
+         <li> process pending events list for sync and async events (#1518) </li>
+         <li> Corrected WxH bug for SVG creation (#1519) </li>
+         <li> Cleanup solution for onClose,onSceneTerminate async events (#1515) </li>
+         <li> updated htmlparser package. Fix for htmlparse import failed in windows. (#1498) </li>
+         <li> sending ready promise for textbox and text elements without parent (#1510) </li>
+         <li> To fix the windows package broken issue. (#1512) </li>
+         <li> fix for pxscene.org examples (#1511) </li>
+         <li> Removed redundant call - Prevents warning when park launched on Mac (#1509) </li>
+         <li> Xre2 1539v2 (#1505) </li>
+         <li> Xre2 1539v2 (#1505) </li>
+         <li> Sparkdown implementation (#1485) </li>
+         <li> Add access permission checks for local and remote file accesses (#1506) </li>
+         <li> Fix rtHttpResponse::{mEmit,mStatusCode} reorder compilation error (#1507) </li>
+         <li> CI flow update (Azure DevOps, semaphoreci, wayland-rdp) (#1501) </li>
+         <li> node modules for v8 (#1483) </li>
+         <li> enabling curl handle reuse (#1503) </li>
+         <li> fixing the celero build (#1504) </li>
+         <li> PxBenchmark : CPU GPU estimates and run script (#1502) </li>
+         <li> added GPU FPS to pxBenchmark (#1496) </li>
+         <li> Fixed bug in applyMatrix introduced while dirtyRectangle work (#1495) </li>
+         <li> To switch off duktape in edge builds as well. (#1494) </li>
+         <li> Fix launch.json example for Spark rename (#1480) </li>
+         <li> support for alpha only FBOs and use them for masking (#1491) </li>
+         <li> To Avoid using msvcrt.lib (#1478) </li>
+         <li> avoid raise download priority test (#1484) </li>
+         <li> syncing with the 1.1.0.3 release (#1487) </li>
+         <li> To switch off duktape in edge builds as well. (#1494) </li>
+         <li> Fix launch.json example for Spark rename (#1480) </li>
+         <li> support for alpha only FBOs and use them for masking (#1491) </li>
+         <li> To Avoid using msvcrt.lib (#1478) </li>
+         <li> avoid raise download priority test (#1484) </li>
+         <li> syncing with the 1.1.0.3 release (#1487) </li>
+      </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/>
+
 <u><h2>Release 1.1.0.3 - 27September2018</h2></u>
 
   <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.1.0.3)</em></p>
