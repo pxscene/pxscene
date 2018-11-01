@@ -16,9 +16,9 @@
 
 <body style="text">
 
-<u><h2>Release 1.2.0.1 - 30October2018</h2></u>
+<u><h2>Release 1.2.0.2 - 01Novomber2018</h2></u>
 
-  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.2.0.1)</em></p>
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.2.0.2)</em></p>
   <h3>Highlights:</h3>
   <bullets>
       <ul>
@@ -28,6 +28,8 @@
 	 <li>Fixed : px.import() fails when importing http/https multiple times</li>
 	 <li>Fixed : px.getFile(filename) exposes files on disk</li>
 	 <li>Fixed : TextBox promise doesn't fire unless the textBox has a parent</li>
+	 <li>Reverted : "Disabled the Font/Glyph 'scaling' memory saving strategy ... Fixed"</li>
+	 <li>Implemented multi-line Edit Box component.</li>
 	 <li>Support relative paths for 'require' in v8</li>
 	 <li>Investigate why https:// takes so much longer than http://</li>
 	 <li>Rework on dirty rectangles to improve the CPU performance.</li>
@@ -40,6 +42,8 @@
   <h3>Commits/Fixes:</h3>
   <bullets>
       <ul>
+         <li> text fixes (#1543)</li>
+         <li> Multi-line editbox component (#1525)</li>
          <li> update to 1.2.0.1 (#1539)</li>
          <li> Avoid using etag on non-stale objects (#1534)</li>
          <li> update to 1.2.0.0 (#1532) </li>
