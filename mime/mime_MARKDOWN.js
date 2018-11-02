@@ -82,7 +82,7 @@ px.import({
 
         px.getFile(url)
           .then((markdownSource) => {
-            renderMarkdown.call(this, markdownSource);
+            renderMarkdown.call(this, markdownSource ? markdownSource.toString() : '');
           })
           .catch((err) => {
             console.log(err);
