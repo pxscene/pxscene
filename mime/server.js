@@ -8,7 +8,7 @@ const app = express();
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 // Serve static assets
-app.use('/mime',express.static(path.resolve(__dirname, 'mime')));
+app.use('/mime',express.static(path.resolve(__dirname, '../mime')));
 
 const PORT = process.env.PORT || 3001;
 
