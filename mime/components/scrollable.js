@@ -26,9 +26,9 @@ px.import({
     this.parent = parent;
     this.options = JSON.parse(JSON.stringify(style)); // deep clone
     this.args = args || {};
-    this.isDraging = false;
-    
-    if(this.args.blank){ // ignore 
+    this.isDragging = false;
+
+    if(this.args.blank){ // ignore
       this.options.scrollbarStyle.w = 0;
       this.options.lineWidth = 0;
       this.options.scrollbarHandleStyle.w = 0;
@@ -72,23 +72,28 @@ px.import({
     }, this.options.scrollbarHandleStyle));
 
     // bind event handlers to the scope
-    this.onMouseEnter = this.onMouseEnter.bind(this);
-    this.onMouseLeave = this.onMouseLeave.bind(this);
-    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseEnter       = this.onMouseEnter.bind(this);
+    this.onMouseLeave       = this.onMouseLeave.bind(this);
+    this.onMouseDown        = this.onMouseDown.bind(this);
+    this.onScrollWheel      = this.onScrollWheel.bind(this);
 
-    this.onSceneMouseDown = this.onSceneMouseDown.bind(this);
-    this.onSceneMouseMove = this.onSceneMouseMove.bind(this);
+    this.onSceneMouseDown   = this.onSceneMouseDown.bind(this);
+    this.onSceneMouseMove   = this.onSceneMouseMove.bind(this);
+    this.onSceneScrollWheel = this.onSceneScrollWheel.bind(this);
+
     this.onSceneMouseUp = this.onSceneMouseUp.bind(this);
     this.update = this.update.bind(this);
 
     // attach events
     this.scrollbarHandle.on('onMouseEnter', this.onMouseEnter);
     this.scrollbarHandle.on('onMouseLeave', this.onMouseLeave);
-    this.scrollbarHandle.on('onMouseDown', this.onMouseDown);
+    this.scrollbarHandle.on('onMouseDown',  this.onMouseDown);
     this.scrollbar.on('onMouseUp', this.onScrollBarClick.bind(this));
+
     this.sceneEE.on('onMouseDown', this.onSceneMouseDown);
     this.sceneEE.on('onResize', this.update);
 
+    scene.root.on('onScrollWheel', this.onSceneScrollWheel.bind(this));
     scene.root.on("onKeyDown", this.onKeyDown.bind(this));
 
     // expose this.content as a root for users of this class
@@ -100,7 +105,8 @@ px.import({
 
   Scrollable.prototype.onKeyDown = function(e) {
     var code = e.keyCode; var flags = e.flags;
-    console.log("DEBUG: onKeyDown > [ " + e.keyCode + " ]   << No Key modifier");
+   // console.log("DEBUG: onKeyDown > [ " + e.keyCode + " ]   << No Key modifier");
+
     var currentY =  this.scrollbarHandle.y;
     var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
     switch(code)
@@ -109,7 +115,7 @@ px.import({
         this.doScroll(currentY - style.keyboardDiffHeight, maxY);
         break;
       }
-      
+
       case keys.DOWN: {
         this.doScroll(currentY + style.keyboardDiffHeight, maxY);
         break;
@@ -119,7 +125,7 @@ px.import({
   Scrollable.prototype.getContentWidth = function() {
     return this.container.w - this.options.scrollbarStyle.w;
   }
-  
+
   Scrollable.prototype.update = function() {
     this.container.w = this.parent.w;
     this.container.h = this.parent.h;
@@ -160,16 +166,23 @@ px.import({
 
   Scrollable.prototype.onMouseDown = function() {
     this.sceneEE.on('onMouseMove', this.onSceneMouseMove);
+
     this.sceneEE.on('onMouseUp', this.onSceneMouseUp);
     // we have to stop scrolling when mouse goes beyond scene
     // as we don't get events from beyond scene
     // so we cannot know if user releases the scrollbar handle outside of the scene
     this.sceneEE.on('onMouseLeave', this.onSceneMouseUp);
-    this.isDraging = true; // think is draging
+    this.isDragging = true; // think is draging
+  }
+
+
+  Scrollable.prototype.onScrollWheel = function() {
+    this.sceneEE.on('onScrollWheel', this.onSceneScrollWheel);
+    this.isDragging = true; // think is dragging
   }
 
   Scrollable.prototype.onScrollBarClick = function(evt){
-    if (this.isDraging) {
+    if (this.isDragging) {
       return;
     }
     var newY = Math.max(evt.y - this.scrollbarHandle.h*0.5, this.scrollbarHandleMargin);
@@ -184,7 +197,16 @@ px.import({
     this.doScroll(newY, maxY);
   }
 
+  Scrollable.prototype.onSceneScrollWheel = function(evt) {
+
+    var currentY =  this.scrollbarHandle.y;
+    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
+
+    this.doScroll(currentY - evt.dy, maxY);
+  }
+
   Scrollable.prototype.doScroll = function(newY, maxY) {
+
     newY = Math.max(0, newY);
     newY = Math.min(newY, maxY);
     this.scrollbarHandle.y = newY;
@@ -196,11 +218,11 @@ px.import({
     this.mouseDownYStart = null;
     var that = this;
     setTimeout(function() {
-      that.isDraging = false;
+      that.isDragging = false;
     }, 32); // next tick set value, make sure all mouse event dispacthed
-    
-    this.sceneEE.off('onMouseMove', this.onSceneMouseMove);
-    this.sceneEE.off('onMouseUp', this.onSceneMouseUp);
+
+    this.sceneEE.off('onMouseMove',  this.onSceneMouseMove);
+    this.sceneEE.off('onMouseUp',    this.onSceneMouseUp);
     this.sceneEE.off('onMouseLeave', this.onSceneMouseUp);
   }
 

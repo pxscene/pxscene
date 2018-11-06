@@ -8,21 +8,19 @@ px.import({
 {
   var CONSOLE_VERSION = "1.0";
 
-  var scene = imports.scene;
+  var scene      = imports.scene;
   var Scrollable = imports.scrollable.Scrollable;
-  var style            = imports.style;
+  var style      = imports.style;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   var TEXT_SIZE        = style.textSize;
   var COLOR_TEXT       = style.textColor;
   var COLOR_BACKGROUND = style.backgroundColor;
 
-  var marginTop = style.marginTop;
+  var marginTop    = style.marginTop;
   var marginBottom = style.marginBottom;
-  var marginLeft = style.marginLeft;
-  var marginRight = style.marginRight;
-
-  var historyMax = style.historyMax; // lines
+  var marginLeft   = style.marginLeft;
+  var marginRight  = style.marginRight;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -48,50 +46,26 @@ px.import({
 
     this.consoleTxt = scene.create({
       t: "textBox" ,
-      parent: this.scrollable.root,   
-      interactive: false, 
+      parent: this.scrollable.root,
+      interactive: false,
       x: marginLeft,
-      y:  marginTop, 
-      w: this.scrollable.getContentWidth() - marginLeft - marginRight,                          
-      text: "", 
-      textColor: COLOR_TEXT, 
-      font: fontRes, 
-      pixelSize: TEXT_SIZE, 
-      wordWrap: true, 
+      y:  marginTop,
+      w: this.scrollable.getContentWidth() - marginLeft - marginRight,
+      text: "" + text,
+      textColor: COLOR_TEXT,
+      font: fontRes,
+      pixelSize: TEXT_SIZE,
+      wordWrap: true,
       lignHorizontal: scene.alignHorizontal.LEFT,
       alignVertical: scene.alignVertical.TOP
     });
     var that = this;
-    function appendLog(txt)
+    
+    this.consoleTxt.ready.then( (o) =>
     {
-      txt = txt + ""; // NB: Force to string
-
-      var lines = txt.split("\n"); // process multi-line output...
-
-      // Add lines to history
-      for(var l = 0; l < lines.length; l++)
-      {
-        if(that.history.length > historyMax)
-        {
-          that.history.shift();                // remove from HEAD
-        }
-        that.history.push( lines[l] + "\n" );  // append at   TAIL
-      }
-
-      // Assemble new string
-      var txt = "";
-      for(var h = 0; h < that.history.length; h++)
-      {
-        txt += that.history[h];
-      }
-
-      // Update the Console text ....
-      that.consoleTxt.text = txt;
-    }
-
-    appendLog(text);
-    updateSize.call(this);
-    this.renderDefer.resolve(this.consoleTxt);
+      updateSize.call(that);
+      this.renderDefer.resolve(that.consoleTxt);
+    })
   }
 
   function updateSize() {
@@ -115,7 +89,6 @@ px.import({
     this.basePath;
     this.scrollable;
     this.consoleTxt;
-    this.history    = [];
 
     this.renderDefer = Promise.defer();
     this.renderReady = this.renderDefer.promise;
