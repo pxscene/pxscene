@@ -211,7 +211,8 @@ px.import({
     newY = Math.min(newY, maxY);
     this.scrollbarHandle.y = newY;
     var scrollRate = (newY - this.scrollbarHandleMargin) / maxY;
-    this.content.y = - (this.content.h - this.container.h) * scrollRate;
+    var moveToY    = - ((this.content.h - this.container.h) * scrollRate);
+    this.content.animateTo( {y: moveToY}, 0.15, this.scene.animation.TWEEN_EXP3, this.scene.animation.OPTION_LOOP, 1)
   }
 
   Scrollable.prototype.onSceneMouseUp = function() {
