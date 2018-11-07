@@ -52,6 +52,7 @@ px.import({
     'onMouseMove',
     'onMouseEnter',
     'onMouseLeave',
+    'onScrollWheel',
     'onFocus',
     'onBlur',
     'onKeyDown',
