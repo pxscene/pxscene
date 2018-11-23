@@ -2,16 +2,16 @@
 
 module.exports = {
   containerStyle: {
-    fillColor: 0xFFFFFFFF,
+    fillColor: 0xFFFFFF70,
   },
   scrollbarStyle: {
-    fillColor: 0xFAFAFAFF,
+    fillColor: 0xFAFAFA70,
     lineColor: 0xE7E7E7FF,
     lineWidth: 1,
     w: 16,
   },
   scrollbarHandleStyle: {
-    fillColor: 0xC1C1C1FF,
+    fillColor: 0x808080FF,
     lineColor: 0xC1C1C1FF,
     lineWidth: 0,
     w: 12,

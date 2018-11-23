@@ -23,14 +23,12 @@
 px.import({
   sceneEventEmitter: 'utils/sceneEventEmitter.js',
   events: 'utils/events.js',
-  style: 'markdown.style.js',
-  mime: '/mime.js',
+  style: 'markdown.style.js'
 }).then(function importsAreReady(imports) {
-  
+
   var style = imports.style;
   var EventEmitter = imports.events;
   var getSceneEventEmitter = imports.sceneEventEmitter.getSceneEventEmitter;
-  var MimeRenderer = imports.mime.MimeRenderer;
 
   /**
    * Block-Level Grammar
@@ -1086,38 +1084,30 @@ px.import({
     var options = this.options;
     var link = this.renderInlineTextWithStyle(text || title, this.options.styles.link);
     link.type = 'link';
-    link.onClick = function(){
-      var scene = options.scene;
 
-      var children = scene.root.children;
-      for( var i = 0 ; i < children.length; i ++){
-        children[i].markAsDelete = true; // mark old things as delete
-      }
-      
-      var newScene = scene.create({
-        t: 'scene',
-        url: 'mimeScene.js?url='+href+'&from=link',
-        parent: scene.root,
-        clip: true,
-        x: 0,
-        y: 0,
-        h: scene.root.h,
-        w: scene.root.w,
-      });
-      newScene.ready.then(function() {
-        var children = scene.root.children;
-        for( var i = 0 ; i < children.length; i ++){
-          if(children[i].markAsDelete) {
-            children[i].remove()
-          }
-        }
-      }).catch(function(err) {
-        console.error(err);
-      });
+    var url = href
+    if (!href.match(/^(?:file|https?|ftp):\/\//)) {
+      url = options.basePath + href;
+    }
+
+    link.onClick = function(){
+    var scene = options.scene;
+
+    // Send navigate request via bubbling service manager up
+    // the chain.
+    var n = scene.getService(".navigate");
+    if (n) {
+      console.log("before navigation request");
+      n.setUrl(url);
+    }
+    else console.log(".navigate service not available");
+
     }
     return link;
   };
 
+  // This will handle multiple document types
+  // Allowing for nested Images, Markdown, Text and Spark Content
   Renderer.prototype.image = function(href, title, text) {
     var scene = this.options.scene;
     var options = this.options;
@@ -1131,17 +1121,38 @@ px.import({
       options.styles.paragraph.pixelSize
     );
 
-    var img = new MimeRenderer(scene, {
-      url: url,
-      h: fontMetrics.height,
-      w: fontMetrics.height,
-      maxWidth: options.parent.w,
-      args: {from:'markdown'},
-    });
+    let hasWxH = (href.indexOf(' =')  >= 0);
+    var WxH = [];
 
+    if(hasWxH)
+    {
+      var splitz = url.split(' =');
+
+      url = splitz[0].trim();
+      WxH = splitz.pop();
+      WxH = WxH.split('x');
+    }
+
+    // Init
+    // Use a 16:9 default aspect ratio
+    var ww = (WxH.length > 0 && WxH[0] != '') ? parseInt(WxH[0]) : 528
+    var hh = (WxH.length > 1 && WxH[1] != '') ? parseInt(WxH[1]) : 297
+
+    /*
+    console.log("#############  MD::Image >>>>  WxH = " + ww + " x " + hh); // JUNK
+    console.log("#############  MD::Image >>>>  url = " + url);  // JUNK
+    console.log("#############  MD::Image >>>> href = " + href); // JUNK
+    */
+
+   // TODO JRJR
+    var img = scene.create({t:'scene',url:url,w:ww,h:hh,parent:this.options.parent,clip:true})
+
+    /*
     function updateSize() {
       if (!img.resource) {
-        return;
+      //img.w = 800
+      //img.h = 600
+      return;
       }
       if(img.resource.w <= 0 || img.resource.h <= 0){ // w or h is 0, skip this
         return;
@@ -1153,13 +1164,22 @@ px.import({
       img.w = w;
       img.h = w / ar;
     }
+    */
 
-    img.ready.then(() => {
-      updateSize();
+    if (!hasWxH) {
+      img.ready.then(() => {
+        if (img.api._ready) {
+          img.api._ready.then(function(){
+            img.w = img.api._preferredW
+            img.h = img.api._preferredH
+          })
+        }
 
-      this.options.ee.emit('onImageReady');
-    });
-    this.options.ee.on('onContainerResize', updateSize);
+        this.options.ee.emit('onImageReady');
+      })
+    }
+
+    //this.options.ee.on('onContainerResize', updateSize);
 
     return img;
   };
