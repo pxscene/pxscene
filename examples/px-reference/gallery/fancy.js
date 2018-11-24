@@ -4,6 +4,9 @@ var basePackageUri = px.getPackageBaseFilePath();
 
 var url;
 
+var maxX = 600
+var maxY = 700
+
 /*
 url = process.cwd() + "/../../images/skulls.png";
 var bg = scene.create({t:"image",url:url,stretchX:2,stretchY:2,parent:root});
@@ -12,13 +15,15 @@ url = process.cwd() + "/../../images/radial_gradient.png";
 var bgShade = scene.create({t:"image",url:url,stretchX:1,stretchY:1,parent:root});
 */
 
-var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:64});
+var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:32});
 
-url = basePackageUri + "/images/spark_logo.png"
-var ball = scene.create({t:"image",url:url,parent:root});
+url = basePackageUri + "/images/ball.png"
+var ballScene = scene.create({t:'object',parent:root})
+var ball = scene.create({t:"image",url:url,parent:ballScene,a:0});
 ball.ready.then(function() {
   ball.cx = ball.resource.w/2;
   ball.cy = ball.resource.h/2;
+  ball.animate({a:1},0.4,scene.TWEEN_LINEAR)
 
   fancy(ball);
 });
@@ -71,6 +76,9 @@ function updateSize(w, h) {
     bgShade.h = h;
 */
     txt1.y = h-txt1.h;
+    var sx = w/maxX
+    var sy = h/maxY
+    ballScene.sx = ballScene.sy = (sx<sy)?sx:sy
 }
 
 scene.on("onResize", function(e) {console.log("fancy resize", e.w, e.h); updateSize(e.w,e.h);});
