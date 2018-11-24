@@ -655,7 +655,7 @@ px.import({
       x: options.styles.code.paddingLeft || 0,
       y: options.styles.code.paddingTop || 0,
       wordWrap: true,
-      font: options.styles.code.font,
+      font: options.mimeBaseURL+options.styles.code.font,
       textColor: options.styles.code.textColor,
     });
 
@@ -1050,7 +1050,7 @@ px.import({
       t: 'text',
       interactive: false,
       text: text,
-      font: style.font,
+      font: this.options.mimeBaseURL+style.font,
       textColor: style.textColor,
     });
 
@@ -1443,6 +1443,7 @@ px.import({
   Markdown.prototype.prepareStyle = function(style, baseURL) {
     this.options.FONT_STYLE = {};
     Object.keys(style.FONT_STYLE).forEach((fontStyle) => {
+
       this.options.FONT_STYLE[fontStyle] = this.scene.create({
         t: 'fontResource',
         url: baseURL + style.FONT_STYLE[fontStyle],

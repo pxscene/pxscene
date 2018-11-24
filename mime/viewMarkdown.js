@@ -35,12 +35,12 @@ px.import({
     this.scrollable = new Scrollable(this.scene, this.container, {blank: this.options.args.from === 'markdown'});
 
     //var mimeURL = this.options.mimeType.url.split('/');
-    var mimeURL = 'http://127.0.0.1/mime/';
+    var mimeURL = 'https://www.pxscene.org/mime/';
     //mimeURL.pop();
     this.markdown = new Markdown(this.scene, this.scrollable, {
       basePath: this.basePath,
       mimeURL: mimeURL//mimeURL.join('/') + '/',
-    });
+    });    
     
     var md = this.markdown;
     this.markdown.prepare().then(() => {
