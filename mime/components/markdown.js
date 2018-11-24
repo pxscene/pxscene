@@ -655,7 +655,7 @@ px.import({
       x: options.styles.code.paddingLeft || 0,
       y: options.styles.code.paddingTop || 0,
       wordWrap: true,
-      font: options.mimeBaseURL+options.styles.code.font,
+      font: options.styles.code.font,
       textColor: options.styles.code.textColor,
     });
 
