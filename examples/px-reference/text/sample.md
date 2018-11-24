@@ -1,5 +1,5 @@
 # Sample Markdown
-Spark supports [markdown](markdown.md) aka **Sparkdown**.  This is a strict markdown implementation (ie no HTML supported).
+Spark supports [markdown](markdown.md) aka **Sparkdown**.  This is a strict markdown implementation (ie no HTML supported).  A list of Spark [gallery](../gallery/gallery.md) samples
 
 ## Spark Embedding
 Spark even supports markdown with embedded interactive spark content.
