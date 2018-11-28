@@ -8,7 +8,7 @@ px.import("px:scene.1").then(function(scene) {
   }
 
   for (var i = 0; i < 2500; i++) {
-    scene.create({t:"text",text:"Spark Rocks!",parent:root,pixelSize:40,textColor:randomColor()}).ready.then(function(o){
+    scene.create({t:"text",text:"Spark Rocks!",parent:root,pixelSize:40,textColor:randomColor(),a:0}).ready.then(function(o){
       o.x = (Math.random()*(scene.w-o.w-(margin*2)))+margin;
       o.y = (Math.random()*(scene.h-o.h-(margin*2)))+margin;
       o.a = (Math.random()*0.7)+0.3;

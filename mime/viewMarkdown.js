@@ -3,12 +3,23 @@
  *
  * - renders scrollbar if document too big
  */
-'use strict';
+//'use strict';
 
 px.import({
+  scene: 'px:scene.1.js',
   scrollable: 'components/scrollable.js',
-  markdown: 'components/markdown.js',
+  markdown: 'components/markdown.js'
 }).then(function importsAreReady(imports) {
+
+  var scene = imports.scene;
+/*
+  scene.create({
+    t: "text",
+    parent: scene.root,
+    text: "Top"
+  });
+  */
+  
   /**
    * Variables
    */
@@ -23,12 +34,13 @@ px.import({
   function renderMarkdown(markdownSource) {
     this.scrollable = new Scrollable(this.scene, this.container, {blank: this.options.args.from === 'markdown'});
 
-    var mimeURL = this.options.mimeType.url.split('/');
-    mimeURL.pop();
+    //var mimeURL = this.options.mimeType.url.split('/');
+    var mimeURL = 'https://www.pxscene.org/mime/';
+    //mimeURL.pop();
     this.markdown = new Markdown(this.scene, this.scrollable, {
       basePath: this.basePath,
-      mimeURL: mimeURL.join('/') + '/',
-    });
+      mimeURL: mimeURL//mimeURL.join('/') + '/',
+    });    
     
     var md = this.markdown;
     this.markdown.prepare().then(() => {
@@ -144,6 +156,7 @@ px.import({
     });
 
     // read/write options
+    
     ['maxWidth'].forEach((prop) => {
       Object.defineProperty(this, prop, {
         get: function () {
@@ -151,9 +164,10 @@ px.import({
         },
         set: function (val) {
           options[prop] = val;
-        },
+        }
       });
     });
+    
 
     // apply options defined in constructor
     Object.keys(this.options).forEach((prop) => {
@@ -165,8 +179,29 @@ px.import({
     return new MarkdownMimeRenderer(scene, option);
   }
 
-  module.exports.MarkdownMimeRenderer = MarkdownMimeRenderer;
-  module.exports.createRenderer = createRenderer;
+  var mdUrl = px.appQueryParams.url;
+  var r = createRenderer(scene, {parent:scene.root, url:mdUrl, args:{from:''}})
+
+  function updSize(w,h)
+  {
+    r.w = w
+    r.h = h
+  }
+
+  scene.on("onResize", function(e) { updSize(e.w,e.h) })
+
+  updSize(scene.w,scene.h)
+
+  //module.exports.MarkdownMimeRenderer = MarkdownMimeRenderer;
+  //module.exports.createRenderer = createRenderer;
+/*
+  scene.create({
+    t: "text",
+    parent: scene.root,
+    text: "Bottom",
+    y:100
+  });
+  */
 
 }).catch(function importFailed(err){
   console.error("Import failed: " + err);

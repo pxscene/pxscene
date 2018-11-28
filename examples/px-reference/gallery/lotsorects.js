@@ -8,7 +8,7 @@ px.import("px:scene.1").then(function(scene) {
   }
 
   for (var i = 0; i < 2500; i++) {
-    scene.create({t:"rect",parent:root,fillColor:randomColor()}).ready.then(function(o){
+    scene.create({t:"rect",parent:root,fillColor:randomColor(),a:0}).ready.then(function(o){
       o.w = (Math.random()*200)+100;
       o.h = (Math.random()*200)+100;
       o.x = (Math.random()*(scene.w-o.w-(margin*2)))+margin;

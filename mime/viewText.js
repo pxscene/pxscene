@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 px.import({
   scene: 'px:scene.1.js',
   scrollable: 'components/scrollable.js',
@@ -6,9 +6,11 @@ px.import({
   keys: 'px:tools.keys.js'}
 ).then( function ready(imports)
 {
-  var CONSOLE_VERSION = "1.0";
 
   var scene = imports.scene;
+
+  var CONSOLE_VERSION = "1.0";
+
   var Scrollable = imports.scrollable.Scrollable;
   var style            = imports.style;
 
@@ -41,7 +43,7 @@ px.import({
    */
   function renderText(text) {
 
-    var isNest = this.options.args.from === 'markdown';
+    var isNest = false //this.options.args.from === 'markdown';
     marginLeft = isNest ? style.marginLeftForNest : style.marginLeft; // update margin left
     this.scrollable = new Scrollable(this.scene, this.container, {blank: isNest});
     this.scrollable.container.fillColor = COLOR_BACKGROUND;
@@ -122,11 +124,9 @@ px.import({
 
     this.container = scene.create({
       t: "object",
-      parent: options.parent,
-      interactive: true,
-      w: options.maxWidth || options.parent.w,
-      h: options.parent.h,
-      draw: true,
+      parent: scene.root,
+      w: scene.w,
+      h: scene.h,
       clip: true,
     });
 
@@ -149,13 +149,6 @@ px.import({
       }
     });
 
-    // ready
-    Object.defineProperty(this, 'ready', {
-      get: function () {
-        return this.renderReady;
-      },
-    });
-
     // read/write props for both container and renderer
     ['w', 'h'].forEach((prop) => {
       Object.defineProperty(this, prop, {
@@ -168,61 +161,23 @@ px.import({
         },
       });
     });
-
-    // this props we set/get only to container
-    ['parent', 'x', 'y'].forEach((prop) => {
-      Object.defineProperty(this, prop, {
-        set: function (val) {
-          this.container[prop] = val;
-        },
-        get: function () {
-          return this.container[prop];
-        },
-      });
-    });
-
-    // resource
-    ['resource'].forEach((prop) => {
-      Object.defineProperty(this, prop, {
-        get: function () {
-          if (this.consoleTxt) {
-            var totalH = this.scrollable.root.h;
-            // for now make markdown report the height not more than 500
-            var h = this.options.args.from === 'markdown' ? totalH : Math.min(totalH, 500);
-            return {
-              h: h,
-              w: options.maxWidth || this.container.w,
-            };
-          }
-        },
-      });
-    });
-
-    // read/write options
-    ['maxWidth'].forEach((prop) => {
-      Object.defineProperty(this, prop, {
-        get: function () {
-          return options[prop];
-        },
-        set: function (val) {
-          options[prop] = val;
-        },
-      });
-    });
-
-    // apply options defined in constructor
-    Object.keys(this.options).forEach((prop) => {
-      this[prop] = this.options[prop];
-    });
   }
 
-  function createRenderer(scene, option) {
-    return new MarkdownTextRenderer(scene, option);
+  var txtUrl = px.appQueryParams.url;
+  var r = new MarkdownTextRenderer(scene,{/*parent:scene.root*//*myContainer*//*, url:txtUrl, args:{from:""}*/})
+  r.url = txtUrl
+
+  function updSize(w,h)
+  {
+    r.w = w
+    r.h = h
   }
 
-  module.exports.MarkdownTextRenderer = MarkdownTextRenderer;
-  module.exports.createRenderer = createRenderer;
+  scene.on("onResize", function(e) { updSize(e.w,e.h) })
+
+  updSize(scene.w,scene.h)
+
 }).catch( function importFailed(err){
   console.log("err: " + err);
-  console.error("Import for mime_TEXT.js failed: " + err)
+  console.error("Import for viewText.js failed: " + err)
 });

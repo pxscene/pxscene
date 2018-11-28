@@ -19,10 +19,12 @@ var txt1 = scene.create({t:"text",x:10,text:"",parent:root,pixelSize:32});
 
 url = basePackageUri + "/images/ball.png"
 var ballScene = scene.create({t:'object',parent:root})
-var ball = scene.create({t:"image",url:url,parent:ballScene,a:0});
+var ball = scene.create({t:"scene",url:'http://www.pxscene.org/examples/px-reference/text/sample.md',w:400,h:400,parent:ballScene,a:0});
 ball.ready.then(function() {
-  ball.cx = ball.resource.w/2;
-  ball.cy = ball.resource.h/2;
+  //ball.cx = ball.resource.w/2;
+  //ball.cy = ball.resource.h/2;
+  ball.cx = 200
+  ball.cy = 200
   ball.animate({a:1},0.4,scene.TWEEN_LINEAR)
 
   fancy(ball);

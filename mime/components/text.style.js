@@ -2,8 +2,8 @@
 
 module.exports =  {
   textSize        : 16,
-  textColor       : 0x53f600FF,
-  backgroundColor : 0x000000FF,
+  textColor       : 0x000000FF,
+  backgroundColor : 0xFFFFFF70,
 
   marginTop     : 22,
   marginBottom  : 0,
