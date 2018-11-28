@@ -21,18 +21,32 @@
  * - `Parser`   - is limited to supported functions only
  */
 px.import({
-  sceneEventEmitter: 'utils/sceneEventEmitter.js',
-  events: 'utils/events.js',
   style: 'markdown.style.js'
 }).then(function importsAreReady(imports) {
 
   var style = imports.style;
-  var EventEmitter = imports.events;
-  var getSceneEventEmitter = imports.sceneEventEmitter.getSceneEventEmitter;
 
   /**
    * Block-Level Grammar
    */
+
+  function _eventEmitter() {
+    this.handlers = {}
+    this.on = function(eventName, eventHandler) {
+      if (!this.handlers[eventName])
+        this.handlers[eventName] = []
+      this.handlers[eventName].push(eventHandler)
+    }
+    this.emit = function(eventName) {
+      console.log('firing event: ', eventName)
+      var handlerz = this.handlers[eventName]
+      if (handlerz) {
+        for (var h of handlerz) {
+          h()
+        }
+      }
+    }
+  }
 
   var block = {
     newline: /^\n+/,
@@ -675,7 +689,8 @@ px.import({
       container.h = decor.h + (options.styles.code.marginBottom || 0);
     }
 
-    options.ee.on('onContainerResize', updateSize);
+    options.emitter.on('onContainerResize',updateSize)
+  
     updateSize();
 
     return container;
@@ -717,7 +732,7 @@ px.import({
       decor.h = y;
     }
 
-    this.options.ee.on('onContainerResize', updateSize);
+    this.options.emitter.on('onContainerResize', updateSize)
     updateSize();
 
     return container;
@@ -785,7 +800,7 @@ px.import({
         - (options.styles['list-item'].marginBottom || 0);
     }
 
-    options.ee.on('onContainerResize', updateSize);
+    options.emitter.on('onContainerResize',updateSize)
     updateSize();
 
     return container;
@@ -832,7 +847,7 @@ px.import({
       container.h = y;
     }
 
-    this.options.ee.on('onContainerResize', updateSize);
+    this.options.emitter.on('onContainerResize',updateSize)
     updateSize();
 
     return container;
@@ -1028,12 +1043,12 @@ px.import({
         + (style.marginBottom || 0);
     }
 
-    this.options.ee.on('onContainerResize', function() {
+    this.options.emitter.on('onContainerResize', function() {
       container.w = options.parent.w - offsetLeft;
 
       renderInlineBlocks();
     });
-
+    
     renderInlineBlocks();
 
     return container;
@@ -1144,11 +1159,11 @@ px.import({
     console.log("#############  MD::Image >>>> href = " + href); // JUNK
     */
 
-   // TODO JRJR
     var img = scene.create({t:'scene',url:url,w:ww,h:hh,parent:this.options.parent,clip:true})
 
-    /*
+    
     function updateSize() {
+      /*
       if (!img.resource) {
       //img.w = 800
       //img.h = 600
@@ -1163,8 +1178,8 @@ px.import({
 
       img.w = w;
       img.h = w / ar;
+      */
     }
-    */
 
     if (!hasWxH) {
       img.ready.then(() => {
@@ -1175,11 +1190,9 @@ px.import({
           })
         }
 
-        this.options.ee.emit('onImageReady');
+        this.options.emitter.emit('onImageReady')
       })
     }
-
-    //this.options.ee.on('onContainerResize', updateSize);
 
     return img;
   };
@@ -1240,7 +1253,7 @@ px.import({
       options.parent.h = y;
     }
 
-    this.options.ee.on("onContainerResize", updateSize);
+    this.options.emitter.on('onContainerResize',updateSize)
     updateSize();
 
     if (src.footnotes.length) {
@@ -1409,9 +1422,7 @@ px.import({
 
     this.source;
 
-    this.ee = new EventEmitter();
-    this.ee.setMaxListeners(10000);
-    this.sceneEE = getSceneEventEmitter(scene);
+    this.emitter = new _eventEmitter()
 
     this.prepareStyle(style, this.options.mimeURL || '');
     
@@ -1431,9 +1442,15 @@ px.import({
 
     this.update = this.update.bind(this);
 
-    this.sceneEE.on('onResize', this.update);
+    //JRJR why do we need to do this?
+    var that = this
+    this.update2 = function() {
+      that.update()
+    }
 
-    this.ee.on('onImageReady', this.update);
+    this.scene.on('onResize', this.update2)
+
+    this.emitter.on('onImageReady', this.update)
   }
 
   Markdown.prototype.getParentRoot = function() {
@@ -1474,7 +1491,7 @@ px.import({
       - (this.options.styles.container.paddingLeft || 0)
       - (this.options.styles.container.paddingRight || 0);
 
-    this.ee.emit('onContainerResize');
+    this.emitter.emit('onContainerResize')
 
     this.updateParent();
   }
@@ -1484,7 +1501,7 @@ px.import({
       basePath: this.options.basePath,
       scene: this.scene,
       parent: this.container,
-      ee: this.ee,
+      emitter: this.emitter,
       FONT_STYLE: this.options.FONT_STYLE,
       styles: this.options.styles,
       mimeBaseURL: this.options.mimeURL || '',

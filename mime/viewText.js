@@ -179,5 +179,5 @@ px.import({
 
 }).catch( function importFailed(err){
   console.log("err: " + err);
-  console.error("Import for mime_TEXT.js failed: " + err)
+  console.error("Import for viewText.js failed: " + err)
 });
