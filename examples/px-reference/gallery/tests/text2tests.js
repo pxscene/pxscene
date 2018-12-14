@@ -20,7 +20,10 @@ var mediumText = "The quick brown fox jumps over the lazy dog. The quick brown f
 var newlineText = "Paragraph\nParagraph longer\nParagraph more";
 var continuousText = "ParagraphParagraphlongerParagraphlongestParagraphmore";
 var wordBoundaryCharsText = "Paragraph Paragraph Paragraph:Paragraph Paragraph&Paragraph Paragraph,Paragraph Paragraph;Paragraph Paragraph.Paragraph Paragraph?Paragraph Paragraph!Paragraph"; // \t/:&,;.?!
-var multilinesText = "Pxscene is an application engine that has been added to the RDK. \nIt is a scene graph API exposed to a Javascript engine in the ground. \nIn other words, it allows for set top box applications to be authored in javascript. \nThe authored javascript has access to the pxscene API for visual elements that are used for composition.";
+var multilinesText = "Pxscene is an application engine that has been added to the RDK.\n\
+It is a scene graph API exposed to a Javascript engine in the ground.\n\
+In other words, it allows for set top box applications to be authored in javascript.\n\
+The authored javascript has access to the pxscene API for visual elements that are used for composition.";
 root.w=800;
 
 // Use the font vars below to preload fonts so that they stay loaded. 
