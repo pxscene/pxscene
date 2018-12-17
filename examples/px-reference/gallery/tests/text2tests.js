@@ -18,6 +18,12 @@ var longText3 = longText + " " +longText2;
 var shortText = "Hello!  How are you?";
 var mediumText = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog."
 var newlineText = "Paragraph\nParagraph longer\nParagraph more";
+var continuousText = "ParagraphParagraphlongerParagraphlongestParagraphmore";
+var wordBoundaryCharsText = "Paragraph Paragraph Paragraph:Paragraph Paragraph&Paragraph Paragraph,Paragraph Paragraph;Paragraph Paragraph.Paragraph Paragraph?Paragraph Paragraph!Paragraph"; // \t/:&,;.?!
+var multilinesText = "Pxscene is an application engine that has been added to the RDK.\n\
+It is a scene graph API exposed to a Javascript engine in the ground.\n\
+In other words, it allows for set top box applications to be authored in javascript.\n\
+The authored javascript has access to the pxscene API for visual elements that are used for composition.";
 root.w=800;
 
 // Use the font vars below to preload fonts so that they stay loaded. 
@@ -262,7 +268,7 @@ scene.root.on("onChar", function(e) {
       text2.leading -= 5; 
       leadingStatus.text="leading="+text2.leading;
   } else if(e.charCode == 115) { // s for text
-    if(textStatus.text == "text=longest") {
+    if(textStatus.text == "text=multilines") {
       text2.text = shortText; 
       textStatus.text="text=short";
     } else if(textStatus.text == "text=short"){
@@ -280,6 +286,17 @@ scene.root.on("onChar", function(e) {
     } else if(textStatus.text == "text=longer"){
       text2.text = longText3; 
       textStatus.text="text=longest";
+    } else if(textStatus.text == "text=longest"){
+      text2.text = continuousText; 
+      textStatus.text="text=continuous";
+    }
+    else if(textStatus.text == "text=continuous"){
+      text2.text = wordBoundaryCharsText; 
+      textStatus.text="text=wordBoundary";
+    }
+    else if(textStatus.text == "text=wordBoundary"){
+      text2.text = multilinesText; 
+      textStatus.text="text=multilines";
     }
   } else if(e.charCode == 112) { // p for increasing pixelSize
     if(text2.pixelSize == 60) {
