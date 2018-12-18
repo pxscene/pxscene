@@ -17,8 +17,9 @@ var longText2 = "I don't think I'm doing a very good job listening to whoever it
 var longText3 = longText + " " +longText2;
 var shortText = "Hello!  How are you?";
 var mediumText = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog."
-var newlineText = "Paragraph\nParagraph longer\nParagraph more";
+var newlineText = "Paragraph longer longer\nParagraph\nParagraph longer\nParagraph more";
 var continuousText = "ParagraphParagraphlongerParagraphlongestParagraphmore";
+var continuousLongText = "ParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmoreParagraphParagraphlongerParagraphlongestParagraphmore";
 var wordBoundaryCharsText = "Paragraph Paragraph Paragraph:Paragraph Paragraph&Paragraph Paragraph,Paragraph Paragraph;Paragraph Paragraph.Paragraph Paragraph?Paragraph Paragraph!Paragraph"; // \t/:&,;.?!
 var multilinesText = "Pxscene is an application engine that has been added to the RDK.\n\
 It is a scene graph API exposed to a Javascript engine in the ground.\n\
@@ -291,6 +292,10 @@ scene.root.on("onChar", function(e) {
       textStatus.text="text=continuous";
     }
     else if(textStatus.text == "text=continuous"){
+      text2.text = continuousLongText; 
+      textStatus.text="text=continuousLong";
+    }
+    else if(textStatus.text == "text=continuousLong"){
       text2.text = wordBoundaryCharsText; 
       textStatus.text="text=wordBoundary";
     }
