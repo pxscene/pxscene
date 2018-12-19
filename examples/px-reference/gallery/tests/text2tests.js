@@ -5,7 +5,11 @@ var root = scene.root;
 //var longText = textA + "\n" + textA + "\n" + textA;
 // "Hello!  How are you?";//
 // Use fontUrl to load from web
-var fontUrlStart = "http://www.pxscene.org/examples/px-reference/fonts/";
+var fontUrlStart = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/fonts/";
+//var fontUrlStart = "http://www.pxscene.org/examples/px-reference/fonts/";
+var XFinityMed = "XFINITYStandardTT-Medium.ttf";
+var XFinity = "XFINITYStandardTT-Light.ttf";//"XFINITYSansTT-New-Lgt.ttf";
+var XFinityBold = "XFINITYStandardTT-Bold.ttf";//"XFINITYSansTT-New-Bold.ttf";
 var IndieFlower = "IndieFlower.ttf";
 var DejaVu = "DejaVuSans.ttf";
 var DejaVuSerif = "DejaVuSerif.ttf";
@@ -28,7 +32,9 @@ The authored javascript has access to the pxscene API for visual elements that a
 root.w=800;
 
 // Use the font vars below to preload fonts so that they stay loaded. 
-
+var fontXfinityMed = scene.create({t:"fontResource",url:fontUrlStart+XFinityMed});
+var fontXFinity = scene.create({t:"fontResource",url:fontUrlStart+XFinity});
+var fontXFinityBold = scene.create({t:"fontResource",url:fontUrlStart+XFinityBold});
 var fontIndieFlower = scene.create({t:"fontResource",url:fontUrlStart+IndieFlower});
 var fontDejaVu = scene.create({t:"fontResource",url:fontUrlStart+DejaVu});
 var fontDejaVuSerif = scene.create({t:"fontResource",url:fontUrlStart+DejaVuSerif});
@@ -86,7 +92,7 @@ var xStopPosStatus = scene.create({t:"text", parent:root, x:350, y:container.y+4
 var xStopPosHint = scene.create({t:"text", parent:root, x:465, y:container.y+480, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use small L)"});
 var leadingStatus = scene.create({t:"text", parent:root, x:350, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"leading=0"});
 var leadingHint = scene.create({t:"text", parent:root, x:465, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use + -)"});
-var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+IndieFlower+" (http)"});
+var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+XFinityMed+" (http)"});
 var px = 0;
 var py = 0;
 var leading = 0;
@@ -98,7 +104,7 @@ var text2 = scene.create({t:"textBox", clip:true, parent:container, x:px, y:py, 
    text2.textColor=0xFFDDFFFF;
    text2.pixelSize=20;
    text2.leading=0;
-   text2.fontUrl=fontUrlStart+IndieFlower;
+   text2.fontUrl=fontXfinityMed;
    text2.alignHorizontal=0;
    text2.alignVertical=0;
    text2.xStartPos=0;
@@ -319,6 +325,21 @@ scene.root.on("onChar", function(e) {
     pixelSizeStatus.text="pixelSize="+text2.pixelSize;
   } else if(e.charCode == 102) { // f for font
     
+    if(fontStatus.text == "font="+XFinityMed+" (http)") {
+      text2.font = fontXFinity;
+      //text2.fontUrl = fontUrlStart+DejaVu; 
+      fontStatus.text = "font="+XFinity+" (http)";
+     } else 
+     if(fontStatus.text == "font="+XFinity+" (http)") {
+       text2.font = fontXFinityBold;
+       //text2.fontUrl = fontUrlStart+DejaVu; 
+       fontStatus.text = "font="+XFinityBold+" (http)";
+      } else 
+      if(fontStatus.text == "font="+XFinityBold+" (http)") {
+        text2.font = fontIndieFlower;
+        //text2.fontUrl = fontUrlStart+DejaVu; 
+        fontStatus.text = "font="+IndieFlower+" (http)";
+       } else 
     if(fontStatus.text == "font="+IndieFlower+" (http)") {
       text2.font = fontDejaVu;
       //text2.fontUrl = fontUrlStart+DejaVu; 
@@ -336,9 +357,9 @@ scene.root.on("onChar", function(e) {
       //text2.fontUrl = fontUrlStart+DancingScriptBold; 
       fontStatus.text = "font="+DancingScriptBold+" (http)";
     } else if(fontStatus.text == "font="+DancingScriptBold+" (http)"){
-      text2.font = fontIndieFlower;
-      //text2.fontUrl = fontUrlStart+IndieFlower; 
-      fontStatus.text = "font="+IndieFlower+" (http)";
+      text2.font = fontXfinityMed;
+      //text2.fontUrl = fontUrlStart+XFinityMed; 
+      fontStatus.text = "font="+XFinityMed+" (http)";
     }
     var font = text2.font;
     font.ready.then(function(f){
