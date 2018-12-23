@@ -93,6 +93,8 @@ px.import({
     this.scene.root.on("onKeyDown", this.onKeyDown.bind(this));
 
     // expose this.content as a root for users of this class
+    this.content.name = 'scroll-content';
+    this.content.scrollbar = this;
     this.root = this.content;
 
     // calculate positions of all scrollbar elements
@@ -208,6 +210,24 @@ px.import({
       evt.stopPropagation()
     }
 
+  }
+
+  /**
+   * if node not in screen, then scroll to here
+   */
+  Scrollable.prototype.scrollTo = function(node) {
+    var startY = Math.abs(this.content.y);
+    var endY = startY + this.parent.h;
+
+    if ( node.y >= startY && node.y + node.h <= endY ) { // in screen
+      return;
+    }
+  
+    const contentH = Math.max(this.parent.h, this.content.h);
+    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
+    var r = maxY/contentH;
+    var newY = startY > node.y ? (node.y * r) : ((node.y + node.h)*r);
+    this.doScroll(newY, maxY);
   }
 
   Scrollable.prototype.doScroll = function(newY, maxY) {
