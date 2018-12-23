@@ -23,9 +23,11 @@
 px.import({
   style: 'markdown.style.js',
   TextSelector: 'textSelector.js',
+  keys: 'px:tools.keys.js'
 }).then(function importsAreReady(imports) {
 
   var style = imports.style;
+  var keys = imports.keys;
   var TextSelector = imports.TextSelector;
 
   /**
@@ -163,6 +165,9 @@ px.import({
     if (this.options.gfm) {
       this.rules = block.gfm;
     }
+    if (this.options.tables) {
+      this.rules = merge({}, this.rules, block.tables);
+    }
   }
 
   /**
@@ -254,6 +259,38 @@ px.import({
           depth: cap[1].length,
           text: cap[3]
         });
+        continue;
+      }
+
+      // table no leading pipe (gfm)
+      if (top && (cap = this.rules.nptable.exec(src))) {
+        src = src.substring(cap[0].length);
+
+        item = {
+          type: 'table',
+          header: cap[1].replace(/^ *| *\| *$/g, '').split(/ *\| */),
+          align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
+          cells: cap[3].replace(/\n$/, '').split('\n')
+        };
+
+        for (i = 0; i < item.align.length; i++) {
+          if (/^ *-+: *$/.test(item.align[i])) {
+            item.align[i] = 'right';
+          } else if (/^ *:-+: *$/.test(item.align[i])) {
+            item.align[i] = 'center';
+          } else if (/^ *:-+ *$/.test(item.align[i])) {
+            item.align[i] = 'left';
+          } else {
+            item.align[i] = null;
+          }
+        }
+
+        for (i = 0; i < item.cells.length; i++) {
+          item.cells[i] = item.cells[i].split(/ *\| */);
+        }
+
+        this.tokens.push(item);
+
         continue;
       }
 
@@ -360,6 +397,40 @@ px.import({
         this.tokens.push({
           type: 'list_end'
         });
+
+        continue;
+      }
+
+      // table (gfm)
+      if (top && (cap = this.rules.table.exec(src))) {
+        src = src.substring(cap[0].length);
+
+        item = {
+          type: 'table',
+          header: cap[1].replace(/^ *| *\| *$/g, '').split(/ *\| */),
+          align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
+          cells: cap[3].replace(/(?: *\| *)?\n$/, '').split('\n')
+        };
+
+        for (i = 0; i < item.align.length; i++) {
+          if (/^ *-+: *$/.test(item.align[i])) {
+            item.align[i] = 'right';
+          } else if (/^ *:-+: *$/.test(item.align[i])) {
+            item.align[i] = 'center';
+          } else if (/^ *:-+ *$/.test(item.align[i])) {
+            item.align[i] = 'left';
+          } else {
+            item.align[i] = null;
+          }
+        }
+
+        for (i = 0; i < item.cells.length; i++) {
+          item.cells[i] = item.cells[i]
+            .replace(/^ *\| *| *\| *$/g, '')
+            .split(/ *\| */);
+        }
+
+        this.tokens.push(item);
 
         continue;
       }
@@ -645,14 +716,69 @@ px.import({
     this.options = options || {};
 
     this.onResizeListeners = [];
-    
-
     this.textIndex = 0;
     this.textSelector = new TextSelector(options);
     this.options.emitter.on('onContainerResize', () => {
       this.textIndex = 0;
       this.textSelector.texts = []; // clear it
     });
+    this.linkMap = {}; // used to store link elements
+    this.currentLinkId = null; // current link
+    
+    // on key down bind
+    options.scene.root.on("onKeyDown", (e) => {
+      var code = e.keyCode; var flags = e.flags;
+      if (code === keys.ENTER) {
+        if (this.linkMap[this.currentLinkId] && this.linkMap[this.currentLinkId].length > 0) {
+          this.linkMap[this.currentLinkId][0].onClick();
+        }
+      } else if(code === keys.TAB) {
+        var idArr = Object.keys(this.linkMap);
+        var oldIndex = idArr.findIndex(id => id === this.currentLinkId);
+        var newIndex = 0;
+        if(keys.is_SHIFT(flags)) {
+          newIndex = oldIndex < 0 ? (idArr.length - 1) : ((oldIndex - 1 + idArr.length)%idArr.length);
+        } else {
+          newIndex = oldIndex < 0 ? 0 : ((oldIndex + 1)%idArr.length);
+        }
+        this.currentLinkId = idArr[newIndex];
+        idArr.forEach( id => {
+          var links = this.linkMap[id] || [];
+          links.forEach(l => {
+            if (id === this.currentLinkId) {
+              l.highlight();
+              var p = this.getGlobalPosition(l);
+              p.scrollbar.scrollTo(p);
+            } else {
+              l.unhighlight();
+            }
+          });
+        });
+      }
+    });
+  }
+  
+  /**
+   * get global position for scroll content root
+   */
+  Renderer.prototype.getGlobalPosition = function(node) {
+    var x = node.x;
+    var y = node.y;
+    var parent = node.parent;
+    
+    while(parent && parent.name !== 'scroll-content') {
+      x += parent.x;
+      y += parent.y;
+      parent = parent.parent;
+    }
+
+    return {
+      x: x,
+      y: y,
+      w: node.w,
+      h: node.h,
+      scrollbar: parent.scrollbar,
+    };
   }
 
   Renderer.prototype.code = function(code, offsetLeft) {
@@ -871,7 +997,7 @@ px.import({
     return container;
   };
 
-  Renderer.prototype.renderTextBlockWithStyle = function(inlineBlocks, style, offsetLeft) {
+  Renderer.prototype.renderTextBlockWithStyle = function(inlineBlocks, style, offsetLeft, width) {
     var scene = this.options.scene;
     var options = this.options
     var that = this;
@@ -882,8 +1008,9 @@ px.import({
       interactive: false,
       x: 0,
       y: 0,
-      w: options.parent.w - offsetLeft,
+      w: width || (options.parent.w - offsetLeft),
     });
+    container.resizeable = true;
 
     function resolveFont(blockFont, inlineFont) {
       if (inlineFont === options.FONT_STYLE.BOLD && blockFont === options.FONT_STYLE.ITAlIC ||
@@ -926,7 +1053,13 @@ px.import({
 
       if(type === 'link') {
         inlineBlockCopy.onClick = inlineBlock.onClick;
-        var clickObj = scene.create({ t: "object", parent: inlineBlockCopy, x: 0, y: 0, w: inlineBlockCopy.w, h: inlineBlockCopy.h});
+        inlineBlockCopy.linkId = inlineBlock.linkId;
+        var clickObj = scene.create({ 
+          t: "rect", fillColor:0x00000000, 
+          lineColor: 0x00000000,
+          lineWidth: options.styles.link.activeBorderWidth,
+          parent: inlineBlockCopy, x: -4, y: 0, w: inlineBlockCopy.w + 6, h: inlineBlockCopy.h
+        });
         clickObj.on('onMouseUp',function() {
           inlineBlockCopy.onClick();
         });
@@ -936,6 +1069,13 @@ px.import({
         clickObj.on('onMouseLeave', function(){
           inlineBlockCopy.textColor = options.styles.link.textColor;
         });
+        inlineBlockCopy.highlight = function() {
+          clickObj.lineColor = options.styles.link.activeBorderColor;
+        }
+        inlineBlockCopy.unhighlight = function() {
+          clickObj.lineColor = 0x00000000;
+        }
+        inlineBlockCopy.timestamp = inlineBlock.timestamp;
       }
       return inlineBlockCopy;
     }
@@ -975,8 +1115,9 @@ px.import({
         x = 0;
         y += lineHeight;
       }
-
+      var timestamp = Date.now();
       while (someBlock = blocksToRender.shift()) {
+        someBlock.timestamp = timestamp;
         if (typeof someBlock.text === 'undefined') {
           if (x + someBlock.w > container.w && x !== 0) {
             newLine();
@@ -1039,6 +1180,17 @@ px.import({
             y: inlineBlock.h - 1,
           })
         }
+        if(inlineBlock.type === 'link') {
+          if(that.currentLinkId === inlineBlock.linkId) {
+            inlineBlock.highlight();
+          }
+          var oldLinks = that.linkMap[inlineBlock.linkId];
+          if (!oldLinks || oldLinks.length <= 0 || oldLinks[0].timestamp !== inlineBlock.timestamp) {
+            that.linkMap[inlineBlock.linkId] = [inlineBlock];
+          } else {
+            that.linkMap[inlineBlock.linkId].push(inlineBlock);
+          }
+        }
         // create same style block with the words which don't fit the line
         if (newBlockWords.length > 0) {
           var newInlineBlock = copy(inlineBlock);
@@ -1070,6 +1222,7 @@ px.import({
     }
 
     this.options.emitter.on('onContainerResize', function() {
+      if (!container.resizeable) return;
       container.w = options.parent.w - offsetLeft;
 
       renderInlineBlocks();
@@ -1077,6 +1230,10 @@ px.import({
     
     renderInlineBlocks();
 
+    container.setWidth = function(w) {
+      container.w = w;
+      renderInlineBlocks();
+    }
     return container;
   }
 
@@ -1084,9 +1241,273 @@ px.import({
     return this.renderTextBlockWithStyle(inlineBlocks, this.options.styles.paragraph, offsetLeft);
   };
 
+  /**
+   * render table into spark
+   * @param header the table header
+   * @param body the table body
+   * @param offsetLeft the table offset left
+   */
+  Renderer.prototype.table = function(header, body, offsetLeft) {
+    var options = this.options;
+    var scene = options.scene;
+    var cellWidths = [];
+    var vLines = []; // vertical lines
+    var hLines = []; // horizontal
+    var backgroupRects = []; // background rect
+
+    var container = scene.create({
+      t: 'object',
+      parent: options.parent,
+    });
+
+
+    var borderFrame = scene.create({  // table border frame
+      t: 'rect',
+      parent: container,
+      lineColor: options.styles.table.borderColor,
+      fillColor: options.styles.table.rowBackgrounColor[0],
+      lineWidth: options.styles.table.borderWidth,
+    });
+
+    /**
+     * get cell origin inline block width
+     * @param rowIndex  the row index
+     * @param columnIndex the column index
+     */
+    var getCellOriginWidth = function(rowIndex, columnIndex) {
+      var blocks = [];
+      if( rowIndex === 0) {
+        blocks = header[columnIndex];
+      } else {
+        blocks = body[rowIndex - 1][columnIndex];
+      }
+      var w = 0;
+      blocks.content.forEach(b => w += b.w);
+      return w;
+    }
+    /**
+     * get cell alignment from table
+     * @param rowIndex  the row index
+     * @param columnIndex the column index
+     */
+    var getAlignment = function(rowIndex, columnIndex) {
+      if( rowIndex === 0) {
+        return header[columnIndex].align;
+      } else {
+        return body[rowIndex - 1][columnIndex].align;
+      }
+    }
+
+    /**
+     * get start x position for column
+     * @param columnWidth  the columnWidth arr
+     * @param index  the column index
+     */
+    var getStartXPosition = function(columnWidth, index) {
+      if (index === 0) return 0;
+      var x = 0;
+      for(var i = 0; i < index; i ++) {
+        x += columnWidth[i];
+      }
+      return x;
+    }
+
+    /**
+     * get total table width
+     * @param columnWidth  the columnWidth arr
+     */
+    var getTotalWidth = function(columnWidth) {
+      var sum = 0;
+      for(var i = 0 ; i < columnWidth.length; i ++){
+        sum += columnWidth[i];
+      }
+      return sum;
+    }
+
+    for(var i = 0 ; i < body.length; i ++) {
+      var bgRect = scene.create({  // table border frame
+        t: 'rect',
+        parent: container,
+        lineColor: 0x00000000,
+        fillColor: options.styles.table.rowBackgrounColor[1],
+        lineWidth: 0,
+      });
+      backgroupRects.push(bgRect);
+    }
+
+    var rows = [];
+    var row = [];
+    cellWidths[0] = [];
+    header.forEach( (h, columnIndex) => {
+      var headerText = this.renderTextBlockWithStyle(
+        h.content,
+        options.styles['table-header'],
+        offsetLeft
+      );
+      headerText.resizeable = false;
+      headerText.parent = container;
+      cellWidths[0][columnIndex] = getCellOriginWidth(0, columnIndex);
+      row.push(headerText);
+    });
+    rows.push(row);
+
+    
+    body.forEach((r, rowIndex) => {
+      var row = [];
+      cellWidths[rowIndex+1] = [];
+      r.forEach((cell, columnIndex) => {
+        var cellText = this.renderTextBlockWithStyle(
+          cell.content,
+          options.styles['table-cell'],
+          offsetLeft
+        );
+        cellText.resizeable = false;
+        cellText.parent = container;
+        cellWidths[rowIndex+1][columnIndex] = getCellOriginWidth(rowIndex+1, columnIndex);
+        row.push(cellText);
+      });
+      rows.push(row);
+    });
+
+    console.log("origin table width arr = ", cellWidths);
+    var pLeft = options.styles['table-cell'].paddingLeft;
+    var pRight = options.styles['table-cell'].paddingRight;
+    var pTop = options.styles['table-cell'].paddingTop;
+    var pBottom = options.styles['table-cell'].paddingBottom;
+
+    var columnNumber = header.length;
+    var rowNumber = body.length + 1;
+
+    // lines
+    for (var i = 0; i < columnNumber - 1; i ++) {
+      var line = scene.create({
+        t: 'rect',
+        parent: container,
+        lineColor: 0x00000000,
+        fillColor: options.styles.table.borderColor,
+        w: options.styles.table.borderWidth,
+        lineWidth: 0,
+      });
+      vLines.push(line);
+    }
+
+    for (var i = 0; i < rowNumber - 1; i ++) {
+      var line = scene.create({
+        t: 'rect',
+        parent: container,
+        lineColor: 0x00000000,
+        fillColor: options.styles.table.borderColor,
+        h: options.styles.table.borderWidth,
+        lineWidth: 0,
+      });
+      hLines.push(line);
+    }
+
+
+
+
+    function updateSize() {
+      container.w = options.parent.w - offsetLeft;
+
+      var columnWidth = [];
+      var avgWidth = container.w / columnNumber;
+      var longWidthCount = 0;
+      var totalUsedWidth = 0;
+      var textOffset =  options.styles['table-cell'].pixelSize;
+
+      for( var i = 0; i < columnNumber; i ++) {
+        var maxWidth = 0;
+        for( var j = 0; j < rowNumber; j ++) {
+          maxWidth = Math.max(maxWidth, cellWidths[j][i]);
+        }
+        if (maxWidth + pLeft + pRight < avgWidth)
+        {
+          columnWidth[i] = maxWidth + pLeft + pRight + textOffset;
+          totalUsedWidth += columnWidth[i];
+        } else {
+          columnWidth[i] = -1;
+          longWidthCount += 1;
+        }
+      }
+
+      // avg long width cell
+      for( var i = 0; i < columnNumber; i ++) {
+        if( columnWidth[i] < 0) {
+          columnWidth[i] = (container.w - totalUsedWidth) / longWidthCount;
+        }
+      }
+
+      var totalW = getTotalWidth(columnWidth);
+
+      var y = 0;
+      for( var i = 0 ; i < rowNumber; i ++) {
+        
+        if( i > 0) {
+          hLines[i-1].x = 0;
+          hLines[i-1].w = totalW;
+          hLines[i-1].y = y;
+        }
+
+        y += pTop;
+
+        // set position
+        var maxHeight = 0;
+        for( var j = 0; j < columnNumber ; j ++) {
+          var cellW = columnWidth[j];
+          var newW = cellW - pLeft - pRight;
+          var cell = rows[i][j];
+          cell.setWidth(newW);
+          maxHeight = Math.max(maxHeight, cell.h);
+          cell.y = y;
+
+          var startX = getStartXPosition(columnWidth, j);
+          var align = getAlignment(i, j);
+          var originW = cellWidths[i][j];
+
+          if(!align || align === 'left') {
+            cell.x = startX + pLeft;
+          } else if(align === 'center'){
+            cell.x = startX + (columnWidth[j] > avgWidth ? pLeft : ( (cellW - originW)*0.5 ));
+          } else {
+            cell.x = startX + (columnWidth[j] > avgWidth ? pLeft : (cellW - originW - pRight - textOffset*0.5));
+          }
+        }
+
+        // cell vertical centering
+        for( var j = 0; j < columnNumber ; j ++) {
+          var cell = rows[i][j];
+          cell.y = (maxHeight - cell.h)*0.5 + y;
+        }
+
+        y += maxHeight + pBottom;
+
+        if( i > 0) {
+          backgroupRects[i-1].w = totalW;
+          backgroupRects[i-1].h = maxHeight + pTop + pBottom;
+          backgroupRects[i-1].x = 0;
+          backgroupRects[i-1].y = y - backgroupRects[i-1].h;
+          backgroupRects[i-1].fillColor = options.styles.table.rowBackgrounColor[i%2 == 0 ? 1 : 0];
+        }
+
+      }
+      borderFrame.h = y;
+      borderFrame.w = totalW;
+      container.h = y + options.styles['table'].marginBottom;
+      
+      for(var j = 0 ; j < columnNumber - 1; j ++) {
+        vLines[j].h = y;
+        vLines[j].y = 0;
+        vLines[j].x = getStartXPosition(columnWidth, j+1);
+      }
+    }
+
+    this.options.emitter.on('onContainerResize',updateSize)
+    updateSize();
+    return container;
+  };
+
   Renderer.prototype.renderInlineTextWithStyle = function(text, style) {
     var scene = this.options.scene;
-
     var textInline = scene.create({
       t: 'text',
       interactive: false,
@@ -1130,7 +1551,7 @@ px.import({
     if (!href.match(/^(?:file|https?|ftp):\/\//)) {
       url = options.basePath + href;
     }
-
+    link.linkId = Math.random() + "";
     link.onClick = function(){
     var scene = options.scene;
 
@@ -1339,6 +1760,37 @@ px.import({
       }
       case 'code': {
         return this.renderer.code(this.token.text, offsetLeft);
+      }
+      case 'table': {
+        var header = []
+          , body = []
+          , i
+          , row
+          , cell
+          , flags
+          , j;
+  
+        // header
+        for (i = 0; i < this.token.header.length; i++) {
+          flags = { header: true, align: this.token.align[i] };
+          header.push({
+            content: this.inline.output(this.token.header[i]),
+            header: true, align: this.token.align[i] 
+          });
+        }
+  
+        for (i = 0; i < this.token.cells.length; i++) {
+          row = this.token.cells[i];
+          cell = [];
+          for (j = 0; j < row.length; j++) {
+            cell.push({
+              content: this.inline.output(row[j]),
+              header: false, align: this.token.align[j]
+            });
+          }
+          body.push(cell);
+        }
+        return this.renderer.table(header, body, offsetLeft);
       }
       case 'blockquote_start': {
         var body = [];

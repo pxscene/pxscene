@@ -5,6 +5,12 @@
 	"caption": "Family Meal at PF Chang's"
 },
 {
+	"width": 600,
+	"height": 560,
+	"url": "http://pxscene.org/examples/px-reference/polaroid/pics/greatWall.jpg",
+	"caption": "A Cold Day at the Great Wall of China with the Robinsons"
+},
+{
 	"width": 773,
 	"height": 580,
 	"url": "http://pxscene.org/examples/px-reference/polaroid/pics/philliesFamily.jpg",
@@ -15,6 +21,12 @@
 	"height": 800,
 	"url": "http://pxscene.org/examples/px-reference/polaroid/pics/HarryPotterWorld.jpg",
 	"caption": "Wizarding World of Harry Potter at Universal Studios Hollywood.  What a blast!"
+},
+{
+	"width": 600,
+	"height": 560,
+	"url": "http://pxscene.org/examples/px-reference/polaroid/pics/stonehenge.jpg",
+	"caption": "The Robinsons at Stonehenge"
 },
 {
 	"width": 870,
