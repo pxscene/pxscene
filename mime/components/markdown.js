@@ -21,10 +21,12 @@
  * - `Parser`   - is limited to supported functions only
  */
 px.import({
-  style: 'markdown.style.js'
+  style: 'markdown.style.js',
+  TextSelector: 'textSelector.js',
 }).then(function importsAreReady(imports) {
 
   var style = imports.style;
+  var TextSelector = imports.TextSelector;
 
   /**
    * Block-Level Grammar
@@ -643,6 +645,14 @@ px.import({
     this.options = options || {};
 
     this.onResizeListeners = [];
+    
+
+    this.textIndex = 0;
+    this.textSelector = new TextSelector(options);
+    this.options.emitter.on('onContainerResize', () => {
+      this.textIndex = 0;
+      this.textSelector.texts = []; // clear it
+    });
   }
 
   Renderer.prototype.code = function(code, offsetLeft) {
@@ -651,12 +661,14 @@ px.import({
 
     var container = scene.create({
       t: 'object',
+      interactive: false,
       parent: options.parent,
     });
 
     var decor = scene.create({
       t: 'rect',
       parent: container,
+      interactive: false,
       fillColor: options.styles.code.fillColor,
       lineColor: options.styles.code.lineColor,
       lineWidth: options.styles.code.lineWidth,
@@ -665,6 +677,7 @@ px.import({
     var textBox = scene.create({
       t: 'textBox',
       parent: container,
+      interactive: false,
       text: code,
       x: options.styles.code.paddingLeft || 0,
       y: options.styles.code.paddingTop || 0,
@@ -702,12 +715,14 @@ px.import({
 
     var container = scene.create({
       t: 'object',
+      interactive: false,
       parent: options.parent,
     });
 
     var decor = scene.create({
       t: 'rect',
       parent: container,
+      interactive: false,
       fillColor: options.styles.blockquote.lineColor,
       x: options.styles.blockquote.lineOffsetLeft,
       w: options.styles.blockquote.lineWidth,
@@ -749,6 +764,7 @@ px.import({
     var container = scene.create({
       t: 'object',
       parent: options.parent,
+      interactive: false,
     });
 
     var markers = [];
@@ -763,6 +779,7 @@ px.import({
           url: options.mimeBaseURL+'res/unordered_list_fill.svg',
           x: 0,
           y: 0,
+          interactive: false,
           h: options.styles['list-item'].pixelSize,
         })
       }
@@ -813,6 +830,7 @@ px.import({
     var container = scene.create({
       t: "object",
       parent: options.parent,
+      interactive: false,
       x: 0,
       y: 0,
     });
@@ -856,6 +874,7 @@ px.import({
   Renderer.prototype.renderTextBlockWithStyle = function(inlineBlocks, style, offsetLeft) {
     var scene = this.options.scene;
     var options = this.options
+    var that = this;
 
     var container = scene.create({
       t: "object",
@@ -950,6 +969,7 @@ px.import({
         var lineHeight = getLineHeight();
 
         updateLineBlocksHeights(lineHeight);
+        that.textSelector.pushBlocks(lineBlocks);
         lineBlocks = [];
 
         x = 0;
@@ -1004,7 +1024,8 @@ px.import({
         inlineBlock.x = x;
         inlineBlock.y = y;
         inlineBlock.parent = container;
-        lineBlocks.push(inlineBlock);
+        inlineBlock.textId = that.textIndex++;
+        lineBlocks.push(inlineBlock);;
 
         if(inlineBlock.type === 'underline') { // draw a under line
           scene.create({
@@ -1012,6 +1033,7 @@ px.import({
             h: options.styles.underline.height,
             fillColor: options.styles.underline.fillColor,
             w: inlineBlock.w,
+            interactive: false,
             parent: inlineBlock,
             x:0,
             y: inlineBlock.h - 1,
@@ -1041,6 +1063,10 @@ px.import({
       container.h = y
         + lastLineHeight
         + (style.marginBottom || 0);
+
+        if(inlineBlocks.length > 0) {
+          that.textSelector.pushBlocks(lineBlocks);
+        }
     }
 
     this.options.emitter.on('onContainerResize', function() {
@@ -1065,7 +1091,7 @@ px.import({
       t: 'text',
       interactive: false,
       text: text,
-      font: this.options.mimeBaseURL+style.font,
+      font: style.font || 'REGULAR',
       textColor: style.textColor,
     });
 

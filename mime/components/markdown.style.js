@@ -26,6 +26,10 @@ module.exports = {
       paddingRight: 10,
       paddingBottom: 10,
       paddingLeft: 10,
+
+      selectionBackgroudColor: 0xf3f1d388,
+      dragBackgourd: 0xf3f1d344,
+      cusorColor: 0x000000ff,
     },
 
     // BLOCK level blocks

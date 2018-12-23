@@ -10,6 +10,8 @@ px.import({
 
   var style = imports.style;
   var keys  = imports.keys;
+  var EDGE_DIFF = 45;
+  
   /**
    * Shows scrollbars if inner content too big
    *
@@ -93,6 +95,8 @@ px.import({
     this.scene.root.on("onKeyDown", this.onKeyDown.bind(this));
 
     // expose this.content as a root for users of this class
+    this.content.name = 'scroll-content';
+    this.content.scrollbar = this;
     this.root = this.content;
 
     // calculate positions of all scrollbar elements
@@ -103,21 +107,55 @@ px.import({
     var code = e.keyCode; var flags = e.flags;
     // console.log("DEBUG: onKeyDown > [ " + e.keyCode + " ]   << No Key modifier");
 
-    var currentY =  this.scrollbarHandle.y;
-    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
+    if(flags > 0) {
+      return;
+    }
     switch(code)
     {
       case keys.UP: {
-        this.doScroll(currentY - style.keyboardDiffHeight, maxY);
+        this.scrollByDiff(-style.keyboardDiffHeight);
         break;
       }
 
       case keys.DOWN: {
-        this.doScroll(currentY + style.keyboardDiffHeight, maxY);
+        this.scrollByDiff(style.keyboardDiffHeight);
         break;
       }
     }
   }
+
+  Scrollable.prototype.scrollByDiff = function(diff) {
+    var currentY =  this.scrollbarHandle.y;
+    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
+    this.doScroll(currentY + diff, maxY);
+  }
+
+  Scrollable.prototype.isTopEdge = function(y) {
+    return EDGE_DIFF > y + this.content.y;
+  }
+
+  Scrollable.prototype.isBottomEdge = function(y) {
+    return EDGE_DIFF > this.parent.h - this.content.y - y;
+  }
+
+  /**
+   * if node not in screen, then scroll to here
+   */
+  Scrollable.prototype.scrollTo = function(node) {
+    var startY = Math.abs(this.content.y);
+    var endY = startY + this.parent.h;
+
+    if ( node.y >= startY && node.y + node.h <= endY ) { // in screen
+      return;
+    }
+  
+    const contentH = Math.max(this.parent.h, this.content.h);
+    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
+    var r = maxY/contentH;
+    var newY = startY > node.y ? (node.y * r) : ((node.y + node.h)*r);
+    this.doScroll(newY, maxY);
+  }
+
   Scrollable.prototype.getContentWidth = function() {
     return this.container.w - this.options.scrollbarStyle.w;
   }
@@ -213,9 +251,9 @@ px.import({
   Scrollable.prototype.doScroll = function(newY, maxY) {
     newY = Math.max(0, newY);
     newY = Math.min(newY, maxY);
-    this.scrollbarHandle.y = newY;
+    this.scrollbarHandle.y = Math.max(2, newY);
     var scrollRate = (newY - this.scrollbarHandleMargin) / maxY;
-    this.content.y = - (this.content.h - this.container.h) * scrollRate;
+    this.content.y = Math.min(0, - (this.content.h - this.container.h) * scrollRate);
   }
 
   Scrollable.prototype.onSceneMouseUp = function(e) {
