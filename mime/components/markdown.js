@@ -997,7 +997,7 @@ px.import({
     return container;
   };
 
-  Renderer.prototype.renderTextBlockWithStyle = function(inlineBlocks, style, offsetLeft, width) {
+  Renderer.prototype.renderTextBlockWithStyle = function(inlineBlocks, style, offsetLeft, width, isTableText) {
     var scene = this.options.scene;
     var options = this.options
     var that = this;
@@ -1054,22 +1054,25 @@ px.import({
       if(type === 'link') {
         inlineBlockCopy.onClick = inlineBlock.onClick;
         inlineBlockCopy.linkId = inlineBlock.linkId;
+        var clickObjOffsetX = 6;
         var clickObj = scene.create({ 
           t: "rect", fillColor:0x00000000, 
           lineColor: 0x00000000,
           lineWidth: options.styles.link.activeBorderWidth,
-          parent: inlineBlockCopy, x: -4, y: 0, w: inlineBlockCopy.w + 6, h: inlineBlockCopy.h
+          parent: inlineBlockCopy, x: -4, y: 0, w: inlineBlockCopy.w + clickObjOffsetX, h: inlineBlockCopy.h
         });
         clickObj.on('onMouseUp',function() {
           inlineBlockCopy.onClick();
         });
         clickObj.on('onMouseEnter', function(){
+          clickObj.w = inlineBlockCopy.w + clickObjOffsetX;
           inlineBlockCopy.textColor = options.styles.link.activeColor;
         });
         clickObj.on('onMouseLeave', function(){
           inlineBlockCopy.textColor = options.styles.link.textColor;
         });
         inlineBlockCopy.highlight = function() {
+          clickObj.w = inlineBlockCopy.w + clickObjOffsetX;
           clickObj.lineColor = options.styles.link.activeBorderColor;
         }
         inlineBlockCopy.unhighlight = function() {
@@ -1077,6 +1080,7 @@ px.import({
         }
         inlineBlockCopy.timestamp = inlineBlock.timestamp;
       }
+      inlineBlockCopy.isTableText = isTableText;
       return inlineBlockCopy;
     }
 
@@ -1255,8 +1259,23 @@ px.import({
     var hLines = []; // horizontal
     var backgroupRects = []; // background rect
 
+    if(body.length === 1 && body[0].length === 1 && body[0][0].content.length === 0){
+      body = [];
+    }
+    for(var i = 0; i < body.length; i ++) {
+      var row = body[i];
+      for(var j = 0 ; j < header.length; j ++) {
+        if(!row[j]) { // empty cell for missing cell
+          row[j] = {
+            content: [this.renderInlineTextWithStyle("", {})]
+          }; 
+        }
+      }
+    }
     var container = scene.create({
       t: 'object',
+      interactive: false,
+      name: 'table-root',
       parent: options.parent,
     });
 
@@ -1264,6 +1283,7 @@ px.import({
     var borderFrame = scene.create({  // table border frame
       t: 'rect',
       parent: container,
+      interactive: false,
       lineColor: options.styles.table.borderColor,
       fillColor: options.styles.table.rowBackgrounColor[0],
       lineWidth: options.styles.table.borderWidth,
@@ -1327,6 +1347,7 @@ px.import({
     for(var i = 0 ; i < body.length; i ++) {
       var bgRect = scene.create({  // table border frame
         t: 'rect',
+        interactive: false,
         parent: container,
         lineColor: 0x00000000,
         fillColor: options.styles.table.rowBackgrounColor[1],
@@ -1342,7 +1363,7 @@ px.import({
       var headerText = this.renderTextBlockWithStyle(
         h.content,
         options.styles['table-header'],
-        offsetLeft
+        offsetLeft, 0 , true
       );
       headerText.resizeable = false;
       headerText.parent = container;
@@ -1359,7 +1380,7 @@ px.import({
         var cellText = this.renderTextBlockWithStyle(
           cell.content,
           options.styles['table-cell'],
-          offsetLeft
+          offsetLeft, 0 , true
         );
         cellText.resizeable = false;
         cellText.parent = container;
@@ -1386,6 +1407,7 @@ px.import({
         lineColor: 0x00000000,
         fillColor: options.styles.table.borderColor,
         w: options.styles.table.borderWidth,
+        interactive: false,
         lineWidth: 0,
       });
       vLines.push(line);
@@ -1396,6 +1418,7 @@ px.import({
         t: 'rect',
         parent: container,
         lineColor: 0x00000000,
+        interactive: false,
         fillColor: options.styles.table.borderColor,
         h: options.styles.table.borderWidth,
         lineWidth: 0,
@@ -1405,7 +1428,7 @@ px.import({
 
 
 
-
+    var textWidthOffset = 4;
     function updateSize() {
       container.w = options.parent.w - offsetLeft;
 
@@ -1456,7 +1479,7 @@ px.import({
           var cellW = columnWidth[j];
           var newW = cellW - pLeft - pRight;
           var cell = rows[i][j];
-          cell.setWidth(newW);
+          cell.setWidth(newW + textWidthOffset);
           maxHeight = Math.max(maxHeight, cell.h);
           cell.y = y;
 
