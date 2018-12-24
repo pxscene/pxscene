@@ -109,6 +109,26 @@ module.exports = {
       paddingLeft: 30,       // padding left of the text ignoring symbol and number
       marginBottom: 10,      // space after list item (this space doesn't sum up with list marginBottom)
     },
+    table:{
+      borderColor: 0xdfe2e5FF,
+      borderWidth: 1,
+      rowBackgrounColor: [0xFFFFFFFF, 0xf6f8faFF ], // row background
+      marginBottom: 20, // table margin Bottom
+    },
+    'table-header':{
+      font: 'BOLD',
+      textColor: 0x000000FF,
+      pixelSize: 16,
+    },
+    'table-cell':{
+      font: 'REGULAR',
+      textColor: 0x1e1e1eFF,
+      pixelSize: 16,
+      paddingRight: 16, // cell padding right 
+      paddingLeft: 16, // cell padding left
+      paddingTop: 6, // cell padding top
+      paddingBottom: 6, //cell padding bottom
+    },
 
     // INLINE level block
     text: {                  // no specific style for regular inline text
@@ -116,6 +136,8 @@ module.exports = {
     link:{
       textColor: 0x2e62b2ff,
       activeColor: 0x1e3e72ff,
+      activeBorderWidth: 2,
+      activeBorderColor: 0x2276e4ff,
     },
     em: {                    // emphasis text (italic)
       font: 'ITALIC',

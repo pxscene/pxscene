@@ -248,6 +248,24 @@ px.import({
 
   }
 
+  /**
+   * if node not in screen, then scroll to here
+   */
+  Scrollable.prototype.scrollTo = function(node) {
+    var startY = Math.abs(this.content.y);
+    var endY = startY + this.parent.h;
+
+    if ( node.y >= startY && node.y + node.h <= endY ) { // in screen
+      return;
+    }
+  
+    const contentH = Math.max(this.parent.h, this.content.h);
+    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
+    var r = maxY/contentH;
+    var newY = startY > node.y ? (node.y * r) : ((node.y + node.h)*r);
+    this.doScroll(newY, maxY);
+  }
+
   Scrollable.prototype.doScroll = function(newY, maxY) {
     newY = Math.max(0, newY);
     newY = Math.min(newY, maxY);

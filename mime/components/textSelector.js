@@ -247,8 +247,8 @@ px.import({
   TextSelector.prototype.convertToContentPosition = function (e) {
     var rootContent = this.rootContent;
     return {
-      x: e.x + rootContent.x + e.target.x,
-      y: Math.abs(rootContent.y) + e.y + e.target.y
+      x: e.x + rootContent.x + (e.target ? e.target.x : 0),
+      y: Math.abs(rootContent.y) + e.y + (e.target ? e.target.y : 0)
     }
   }
 
@@ -392,7 +392,7 @@ px.import({
     var r = [];
     if(blocks && blocks.length > 0) {
       blocks.forEach(b => {
-        if(!b || !b.text || !b.font) {
+        if(!b || !b.text || !b.font || b.isTableText) {
           return;
         }
         r.push(b);
