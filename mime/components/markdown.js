@@ -1262,23 +1262,12 @@ px.import({
     if(body.length === 1 && body[0].length === 1 && body[0][0].content.length === 0){
       body = [];
     }
-    for(var i = 0; i < body.length; i ++) {
-      var row = body[i];
-      for(var j = 0 ; j < header.length; j ++) {
-        if(!row[j]) { // empty cell for missing cell
-          row[j] = {
-            content: [this.renderInlineTextWithStyle("", {})]
-          }; 
-        }
-      }
-    }
     var container = scene.create({
       t: 'object',
       interactive: false,
       name: 'table-root',
       parent: options.parent,
     });
-
 
     var borderFrame = scene.create({  // table border frame
       t: 'rect',
@@ -1789,29 +1778,43 @@ px.import({
           , body = []
           , i
           , row
-          , cell
-          , flags
-          , j;
+          , bodyRow
+          , j
+          , numColumns;
   
         // header
         for (i = 0; i < this.token.header.length; i++) {
           flags = { header: true, align: this.token.align[i] };
           header.push({
             content: this.inline.output(this.token.header[i]),
-            header: true, align: this.token.align[i] 
+            header: true,
+            align: this.token.align[i]
           });
         }
   
         for (i = 0; i < this.token.cells.length; i++) {
           row = this.token.cells[i];
-          cell = [];
-          for (j = 0; j < row.length; j++) {
-            cell.push({
+          // Ignore the extra column
+          numColumns = Math.min(row.length, this.token.header.length);
+          bodyRow = [];
+          for (j = 0; j < numColumns; j++) {
+            bodyRow.push({
               content: this.inline.output(row[j]),
-              header: false, align: this.token.align[j]
+              header: false,
+              align: this.token.align[j]
             });
           }
-          body.push(cell);
+
+          // Make sure each row has enough columns
+          for (j = numColumns; j < this.token.header.length; j++) {
+            bodyRow.push({
+              content: this.inline.output(''), // Put an empty string
+              header: false,
+              align: this.token.align[j],
+            });
+          }
+
+          body.push(bodyRow);
         }
         return this.renderer.table(header, body, offsetLeft);
       }
