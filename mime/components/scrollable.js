@@ -138,24 +138,6 @@ px.import({
     return EDGE_DIFF > this.parent.h - this.content.y - y;
   }
 
-  /**
-   * if node not in screen, then scroll to here
-   */
-  Scrollable.prototype.scrollTo = function(node) {
-    var startY = Math.abs(this.content.y);
-    var endY = startY + this.parent.h;
-
-    if ( node.y >= startY && node.y + node.h <= endY ) { // in screen
-      return;
-    }
-  
-    const contentH = Math.max(this.parent.h, this.content.h);
-    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
-    var r = maxY/contentH;
-    var newY = startY > node.y ? (node.y * r) : ((node.y + node.h)*r);
-    this.doScroll(newY, maxY);
-  }
-
   Scrollable.prototype.getContentWidth = function() {
     return this.container.w - this.options.scrollbarStyle.w;
   }
@@ -248,21 +230,41 @@ px.import({
 
   }
 
-  /**
-   * if node not in screen, then scroll to here
-   */
-  Scrollable.prototype.scrollTo = function(node) {
-    var startY = Math.abs(this.content.y);
-    var endY = startY + this.parent.h;
+  // Get y in the content
+  Scrollable.prototype.getYInContainer = function(object) {
+    // check cache, if exists, return cached value directly
+    if (object.yInContent !== undefined) {
+      return object.yInContent;
+    }
+    var y = object.y;
+    var parent = object.parent;
+    while (parent && parent !== this.content) {
+      y += parent.y;
+      parent = parent.parent;
+    }
+    // Cache it to avoid unnecessary duplicated calculation
+    object.yInContent = y;
+    return y;
+  }
 
-    if ( node.y >= startY && node.y + node.h <= endY ) { // in screen
+  // Check if the object is not viewable
+  Scrollable.prototype.isObjectViewable = function(object) {
+    var yInContent = this.getYInContainer(object);
+    var yInContainer = yInContent + this.content.y;
+    return 0 < yInContainer && yInContainer + object.h < this.container.h;
+  }
+
+  // Scroll to object (if it's not viewable)
+  Scrollable.prototype.scrollTo = function(object) {
+    if (this.isObjectViewable(object)) {
+      // If the object is viewable, then do nothing
       return;
     }
-  
-    const contentH = Math.max(this.parent.h, this.content.h);
+    // Otherwise, scroll to it.
+    var scrollToY = 100 - this.getYInContainer(object);
+    var scrollRate = scrollToY / (this.container.h - this.content.h);
     var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
-    var r = maxY/contentH;
-    var newY = startY > node.y ? (node.y * r) : ((node.y + node.h)*r);
+    var newY = scrollRate * maxY + this.scrollbarHandleMargin;
     this.doScroll(newY, maxY);
   }
 
