@@ -727,7 +727,7 @@ px.import({
     this.autoGenLinkId = 0; // Link ID (auto incremented, starts from 0)
     
     // on key down bind
-    options.scene.root.on("onKeyDown", (e) => {
+    options.scene.root.on("onKeyUp", (e) => {
       var code = e.keyCode; var flags = e.flags;
       if (code === keys.ENTER) {
         if (this.linkMap[this.currentLinkId] && this.linkMap[this.currentLinkId].length > 0) {
@@ -735,6 +735,7 @@ px.import({
         }
       } else if(code === keys.TAB) {
         var idArr = Object.keys(this.linkMap);
+        idArr = idArr.map((id) => +id);
         var oldIndex = idArr.findIndex(id => id === this.currentLinkId);
         var newIndex = 0;
         if(keys.is_SHIFT(flags)) {
@@ -1102,6 +1103,10 @@ px.import({
       }
       inlineBlock.unhighlight = function() {
         clickObj.unhighlight();
+      }
+
+      if(that.currentLinkId === linkId) {
+        inlineBlock.highlight();
       }
     }
 
