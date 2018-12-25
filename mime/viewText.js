@@ -97,6 +97,10 @@ px.import({
   }
 
   function updateSize() {
+    // Avoid TypeError: Cannot read property 'getContentWidth' of undefined
+    if (!this.scrollable) {
+      return;
+    }
     this.consoleTxt.w = this.scrollable.getContentWidth() - marginLeft - marginRight;
     var measure = this.consoleTxt.measureText();
     this.scrollable.root.h = measure.bounds.y2 + marginTop + marginBottom;

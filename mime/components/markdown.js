@@ -724,6 +724,7 @@ px.import({
     });
     this.linkMap = {}; // used to store link elements
     this.currentLinkId = null; // current link
+    this.autoGenLinkId = 0; // Link ID (auto incremented, starts from 0)
     
     // on key down bind
     options.scene.root.on("onKeyDown", (e) => {
@@ -746,11 +747,13 @@ px.import({
           var links = this.linkMap[id] || [];
           links.forEach(l => {
             if (id === this.currentLinkId) {
-              l.highlight();
-              var p = this.getGlobalPosition(l);
-              p.scrollbar.scrollTo(p);
+              if (l.highlight) {
+                l.highlight();
+                var p = this.getGlobalPosition(l);
+                p.scrollbar.scrollTo(p);
+              }
             } else {
-              l.unhighlight();
+              l.unhighlight && l.unhighlight();
             }
           });
         });
@@ -1012,6 +1015,9 @@ px.import({
     });
     container.resizeable = true;
 
+    // All link ID in this inlineBlocks
+    var linkIds = [];
+
     function resolveFont(blockFont, inlineFont) {
       if (inlineFont === options.FONT_STYLE.BOLD && blockFont === options.FONT_STYLE.ITAlIC ||
         inlineFont === options.FONT_STYLE.ITALIC && blockFont === options.FONT_STYLE.BOLD
@@ -1024,6 +1030,79 @@ px.import({
       }
 
       return inlineFont ? inlineFont : blockFont;
+    }
+
+    // Update link click object (should be called after setting the text)
+    function updateLinkClickObj(inlineBlock) {
+      // for falsy values just return
+      if (!inlineBlock) {
+        return;
+      }
+      // Do nothing for non-link text.
+      var type = inlineBlock.type;
+      if (type !== 'link') {
+        return;
+      }
+
+      var linkId = inlineBlock.linkId;
+      var links = that.linkMap[linkId];
+      if (links && links[0] && links[0].clickObj) {
+        // The same linkId has existed, don't need to create a new clickObj,
+        // just extend the width & height of the existing clickObj
+        clickObj = that.linkMap[linkId][0].clickObj;
+        clickObj.w = Math.max(clickObj.w, inlineBlock.w);
+        clickObj.h = Math.max(clickObj.h, inlineBlock.y - that.linkMap[linkId][0].y + inlineBlock.h);
+        clickObj.x = Math.min(clickObj.x, inlineBlock.x - links[0].x);
+      } else {
+        var clickObjOffsetX = 6;
+        var clickObj = scene.create({
+          t: "rect", fillColor:0x00000000,
+          lineColor: 0x00000000,
+          lineWidth: options.styles.link.activeBorderWidth,
+          parent: inlineBlock, x: -4, y: 0,
+          w: inlineBlock.w + clickObjOffsetX, h: inlineBlock.h,
+        });
+        clickObj.on('onMouseUp',function() {
+          inlineBlock.onClick();
+        });
+        clickObj.on('onMouseEnter', function(){
+          var links = that.linkMap[linkId];
+          if (!links || links.length <= 0 || links[0].timestamp !== inlineBlock.timestamp) {
+            inlineBlock.textColor = options.styles.link.activeColor;
+          } else {
+            links.forEach((linkBlock) => {
+              linkBlock.textColor = options.styles.link.activeColor;
+            });
+          }
+        });
+        clickObj.on('onMouseLeave', function(){
+          var links = that.linkMap[linkId];
+          if (!links || links.length <= 0 || links[0].timestamp !== inlineBlock.timestamp) {
+            inlineBlock.textColor = options.styles.link.textColor;
+          } else {
+            links.forEach((linkBlock) => {
+              linkBlock.textColor = options.styles.link.textColor;
+            });
+          }
+        });
+        // Show the rectangle (highlighted)
+        clickObj.highlight = function() {
+          clickObj.lineColor = options.styles.link.activeBorderColor;
+        };
+        // Hide the rectangle (unhighlighted)
+        clickObj.unhighlight = function() {
+          clickObj.lineColor = 0x00000000;
+        };
+      }
+
+      inlineBlock.clickObj = clickObj;
+
+      inlineBlock.highlight = function() {
+        clickObj.highlight();
+      }
+      inlineBlock.unhighlight = function() {
+        clickObj.unhighlight();
+      }
     }
 
     function copy(inlineBlock) {
@@ -1053,32 +1132,17 @@ px.import({
 
       if(type === 'link') {
         inlineBlockCopy.onClick = inlineBlock.onClick;
-        inlineBlockCopy.linkId = inlineBlock.linkId;
-        var clickObjOffsetX = 6;
-        var clickObj = scene.create({ 
-          t: "rect", fillColor:0x00000000, 
-          lineColor: 0x00000000,
-          lineWidth: options.styles.link.activeBorderWidth,
-          parent: inlineBlockCopy, x: -4, y: 0, w: inlineBlockCopy.w + clickObjOffsetX, h: inlineBlockCopy.h
-        });
-        clickObj.on('onMouseUp',function() {
-          inlineBlockCopy.onClick();
-        });
-        clickObj.on('onMouseEnter', function(){
-          clickObj.w = inlineBlockCopy.w + clickObjOffsetX;
-          inlineBlockCopy.textColor = options.styles.link.activeColor;
-        });
-        clickObj.on('onMouseLeave', function(){
-          inlineBlockCopy.textColor = options.styles.link.textColor;
-        });
-        inlineBlockCopy.highlight = function() {
-          clickObj.w = inlineBlockCopy.w + clickObjOffsetX;
-          clickObj.lineColor = options.styles.link.activeBorderColor;
-        }
-        inlineBlockCopy.unhighlight = function() {
-          clickObj.lineColor = 0x00000000;
-        }
+        var linkId = inlineBlock.linkId;
+        inlineBlockCopy.linkId = linkId;
         inlineBlockCopy.timestamp = inlineBlock.timestamp;
+        var oldLinks = that.linkMap[linkId];
+        if (!oldLinks || oldLinks.length <= 0 || oldLinks[0].timestamp !== inlineBlock.timestamp) {
+          that.linkMap[linkId] = [inlineBlockCopy];
+        } else {
+          that.linkMap[linkId].push(inlineBlockCopy);
+        }
+
+        linkIds.push(linkId);
       }
       inlineBlockCopy.isTableText = isTableText;
       return inlineBlockCopy;
@@ -1086,6 +1150,7 @@ px.import({
 
     function renderInlineBlocks() {
       container.removeAll();
+      linkIds.forEach((linkId) => that.linkMap[linkId] = undefined);
 
       var x = 0;
       var y = 0;
@@ -1184,17 +1249,7 @@ px.import({
             y: inlineBlock.h - 1,
           })
         }
-        if(inlineBlock.type === 'link') {
-          if(that.currentLinkId === inlineBlock.linkId) {
-            inlineBlock.highlight();
-          }
-          var oldLinks = that.linkMap[inlineBlock.linkId];
-          if (!oldLinks || oldLinks.length <= 0 || oldLinks[0].timestamp !== inlineBlock.timestamp) {
-            that.linkMap[inlineBlock.linkId] = [inlineBlock];
-          } else {
-            that.linkMap[inlineBlock.linkId].push(inlineBlock);
-          }
-        }
+        updateLinkClickObj(inlineBlock);
         // create same style block with the words which don't fit the line
         if (newBlockWords.length > 0) {
           var newInlineBlock = copy(inlineBlock);
@@ -1241,9 +1296,8 @@ px.import({
     return container;
   }
 
-  Renderer.prototype.paragraph = function(inlineBlocks, offsetLeft, style) {
-    style = style || {};
-    return this.renderTextBlockWithStyle(inlineBlocks, Object.assign({}, this.options.styles.paragraph, style), offsetLeft);
+  Renderer.prototype.paragraph = function(inlineBlocks, offsetLeft) {
+    return this.renderTextBlockWithStyle(inlineBlocks, this.options.styles.paragraph, offsetLeft);
   };
 
   /**
@@ -1564,18 +1618,18 @@ px.import({
     if (!href.match(/^(?:file|https?|ftp):\/\//)) {
       url = options.basePath + href;
     }
-    link.linkId = Math.random() + "";
+    link.linkId = this.autoGenLinkId++;
     link.onClick = function(){
-    var scene = options.scene;
+      var scene = options.scene;
 
-    // Send navigate request via bubbling service manager up
-    // the chain.
-    var n = scene.getService(".navigate");
-    if (n) {
-      console.log("before navigation request");
-      n.setUrl(url);
-    }
-    else console.log(".navigate service not available");
+      // Send navigate request via bubbling service manager up
+      // the chain.
+      var n = scene.getService(".navigate");
+      if (n) {
+        console.log("before navigation request");
+        n.setUrl(url);
+      }
+      else console.log(".navigate service not available");
 
     }
     return link;
@@ -1757,8 +1811,9 @@ px.import({
    * Parse Current Token
    */
 
-  Parser.prototype.tok = function(offsetLeft = 0, style = {}) {
+  Parser.prototype.tok = function(offsetLeft = 0) {
     var options = this.options;
+
     switch (this.token.type) {
       case 'space': {
         return null;
@@ -1822,7 +1877,7 @@ px.import({
         var body = [];
 
         while (this.next().type !== 'blockquote_end') {
-          body.push(this.tok(offsetLeft + (options.styles.blockquote.paddingLeft || 0), {marginBottom: 0}));
+          body.push(this.tok(offsetLeft + (options.styles.blockquote.paddingLeft || 0)));
         }
 
         return this.renderer.blockquote(body, offsetLeft);
@@ -1860,7 +1915,7 @@ px.import({
         return this.renderer.listitem(body, offsetLeft);
       }
       case 'paragraph': {
-        return this.renderer.paragraph(this.inline.output(this.token.text), offsetLeft, style);
+        return this.renderer.paragraph(this.inline.output(this.token.text), offsetLeft);
       }
       case 'text': {
         return this.renderer.paragraph(this.parseText(), offsetLeft);
