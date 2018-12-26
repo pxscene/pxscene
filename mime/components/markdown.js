@@ -1320,8 +1320,9 @@ px.import({
     return container;
   }
 
-  Renderer.prototype.paragraph = function(inlineBlocks, offsetLeft) {
-    return this.renderTextBlockWithStyle(inlineBlocks, this.options.styles.paragraph, offsetLeft);
+  Renderer.prototype.paragraph = function(inlineBlocks, offsetLeft, style) {
+    style = style || {};
+    return this.renderTextBlockWithStyle(inlineBlocks, Object.assign({}, this.options.styles.paragraph, style), offsetLeft);
   };
 
   /**
@@ -1849,7 +1850,7 @@ px.import({
    * Parse Current Token
    */
 
-  Parser.prototype.tok = function(offsetLeft = 0) {
+  Parser.prototype.tok = function(offsetLeft = 0, style = {}) {
     var options = this.options;
 
     switch (this.token.type) {
@@ -1915,7 +1916,7 @@ px.import({
         var body = [];
 
         while (this.next().type !== 'blockquote_end') {
-          body.push(this.tok(offsetLeft + (options.styles.blockquote.paddingLeft || 0)));
+          body.push(this.tok(offsetLeft + (options.styles.blockquote.paddingLeft || 0), { marginBottom: 0 }));
         }
 
         return this.renderer.blockquote(body, offsetLeft);
@@ -1953,7 +1954,7 @@ px.import({
         return this.renderer.listitem(body, offsetLeft);
       }
       case 'paragraph': {
-        return this.renderer.paragraph(this.inline.output(this.token.text), offsetLeft);
+        return this.renderer.paragraph(this.inline.output(this.token.text), offsetLeft, style);
       }
       case 'text': {
         return this.renderer.paragraph(this.parseText(), offsetLeft);
