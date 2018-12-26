@@ -206,7 +206,6 @@ px.import({
   Lexer.prototype.token = function(src, top) {
     var src = src.replace(/^ +$/gm, '')
       , next
-      , key
       , loose
       , cap
       , bull
@@ -650,6 +649,15 @@ px.import({
       if (cap = this.rules.code.exec(src)) {
         src = src.substring(cap[0].length);
         out.push(this.renderer.codespan(cap[2]));
+        continue;
+      }
+
+      if (cap = this.rules.del.exec(src)) {
+        src = src.substring(cap[0].length);
+        var delOutputNodes = this.renderer.del(this.output(cap[2] || cap[1]));
+        delOutputNodes.forEach((delOutputNode) => {
+          out.push(delOutputNode);
+        });
         continue;
       }
 
@@ -1242,7 +1250,7 @@ px.import({
         inlineBlock.textId = that.textIndex++;
         lineBlocks.push(inlineBlock);;
 
-        if(inlineBlock.type === 'underline') { // draw a under line
+        if (inlineBlock.type === 'underline') { // draw a under line
           scene.create({
             t: 'rect',
             h: options.styles.underline.height,
@@ -1250,9 +1258,20 @@ px.import({
             w: inlineBlock.w,
             interactive: false,
             parent: inlineBlock,
-            x:0,
+            x: 0,
             y: inlineBlock.h - 1,
-          })
+          });
+        } else if (inlineBlock.type === 'del') {
+          scene.create({
+            t: 'rect',
+            h: options.styles.del.height,
+            fillColor: options.styles.del.fillColor,
+            w: inlineBlock.w,
+            interactive: false,
+            parent: inlineBlock,
+            x: 0,
+            y: inlineBlock.h / 2 + 1,
+          });
         }
         updateLinkClickObj(inlineBlock);
         // create same style block with the words which don't fit the line
@@ -1580,13 +1599,15 @@ px.import({
 
   Renderer.prototype.renderInlineTextWithStyle = function(text, style) {
     var scene = this.options.scene;
-    var textInline = scene.create({
+    var textInlineStyle = {
       t: 'text',
       interactive: false,
       text: text,
       font: style.font || 'REGULAR',
       textColor: style.textColor,
-    });
+    };
+    var textInline = scene.create(textInlineStyle);
+    textInline.style = textInlineStyle;
 
     return textInline;
   }
@@ -1612,6 +1633,18 @@ px.import({
 
   Renderer.prototype.codespan = function(text) {
     return this.renderInlineTextWithStyle(text, this.options.styles.codespan);
+  };
+
+  Renderer.prototype.del = function(inlineTexts) {
+    var delNodes = [];
+    inlineTexts.forEach((inlineText) => {
+      var style = inlineText.style;
+      var text = style.text;
+      var delNode = this.renderInlineTextWithStyle(text, style);
+      delNode.type = 'del';
+      delNodes.push(delNode);
+    })
+    return delNodes;
   };
 
   Renderer.prototype.link = function(href, title, text) {
