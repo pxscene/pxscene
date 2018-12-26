@@ -152,5 +152,9 @@ module.exports = {
     codespan: {              // inline code text (monospace)
       font: 'MONOSPACE',
     },
+    del:{
+      height: 1,
+      fillColor: 0x000000ff,
+    }
   },
 };

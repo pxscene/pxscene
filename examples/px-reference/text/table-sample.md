@@ -62,7 +62,25 @@
 
 ## 6. Strikethrough
 
-~~xxx~~
+(1) Simple strikethrough
+
+~~simple strikethrough~~
+
+(2) Strikethrough with Bold text
+
+~~**bold strikethrough**~~
+
+(3) Strikethrough with Italic text
+
+~~*italic strikethrough*~~
+
+(4) Strikethrough with code span
+
+~~`print 'This is a code'`~~
+
+(5) Mixed sample
+
+Hi, this is **a mixed** example. ~~Be **Bold** or *Italtic*, but never `Regular`~~
 
 # Other examples
 
