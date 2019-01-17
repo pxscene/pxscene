@@ -14,7 +14,104 @@
     <![endif]-->
 </head>
 
-<body style="text">
+<body >
+
+  <u><h2>Release 1.4.0.0 - 14January2019</h2></u>
+   <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.4.0.0)</em></p>
+   <h3>Highlights:</h3>
+   <bullets>
+    <ul>
+      <li>Features:<ul>
+          <li>Add scene.info.build.os property - <em>returns "Windows", "macOS" or "Linux"</em></li>
+          <li>Enable CORS for Spark by Default</li>
+        </ul>
+      </li>
+      <li>Bug fixes: <ul>
+          <li>Fix shortcut for Debug Logging - <em>CTRL-ALT-SHIFT-D from Spark browser</em></li>
+          <li>Promise creation should only happen once for most pxObjects - 
+            <em>New promises were being generated unnecessarily for property changes to object types whose readiness should not have been affected; fix is for new promises to be created only for text, textBox, image, image9 and imageA when properties that destabilize their readiness are changed.</em></li>
+          <li>TextBox related issues: <ul>
+              <li>Vertical alignment of textBox for text with newlines was not correct</li>
+              <li>about.js text alignment is not correct</li>
+              <li>Text is truncating at second line instead of last line</li>
+              <li>pxTextBox should consider "?" and "!" as delimiters and word boundary chars</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+   </bullets>
+   <h3>Commits/Fixes:</h3>
+   <bullets>
+    <ul>
+      <li>update to 1.4.0.0</li>
+      <li>cache http agents (#1682)</li>
+      <li>update to 1.4.0.0 (#1680)</li>
+      <li>expose Agent in http_wrap (#1678)</li>
+      <li>Use <a href="http://sparkui.org">sparkui.org</a> (#1677)</li>
+      <li>Fixed continuous text, newline truncate wrap cases and textbox with 0 height 0 width issue (#1675)</li>
+      <li>move to use <a href="http://sparkui.org">sparkui.org</a> (#1676)</li>
+      <li>Only create new promise for properties on objects that can destabilize readiness (#1673)</li>
+      <li>crash fix when launching webapp (#1668)</li>
+      <li>updates for api backwards compatibility (#1669)</li>
+      <li>changes for fixing thread leak warning from unit tests (#1666)</li>
+      <li>spark instance and url setting support (#1665)</li>
+      <li>coverity warning fix (#1656)</li>
+      <li>add option for tracking pxobjects (#1657)</li>
+      <li>Updated README for windows build instruction (#1658)</li>
+      <li>Add test_moduleApi test in tests.json (#1641)</li>
+      <li>changes for v8 crash on http request delay (#1650)</li>
+      <li>Removing old MIME stuff (#1655)</li>
+      <li>add os info to scene (#1647)</li>
+      <li>support Buffer for rtHttpRequest::write (#1627)</li>
+      <li>Restore #1614 (#1654)</li>
+      <li>Enable CORS for Spark by Default (#1638)</li>
+      <li>Double-Click SELECT ALL a bit easier. Cursor hiding when selections fix (#1645)</li>
+      <li>changes for tests warnings (#1646)</li>
+      <li>easter egg for dirty rect (#1648)</li>
+      <li>remove null assigns from browser.js (#1653)</li>
+      <li>Prevent error if move of [Makefile.build] already moved (#1651)</li>
+      <li>V8 build - Test suite crash fix (#1649)</li>
+      <li>apply matrix updates and removing printAll on term (#1643)</li>
+      <li>update permissions tests, supports explicit allows and is no longer platform specific (#1566)</li>
+      <li>Updates for building V8, and for handling the V8 build on Ubuntu 14.04 (#1640)</li>
+      <li>wrap xModule exposed as 'module' (#1635)</li>
+      <li>fix random leaks (#1637)</li>
+      <li>Continuous long text truncate issue (#1636)</li>
+      <li>Xcode generator (#1631)</li>
+      <li>Change selection + cursor visibility behavior (#1604)</li>
+      <li>Update Readme to indicate that XCode 10+ is not supported (#1615)</li>
+      <li>fix for crash on sigterm during scene update (#1623)</li>
+      <li>pxTextBox should consider "?" and "!" as delimiters and word boundary chars (#1628)</li>
+      <li>pxTextBox Vertical alignment w.t.r.t parent control (#1621)</li>
+      <li>Commits on Dec 13, 2018</li>
+      <li>tests and fixes for rtHttp* listeners: (#1613)</li>
+      <li>Added support for pxbenchmark.conf (#1629)</li>
+      <li>tests and fixes for URLs with userinfo (#1618)</li>
+      <li>fix an issue for v8 seen on VUI app (#1624)</li>
+      <li>changes for enabling embedded snapshots from V8 (#1619)</li>
+      <li>add check for malloc failure (#1617)</li>
+      <li>shortcut update for debug metrics logging (#1595)</li>
+      <li>CORS, permissions for the http modules in v8 (#1605)</li>
+      <li>Fixed font scale issues with 2x scale and scale more than 32 (#1616)</li>
+      <li>Text truncate issue and Newline char issue fixed (#1608)</li>
+      <li>#1584 with changes per comments (#1614)</li>
+      <li>fix for random leaks (#1612)</li>
+      <li>v8 updates for component builds (#1596)</li>
+      <li>fixes for v8: (#1573)</li>
+      <li>Cors http2 (#1516)</li>
+      <li>update for filedownloader false leaks (#1601)</li>
+      <li>Reenabling support for _ext override for mimetype viewers (#1593)</li>
+      <li>More browser.js patches (#1589)</li>
+      <li>Fixed scrollwheel event propagation; mouseentered state with animation</li>
+      <li>Cleaned up layout code a tad</li>
+      <li>Added support for forcing viewer by support _ext url parameter</li>    
+    </ul>
+   </bullets>
+   <br/>
+   <br/>
+   <br/> 
+
 
 <u><h2>Release 1.3.0.2 - 28November2018</h2></u>
 
