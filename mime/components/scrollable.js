@@ -10,6 +10,8 @@ px.import({
 
   var style = imports.style;
   var keys  = imports.keys;
+  var EDGE_DIFF = 45;
+  
   /**
    * Shows scrollbars if inner content too big
    *
@@ -93,6 +95,8 @@ px.import({
     this.scene.root.on("onKeyDown", this.onKeyDown.bind(this));
 
     // expose this.content as a root for users of this class
+    this.content.name = 'scroll-content';
+    this.content.scrollbar = this;
     this.root = this.content;
 
     // calculate positions of all scrollbar elements
@@ -103,21 +107,37 @@ px.import({
     var code = e.keyCode; var flags = e.flags;
     // console.log("DEBUG: onKeyDown > [ " + e.keyCode + " ]   << No Key modifier");
 
-    var currentY =  this.scrollbarHandle.y;
-    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
+    if(flags > 0) {
+      return;
+    }
     switch(code)
     {
       case keys.UP: {
-        this.doScroll(currentY - style.keyboardDiffHeight, maxY);
+        this.scrollByDiff(-style.keyboardDiffHeight);
         break;
       }
 
       case keys.DOWN: {
-        this.doScroll(currentY + style.keyboardDiffHeight, maxY);
+        this.scrollByDiff(style.keyboardDiffHeight);
         break;
       }
     }
   }
+
+  Scrollable.prototype.scrollByDiff = function(diff) {
+    var currentY =  this.scrollbarHandle.y;
+    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
+    this.doScroll(currentY + diff, maxY);
+  }
+
+  Scrollable.prototype.isTopEdge = function(y) {
+    return EDGE_DIFF > y + this.content.y;
+  }
+
+  Scrollable.prototype.isBottomEdge = function(y) {
+    return EDGE_DIFF > this.parent.h - this.content.y - y;
+  }
+
   Scrollable.prototype.getContentWidth = function() {
     return this.container.w - this.options.scrollbarStyle.w;
   }
@@ -210,12 +230,50 @@ px.import({
 
   }
 
+  // Get y in the content
+  Scrollable.prototype.getYInContainer = function(object) {
+    // check cache, if exists, return cached value directly
+    if (object.yInContent !== undefined) {
+      return object.yInContent;
+    }
+    var y = object.y;
+    var parent = object.parent;
+    while (parent && parent !== this.content) {
+      y += parent.y;
+      parent = parent.parent;
+    }
+    // Cache it to avoid unnecessary duplicated calculation
+    object.yInContent = y;
+    return y;
+  }
+
+  // Check if the object is not viewable
+  Scrollable.prototype.isObjectViewable = function(object) {
+    var yInContent = this.getYInContainer(object);
+    var yInContainer = yInContent + this.content.y;
+    return 0 < yInContainer && yInContainer + object.h < this.container.h;
+  }
+
+  // Scroll to object (if it's not viewable)
+  Scrollable.prototype.scrollTo = function(object) {
+    if (this.isObjectViewable(object)) {
+      // If the object is viewable, then do nothing
+      return;
+    }
+    // Otherwise, scroll to it.
+    var scrollToY = 100 - this.getYInContainer(object);
+    var scrollRate = scrollToY / (this.container.h - this.content.h);
+    var maxY = this.scrollbar.h - this.scrollbarHandleMargin - this.scrollbarHandle.h;
+    var newY = scrollRate * maxY + this.scrollbarHandleMargin;
+    this.doScroll(newY, maxY);
+  }
+
   Scrollable.prototype.doScroll = function(newY, maxY) {
     newY = Math.max(0, newY);
     newY = Math.min(newY, maxY);
-    this.scrollbarHandle.y = newY;
+    this.scrollbarHandle.y = Math.max(2, newY);
     var scrollRate = (newY - this.scrollbarHandleMargin) / maxY;
-    this.content.y = - (this.content.h - this.container.h) * scrollRate;
+    this.content.y = Math.min(0, - (this.content.h - this.container.h) * scrollRate);
   }
 
   Scrollable.prototype.onSceneMouseUp = function(e) {
