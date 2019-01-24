@@ -3,8 +3,13 @@
  */
 'use strict'
 
+
+px.configImport({
+  "components:" : px.getPackageBaseFilePath() + "/components/"
+});
+
 px.import({
-  style: 'scrollable.style.js',
+  style: 'components:scrollable.style.js',
   keys: 'px:tools.keys.js'
 }).then(function importsAreReady(imports) {
 
@@ -113,12 +118,33 @@ px.import({
     switch(code)
     {
       case keys.UP: {
-        this.scrollByDiff(-style.keyboardDiffHeight);
+        if(style.useArrowKeys)
+        {
+          this.scrollByDiff(-style.keyboardDiffHeight);
+        }
         break;
       }
 
       case keys.DOWN: {
-        this.scrollByDiff(style.keyboardDiffHeight);
+        if(style.useArrowKeys)
+        {
+          this.scrollByDiff(style.keyboardDiffHeight);
+        }
+        break;
+      }
+      case keys.PAGEUP: {
+        if(style.usePageKeys)
+        {
+          this.scrollByDiff(-style.rowScrollHeight);
+        }
+        break;
+      }
+
+      case keys.PAGEDOWN: {
+        if(style.usePageKeys)
+        {
+          this.scrollByDiff(style.rowScrollHeight);
+        }
         break;
       }
     }
@@ -273,7 +299,10 @@ px.import({
     newY = Math.min(newY, maxY);
     this.scrollbarHandle.y = Math.max(2, newY);
     var scrollRate = (newY - this.scrollbarHandleMargin) / maxY;
-    this.content.y = Math.min(0, - (this.content.h - this.container.h) * scrollRate);
+
+  //  this.content.y = Math.min(0, - (this.content.h - this.container.h) * scrollRate);
+    var newY = Math.min(0, - (this.content.h - this.container.h) * scrollRate);
+    this.content.animate( { y: newY }, .30, this.scene.animation.TWEEN_LINEAR, this.scene.animation.OPTION_FASTFORWARD, 1);
   }
 
   Scrollable.prototype.onSceneMouseUp = function(e) {
@@ -299,4 +328,3 @@ px.import({
 }).catch(function importFailed(err) {
   console.error("Import failed: " + err);
 });
-
