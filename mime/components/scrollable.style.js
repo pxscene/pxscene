@@ -23,4 +23,7 @@ module.exports = {
     w: 12,
   },
   keyboardDiffHeight: 12,
+  rowScrollHeight: 285,
+  useArrowKeys: false,
+  usePageKeys: true
 };
