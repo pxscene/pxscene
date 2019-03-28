@@ -16,6 +16,77 @@
 
 <body >
 
+
+  <u><h2>Release 1.6.0.1 - 14March2019</h2></u>
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.6.0.1)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+    <ul>
+      <li>Features:<ul>
+        <li>Enhanced Drag and Drop support (macOS)
+          <ul>
+            <li>Now just drag and drop a javascript file into the body of the Spark browser, and Spark will load the file. </li>
+            <li>Drag and drop a file into the URL box to get the URL of the file to replace selected text or be added to text that's already there.</li>
+          </ul>
+        </li>
+        <li>Use RT_LOG_LEVEL to control mouse and keyboard logging from shell.js</li>
+        <li>Add metrics logging for download thread performance details</li>
+        <li>remove pxObject's matrix props to reduce size of pxObject</li>
+        <li>Web/CSS color support for pxRectangle and pxText. See sample usage in these two files: <a href="http://www.sparkui.org/tests-ci/tests/test_pxWebColors.js">test_pxWebColors.js</a> and <a href="http://www.sparkui.org/tests-ci/tests/test_pxColorNames.js">test_pxColorNames.js</a></li>
+        <li>Change pxCore CI builds to use the new testRunner and tests from <a href="http://sparkui.org">sparkui.org</a></li>
+        </ul>
+      </li>
+      <li>Bug fixes: <ul>
+        <li>avoid double downloads for image and image9</li>
+        <li>MASK does not respect Alpha of parent object</li>
+        </ul>
+      </li>
+    </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+   <ul>
+    <li>update to 1.6.0.1 (#1759)</li>
+    <li>Enhanced Drag and Drop support (macOS) (#1754)</li>
+    <li>avoid double downloads for image9 (#1758)</li>
+    <li>enabling metrics for few scenarios (#1757)</li>
+    <li>fix for mips contexts (#1756)</li>
+    <li>update to 1.6.0.0 (#1753)</li>
+    <li>mac build updates for node (#1749)</li>
+    <li>shared context support for egl (#1751)</li>
+    <li>Use RT_LOG_LEVEL to control mouse and keyboard logging from shell.js (#1737)</li>
+    <li>avoid remove listener if url not changed (#1750)</li>
+    <li>changes for node compile optimization and inspector selection (#1747)</li>
+    <li>Mutex lock/unlock is not required during reaching from cache. DELIA-3… (#1743)</li>
+    <li>added a new api for shared contexts and references (#1744)</li>
+    <li>added a new api for shared contexts and references (#1742)</li>
+    <li>metrics for downloads (#1739)</li>
+    <li>changes for about.js window re-arrangement after resize (#1724)</li>
+    <li>Fixes issue where MASK was not respecting Alpha of parent object (#1709)</li>
+    <li>Move to use <a href="http://sparkui.org">sparkui.org</a> (#1713)</li>
+    <li>build fix: (#1719)</li>
+    <li>null pointer check for coverity fix (#1732)</li>
+    <li>remove pxObject's matrix props (#1717)</li>
+    <li>update screencapture_jar test (<a href="http://www.sparkui.org">www.sparkui.org</a>, canned image) (#1720)</li>
+    <li>Break out [pxObject] from [pxScene2d]. Remove [pxPath]... Tidy up. (#1726)</li>
+    <li>Marking overlapping child objects dirty if parent is dirty (#1722)</li>
+    <li>remove rtRemote (#1714)</li>
+    <li>changes for spark log identification (#1687)</li>
+    <li>clean up sandbox and wrap some callbacks in try..catch (#1703)</li>
+    <li>Fixed dirty rect issue with hidden and animated objects (#1694)</li>
+    <li>Adding support for #RGB, #RRGGBB, and Web Named colors (#1663)</li>
+    <li>optimus updates for memory management (#1701)</li>
+    <li>Input: Fix leaked directory resource (#1700)</li>
+    <li>Optimus application couldn't launch due to error (#1697)</li>
+    <li>ability to create additional contexts (#1712)</li>
+   </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/> 
+
+
+
   <u><h2>Release 1.5.0.0 - 08February2019</h2></u>
   <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.5.0.0)</em></p>
   <h3>Highlights:</h3>
