@@ -23,35 +23,19 @@
 px.import({
   style: 'markdown.style.js',
   TextSelector: 'textSelector.js',
+  utils: 'utils.js',
   keys: 'px:tools.keys.js'
 }).then(function importsAreReady(imports) {
 
   var style = imports.style;
   var keys = imports.keys;
   var TextSelector = imports.TextSelector;
+  var _eventEmitter = imports.utils._eventEmitter;
+  var merge = imports.utils.merge;
 
   /**
    * Block-Level Grammar
    */
-
-  function _eventEmitter() {
-    this.handlers = {}
-    this.on = function(eventName, eventHandler) {
-      if (!this.handlers[eventName])
-        this.handlers[eventName] = []
-      this.handlers[eventName].push(eventHandler)
-    }
-    this.emit = function(eventName) {
-      console.log('firing event: ', eventName)
-      var handlerz = this.handlers[eventName]
-      if (handlerz) {
-        for (var h of handlerz) {
-          h()
-        }
-      }
-    }
-  }
-
   var block = {
     newline: /^\n+/,
     code: /^( {4}[^\n]+\n*)+/,
@@ -1979,24 +1963,7 @@ px.import({
 
   function noop() {}
   noop.exec = noop;
-
-  function merge(obj) {
-    var i = 1
-      , target
-      , key;
-
-    for (; i < arguments.length; i++) {
-      target = arguments[i];
-      for (key in target) {
-        if (Object.prototype.hasOwnProperty.call(target, key)) {
-          obj[key] = target[key];
-        }
-      }
-    }
-
-    return obj;
-  }
-
+  
   var defaults = {
     gfm: true,
     tables: true,
