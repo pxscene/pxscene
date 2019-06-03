@@ -16,6 +16,48 @@
 
 <body >
 
+  <u><h2>Release 1.7.0.1 - 22May2019</h2></u>
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.7.0.1)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+    <ul>
+      <li>Features:<ul>
+        <li>GIF Support - <em>for Linux builds only</em>. Use imageA and imageAResource to use GIFs in a Spark application.</li>
+        <li>Screenshot support for child scenes and externals</li>
+      </ul>
+
+      <li>Bug fixes: <ul>
+          <li>Calling suspend for Spark app is suspending root app</li>
+          <li>ImageAResource width and height were replacing any authored width and height for imageA objects using the resource. This would result in an inability to stretch an imageA to a desired width and height other than the resource's actual width and height.  Check 
+              <code>(scene.capabilities.graphics.imageAResource &gt;= 2)</code> to detect if this fix is available.
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+   <ul>
+    <li>update to 1.7.0.1</li>
+    <li>imageA resource width and height properties (#1844)</li>
+    <li>stretching updates for pxImageA (#1839)</li>
+    <li>update to 1.7.0.0 (#1833)</li>
+    <li>GIF fixes : artifacts + build scripts for UBuntu (#1830)</li>
+    <li>Adding missing return value (#1831)</li>
+    <li>optimus bug fix (#1826)</li>
+    <li>suspend and resume updates (#1825)</li>
+    <li>disabling gif support for ubuntu (#1823)</li>
+    <li>add macOS dependency</li>
+    <li>Add linux dependency</li>
+    <li>GIF support for ubuntu (#1810)</li>
+    <li>screenshot support for child scenes and externals (#1820)</li>
+    <li>Benchmark : Moved automation script to src and updated ReadMe (#1796)</li>
+   </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/> 
+
 
   <u><h2>Release 1.6.0.2 - 25April2019</h2></u>
   <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.6.0.2)</em></p>
