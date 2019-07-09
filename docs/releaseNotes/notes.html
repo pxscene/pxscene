@@ -16,6 +16,106 @@
 
 <body >
 
+  <u><h2>Release 1.8.0.3 - 19Jun2019</h2></u>
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.8.0.3)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+    <ul>
+      <li>Features:<ul>
+        <li>GIF support for Mac</li>
+      </ul>
+
+      <li>Bug fixes: <ul>
+        <p>Fall back to node 6 for stability.</p>
+        </ul>
+      </li>
+    </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+    <ul>
+      <li>update to 1.8.0.3</li>
+      <li>Revert "fix js2rt to not convert js promise into rt object (segfault) (#1879)</li>
+      <li>enable gif support when building mac</li>
+      <li>using node 6 for Spark 1.8 release (#1910)</li>
+    </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/>
+
+  <u><h2>Release 1.8.0.1 - 13Jun019</h2></u>
+  <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.8.0.1)</em></p>
+  <h3>Highlights:</h3>
+  <bullets>
+    <ul>
+      <li>Features:<ul>
+        <li>Support for local storage in Spark applications<ul>
+            <li>Spark local storage is modeled after Web Storage's localStorage.  </li>
+            <li>The ability to use localStorage is managed by application permissions.</li>
+            <li>See TBD for more details</li>
+          </ul>
+        </li>
+        <li>Node 8 support (off by default)</li>
+      </ul>
+
+      <li>Bug fixes: <ul>
+        <li>getPackageBaseFilePath bugs</li>
+        <li>[edge build] "Load markdown file failed" error when launching sample.md</li>
+        <li>[Desktop ONLY - GIF] Some GIFs are throwing an error and not loading in Mac desktop</li>
+        <li>Uncaught rejection causing app contents not to display - This was introduced in 1.8.0.0.</li>
+        </ul>
+      </li>
+    </ul>
+  </bullets>
+  <h3>Commits/Fixes:</h3>
+  <bullets>
+   <ul>
+      <li>update to 1.8.0.1 (#1905)</li>
+      <li>Default sparkInstance to load preloadSparkInstance.js instead of browser.js. Set PXCORE_ESSOS_WAYLAND for Spark Instance application  (#1897)</li>
+      <li>fix uncaught rejection in weather app (reverts a fix for instanceof) (#1903)</li>
+      <li>pxBenchmark: Added additional data along with GPU size info (#1886)</li>
+      <li>ubuntu 18 support with node 6 (#1889)</li>
+      <li>ability to get native texture id for pxTextureOffscreen (#1892)</li>
+      <li>Fixed issues with compressed gifs on dekstop (#1895)</li>
+      <li>update <a href="http://sample.md">sample.md</a> url (#1884)</li>
+      <li>update to 1.8.0.0 (#1883)</li>
+      <li>uiReady (#1865)</li>
+      <li>changes for switching to node6.9.0 (#1867)</li>
+      <li>fix js2rt to not convert js promise into rt object (segfault) (#1879)</li>
+      <li>code coverage improvement for eventloop and windownative (#1870)</li>
+      <li>Adding a logging to capture font atlas size/usage (#1835)</li>
+      <li>ubuntu 18 support &amp; warnings fix (#1846)</li>
+      <li>windows build fix for externals (#1858)</li>
+      <li>fix Coverity 05/31/19 (#1864)</li>
+      <li>adding xmlto install (#1863)</li>
+      <li>Gif support on windows (#1845)</li>
+      <li>Fixed about.js vertical alignment (#1746)</li>
+      <li>add epsilon for time comparision for unittest (#1778)</li>
+      <li>Adding named color for [none/clear/transparent] (#1786)</li>
+      <li>move rtthreadpool test to beginning to avoid contention (#1787)</li>
+      <li>XRE2-2078 : Create FlingTo test app (#1801)</li>
+      <li>changes for migrating landing page from <a href="http://pxscene.org">pxscene.org</a> to <a href="http://sparkui.org">sparkui.org</a> (#1804)</li>
+      <li>GIF support for Mac, RPI (#1822)</li>
+      <li>add codecov badge (#1813)</li>
+      <li>changing auto-update url from <a href="http://pxscene.org">pxscene.org</a> to <a href="http://sparkui.org">sparkui.org</a> (#1817)</li>
+      <li>Benchmark mac build (#1821)</li>
+      <li>libnode: added aarch64 support (#1832)</li>
+      <li>size reduction changes (#1849)</li>
+      <li>pxWayland should not try to kill all clientProcess except it got SIGTERM from terminateClient (#1852)</li>
+      <li>fix getPackageBaseFilePath (#1829)</li>
+      <li>rtSettings to support locations other than home folder (#1840)</li>
+      <li>Local storage (#1797)</li>
+      <li>imageA resource width and height properties (#1844)</li>
+      <li>stretching updates for pxImageA (#1839)</li>
+      <li>node 8.15.1 and grpc-js [PoC] (#1735)</li>
+   </ul>
+  </bullets>
+  <br/>
+  <br/>
+  <br/> 
+
+  
   <u><h2>Release 1.7.1.1 - 07Jun019</h2></u>
   <p talk-marker="6" talk-page-id="114000371" talk-page-version="85"><em>(<a class="external-link" href="http://github.com/pxscene/pxCore" rel="nofollow" style="text-decoration: underline;">github.com/pxscene/pxCore</a>: tag 1.7.1.1)</em></p>
   <h3>Highlights:</h3>
