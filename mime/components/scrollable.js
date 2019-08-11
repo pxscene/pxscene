@@ -311,9 +311,11 @@ px.import({
 
     this.isDragging = false
 
-    this.scene.delListener('onMouseMove', this.onSceneMouseMove);
-    this.scene.delListener('onMouseUp', this.onSceneMouseUp);
-    this.scene.delListener('onMouseLeave', this.onSceneMouseUp);    
+    if(this.scene.delListener){
+      this.scene.delListener('onMouseMove', this.onSceneMouseMove);
+      this.scene.delListener('onMouseUp', this.onSceneMouseUp);
+      this.scene.delListener('onMouseLeave', this.onSceneMouseUp);  
+    }  
   }
 
   Scrollable.prototype.clampScrollbarHandleY = function(y) {
